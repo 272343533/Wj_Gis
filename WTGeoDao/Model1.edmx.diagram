@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="aba271d7e8d1433388df06c0b7a53f87" Name="关系图1" ZoomLevel="62">
+        <EntityTypeShape EntityType="wj_GisDbModel.A_市局表格2018年度" Width="1.5" PointX="5.143779608022319" PointY="9.705104295958348" />
+        <EntityTypeShape EntityType="wj_GisDbModel.B_经发局表格2018年度" Width="1.5" PointX="4.5543349741745436" PointY="15.840285964235797" />
+        <EntityTypeShape EntityType="wj_GisDbModel.blBllType" Width="1.5" PointX="3.1113426997844793" PointY="22.711943145241563" />
+        <EntityTypeShape EntityType="wj_GisDbModel.blCityPlan" Width="1.5" PointX="7.0937341354292514" PointY="22.521584446784846" />
+        <EntityTypeShape EntityType="wj_GisDbModel.blLayer" Width="1.5" PointX="11.559036310556827" PointY="29.892793937536325" />
+        <EntityTypeShape EntityType="wj_GisDbModel.blLayerTotalConf" Width="1.5" PointX="1.1819245168855062" PointY="15.669690720583168" />
+        <EntityTypeShape EntityType="wj_GisDbModel.bsHYDL" Width="1.5" PointX="2.3454322714104467" PointY="19.532463649070106" />
+        <EntityTypeShape EntityType="wj_GisDbModel.bsOrganize" Width="1.5" PointX="4.9562635202688456" PointY="17.082406618205088" />
+        <EntityTypeShape EntityType="wj_GisDbModel.bsSoftCustInfo" Width="1.5" PointX="2.3250127315172051" PointY="14.921834177766849" />
+        <EntityTypeShape EntityType="wj_GisDbModel.bsTotalResult" Width="1.5" PointX="2.460465896157765" PointY="2.6433748913199522" />
+        <EntityTypeShape EntityType="wj_GisDbModel.bsUser" Width="1.5" PointX="4.9211963922349717" PointY="20.068122858213318" />
+        <EntityTypeShape EntityType="wj_GisDbModel.Excel2FieldMap" Width="1.5" PointX="11.845085464345797" PointY="4.8054490558828453" />
+        <EntityTypeShape EntityType="wj_GisDbModel.LtdProblem" Width="1.5" PointX="6.07014347895521" PointY="25.972150635892596" />
+        <EntityTypeShape EntityType="wj_GisDbModel.LtdRegular" Width="1.5" PointX="4.2946009059877142" PointY="22.39333278983521" />
+        <EntityTypeShape EntityType="wj_GisDbModel.t标准化级别" Width="1.5" PointX="0.9715666645074108" PointY="22.206141601412622" />
+        <EntityTypeShape EntityType="wj_GisDbModel.t开发区2000万企业" Width="1.5" PointX="9.6692166801864357" PointY="6.576767253958046" />
+        <EntityTypeShape EntityType="wj_GisDbModel.t企业技术中心台账" Width="1.5" PointX="4.8958147433101269" PointY="25.680095773972617" />
+        <EntityTypeShape EntityType="wj_GisDbModel.t清洁生产历年" Width="1.5" PointX="3.7190902250442139" PointY="6.5723709494678166" />
+        <EntityTypeShape EntityType="wj_GisDbModel.t同里镇开发区上市企业台帐三板" Width="1.5" PointX="4.4112771546520655" PointY="5.8137854066741586" />
+        <EntityTypeShape EntityType="wj_GisDbModel.t同里镇开发区上市企业台帐台资" Width="1.5" PointX="3.560131672564955" PointY="27.589390320512184" />
+        <EntityTypeShape EntityType="wj_GisDbModel.t同里镇开发区上市企业台帐主版后备" Width="1.5" PointX="5.9476536428312086" PointY="22.396385471521125" />
+        <EntityTypeShape EntityType="wj_GisDbModel.t吴江区智能制造示范试点企业名单" Width="1.5" PointX="2.9387589390104445" PointY="1.807373152024752" />
+        <EntityTypeShape EntityType="wj_GisDbModel.t闲置土地盘活计划表" Width="1.5" PointX="3.1845681235122343" PointY="10.851460506604733" />
+        <EntityTypeShape EntityType="wj_GisDbModel.t新地标计划企业名单" Width="1.5" PointX="7.3751944933902447" PointY="2.0072798887301611" />
+        <EntityTypeShape EntityType="wj_GisDbModel.t智能车间" Width="1.5" PointX="9.8233325825181481" PointY="5.4312310095090561" />
+        <EntityTypeShape EntityType="wj_GisDbModel.z企业变化信息表" Width="1.5" PointX="0.35527388395521503" PointY="15.471881575636511" />
+        <EntityTypeShape EntityType="wj_GisDbModel.z新增企业信息表" Width="1.5" PointX="7.206398190560936" PointY="6.0960474936738835" />
+        <EntityTypeShape EntityType="wj_GisDbModel.z租赁企业信息表" Width="1.5" PointX="10.21037712051085" PointY="25.648622763179532" />
+        <EntityTypeShape EntityType="wj_GisDbModel.经发局表格" Width="1.5" PointX="3.7943286466385837" PointY="7.3394442085826048" />
+        <EntityTypeShape EntityType="wj_GisDbModel.开发区表格" Width="1.5" PointX="11.869963757633215" PointY="14.32476323019935" />
+        <EntityTypeShape EntityType="wj_GisDbModel.市局表格" Width="1.5" PointX="4.2223777734778718" PointY="28.523291571309461" />
+        <EntityTypeShape EntityType="wj_GisDbModel.GDB_ITEMRELATIONSHIPS" Width="1.5" PointX="7.4740275030369068" PointY="8.6179552267389159" />
+        <EntityTypeShape EntityType="wj_GisDbModel.GDB_ITEMRELATIONSHIPTYPES" Width="1.5" PointX="1.5405810463896863" PointY="28.575031457736639" />
+        <EntityTypeShape EntityType="wj_GisDbModel.GDB_ITEMS" Width="1.5" PointX="0.98031927690856113" PointY="12.574390283121909" />
+        <EntityTypeShape EntityType="wj_GisDbModel.GDB_ITEMTYPES" Width="1.5" PointX="3.6055836433570758" PointY="6.6443317712491057" />
+        <EntityTypeShape EntityType="wj_GisDbModel.GDB_REPLICALOG" Width="1.5" PointX="1.9946253271748429" PointY="0.38624854403838915" />
+        <EntityTypeShape EntityType="wj_GisDbModel.GDB_TABLES_LAST_MODIFIED" Width="1.5" PointX="2.0355561440976135" PointY="10.971852069241857" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i10" Width="1.5" PointX="7.0436119414137739" PointY="22.726804907772134" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i11" Width="1.5" PointX="4.58678713281955" PointY="29.779521419564038" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i12" Width="1.5" PointX="10.617475272443834" PointY="5.3355887706091574" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i14" Width="1.5" PointX="2.364361995069479" PointY="9.4449891939037425" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i15" Width="1.5" PointX="10.574167213670055" PointY="29.159613429177373" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i16" Width="1.5" PointX="7.9720292165745184" PointY="10.312696238193984" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i17" Width="1.5" PointX="7.25988952967333" PointY="6.9594584884864554" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i2" Width="1.5" PointX="11.41965879472888" PointY="16.268951170271706" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i25" Width="1.5" PointX="10.670310459411848" PointY="4.4239615371562362" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i26" Width="1.5" PointX="2.3102057698695946" PointY="27.168921229973865" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i29" Width="1.5" PointX="6.1236435967141976" PointY="19.337118142907098" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i3" Width="1.5" PointX="0.92461704878351525" PointY="31.218735277288935" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i30" Width="1.5" PointX="11.137183885619596" PointY="11.917150204962654" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i31" Width="1.5" PointX="3.0889784130682134" PointY="7.09279503258541" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i32" Width="1.5" PointX="9.1471463149167338" PointY="19.551221782132622" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i4" Width="1.5" PointX="0.042086301391053155" PointY="0.5611484798421843" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i5" Width="1.5" PointX="3.7663994467660782" PointY="8.2452097722539719" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i6" Width="1.5" PointX="7.2424058687139325" PointY="4.500867413590135" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i7" Width="1.5" PointX="5.031446403372775" PointY="12.338688304805517" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i8" Width="1.5" PointX="4.1348163057746437" PointY="26.317647916412749" />
+        <EntityTypeShape EntityType="wj_GisDbModel.i9" Width="1.5" PointX="3.0074242162552776" PointY="1.8146848687039152" />
+        <EntityTypeShape EntityType="wj_GisDbModel.LtdPhoto" Width="1.5" PointX="0.12206712557099159" PointY="22.771126578921045" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_archives" Width="1.5" PointX="7.2597039934525744" PointY="25.795519885511844" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_column_registry" Width="1.5" PointX="3.4557472669779075" PointY="27.654726249936374" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_dbtune" Width="1.5" PointX="5.295737561441836" PointY="25.345938545347163" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_geometry_columns" Width="1.5" PointX="3.8213139548065671" PointY="0.89503933531001179" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY1" Width="1.5" PointX="9.8346374341448" PointY="10.259228487619771" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY10" Width="1.5" PointX="9.990800929251499" PointY="31.445847034196298" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY11" Width="1.5" PointX="7.5979347916310349" PointY="13.012697076896529" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY12" Width="1.5" PointX="0.0301366467169191" PointY="16.3961171882209" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY2" Width="1.5" PointX="10.911867375910219" PointY="31.212170287599868" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY20" Width="1.5" PointX="6.3947246327971685" PointY="8.6465574543208614" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY21" Width="1.5" PointX="10.892768734550462" PointY="20.697596097689864" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY24" Width="1.5" PointX="0.10086164255666624" PointY="11.114495640208244" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY25" Width="1.5" PointX="7.3673910644684879" PointY="25.951556039020211" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY26" Width="1.5" PointX="1.0694102854791145" PointY="16.115472920292742" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY27" Width="1.5" PointX="9.5241692706589447" PointY="11.842900803239504" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY3" Width="1.5" PointX="7.1809212449849218" PointY="14.515031389200608" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY4" Width="1.5" PointX="7.12935217801917" PointY="11.694518884501662" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY5" Width="1.5" PointX="4.4473217355307755" PointY="3.9036371428070762" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY6" Width="1.5" PointX="1.0131840598830879" PointY="12.582549518245529" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY7" Width="1.5" PointX="9.3640605757776925" PointY="31.046451627764132" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_GEOMETRY9" Width="1.5" PointX="3.5103942134931652" PointY="31.217190801732798" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_layer_locks" Width="1.5" PointX="2.375793245796018" PointY="31.784503370423103" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_layer_stats" Width="1.5" PointX="5.10115273534374" PointY="19.867235282374189" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_layers" Width="1.5" PointX="6.0898904884652652" PointY="0.40449333209753657" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_lineages_modified" Width="1.5" PointX="4.5968714675851494" PointY="26.630059627178152" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_locators" Width="1.5" PointX="10.957250592744561" PointY="8.8076276224142074" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_logfile_pool" Width="1.5" PointX="6.2857821929667992" PointY="23.678954880535116" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_metadata" Width="1.5" PointX="9.646403732544929" PointY="30.661614551517" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_object_ids" Width="1.5" PointX="9.5724583145102766" PointY="30.100830405066176" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_object_locks" Width="1.5" PointX="3.0031312792576532" PointY="20.170410791491349" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_process_information" Width="1.5" PointX="8.4353166690260721" PointY="26.074697625858104" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_raster_columns" Width="1.5" PointX="2.8114704800823103" PointY="14.382799021146631" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_server_config" Width="1.5" PointX="8.6662894378724928" PointY="12.127104422136725" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_spatial_references" Width="1.5" PointX="4.6628404598044426" PointY="8.5666405598477642" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_state_lineages" Width="1.5" PointX="0.43243966830542296" PointY="28.176727248438041" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_state_locks" Width="1.5" PointX="5.1353598856997493" PointY="16.515763484181726" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_states" Width="1.5" PointX="2.3405032820722571" PointY="18.006147393028321" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_table_locks" Width="1.5" PointX="11.732064831877157" PointY="29.830192490401767" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_table_registry" Width="1.5" PointX="5.3858052908376814" PointY="0.48446100972800565" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_tables_modified" Width="1.5" PointX="11.066783129734352" PointY="31.779140889541779" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_version" Width="1.5" PointX="3.641943026167314" PointY="2.4472674291801022" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_versions" Width="1.5" PointX="1.4464308775246288" PointY="30.767725094579031" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_xml_columns" Width="1.5" PointX="5.4838372084702538" PointY="10.341495697545584" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_xml_index_tags" Width="1.5" PointX="11.15735457798343" PointY="27.332650927516003" />
+        <EntityTypeShape EntityType="wj_GisDbModel.SDE_xml_indexes" Width="1.5" PointX="6.7390408491431923" PointY="13.197910076565067" />
+        <EntityTypeShape EntityType="wj_GisDbModel.tmpLtdXx" Width="1.5" PointX="3.8914056140423781" PointY="4.6009937546220581" />
+        <EntityTypeShape EntityType="wj_GisDbModel.安全检查点位置" Width="1.5" PointX="1.7153247900844202" PointY="4.8004174105824982" />
+        <EntityTypeShape EntityType="wj_GisDbModel.道路" Width="1.5" PointX="3.2071026913854768" PointY="15.286353610123673" />
+        <EntityTypeShape EntityType="wj_GisDbModel.道路注记" Width="1.5" PointX="8.8949760705674876" PointY="23.952649634309417" />
+        <EntityTypeShape EntityType="wj_GisDbModel.发展总公司" Width="1.5" PointX="3.2528993260361716" PointY="1.475969538779915" />
+        <EntityTypeShape EntityType="wj_GisDbModel.发展总公司数据图层" Width="1.5" PointX="2.7873727710858791" PointY="7.6730674093929432" />
+        <EntityTypeShape EntityType="wj_GisDbModel.房屋建筑" Width="1.5" PointX="11.719245331231154" PointY="16.081596665122358" />
+        <EntityTypeShape EntityType="wj_GisDbModel.房屋建筑_老所属企业名" Width="1.5" PointX="4.8509124744920591" PointY="12.703571429803768" />
+        <EntityTypeShape EntityType="wj_GisDbModel.管理区" Width="1.5" PointX="0.96235707633307066" PointY="30.755938454883143" />
+        <EntityTypeShape EntityType="wj_GisDbModel.行政区" Width="1.5" PointX="9.1475432483235117" PointY="27.893550796384712" />
+        <EntityTypeShape EntityType="wj_GisDbModel.河流" Width="1.5" PointX="6.1123001659811944" PointY="25.042094495632728" />
+        <EntityTypeShape EntityType="wj_GisDbModel.河流注记" Width="1.5" PointX="0.22102827216546434" PointY="8.2292091884786309" />
+        <EntityTypeShape EntityType="wj_GisDbModel.红牌警告点位置" Width="1.5" PointX="3.921961020641942" PointY="20.046910354889423" />
+        <EntityTypeShape EntityType="wj_GisDbModel.黄牌警告点位置" Width="1.5" PointX="8.33158073217216" PointY="8.7295295189737949" />
+        <EntityTypeShape EntityType="wj_GisDbModel.企业范围" Width="1.5" PointX="11.909712424459734" PointY="12.768609470114395" />
+        <EntityTypeShape EntityType="wj_GisDbModel.企业范围_改完_字段全" Width="1.5" PointX="5.3903095803178429" PointY="17.101590298629176" />
+        <EntityTypeShape EntityType="wj_GisDbModel.企业照片点位置" Width="1.5" PointX="8.47344936079972" PointY="19.955262372249393" />
+        <AssociationConnector Association="wj_GisDbModel.archives_fk1" />
+        <AssociationConnector Association="wj_GisDbModel.archives_fk2" />
+        <AssociationConnector Association="wj_GisDbModel.geocol_fk" />
+        <AssociationConnector Association="wj_GisDbModel.sdelayer_stats_fk2" />
+        <AssociationConnector Association="wj_GisDbModel.layers_fk" />
+        <AssociationConnector Association="wj_GisDbModel.layers_sfk" />
+        <AssociationConnector Association="wj_GisDbModel.rascol_fk" />
+        <AssociationConnector Association="wj_GisDbModel.xml_columns_fk1" />
+        <AssociationConnector Association="wj_GisDbModel.xml_columns_fk2" />
+        <AssociationConnector Association="wj_GisDbModel.xml_indextags_fk1" />
+        <AssociationConnector Association="wj_GisDbModel.SDE_mvtables_modified" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
