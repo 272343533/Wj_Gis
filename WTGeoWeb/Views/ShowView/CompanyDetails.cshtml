@@ -1,0 +1,70 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>公司信息</title>
+    <link rel="stylesheet" href="~/Content/themes/showview/Site.css" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/showview.js"></script>
+    <script type="text/javascript" src="~/Content/themes/showview/vue.js"></script>
+    <script type="text/javascript" src="~/Content/themes/showview/zepto.min.js"></script>
+</head>
+<body>
+    <div id="CompanyDetails">
+        <div class="div100 title yellow"> <a href="javascript:" style="float:left"  onclick="javascript:history.go(-1);"> <span class="btnReturn"> 返回 </span></a>{{item.Name}}</div>
+        <div class="div100">地块编码:<br>&nbsp&nbsp&nbsp&nbsp{{item.DKBM}}</div>
+        <div class="div100">地类名称:<br>&nbsp&nbsp&nbsp&nbsp{{item.DLMC}}</div>
+        <div class="div100">原企业名称:<br>&nbsp&nbsp&nbsp&nbsp{{item.PreName}}</div>
+        <div class="div100">用地单位名称:<br>&nbsp&nbsp&nbsp&nbsp{{item.YDDMWC}}</div>
+        <div class="div100">土地租赁企业名称:<br>&nbsp&nbsp&nbsp&nbsp{{item.TDZLQYMC}}</div>
+        <div class="div100">所属行政村名称:<br>&nbsp&nbsp&nbsp&nbsp{{item.SSXZCMC}}</div>
+        <div class="div100">开发商名称:<br>&nbsp&nbsp&nbsp&nbsp{{item.KFSMC}}</div>
+        <div class="div100">地块附属建筑占地面积:<br>&nbsp&nbsp&nbsp&nbsp{{item.DKFUJZZDMJ}} m2( {{item.DKFUJZZDMJ | ConvertToMu}}亩)</div>
+        <div class="div100">地块附属建筑面积:<br>&nbsp&nbsp&nbsp&nbsp{{item.DMFSJZMJ}} m2({{item.DMFSJZMJ | ConvertToMu}}亩)</div>
+     </div>
+
+    <script>
+        VBltdName = "@ViewBag.regionCode";
+        var vm = new Vue({
+            el: '#CompanyDetails',
+            data: {
+                item: {},
+            },
+            filters: {
+                TestValue: function (value) {
+                    if (value)
+                        return (value / 666).toFixed(2);
+                    else
+                        return value;
+                },
+                ConvertToMu: function (value) {
+                if (value > 0)
+                    return "" + (value / 666).toFixed(2) + "";
+                else
+                    return "";
+                },
+                Fixed2: function (value) {
+                    if (value > 0) {
+                        return (value * 1).toFixed(2);
+                    }
+                    else
+                        return value;
+                }
+            },
+        });
+       
+        $.post('../ShowView/GetLtdDetails', { regionCode: VBltdName }, function (data) {
+            console.log(data);
+            if (data != null) {
+                vm.item = data;
+                console.log(vm.item);
+            } else {
+                alert("暂无数据！");
+            }
+        });
+       
+    </script>
+</body>
+</html>

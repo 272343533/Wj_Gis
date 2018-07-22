@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>界面</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    	<link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes/claro/claro.css">
+    	<link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css">
+    	<link rel="stylesheet" href="ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+		<link rel="stylesheet" href="main.css"> 
+		<script src="js/jquery-3.2.1.min.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/vue-resource.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="http://122.114.38.213:8080/arcgis_js_api/library/3.17/3.17/init.js"></script>
+		<script>
+		var setLayers;
+		   require([
+		        "esri/map",
+		        "esri/layers/ArcGISDynamicMapServiceLayer",
+			    "esri/dijit/OverviewMap",
+				"dojo/parser","dojo/dom",
+		        "dijit/layout/BorderContainer",
+				"dijit/layout/ContentPane",//??
+
+				"esri/tasks/FindTask",
+            	"esri/tasks/FindParameters",
+
+				
+				"esri/tasks/query",
+				"esri/tasks/IdentifyTask",
+				"esri/tasks/IdentifyParameters",
+				"esri/toolbars/draw",
+				"esri/symbols/SimpleFillSymbol",
+				"esri/symbols/SimpleLineSymbol",
+				"esri/graphic",
+				"dojo/colors",
+			
+		        "dojo/domReady!"
+
+				],
+		            function(Map,ArcGISDynamicMapServiceLayer,OverviewMap,parser
+							,on
+							,dom
+							,IdentifyTask,IdentifyParameters
+							,draw,SimpleFillSymbol,SimpleLineSymbol,Graphic,Color
+						){
+						//parser.parse();
+		                var map = new Map("map");
+						var MapServer = "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer";
+                   
+		                var layer=new ArcGISDynamicMapServiceLayer(MapServer);
+		                map.addLayer(layer);
+						//地图鼠标点击响应事件
+						// on(map,"click",function(e){
+						// 	alert("map clicked");
+						// });
+						map.on("click",mapClick);
+						
+						
+
+						function mapClick(e){
+							//获得用户点击的地图坐标
+							var point=e.mapPoint;
+							
+							//实例化查询参数
+							var query=new  esri.tasks.Query();
+							query.geometry = point;
+							query.outFields = ["*"];
+							query.outSpatialReference = map.spatialReference;
+							query.spatialRelationship =  esri.tasks.Query.SPATIAL_REL_INTERSECTS;
+							query.returnGeometry = true;
+							//实例化查询对象
+							var queryTask = new esri.tasks.QueryTask("http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/0");
+							//进行查询                                
+							queryTask.execute(query,showFindResult)
+							
+                    	};
+						function showFindResult(queryResult)
+						{
+						    console.log(queryResult);
+							if (queryResult.features == 0) {
+								alert("没有该元素");
+								return;
+							}
+							for (var i = 0; i < queryResult.features.length; i++) {
+								//获得该图形的形状
+								var feature = queryResult.features[i];
+								var geometry = feature.geometry;
+								console.log(geometry);
+								var ptName = feature.attributes["OBJECTID"];
+								alert(ptName);
+								//定义高亮图形的符号
+								//1.定义面的边界线符号
+								var outline= new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASHDOT,new Color([255, 0, 0]), 3);
+								//2.定义面符号                     
+								//var PolygonSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, outline,new dojo.colors.Color([0, 255, 0, 1]));
+								//创建客户端图形
+								//var graphic = new Graphic(geometry, PolygonSymbol);
+								//将客户端图形添加到map中
+								//map.graphics.add(graphic);
+							}
+						};
+
+
+
+
+						//添加鹰眼
+		                var overviewMapDijit = new OverviewMap({
+		                  map: map,
+		                  visible: true,
+		                  attachTo: "bottom-right",   // 默认右下角  
+		                  width: 150, // 默认值是地图高度的 1/4th  
+		                  height: 150, // 默认值是地图高度的 1/4th   
+		                  opacity: .40,    // 透明度 默认0.5  
+		                  maximizeButton: true,   // 最大化,最小化按钮，默认false  
+		                  expandFactor: 3, //概览地图和总览图上显示的程度矩形的大小之间的比例。默认值是2，这意味着概览地图将至少是两倍的大小的程度矩形。  
+		                  color: "#D84E13",
+		                });
+						
+		                overviewMapDijit.startup();
+		                setLayers = function(vis){
+		                	layer.setVisibleLayers(vis);
+		                };
+					})
+						
+		</script>
+	</head>
+
+<body>
+<div id="app"> 
+	<!-- 顶部菜单 -->
+	<div style="visibility:hidden">
+		<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+		  <div class="container-fluid">
+		      <ul class="nav navbar-nav">
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">账号管理 <span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		            <li><a href="#"  data-toggle="modal" data-target="#admin" >用户管理</a></li>
+		            <li><a href="#" data-toggle="modal" data-target="#pwd" >修改密码</a></li>
+		          </ul>
+		        </li>
+		        <li class="dropdown">
+		          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">企业信息查询<span class="caret"></span></a>
+		          <ul class="dropdown-menu">
+		            <li><a href="#" data-toggle="modal" data-target="#comprehensive">综合查询</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li class="dropdown-submenu">
+		            <a href="#" tabindex="-1">行政区查询</a>
+		            	<ul class="dropdown-menu">
+		            	 <li><a tabindex="-1" href="#" data-toggle="modal" data-target="#result">村界</a></li>
+		            	 <li><a tabindex="-1" href="#">镇界</a></li>
+		            	</ul>
+		            </li>
+		            <li><a href="#" data-toggle="modal" data-target="#industry">工业管理区查询</a></li>
+		            <li><a href="#">自由地块查询</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li><a href="#">现状数据</a></li>
+		            <li><a href="#">土地规划</a></li>
+		            <li><a href="#">批次供地</a></li>
+		            <li role="separator" class="divider"></li>
+		            <li><a href="#">取消选择</a></li>
+		          </ul>
+		        </li>
+		        <li><a href="#">信息维护</a></li>
+		        <li><a href="#">图形处理</a></li>
+		        <li><a href="#">更新地图</a></li>
+		        <li><a href="#">视图</a></li>
+		      </ul>
+		  </div><!-- /.container-fluid -->
+		</nav>
+	</div>
+	<div id="container">
+	        <div id="canvas">
+
+	<!-- 左侧边栏 -->
+		  	<div id="sidebar">
+				<form class="form-inline">
+					<label>图层</label>
+					<select>
+					  <option value ="">layer1</option>
+					</select>
+					<select>
+					  <option value ="">layer2</option>
+					</select>
+					<button type="submit" class="btn btn-sm btn-primary">刷新</button>
+			  	</form>
+
+			  	<p class="p2 text-center">——————— 分区列表 ———————</p>
+			  	<div class="zone">
+			  		<div id="zone-left"></div>
+			  		<div id="zone-right"></div>
+			  	</div>
+
+
+				<p class="p2 text-center">——————— 图层列表 ———————</p>
+		  		<div class="tree">
+		  		<ul id="layerTree" class="ztree" ></ul>
+				</div>
+		  	</div> <!--#sidebar end -->
+		  	<a class="toggle-nav" id="bars"><span class="glyphicon glyphicon-option-vertical"></span></a>
+
+	<!-- 地图 -->
+	  		<div id="map">
+		  		<div class="btn-group" role="group" style="float:right">
+		  		  <button type="button" class="btn btn-default" id="toggle-right">
+		  		  <span class="glyphicon glyphicon-list-alt"></span></button>
+		  		  <button id="btnTdxz" type="button" class="btn btn-default">现</button>
+		  		  <button type="button" class="btn btn-default">房</button>
+		  		  <button type="button" class="btn btn-default">批</button>
+		  		  <button type="button" class="btn btn-default">土</button>
+		  		  <button type="button" class="btn btn-default">城</button>
+		  		</div>
+	  		</div> <!-- map end -->
+<!-- 右侧边栏 -->
+	  		<div id="rightbar">
+
+	  			  <!-- Nav tabs -->
+	  			  <ul class="nav nav-tabs tablist">
+	  			    <li id="lg" class="active"><a href="#home" data-toggle="tab">土地现状数据</a></li>
+	  			    <li id="xs"><a href="#profile" data-toggle="tab">房屋建筑</a></li>
+	  			    <li><a href="#messages" data-toggle="tab">历年批次</a></li>
+	  			    <li><a href="#settings" data-toggle="tab">土地规划</a></li>
+	  			    <li><a href="#settings" data-toggle="tab">城市规划</a></li>
+	  			  </ul>
+
+
+	  			  <button id="tSave" type="save" class="btn btn-sm btn-primary center-block">保存</button>
+	  		</div>
+
+
+		</div> <!--#canvas end -->
+	</div> <!-- #container end -->
+
+	<!-- 用户管理 模态框 -->
+		<div class="modal fade" id="admin">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">用户管理</h4>
+					</div>
+					<div class="modal-body">
+						<div class="option">
+							<button type="button" class="btn btn-default " >
+							  <span class="glyphicon glyphicon-plus" ></span>新增
+							</button>
+							<button type="button" class="btn btn-default btn-primary" >
+							  <span class="glyphicon glyphicon-save-file"></span>保存
+							</button>
+							<button type="button" class="btn btn-default " >
+							  <span class="glyphicon glyphicon-minus" ></span>删除
+							</button>
+						</div>
+						<table class="table table-striped table-bordered">
+						   <thead>
+						     <tr>
+						       <th></th>
+						       <th>姓名</th>
+						       <th>登录名</th>
+						       <th>具有权限</th>
+						       <th>最后登录时间</th>
+						     </tr>
+						   </thead>
+						   <tbody>
+						     <tr class="danger">
+						       <td>1</td>
+						       <td>系统管理员</td>
+						       <td>admin</td>
+						       <td><select name="authority" >
+						       		<option value="">管理员</option>
+						       		</select>
+						       </td>
+						       <td></td>
+						     </tr>
+						     <tr class="warning">
+						       <td>2</td>
+						       <td>新增用户</td>
+						       <td></td>
+						       <td><select name="authority" >
+						       		<option value="">浏览人员</option>
+						       		</select></td>
+						       <td></td>
+						     </tr>
+						     <tr class="danger">
+						       <td>3</td>
+						       <td>测试用户</td>
+						       <td>test</td>
+						       <td><select name="authority" >
+						       		<option value="">浏览人员</option>
+						       		</select>
+						       </td>
+						       <td></td>
+						     </tr>
+						   </tbody>
+						 </table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!-- 修改密码 模态框 -->
+		<div class="modal fade" id="pwd">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">修改密码</h4>
+					</div>
+					<div class="modal-body" id="pwd-body">
+						<form class="form-horizontal">
+						  <div class="form-group">
+						    <label for="opwd" class="col-sm-4 control-label">原密码</label>
+						    <div class="col-sm-8">
+						      <input type="password" class="form-control" id="opwd">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="npwd" class="col-sm-4 control-label">新密码</label>
+						    <div class="col-sm-8">
+						      <input type="password" class="form-control" id="npwd">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="npwd" class="col-sm-4 control-label">再次确认</label>
+						    <div class="col-sm-8">
+						      <input type="password" class="form-control" id="npwd">
+						    </div>
+						  </div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary">保存</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!-- 综合查询 模态框 -->
+		<div class="modal fade bs-example-modal-lg" id="comprehensive">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">企业查询</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+						  <div class="col-md-3">
+							  <div id="compreTree"><input type="checkbox">条件</div>
+							  <button type="submit" id="confirm" class="btn btn-sm center-block btn-primary">确定</button>
+						  </div>
+
+							  <div class="col-md-9">
+								<div id="cForm">
+								<form class="form-inline">
+							  		<div class="form-group">
+							  	    	<label for="villageID">所属行政村代码</label>
+							  	    	<input type="text" class="form-control" id="villageID">
+							  		</div>
+							  	  　　
+							  		<div class="form-group">
+							  	    	<label for="townID">所属行政镇代码</label>
+							  	    	<input type="email" class="form-control" id="townID">
+							  		</div>
+								</form>
+								<form class="form-inline">
+							  		<div class="form-group">
+							  	    	<label for="oName">　用地单位名称</label>
+							  	    	<input type="text" class="form-control" id="oName">
+							  		</div>
+							  	  　　
+							  		<div class="form-group">
+							  	    	<label for="villageName">所属行政村名称</label>
+							  			<input type="email" class="form-control" id="villageName">
+							  		</div>
+								</form>
+								</div>
+								  	<div class="row alls">
+								  		<div class="col-md-4 col-md-offset-2">
+								  			<input type="checkbox">全选
+								  		</div>
+								  		<div class="col-md-2">
+								  			<button id="inquiry" class="btn btn-sm btn-primary">　查询　</button>
+								  		</div>
+								  		<div class="col-md-4">
+								  			<button id="location" class="btn btn-sm btn-primary">空间定位</button>
+										</div>
+									</div>
+									<div id="compre-table">
+									<table class="table table-striped table-bordered table-condensed">
+										<thead>
+											<tr class="success">
+												<th></th>
+												<th>地块编码</th>
+												<th>地类名称</th>
+												<th>地类编码</th>
+												<th>地块名称</th>
+												<th>开发商名称</th>
+												<th>所属行政村代码</th>
+												<th>所属行政镇代码</th>
+												<th>地块附属建筑面积</th>
+												<th>地块附属建筑占地面积</th>
+												<th>备注</th>
+												<th>用地单位名称</th>
+												<th>土地租赁企业名称</th>
+												<th>所属行政村名称</th>
+												<th>所属行政镇名称</th>
+												<th>占地面积</th>
+												<th>原企业名称</th>
+												<th>企业名称</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>*</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+												<td>000000000</td>
+											</tr>
+										</tbody>
+									</table>
+									</div>
+							  </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!-- 工业管理区查询 模态框 -->
+		<div class="modal fade bs-example-modal-lg" id="industry">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">工业管理区空间查询结果</h4>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs" role="tablist">
+								<li role="presentation" class="active">
+									<a href="#current" role="tab" data-toggle="tab">现状</a>
+								</li>
+								<li role="presentation">
+									<a href="#plan" role="tab" data-toggle="tab">规划</a>
+								</li>
+								<li role="presentation">
+									<a href="#batch" role="tab" data-toggle="tab">批次供地</a>
+								</li>
+							</ul>
+						
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div role="tabpanel" class="tab-pane active" id="current">
+									<table class="table table-striped table-bordered table-hover table-condensed">
+										<thead>
+											<tr class="success">
+												<th></th>
+												<th>统计类型</th>
+												<th>地块数量</th>
+												<th>面积</th>
+												<th>建筑占地面积</th>
+												<th>建筑面积</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td>交通用地</td>
+												<td>15</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td><button>明细</button></td>
+											</tr>
+											<tr>
+												<td>2</td>
+												<td>农用地</td>
+												<td>17</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td><button>明细</button></td>
+											</tr>
+											<tr>
+												<td>3</td>
+												<td>河流水域</td>
+												<td>8</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td><button>明细</button></td>
+											</tr>
+											<tr>
+												<td>4</td>
+												<td>农村宅基地</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td><button>明细</button></td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>经营性住宅</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td><button>明细</button></td>
+											</tr>
+											<tr>
+												<td>6</td>
+												<td>工业</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td><button>明细</button></td>
+											</tr>
+											<tr>
+												<td>7</td>
+												<td>行政事业用地</td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td></td>
+												<td><button>明细</button></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<div role="tabpanel" class="tab-pane" id="plan">
+									<h3 class="text-center">土地规划</h3>
+									<table class="table table-striped table-bordered table-hover table-condensed">
+										<thead>
+											<tr class="success">
+												<th></th>
+												<th>统计类型</th>
+												<th>地块数量</th>
+												<th>面积</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td>限制建设区</td>
+												<td></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>2</td>
+												<td>一般农地区</td>
+												<td></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>3</td>
+												<td>村镇建设用地区</td>
+												<td></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>4</td>
+												<td>允许建设区</td>
+												<td></td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>5</td>
+												<td>城镇建设用地区</td>
+												<td></td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+									<h3 class="text-center">城市规划</h3>
+									<table class="table table-striped table-bordered table-hover table-condensed">
+										<thead>
+											<tr  class="info">
+												<th></th>
+												<th>统计类型</th>
+												<th>面积</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td>城市非建设用地</td>
+												<td></td>
+											</tr>
+											<tr>
+												<td>2</td>
+												<td>绿地</td>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+								<div role="tabpanel" class="tab-pane" id="batch">
+								<h3 class="text-center">批次统计</h3>
+								<table class="table table-bordered table-hover table-condensed">
+									<thead>
+										<tr class="success">
+											<th></th>
+											<th>统计类型</th>
+											<th>地块数量</th>
+											<th>面积</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>历年批次</td>
+											<td>15</td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+								<h3 class="text-center">批次供地明细</h3>
+								<table class="table table-striped table-bordered table-hover table-condensed">
+									<thead>
+										<tr class="info">
+											<th></th>
+											<th>批次号</th>
+											<th>占地面积（平米）</th>
+											<th>地块编码</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+									</tbody>
+								</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-primary" data-dismiss="modal">关闭</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!-- 村界 -->
+	<div class="modal fade bs-example-modal-lg" tabindex="-1" id="result">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">{{ LayerName }}查询结果</h4>
+				</div>
+				<div class="modal-body">
+					<div role="tabpanel" class="ruralArea" id="tabpanel">
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" role="tablist">
+							<li role="presentation" class="active">
+								<a href="#tdxz" role="tab" data-toggle="tab">土地现状</a>
+							</li>
+							<li role="presentation">
+								<a href="#gh" role="tab" data-toggle="tab">规划</a>
+							</li>
+							<li role="presentation">
+								<a href="#pcgd" role="tab" data-toggle="tab">批次供地</a>
+							</li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane active" id="tdxz">
+								<table class="table table-striped table-bordered table-hover table-condensed">
+									<thead>
+										<tr class="success">
+											<th>统计类型</th>
+											<th>地块数量</th>
+											<th>面积 (㎡)</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+									<tr v-for="item in totalLayers[0].totalTypes">
+										<td>{{item.ItemName}}</td>
+										<td>{{item.RegionCount}}</td>
+										<td>{{item.RegionArea}}</td>
+										<td>
+											<form>
+											    <input type="hidden" name="TotalTypeName" :value="item.ItemName"/>
+											    <input type="hidden" name="regionCodes" :value="item.RegionCodes"/>
+											    <button v-on:click="getDetail" class="dBtn">明细</button>
+											</form>
+										</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="gh">
+								<h3 class="text-center">城市规划</h3>
+								<table class="table table-striped table-bordered table-hover table-condensed">
+									<thead>
+										<tr class="success">
+											<th>统计类型</th>
+											<th>面积 (㎡)</th>
+										</tr>
+									</thead>
+									<tbody>
+									<tr v-for="csgh in totalLayers[1].totalTypes">
+										<td>{{csgh.ItemName}}</td>
+										<td>{{csgh.RegionArea}}</td>
+									</tr>
+									</tbody>
+								</table>
+								<h3 class="text-center">土地规划</h3>
+								<table class="table table-striped table-bordered table-hover table-condensed">
+									<thead>
+										<tr  class="info">
+											<th>统计类型</th>
+											<th>面积 (㎡)</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="tdgh in totalLayers[2].totalTypes">
+											<td>{{tdgh.ItemName}}</td>
+											<td>{{tdgh.RegionArea}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="pcgd">
+							<h3 class="text-center">批次统计</h3>
+							<b>统计区面积：{{ totalLayers[3].RegionArea}} ㎡</b><br>
+							<b>地块数量：{{ totalLayers[3].RegionCount}}</b>
+							<h3 class="text-center">批次明细</h3>
+							<table class="table table-striped table-bordered table-hover table-condensed">
+								<thead>
+									<tr class="info">
+										<th>批次号</th>
+										<th>占地面积（平米）</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="pcmx in totalLayers[3].totalTypes">
+										<td>{{pcmx.ItemName}}</td>
+										<td>{{pcmx.RegionArea}}</td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
+						</div>
+					</div>
+
+					<!-- 明细div -->
+					<div class="detail" v-show = "false">
+						<button v-on:click="back">返回</button>					
+						<div v-for="item in details">
+							<a href="#">{{item.LtdNo}} {{item.LtdName}}</a>
+
+							<div>占地面积：{{item.RegionArea}}</div>
+							<div>建筑占地面积：{{item.FloorArea}}</div>
+							<div>建筑面积：{{item.BuildingArea}}</div>
+						</div>
+					</div> <!-- .detail END -->
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-primary" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	</div> <!-- #app END -->
+	<script src="js/main.js"></script>
+	<script src="js/result.js"></script>
+	<script src="ztree/js/jquery.ztree.all.min.js"></script>
+	<script type="text/javascript">
+	//zTree 图层                
+		var setting = {
+			treeId: 'layerTree',
+		    view: {  
+		        showLine: true,   
+		    },  
+		    check: {
+		    	enable: true,
+		    	autoCheckTrigger: true
+		    },
+		    callback: {
+				onCheck: zTreeOnCheck
+			}
+		};
+		var nodes =[
+			{
+				  "checked": false,
+				  "name": "镇界",
+			      "id": 1,
+			      "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/0",
+			      "PubLayIndex": 0
+			  },
+			  {
+			  	  "checked": false,
+			      "name": "村界",
+			      "id": 2,
+			      "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/1",
+			      "PubLayIndex": 1
+			  },
+			  {
+			  	  "checked": false,
+			      "name": "工业管理区",
+			      "id": 3,
+			      "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/2",
+			      "PubLayIndex": false
+			  },
+			    {	     
+			       "checked": false,  
+			       "name": "自由分区",
+			       "id": 4,
+			       "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/3",
+			       "PubLayIndex": 3
+			   },
+			   {
+			   	   "checked": false,
+			       "id": 5,
+			       "name": "历年批次",
+			       "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/4",
+			       "PubLayIndex": 4
+			   },
+			   {
+			   	   "checked": false,
+			       "SubLayers": null,
+			       "id": 6,
+			       "name": "房屋建筑",
+			       "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/5",
+			       "PubLayIndex": 5
+			   },
+			   {
+			   	   "checked": false,
+			       "id": 7,
+			       "name": "城市规划",
+			       "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/7",
+			       "PubLayIndex": 7
+			   },
+			  {
+			  	   "checked": false,
+			       "id": 8,
+			       "name": "土地规划",
+			       "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/13",
+			       "PubLayIndex": 13
+			   },
+			    {
+			       "checked": false,
+			       "SubLayers": null,
+			       "id": 9,
+			       "name": "道路线",
+			       "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/16",
+			       "PubLayIndex": 16
+			   },
+			   {
+			   	   "checked": false,
+			       "SubLayers": null,
+			       "id": 10,
+			       "name": "道路中线",
+			       "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/17",
+			       "PubLayIndex": 17
+			   },
+			   {
+			   	   "checked": false,
+			       "SubLayers": null,
+			       "id": 11,
+			       "name": "桥",
+			       "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/18",
+			       "PubLayIndex": 18
+			   },
+			   {
+			   	   "checked": false,
+			       "id": 12,
+			       "name": "土地现状数据",
+			       "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/20",
+			       "PubLayIndex": 20
+			   },
+			   {
+			       "checked": false,
+			       "SubLayers": null,
+			       "id": 13,
+			       "name": "影像图",
+			       "RestAddr": "http://122.114.38.213/arcgis/rest/services/WTMap/WTService/MapServer",
+			       "PubLayIndex": 0
+			   }
+		];
+		$(document).ready(function(){
+		      zTreeObj = $.fn.zTree.init($("#layerTree"), setting, nodes);
+		   });
+
+		function zTreeOnCheck(event, treeId, treeNode) {
+		    var visible = [];
+		    var treeObj = $.fn.zTree.getZTreeObj("layerTree");
+		    var Cnodes = treeObj.getCheckedNodes(true); //获取选中的树节点
+
+		    dojo.forEach(Cnodes, function(nodes) {
+		        visible.push(nodes.id-1);
+		    });
+		    //if there aren't any layers visible set the array to be -1
+		    if (visible.length === 0) {
+		        visible.push(-1);
+		    }
+		    setLayers(visible);
+		};
+
+	</script>
+	</body>
+</html>

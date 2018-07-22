@@ -1,0 +1,48 @@
+﻿<style>
+#hello{width:108px;height:108px;border:1px solid #369;overflow:hidden;margin:auto;}
+#word{margin:auto;width:136px;}
+</style>
+ 
+<div id="hello">
+    <img id="img" src="http://i1.baidu.com/it/u=2390401277,3891827753&fm=203">
+</div>
+ 
+<div>
+<input type="button" value="<" onclick="Change()";>
+<input type="button" value=">" onclick="Change()";>
+</div>
+ 
+<script>
+    function Change2() {
+        $ajax.po
+        $('#img').attr('src', 'your image src');
+    }
+
+</script>
+ <script type="text/javascript" src="~/Content/themes/showview/vue.js"></script>
+    <script type="text/javascript" src="~/Content/themes/showview/zepto.min.js"></script>
+       <script tyep="text.javascript"  src="~/Scripts/QyTech.js"></script>
+ 
+    <script>
+        Id = "@ViewBag.Id";
+        var vm = new Vue({
+            el: '#fwjz',
+            data: {
+                item: [],
+            },
+            methods: {
+                getdata: function () {
+                    $.post('../EditView/GetFwjzInfo', { id: Id }, function (data) {
+                        console.log(data);
+                        if (data != null) {
+                            vm.item = data;
+                        } else {
+                            alert("暂无数据！");
+                        }
+                    });
+                }
+            },
+        });
+        vm.getdata();
+       
+    </script>

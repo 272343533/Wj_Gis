@@ -1,0 +1,228 @@
+﻿html,body
+{
+     height: 100%;
+	   width: 100%;
+	   margin: 0;
+	   padding: 0;
+	   /*background-color: #F3F5F7;*/
+    font-size: 1em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: #ffffff;
+    background-color: #4F81BD;
+}
+
+#map {
+		height:99%;
+		width: 100%;
+		margin: 0;
+	    padding: 0;
+	    background-color: #F3F5F7;
+		border:0px solid;
+		position: absolute;
+		left:0px;
+		top: 0px;
+        opacity: 1;
+	}
+
+
+header, footer, nav, section
+{
+    display: block;
+}
+
+a:link
+{
+    text-decoration: none;
+    color: white;
+}
+
+a:visited
+{
+    text-decoration: none;
+    color: white;
+}
+
+a:hover
+{
+    text-decoration: underline;
+    color: white;
+}
+
+a:active
+{
+    text-decoration: none;
+    color: white;
+}
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+fieldset
+{
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend
+{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea
+{
+    min-height: 75px;
+}
+
+.editor-label
+{
+    margin: 1em 0 0 0;
+}
+
+.editor-field
+{
+    margin: 0.5em 0 0 0;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #f00;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+.div20
+{
+    width: 20%;
+    float: left;
+}
+
+.div25
+{
+    width: 25%;
+    float: left;
+}
+
+.div30
+{
+    width: 30%;
+    float: left;
+}
+
+.div33
+{
+    width: 33%;
+    float: left;
+}
+
+.div40
+{
+    width: 40%;
+    float: left;
+}
+
+.div50
+{
+    width: 50%;
+    float: left;
+}
+
+.div60
+{
+    width: 60%;
+    float: left;
+}
+
+.div75
+{
+    width: 75%;
+    float: left;
+}
+.div80
+{
+    width: 80%;
+    float:right;
+    text-align: right;
+}
+.div100
+{
+    margin-top: 5px;
+    width: 100%;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+.div100Center
+{
+    margin-top: 5px;
+    width: 100%;
+    float: left;
+    text-align:center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.button
+{
+    text-align: center;
+    border-radius: 5px;
+    margin: 0 auto;
+    background-color: #385D8A;
+}
+
+
+.title
+{
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    height: 1.5em;
+}
+
+.b
+{
+    font-weight: bold;
+}
+.yellow
+{
+    color: yellow;
+}
+.mt5
+{
+    margin-top: 5px;
+}
+
+.mt10
+{
+    margin-top: 10px;
+}
+
+.btnReturn
+{
+    color:white;
+    font-size:medium;
+    float:left;
+}
+

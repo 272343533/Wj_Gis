@@ -1,0 +1,215 @@
+﻿
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>房屋建筑</title>
+    <link rel="stylesheet" href="~/Content/themes/showview/Site.css" type="text/css" />
+
+          <link rel="stylesheet" href="../weui-master/style/weui.css"/>
+      <link rel="stylesheet" href="../weui-master/style/weui2.css"/>
+      <link rel="stylesheet" href="../weui-master/style/weui3.css"/>
+      <script src="../weui-master/zepto.min.js"></script>
+      <script src="../weui-master/picker.js"></script>
+      <script src="../weui-master//picker-city.js"></script>
+
+
+        <style>
+       .label
+        {
+            width:40%;
+        }
+        .post
+        {            
+            width:100%;
+            float:left;
+            clear:both;
+            border-bottom:1px #1a2246 dotted;
+        }
+       .valuetxt
+        {
+            text-align:left;
+        }
+        input
+        {
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="fwjz">
+        <div class="div100 title" style="text-align:center;color:black">
+                <a href="javascript:" style="float:left"  onclick="javascript:$('#divLoadPage').modal('hide');">
+                     <span class="btnReturn"  style="color:grey"> 返回 </span>
+                </a>
+                 <span id="titltext" > 房屋建筑 </span>
+        </div>
+        <br /><br /><br />
+
+        <div style="color:black">
+
+           <form> @*action="/EditView/SaveFwjzInfo" method="post">*@
+               <div><input  name="OBJECTID" v-model="item.OBJECTID" type="hidden"/></div>
+
+             <div class="weui_cell">
+                  <div class="weui_cell_hd"><label class="weui_label">建筑编号</label></div>
+                 <input  name="JZBH" v-model="item.JZBH"  class="weui_input" placeholder="请输入建筑编号"/>
+
+             </div>
+               @*<div class="post"><div class="div100 yellow">所属地块代码:</div><div class="div100"><input  name="所属地块代码" v-model="item.ssdkdm"   class="vieworedit"/></div></div>
+               *@ 
+                <div class="weui_cell">
+                     <div class="weui_cell_hd"><label class="weui_label">用地企业名称</label></div>
+                     <input name="SSYDQYMC" v-model="item.SSYDQYMC"   class="weui_input" placeholder="请输入所属用地企业名称"/>
+                </div>
+               
+                <div class="weui_cell">
+                     <div class="weui_cell_hd"><label class="weui_label">建筑占地面积</label></div>
+                     <input name="JZZDMJ" v-model="item.JZZDMJ"   class="weui_input" type="number" placeholder="请输入建筑占地面积"/>㎡
+                </div>
+                <div class="weui_cell">
+                     <div class="weui_cell_hd"><label class="weui_label">建筑面积</label></div>
+                     <input name="JZMJ" v-model="item.JZMJ"   class="weui_input" placeholder="请输入建筑面积"/>㎡
+                </div>
+ 
+               <div class="weui_cell">
+                     <div class="weui_cell_hd"><label class="weui_label">层数</label></div>
+                     <input name="LCS" v-model="item.LCS"   class="weui_input" placeholder="请输入层数"/>
+                </div>
+                <div class="weui_cell">
+                     <div class="weui_cell_hd"><label class="weui_label">所属租赁企业</label></div>
+                     <input name="SSYDQYMC" v-model="item.SSYDQYMC"   class="weui_input" placeholder="请输入所属用地租赁企业名称"/>
+                </div>
+                <div class="weui_cell">
+                     <div class="weui_cell_hd"><label class="weui_label">所属行政区</label></div>
+                     <input name="SSXZQMC" v-model="item.SSXZQMC"   class="weui_input" placeholder="请输入所属行政区名称"/>
+                </div>
+             <div class="weui_cell">
+                     <div class="weui_cell_hd"><label class="weui_label">所属管理区</label></div>
+                     <input name="SSGLQMC" v-model="item.SSGLQMC"   class="weui_input" placeholder="请输入所属管理区名称"/>
+            </div>
+            <div style="text-align:center;margin-top:5px;clear:both;">
+                  <a id="btnSubmitFw" href="javascript:;" class="weui_btn weui_btn_primary" onclick="vm.submit()" >提交</a>
+                             
+                 @*       
+                         <input id="postChange" style="width:25%;color:black" type="button" onclick="ViewToEdit($('#postChange').val())" value="编辑"/>
+                 <input id="btnSubmit" style="width:25%;display: none;color:black" type="button" onclick="vm.submit()"  value="保存"/>
+       *@
+            </div>
+              
+        </form>
+        </div>
+    </div>
+          <script type="text/javascript" src="~/Content/themes/showview/vue.js"></script>
+    <script type="text/javascript" src="~/Content/themes/showview/zepto.min.js"></script>
+       <script tyep="text.javascript"  src="~/Scripts/QyTech.js"></script>
+ 
+    <script>
+        Id = "@ViewBag.Id";
+        var UsercanEdit = @ViewBag.UserCanEdit;
+        $("#btnSubmitFw").attr("disabled", !UserCanEdit);
+
+
+
+        var vm = new Vue({
+            el: '#fwjz',
+            data: {
+                item: [],
+            },
+            methods: {
+                submit: function () {
+                    
+                    event.preventDefault();
+                    var formData = new FormData();
+                    formData.append('OBJECTID', this.item.OBJECTID);
+
+                    formData.append('jzbh', this.item.jzbh);
+                    formData.append('ssdwmc', this.item.ssdwmc);
+                    formData.append('jzzdmj', this.item.jzzdmj);
+                    formData.append('jzmj', this.item.jzmj);
+                    formData.append('cs', this.item.cs);
+                    formData.append('ssydzlqymc', this.item.ssydzlqymc);
+                    formData.append('bz', this.item.bz);
+                    //var jsonstr = arrayToJson(formData);
+                    //console.log(jsonstr);
+                    var abc = JSON.stringify({
+                        jzbh:  this.item.jzbh,
+                        ssdwmc: this.item.ssdwmc
+                    });
+                
+                    var config = {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                    console.log(formData);
+                    $.ajax({
+                        url: '../EditView/SaveFwjzInfo',
+                        type: 'POST',
+                        data: formData,
+                        dataType: 'JSON',
+                        async: false,
+                        cache: false,
+                        contentType:false,
+                        processData: false,
+                        success: function (returndata) {
+                            alert(returndata);
+                        },
+                        error: function (returndata) {
+                            alert(returndata);
+                        }
+                    });
+                    //$.post('../EditView/SaveFwjzInfo', formData, config).then(function (res) {
+                    //    alert(res);
+                        //if (res.status === 2000) {
+                        //    /*这里做处理*/
+                        //}
+                    //})
+                },
+                getdata:function(){
+                    $.post('../EditView/GetFwjzInfo', { id: Id }, function (data) {
+                        console.log(data);
+                        if (data != null) {
+                            vm.item = data;
+                        } else {
+                            alert("暂无数据！");
+                        }
+                    });
+                }
+            },
+        });
+        vm.getdata();
+        //$.post('../EditView/GetFwjzInfo', { id: Id }, function (data) {
+        //    console.log(data);
+        //    if (data != null) {
+        //        vm.item = data;
+        //    } else {
+        //        alert("暂无数据！");
+        //    }
+        //});
+        function arrayToJson(o) {
+            var r = [];
+            if (typeof o == "string") return "\"" + o.replace(/([\'\"\\])/g, "\\$1").replace(/(\n)/g, "\\n").replace(/(\r)/g, "\\r").replace(/(\t)/g, "\\t") + "\"";
+            if (typeof o == "object") {
+                if (!o.sort) {
+                    for (var i in o)
+                        r.push(i + ":" + arrayToJson(o[i]));
+                    if (!!document.all && !/^\n?function\s*toString\(\)\s*\{\n?\s*\[native code\]\n?\s*\}\n?\s*$/.test(o.toString)) {
+                        r.push("toString:" + o.toString.toString());
+                    }
+                    r = "{" + r.join() + "}";
+                } else {
+                    for (var i = 0; i < o.length; i++) {
+                        r.push(arrayToJson(o[i]));
+                    }
+                    r = "[" + r.join() + "]";
+                }
+                return r;
+            }
+            return o.toString();
+        }
+        ViewToEdit('保存');
+    </script>
+</body>
+</html>

@@ -1,0 +1,519 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>企业信息</title>
+    <link rel="stylesheet" href="~/Content/themes/showview/Site.css" type="text/css" />
+
+      <link rel="stylesheet" href="../weui-master/style/weui.css"/>
+      <link rel="stylesheet" href="../weui-master/style/weui2.css"/>
+      <link rel="stylesheet" href="../weui-master/style/weui3.css"/>
+
+        <script src="~/Scripts/vue.js"></script>
+ 
+
+      <script src="../weui-master/zepto.min.js"></script>
+      <script src="../weui-master/picker.js"></script>
+      <script src="../weui-master//picker-city.js"></script>
+ 
+  
+    <style>
+        .label
+        {
+            width: 40%;
+        }
+        .post
+        {
+            width: 100%;
+            float: left;
+            clear: both;
+            border-bottom: 1px #1a2246 dotted;
+        }
+        .valuetxt
+        {
+            text-align: left;
+        }
+        input
+        {
+            width: 100%;
+        }
+    </style>
+</head>
+<body style="background-color: #f8f8f8;">
+    <div>
+      
+        <div class="div100 title" style="text-align:center;color:black">
+            <a href="javascript:" style="float:left"  onclick="javascript:$('#divLoadPage').modal('hide');">
+                 <span class="btnReturn" style="color:gray"> 返回 </span>
+            </a>
+             <span id="titltext" > 企业信息 </span>
+           
+        </div>
+
+        <div style="clear: both; height: 30px;"></div>
+        <div class="mt10 div100 " style="text-align: center; position: fixed; top: 30px; left: 0; margin-left: 0.5%; color: #4F81BD">
+            <div class="button mt5 " style="width: 25%; float: left; height: 25px; line-height: 25px;"><a href="javascript:changeShow('ltdbase')" id="bltdbase">基本信息</a></div>
+            <div class="button mt5" style="width: 25%; float: left; height: 25px; line-height: 25px;"><a href="javascript:changeShow('ltdRegular')" id="bltdRegular">制度信息</a></div>
+            <div class="button mt5" style="width: 25%; float: left; height: 25px; line-height: 25px;"><a href="javascript:changeShow('ltdSafety')" id="bltdSafety">安全检查</a></div>
+            <div class="button mt5" style="width: 25%; float: left; height: 25px; line-height: 25px;"><a href="javascript:changeShow('ltdRent')" id="bltdRent">租赁企业</a></div>
+        </div>
+
+
+        <div id="ltdInfo">
+           <div id="ltdbase" style="color:black">
+                <div class="div100 title "  id="basetitle">基本信息</div>
+                      <div id="ltdBasecontnet">
+                        <form>
+                            <div class="weui_cell">
+                                <div class="weui_cell_hd"><label class="weui_label">地块编码</label></div>
+                                <input name="DKBH" v-model="item_base.DKBH"   class="weui_input" placeholder="请输入地块编码"/>
+
+                               
+                            </div>
+                            <div class="weui_cell">
+                                    <div class="weui_cell_hd"><label class="weui_label">用地单位名称</label></div>
+                                    <input name="地块名称" v-model="item_base.YDQYMC"   class="weui_input"  placeholder="请输入用地单位名称"/>
+                            </div>
+                            <div class="weui_cell">
+                                  <div class="weui_cell_hd"><label class="weui_label">租赁企业名称</label></div>
+                                    <input name="土地租赁企业名称" v-model="item_base.ZLQYMC_"   class="weui_input"   placeholder="请输入土地租赁企业名称"/>
+                            </div>
+                            <div class="weui_cell">
+                                 <div class="weui_cell_hd"><label class="weui_label">发证面积</label></div>
+                                    <input name="发证面积" v-model="item_base.FZMJ_" style="width: 90%"   class="weui_input" type="number"  placeholder="请输入发证面积"/>㎡
+                            </div>
+                          <div class="weui_cell">
+                                 <div class="weui_cell_hd"><label class="weui_label">占地面积</label></div>
+                                    <input name="ZDMJ" v-model="item_base.ZDMJ" style="width: 90%"   class="weui_input" type="number"  placeholder="请输入占地面积"/>㎡
+                            </div>
+                            <div class="weui_cell">
+                                <div class="weui_cell_hd"><label class="weui_label">建筑占地面积</label></div>
+                                    <input name="建筑占地面积" v-model="item_base.JZZDMJ" style="width: 90%"   class="weui_input" type="number"   placeholder="请输入建筑占地面积"/>㎡
+                            </div>
+                            <div class="weui_cell">
+                                <div class="weui_cell_hd"><label class="weui_label">建筑面积</label></div>
+                                    <input name="建筑面积" v-model="item_base.JZMJ" style="width: 90%"   class="weui_input"  type="number"  placeholder="请输入建筑面积"/>㎡
+                            </div>
+                            
+                         <div class="weui_cell">
+                               <div class="weui_cell_hd"><label class="weui_label">土地坐落</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <textarea id="textarea" name="TDZL" v-model="item_base.TDZL" class="weui_textarea" placeholder="请输入土地坐落" rows="3"></textarea>
+                                <div class="weui_textarea_counter"><span id='count'>0</span>/<span id='count_max'>75</span></div>
+                            </div>
+                        </div>
+            
+                            <div style="text-align: center; margin-top: 5px; clear: both;">
+                                  <a id="btnSubmit" href="javascript:;" class="weui_btn weui_btn_primary" onclick="vm.save()" >提交</a>
+                                    @* <a id="postChange" href="javascript:;" class="weui_btn weui_btn_primary" onclick="ViewToEdit($('#postChange').val())">修改数据</a>*@
+                                 
+                                       @*   <input id="postChange1" style="width:25%;color:black" type="button" onclick="ViewToEdit($('#postChange').val())" value="编辑"/>
+                                            <input id="btnSubmit1" style="width:25%;display: none;color:black" type="button" onclick="vm.save()" value="保存"/>*@
+                            </div>
+                         </form>
+                      </div>   
+            </div>  
+            <div id="ltdRegular" style="display: none; color:black">
+                <div class="div100 title " id="regtitle">制度信息</div>
+                <div id="ltdregularcontent">
+                    <form>
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">所属地块编码</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input  name="SSDKBM" v-model="item_reg.SSDKBM" class="weui_input" placeholder="请输入所属地块编码"/>
+                            </div>
+                        </div>
+                         <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">所属企业编码</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input  name="SSQYBM" v-model="item_reg.SSQYBM" class="weui_input" placeholder="请输入所属企业编码"/>
+                            </div>
+                        </div>
+                       
+                        <div class="weui_cell weui_cell_select weui_select_after">
+                                <div class="weui_cell_hd">
+                                    <label for="" class="weui_label">安全制度</label>
+                                </div>
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <select v-model="item_reg.AQZD" class="weui_select" name="AQZD">
+                                        <option value="齐全">齐全</option>
+                                        <option value="不齐全">不齐全</option>
+                                    </select>
+                                </div>
+                       </div>
+                         <div class="weui_cell weui_cell_select weui_select_after">
+                                <div class="weui_cell_hd">
+                                    <label for="" class="weui_label">消防制度</label>
+                                </div>
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <select v-model="item_reg.XFZD" class="weui_select" name="XFZD">
+                                        <option value="齐全">齐全</option>
+                                        <option value="不齐全">不齐全</option>
+                                    </select>
+                                </div>
+                        </div>
+                         <div class="weui_cell weui_cell_select weui_select_after">
+                                <div class="weui_cell_hd">
+                                    <label for="" class="weui_label">财务制度</label>
+                                </div>
+                                <div class="weui_cell_bd weui_cell_primary">
+                                    <select v-model="item_reg.CWZD" class="weui_select" name="CWZD">
+                                        <option value="齐全">齐全</option>
+                                        <option value="不齐全">不齐全</option>
+                                    </select>
+                                </div>
+                        </div>
+
+                        <div class="weui_cell weui_cell_select weui_select_after">
+                            <div class="weui_cell_hd">
+                                <label for="" class="weui_label">上报年度</label>
+                            </div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <select v-model="item_reg.SBND" class="weui_select" name="SBND">
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+                                </select>
+                            </div>
+                        </div>
+                          
+                        <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">上报日期</label></div>
+                                <input id="SBRQ" name="SBRQ" v-model="item_reg.SBRQ" type="date" class="weui_input"   placeholder="上报日期"/>
+                       </div>
+                        </div>
+                        <div class="weui_cell">
+                           <div class="weui_cell_hd"><label class="weui_label">安全照片点编码</label></div>
+                                <input name="AQZPDBM" v-model="item_reg.AQZPDBM"   disabled="disabled"  class="weui_input"   placeholder="安全照片点编码"/>
+                        </div>
+                        <div style="text-align: center; margin-top: 5px; clear: both;">
+                            <a id="btnSubmit_Reg" href="javascript:;" class="weui_btn weui_btn_primary" onclick="vm.save_reg()" >提交</a>
+                       </div>
+                </div>
+            <div id="ltdSafety" style="display: none; color:black">
+                <div class="div100 title " id="safetytitle">安全检查</div>
+               <div id="ltdSafetycontent">
+                    <div class="post">
+                      @*  <div class="div100 ">地块编码:</div>
+                      *@  <div class="div100">
+                            <input type="hidden" name="OBJECTID" v-model="item_safety.OBJECTID"   disabled="disabled"/></div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">所属地块编码</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input  name="SSDKBM" v-model="item_safety.SSDKBM" class="weui_input" placeholder="所属地块编码"/>
+                        </div>
+                    </div>
+
+                     <div class="weui_cell weui_cell_select weui_select_after">
+                        <div class="weui_cell_hd">
+                            <label for="" class="weui_label">查处类型</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <select v-model="item_safety.CCLX" class="weui_select" name="CCLX">
+                                <option value="红牌">红牌</option>
+                                <option value="黄牌">黄牌</option>
+                            </select>
+                        </div>
+                    </div>
+                     <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">查处代码</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input  name="CCDM" v-model="item_safety.CCDM" class="weui_input" placeholder="查处代码"/>
+                            </div>
+                    </div>
+                    <div class="weui_cell weui_cell_select weui_select_after">
+                        <div class="weui_cell_hd">
+                            <label for="" class="weui_label">查处内容</label>
+                        </div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <select v-model="item_safety.CCNR" class="weui_select" name="CCNR">
+                                <option value="安全制度不合格">安全制度不合格</option>
+                                <option value="环保制度不合格">环保制度不合格</option>
+                                <option value="财务制度不合格">财务制度不合格</option>
+                                <option value="消防制度不合格">消防制度不合格</option>
+                            </select>
+                        </div>
+                     </div>
+
+                     <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">查处日期</label></div>
+                            <input id="CCRQ" name="CCRQ" v-model="item_safety.CCRQ" type="text" class="weui_input"   placeholder="查处日期"/>
+                       </div>
+                      <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">撤销代码</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input  name="CXDM" v-model="item_safety.CXDM" class="weui_input" placeholder="撤销代码"/>
+                        </div>
+                       </div>
+                       <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">撤销日期</label></div>
+                            <input id="CXRQ" name="CXRQ" v-model="item_safety.CXRQ" type="text" class="weui_input"   placeholder="撤销日期"/>
+                       </div>
+                       <div class="weui_cell">
+                            <div class="weui_cell_hd"><label class="weui_label">删除代码</label></div>
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <input  name="SCDM" v-model="item_safety.SCDM" class="weui_input" placeholder="删除代码"/>
+                            </div>
+                      </div>
+                     <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">所属企业编码</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <input  name="SSQYBM" v-model="item_safety.SSQYBM" class="weui_input" placeholder="所属企业编码"/>
+                        </div>
+                    </div>
+                    <div class="weui_cell">
+                        <div class="weui_cell_hd"><label class="weui_label">安全照片点编码</label></div>
+                        <div class="weui_cell_bd weui_cell_primary">
+                            
+                        <input class="weui_input" name="AQZPDBM" placeholder="安全照片点编码" v-model="item_safety.AQZPDBM" />
+                        </div>
+                    </div>
+                  @*  <div style="text-align: center; margin-top: 5px; clear: both;">
+                            <a id="btnSubmit_Az" href="javascript:;" class="weui_btn weui_btn_primary" onclick="vm.Az_save()" >提交</a>
+                  </div>*@
+                    
+                </div>
+            </div>
+            <div id="ltdRent" style="display: none; color:black">
+                <div class="div100 title " id="renttitle">租赁企业</div>
+                <div id="ltdRentcontent">
+                    <div class="div100" style="text-align: right; font-size: 0.8em;"></div>
+                      <div  v-for="(index,item) in item_rents">
+                        &nbsp;&nbsp;<span class="">{{index+1}}&nbsp;{{item.ZLQYMC_}}：</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;纳税人识别号:{{item.NSRSBH}}<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;土地证号:{{item.TDZH}}<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;租赁类型:{{item.ZLLX}}<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;公司规模:{{item.GSGM}}<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;法人代表:{{item.FRDB}}<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;产业类型:{{item.CYLX}}<br />
+                  
+                    </div>
+            </div>
+            </div>
+        </div>
+        
+   </div>
+ 
+    <script type="text/javascript" src="~/Content/themes/showview/vue.js"></script>
+    <script type="text/javascript" src="~/Content/themes/showview/zepto.min.js"></script>
+       <script tyep="text.javascript"  src="~/Scripts/QyTech.js"></script>
+ 
+    <script>
+        Id = "@ViewBag.Id";
+        var UserCanEdit = @ViewBag.UserCanEdit;
+        $("#btnSubmit").attr("disabled", !UserCanEdit);
+        $("#btnSubmit_Reg").attr("disabled", !UserCanEdit);
+        
+
+        var vm = new Vue({
+            el: '#ltdInfo',
+            data: {
+                item_base: [],
+                item_reg: [],
+                item_safety: [],
+                item_rents: []
+            },
+            methods: {
+                Getdata: function () {
+                    $.post('../EditView/GetQyxxInfo', { id: Id }, function (data) {
+                        console.log(data);
+                        if (data != null) {
+                            vm.item_base = data;
+                           // $("#titltext").html(data.yddwmc);
+                        } else {
+                            $("#basetitle").html("暂无基本信息");
+                        }
+                    });
+                },
+                save: function () {
+                   
+                    event.preventDefault();
+                    var formData = new FormData();
+                    formData.append('DKBH', this.item_base.DKBH);
+                    formData.append('YDQYMC', this.item_base.YDQYMC);
+                    formData.append('ZLQYMC_', this.item_base.ZLQYMC_);
+                    formData.append('FZMJ_', this.item_base.FZMJ_);
+                    formData.append('ZDMJ', this.item_base.ZDMJ);
+
+                    formData.append('JZZDMJ', this.item_base.JZZDMJ);
+                    formData.append('JZMJ', this.item_base.JZMJ);
+                    formData.append('TDZL', this.item_base.TDZL);
+
+                    $.ajax({
+                        url: '../EditView/SaveQyxxInfo',
+                        type: 'POST',
+                        data: formData,
+                        dataType: 'JSON',
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (returndata) {
+                            alert(returndata);
+                            //if (res.status === 2000) {
+                            //    /*这里做处理*/
+                            //}
+                        },
+                        error: function (returndata) {
+                            alert(returndata);
+                        }
+                    });
+                },
+                GetRegular: function () {
+                    $.post('../EditView/GetLtdRegularInfo', { id: Id }, function (data) {
+                        console.log(data);
+                        if (data != null) {
+                            vm.item_reg = data;
+                        } else {
+                            alert("暂无制度信息");
+                            $("#regtitle").html("暂无制度信息");
+                        }
+                    });
+                },
+                save_reg: function () {
+                   
+                    event.preventDefault();
+                    var formData = new FormData();
+                    formData.append('SSDKBM', this.item_reg.SSDKBM);
+                    formData.append('SSQYBM', this.item_reg.SSQYBM);
+                    formData.append('AQZD', this.item_reg.AQZD);
+                    formData.append('XFZD', this.item_reg.XFZD);
+                    formData.append('CWZD', this.item_reg.CWZD);
+                    formData.append('SBND', this.item_reg.SBND);
+                    formData.append('SBRQ', this.item_reg.SBRQ);
+                    formData.append('AQZPDBM', this.item_reg.AQZPDBM);
+                   // formData.append('DWMC', this.item_reg.DWMC);
+
+                    $.ajax({
+                        url: '../EditView/SaveLtdRegularInfo',
+                        type: 'POST',
+                        data: formData,
+                        dataType: 'JSON',
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (returndata) {
+                            alert(returndata);
+                            //if (res.status === 2000) {
+                            //    /*这里做处理*/
+                            //}
+                        },
+                        error: function (returndata) {
+                            alert(returndata);
+                        }
+                    });
+                },
+
+                GetSafety: function () {
+                    $.post('../EditView/GetLtdProblemInfo', { id: Id }, function (data) {
+                        console.log(data);
+                        if (data != null) {
+                            vm.item_safety = data;
+                        } else {
+                            $("#safetytitle").html("暂无安全信息");
+                        }
+                    });
+                },
+                save_safe: function () {
+                   
+                    event.preventDefault();
+                    var formData = new FormData();
+                    formData.append('DKBH', this.item_base.DKBH);
+                    formData.append('YDQYMC', this.item_base.YDQYMC);
+                    formData.append('ZLQYMC_', this.item_base.ZLQYMC_);
+                    formData.append('FZMJ_', this.item_base.FZMJ_);
+                    formData.append('ZDMJ', this.item_base.ZDMJ);
+
+                    formData.append('JZZDMJ', this.item_base.JZZDMJ);
+                    formData.append('JZMJ', this.item_base.JZMJ);
+                    formData.append('TDZL', this.item_base.TDZL);
+
+                    $.ajax({
+                        url: '../EditView/SaveQyxxInfo',
+                        type: 'POST',
+                        data: formData,
+                        dataType: 'JSON',
+                        async: false,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function (returndata) {
+                            alert(returndata);
+                            //if (res.status === 2000) {
+                            //    /*这里做处理*/
+                            //}
+                        },
+                        error: function (returndata) {
+                            alert(returndata);
+                        }
+                    });
+                },
+
+                GetRent: function () {
+                    $.post('../EditView/GetLtdRentInfo', { id: Id }, function (data) {
+                        console.log(data);
+                        if (data != null) {
+                            vm.item_rents = data;
+                        } else {
+                            $("#renttitle").html("暂无租赁企业");
+                        }
+                        console.log(vm.item_rents);
+
+                    });
+                }
+            },
+        });
+     
+        function changeShow(id) {
+            $('#bltdbase').html("基本信息");
+            $('#bltdRegular').html("制度信息");
+            $('#bltdSafety').html("安全检查");
+            $('#bltdRent').html("租赁信息");
+            if ($('#' + id).css("display") == "none") {
+                $('#ltdbase').css({ "display": "none" });
+                $('#ltdRegular').css({ "display": "none" });
+                $('#ltdSafety').css({ "display": "none" });
+                $('#ltdRent').css({ "display": "none" });
+                $('#' + id).css({ "display": "block" });
+
+                $('#b' + id).html("返回");
+            }
+            else {
+                $('#' + id).css({ "display": "none" });
+                $('#ltdbase').css({ "display": "block" });
+            }
+        }
+
+         ViewToEdit('编辑');
+        vm.Getdata();
+        vm.GetRegular();
+        vm.GetSafety();
+        vm.GetRent();
+
+        $(function () {
+            $("#SBRQ").datetimePicker({ title: "选择日期", m: 1 });
+            $("#CCRQ").datetimePicker({ title: "选择日期", m: 1 });
+            $("#CXRQ").datetimePicker({ title: "选择日期", m: 1 });
+            
+            var max = $('#count_max').text();
+            $('#textarea').on('input', function () {
+                var text = $(this).val();
+                var len = text.length;
+                $('#count').text(len);
+                if (len > max) {
+                    $(this).closest('.weui_cell').addClass('weui_cell_warn');
+                }
+                else {
+                    $(this).closest('.weui_cell').removeClass('weui_cell_warn');
+                }
+            });
+            
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>查询结果</title>
+    <link rel="stylesheet" href="~/Content/themes/showview/Site.css" type="text/css" />
+    
+    <script type="text/javascript" src="~/Content/themes/showview/vue.js"></script>
+    <script type="text/javascript" src="~/Content/themes/showview/zepto.min.js"></script>
+
+</head>
+<body>
+    <div id="ResultView">
+        <div id="tdxz">
+            <div class="div100 title yellow"><a href="javascript:" style="float:left"  onclick="javascript:history.go(-1);"> <span class="btnReturn"> 返回 </span></a>{{ ObjName }}&nbsp&nbsp查询结果</div>
+            <div class="div100" style="text-align: right; font-size: 0.8em;">统计区面积：{{ totalLayers[0].RegionArea}}{{ totalLayers[0].RegionArea | ConvertToMu}}</div>
+            <div style="float: left" v-for="item in totalLayers[0].totalTypes">
+                <div class="div100 b yellow">{{item.ItemName}}：</div>
+                <div class="div20">
+                    <form action="Details" method="post">
+                        <input type="hidden" name="TotalTypeName" value="{{item.ItemName}}"/>
+                        <input type="hidden" name="regionCodes" value="{{item.RegionCodes}}"/>
+                        <input class="button" type="submit" style="color:white" value="明细" />
+                    </form>
+                </div>
+                <div class="div100">&nbsp;&nbsp;地块数量:{{item.RegionCount}}个</div>
+                <div class="div100">&nbsp;&nbsp;面积:{{item.RegionArea | ToFixed2}}{{item.RegionArea | ConvertToMu}}</div>
+            </div>
+        </div>
+        <div id="csghs" style="display: none;">
+            <div class="div100 title yellow">{{ ObjName }}&nbsp&nbsp城市规划</div>
+            <div class="div100" style="text-align: right; font-size: 0.8em;">统计区面积：{{ totalLayers[1].RegionArea}}{{ totalLayers[1].RegionArea | ConvertToMu}}</div>
+            <div style="width: 100%; float: left;" v-for="csgh in totalLayers[1].totalTypes">
+                &nbsp;&nbsp;<span class="yellow">{{csgh.ItemName}}：</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;{{csgh.RegionArea | ToFixed2}}{{csgh.RegionArea | ConvertToMu}}
+            </div>
+        </div>
+        <div id="tdgh" style="display: none;">
+            <div class="div100 title yellow">{{ ObjName }}&nbsp&nbsp土地规划</div>
+            <div class="div100" style="text-align: right; font-size: 0.8em;">统计区面积：{{ totalLayers[2].RegionArea}}{{ totalLayers[2].RegionArea | ConvertToMu}}</div>
+            <div style="width: 100%; float: left;" v-for="tdghitem in totalLayers[2].totalTypes">
+                &nbsp;&nbsp;<span class="yellow">{{tdghitem.ItemName}}：</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;{{tdghitem.RegionArea | ToFixed2}} {{tdghitem.RegionArea | ConvertToMu}}
+            </div>
+        </div>
+        <div id="pcgd" style="display: none;">
+            <div class="div100 title yellow">{{ ObjName }}&nbsp&nbsp批次供地</div>
+            <div class="div100" style="text-align: right; font-size: 0.8em;">统计区面积：{{ totalLayers[3].RegionArea}}{{ totalLayers[3].RegionArea | ConvertToMu}}</div>
+            <div class="div100 title yellow">批次明细</div>
+            <div style="width: 100%; float: left;" v-for="pcmx in totalLayers[3].totalTypes">
+                &nbsp;&nbsp;<span class="yellow">{{pcmx.ItemName}}:</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;{{pcmx.RegionArea | ToFixed2}} {{pcmx.RegionArea | ConvertToMu}}
+            </div>
+        </div>
+        <div style="clear: both; height: 30px;"></div>
+        <div class="mt10 div100 " style="text-align: center; position: fixed; bottom: 0; left: 0; margin-left: 0.5%; color: #4F81BD">
+            <div class="button mt5 " style="width: 33%; float: left; height: 25px; line-height: 25px;"><a href="javascript:changeShow('csghs')" id="bcsghs">城市规划</a></div>
+            <div class="button mt5" style="width: 33%; float: left; height: 25px; line-height: 25px;"><a href="javascript:changeShow('tdgh')" id="btdgh">土地规划</a></div>
+            <div class="button mt5" style="width: 33%; float: left; height: 25px; line-height: 25px;"><a href="javascript:changeShow('pcgd')" id="bpcgd">批次供地</a></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+       var vm = new Vue({
+            el: '#ResultView',
+            data: {
+                ObjName: '',
+                totalLayers:[],
+                Tdsz: {
+                    ItemNo: 1,
+                    ItemName: '',
+                    RegionArea: 0,
+                    RegionCount: 0,
+                    BuildingArea: 0,
+                    FloorArea: 0,
+                    totalTypes:[],
+                },
+                Tdgh: {},
+                Csgh: {},
+                Pcgd: {},
+            },
+            filters: {
+                ConvertToMu: function (value) {
+                    if (value > 0)
+                        return "㎡(" + (value / 666).toFixed(2) + "亩)";
+                    else
+                        return;
+                },
+                ToFixed2: function (value) {
+                    if (value > 0)
+                        return (value / 1).toFixed(2);
+                    else
+                        return value;
+                }
+            },
+        });
+       
+         var VBJson = "@ViewBag.Json";
+        var jsons = eval("[" + VBJson.replace(/&quot;/g, "\"") + "]");
+        var json = jsons[0];
+        var objname = json.ObjName;
+        vm.ObjName = objname;
+        console.log(json);
+        var layinfo=[];
+        if (jsons.length > 0) {
+            for (i = 0; i < json.totalLayers.length; i++) {
+                var totall = json.totalLayers[i];
+                layinfo.push(totall);
+            }
+        }
+        vm.totalLayers = layinfo;
+
+        //var layinfo = json.totalLayers[0];
+        //vm.Tdsz.ItemNo = layinfo.ItemNo;
+        //vm.Tdsz.ItemName = layinfo.ItemName;
+        //vm.Tdsz.RegionArea = layinfo.RegionArea;
+       // vm.Tdsz.RegionCount = layinfo.RegionCount;
+        //vm.Tdsz.BuildingArea = layinfo.BuildingArea;
+        //vm.Tdsz.FloorArea = layinfo.FloorArea;
+
+        console.log(vm.totalLayers);
+
+        function changeShow(id) {
+            if ($('#' + id).css("display") == "none") {
+                $('#tdxz').css({ "display": "none" });
+                $('#csghs').css({ "display": "none" });
+                $('#tdgh').css({ "display": "none" });
+                $('#pcgd').css({ "display": "none" });
+                $('#' + id).css({ "display": "block" });
+                $('#bcsghs').html("城市规划");
+                $('#btdgh').html("土地规划");
+                $('#bpcgd').html("批次供地");
+                $('#b' + id).html("返回");
+            }
+            else {
+                $('#' + id).css({ "display": "none" });
+                $('#tdxz').css({ "display": "block" });
+                $('#bcsghs').html("城市规划");
+                $('#btdgh').html("土地规划");
+                $('#bpcgd').html("批次供地");
+            }
+        }
+    </script>
+</body>
+</html>

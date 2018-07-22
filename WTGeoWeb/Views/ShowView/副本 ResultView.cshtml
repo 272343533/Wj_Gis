@@ -1,0 +1,246 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>查询结果</title>
+    <link rel="stylesheet" href="~/Content/themes/showview/Site.css" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/showview.js"></script>
+    <script type="text/javascript" src="~/Content/themes/showview/vue.js"></script>
+    <script type="text/javascript" src="~/Content/themes/showview/zepto.min.js"></script>
+
+</head>
+<body>
+    <div id="ResultView">
+        <div id="tdxz">
+            <div class="div100 title yellow">查询结果</div>
+            <div class="div100" style="text-align: right; font-size: 0.6em;">统计区面积：@ViewBag.CountArea{{@ViewBag.CountArea | ConvertToMu}}</div>
+            <div style="float: left" v-for="item in tdxz">
+                <div class="div100 b yellow">{{item.ItemName}}：</div>
+                <div class="div100">&nbsp;&nbsp;地块数量:{{item.RegionCount}}个</div>
+                <div class="div100">&nbsp;&nbsp;面积:{{item.RegionArea | ToFixed2}}{{item.RegionArea | ConvertToMu}}</div>
+            </div>
+            <div class="div100 title yellow" v-if="jsyds.length>0">建设用地情况</div>
+            <div style="float: left">
+                <div class="mt5" style="float: left" v-for="item in jsyds" v-if="(item.ItemName=='工业'||item.ItemName=='经营性住宅'||item.ItemName=='行政事业用地'||item.ItemName=='商业用地'||item.ItemName=='拆迁安置区')">
+                    <div class="div40 b yellow">{{item.ItemName}}</div>
+                    <div class="div40" style="text-align: right">计数数量{{item.ExtF1}}  </div>
+                    <div class="div20" v-if="item.ExtF1!=0">
+                        <form action="Details" method="post">
+                                <input type="hidden" name="TotalTypeName" value="{{item.ItemName}}"/>
+                                <input type="hidden" name="bsOCodes" value="{{url}}"/>
+                                <input id="CodeType" type="hidden" name="CodeType" value="{{CodeType}}"/>
+                            <input class="button" type="submit" style="color:white" value="明细" />
+                        </form>
+                        @*<a href="Details?TotalTypeName={{item.ItemName}}&bsOCodes={{url}}">明细</a>*@
+                    </div>
+                    <div style="width: 100%; float: left;">&nbsp;&nbsp;占地面积：{{item.FloorArea | ToFixed2}}{{item.FloorArea | ConvertToMu}}</div>
+                    <div style="width: 100%; float: left;">&nbsp;&nbsp;建筑占地面积：{{item.BuildingFloorArea}}</div>
+                    <div style="width: 100%; float: left;">&nbsp;&nbsp;建筑面积：{{item.BuildingArea}}</div>
+                </div>
+            </div>
+        </div>
+        <div id="csghs" style="display: none;">
+            <div class="div100 title yellow">城市规划</div>
+            <div style="width: 100%; float: left;" v-for="csgh in csghs">
+                &nbsp;&nbsp;<span class="yellow">{{csgh.ItemName}}：</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;{{csgh.RegionArea | ToFixed2}}{{csgh.RegionArea | ConvertToMu}}
+            </div>
+        </div>
+        <div id="tdgh" style="display: none;">
+            <div class="div100 title yellow">土地规划</div>
+            <div style="width: 100%; float: left;" v-for="tdghitem in tdgh">
+                &nbsp;&nbsp;<span class="yellow">{{tdghitem.ItemName}}：</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;{{tdghitem.RegionArea | ToFixed2}} {{tdghitem.RegionArea | ConvertToMu}}
+            </div>
+        </div>
+        <div id="pcgd" style="display: none;">
+            <div class="div100 title yellow">批次</div>
+            <div style="width: 100%; float: left;" v-for="pc in pcs">
+                &nbsp;&nbsp;<span class="yellow">{{pc.ItemName}}：</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;{{pc.RegionArea | ToFixed2}}{{pc.RegionArea | ConvertToMu}}
+            </div>
+            <div v-if="pcmxs.length>0">
+                <div class="div100 title yellow">批次明细</div>
+                <div style="width: 100%; float: left;" v-for="pcmx in pcmxs">&nbsp;&nbsp;{{pcmx.ItemName}}</div>
+            </div>
+            <div class="div100 title yellow" v-if="gds.length>0">供地</div>
+            <div style="width: 100%; float: left;" v-for="gd in gds">
+                &nbsp;&nbsp;<span class="yellow">{{gd.ItemName}}：</span><br />
+                &nbsp;&nbsp;&nbsp;&nbsp;{{gd.FloorArea | ToFixed2}}{{gd.FloorArea | ConvertToMu}}
+            </div>
+        </div>
+        <div style="clear: both; height: 30px;"></div>
+        <div class="mt10 div100 " style="text-align: center; position: fixed; bottom: 0; left: 0; margin-left: 0.5%; color: #4F81BD">
+            <div class="button mt5 " style="width: 33%; float: left; height: 25px; line-height: 25px;"><a href="javascript:changeShow('csghs')" id="bcsghs">城市规划</a></div>
+            <div class="button mt5" style="width: 33%; float: left; height: 25px; line-height: 25px;"><a href="javascript:changeShow('tdgh')" id="btdgh">土地规划</a></div>
+            <div class="button mt5" style="width: 33%; float: left; height: 25px; line-height: 25px;"><a href="javascript:changeShow('pcgd')" id="bpcgd">批次供地</a></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        VBQueryType = "@ViewBag.QueryType";
+        VBIds = "@ViewBag.Ids";
+
+        var _tdxzs = [];//土地现状数据
+        var _jsyds = [];//
+        var _csghs = [];//城市规划
+        var _tdghs = [];//土地规划
+        var _pcs = [];//历史批次
+        var _pcmxs = [];//批次明细？
+        var _gds = [];
+
+        var vm = new Vue({
+            el: '#ResultView',
+            data: {
+                tdxz: [],   //土地现状
+                jsyds: [],  
+                csghs: [],  //城市规划
+                tdgh: [],  //土地规划
+                pcs: [],//历史批次
+                pcmxs: [],//批次明细
+                gds: [],  //供地（批次）
+                url: '',
+                CodeType:"1",
+
+            },
+            filters: {
+                ConvertToMu: function (value) {
+                    if (value > 0)
+                        return "㎡(" + (value / 666).toFixed(2) + "亩)";
+                    else
+                        return;
+                },
+                ToFixed2: function (value) {
+                    if (value > 0)
+                        return (value / 1).toFixed(2);
+                    else
+                        return value;
+                }
+            },
+        });
+        if (VBQueryType == "村" || VBQueryType == "镇") {
+            vm.url = VBIds;
+            $.post('../QueryTotal/QueryAllTotalResult', { QueryLayer: VBQueryType, Ids: VBIds }, function (data) {
+                if (data.length > 0) {
+                    for (i = 0; i < data.length; i++) {
+                        if (data[i].TotalType == "土地现状" || data[i].TotalType == "土地现状1" || data[i].TotalType == "土地现状2") {
+                            _tdxzs.push(data[i]);
+                        } else if (data[i].TotalType == "城市规划") {
+                            _csghs.push(data[i]);
+                        }
+                        else if (data[i].TotalType == "土地规划") {
+                            _tdghs.push(data[i]);
+                        }
+                        else if (data[i].TotalType == "历年批次") {
+                            _pcs.push(data[i]);
+                        }
+                        else if (data[i].TotalType == "供地") {
+                            _gds.push(data[i]);
+                        }
+                        else if (data[i].TotalType == "批次明细") {
+                            _pcmxs.push(data[i]);
+                        }
+                    }
+                    vm.tdxz = _tdxzs;
+                    vm.jsyds = _tdxzs;
+                    vm.csghs = _csghs;
+                    vm.tdgh = _tdghs;
+                    vm.pcs = _pcs;
+                    vm.gds = _gds;
+                    vm.pcmxs = _pcmxs;
+                } else {
+                    alert("暂无数据！");
+                }
+            });
+        }else{
+            vm.CodeType = "2";
+            VBJson = "@ViewBag.Json";
+            var AllData = eval("[" + VBJson.replace(/&quot;/g, "\"") + "]");
+            AllData = AllData[0];
+            var jzbhlb = AllData.extCodes1; //建筑编号列表
+            var pcbhlb = AllData.extCodes2;//批次编号列表
+            var LayerName = AllData.LayerName;            
+            vm.url = jzbhlb;
+            TdxzData = AllData.Data;
+
+            if (AllData.Data.length > 0) {
+                for (i = 0; i < AllData.Data.length; i++) {
+                    if (AllData.Data[i].TotalType == "土地现状" || AllData.Data[i].TotalType == "土地现状1" || AllData.Data[i].TotalType == "土地现状2") {
+                        _tdxzs.push(AllData.Data[i]);
+                    } else if (AllData.Data[i].TotalType == "城市规划") {
+                        _csghs.push(AllData.Data[i]);
+                    }
+                    else if (AllData.Data[i].TotalType == "土地规划") {
+                        _tdghs.push(AllData.Data[i]);
+                    }
+                    else if (AllData.Data[i].TotalType == "历年批次") {
+                        _pcs.push(AllData.Data[i]);
+                    }
+                    else if (AllData.Data[i].TotalType == "供地") {
+                        _gds.push(AllData.Data[i]);
+                    }
+                    else if (AllData.Data[i].TotalType == "批次明细") {
+                        _pcmxs.push(AllData.Data[i]);
+                    }
+                    if (AllData.Data[i].TotalType == "土地现状1") {
+                        _jsyds.push(AllData.Data[i]);
+                    }
+                }
+            } else {
+                alert("请检查选区！");
+            }
+            $.post('../QueryTotal/QueryTotalItemIntersect', { Ids: jzbhlb }, function (data) {
+                if (data.length > 0) {
+                    for (i = 0; i < data.length; i++) {
+                        if (data[i].ItemName == "建筑面积" || data[i].ItemName == "建筑占地面积") {
+                            _tdxzs.push(data[i]);
+                        } else {
+                            for (j = 0; j < _jsyds.length; j++) {
+                                if (data[i].ItemName == _jsyds[j].ItemName) {
+                                    data[i].FloorArea = _jsyds[j].RegionArea;
+                                }
+                            }
+                        }
+                    }
+                    _jsyds = data;
+                } else {
+                    alert("暂无数据！");
+                }
+                vm.tdxz = _tdxzs;
+                vm.jsyds = _jsyds;
+            });
+            vm.tdxz = _tdxzs;
+            vm.jsyds = _tdxzs;
+            vm.csghs = _csghs;
+            vm.tdgh = _tdghs;
+            vm.pcs = _pcs;
+            vm.pcmxs = _pcmxs;
+            vm.gds = _gds;
+        }
+
+        function changeShow(id) {
+            if ($('#' + id).css("display") == "none") {
+                $('#tdxz').css({ "display": "none" });
+                $('#csghs').css({ "display": "none" });
+                $('#tdgh').css({ "display": "none" });
+                $('#pcgd').css({ "display": "none" });
+                $('#' + id).css({ "display": "block" });
+                $('#bcsghs').html("城市规划");
+                $('#btdgh').html("土地规划");
+                $('#bpcgd').html("批次供地");
+                $('#b' + id).html("返回");
+            }
+            else {
+                $('#' + id).css({ "display": "none" });
+                $('#tdxz').css({ "display": "block" });
+                $('#bcsghs').html("城市规划");
+                $('#btdgh').html("土地规划");
+                $('#bpcgd').html("批次供地");
+            }
+        }
+    </script>
+</body>
+</html>

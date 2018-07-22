@@ -1,0 +1,300 @@
+﻿<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>企业信息</title>
+    <link rel="stylesheet" href="~/Content/themes/showview/Site.css" type="text/css" />
+    <script type="text/javascript" src="~/Content/themes/showview/vue.js"></script>
+    <script type="text/javascript" src="~/Content/themes/showview/zepto.min.js"></script>
+    <script tyep="text.javascript"  src="~/Scripts/QyTech.js"></script>
+    <style>
+        .label
+        {
+            width: 40%;
+        }
+        .post
+        {
+            width: 100%;
+            float: left;
+            clear: both;
+            border-bottom: 1px #1a2246 dotted;
+        }
+        .valuetxt
+        {
+            text-align: left;
+        }
+        input
+        {
+            width: 100%;
+        }
+         .loading_background{
+            width:60%;
+            text-align:center ;
+            line-height:30px;height:30px; 
+            position: absolute;
+            top: 50%;
+            left:25%;
+            filter: alpha(opacity=00); 
+            background-color:yellowgreen;
+        }
+
+        .divphoto
+        {
+            width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
+
+    <script type ="text/javascript">
+        function Loading(bool) {
+            var ajaxbg = $("#loading_background");
+
+            if (bool) {
+                ajaxbg.show();
+            } else {
+                ajaxbg.hide();
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div>
+        <div class="div100 title" style="text-align:center">
+            <a href="javascript:" style="float:left"  onclick="javascript:$('#divLoadPage').modal('hide');">
+                 <span class="btnReturn" style="color:gray"> 返回 </span>
+            </a>
+               <span id="titltext" style="color:black" > 图片上传 </span>
+        </div>
+       <br/><br/>
+       
+       <div style="color:black">
+            <div class="weui_cell">
+                  <div class="weui_cell_hd"><label class="weui_label">照片类型</label></div>
+                      <input type="radio" name="phototype" style="width:5%" checked="checked" value="1">企业照片
+                      <input type="radio"  name="phototype"  style="width:5%"  value="2">安全检查
+             </div>
+            <div class="weui_cell">
+                  <div class="weui_cell_hd"><label class="weui_label">地块编码</label></div>
+                 <input  name="SSDKHM"  value="@ViewBag.dkbh" class="weui_input"/>
+
+             </div>
+          <div class="weui_cell">
+                  <div class="weui_cell_hd"><label class="weui_label">企业名称</label></div>
+                 <select name="SSQYMC" id="SSQYMC" >   
+                 </select> 
+            
+
+          
+           </div>
+         <div class="weui_cell">
+                  <div class="weui_cell_hd"><label class="weui_label">位置坐标</label></div>
+                 <input id="WZZB" name="WZZB"  class="weui_input"  value="@ViewBag.pos"/>
+
+           </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd"><label class="weui_label">照片描述</label></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <textarea id="textarea" name="PicMemo" class="weui_textarea" placeholder="请输入照片描述" rows="3"></textarea>
+                    <div class="weui_textarea_counter"><span id='count'>0</span>/<span id='count_max'>255</span></div>
+                </div>
+            </div>
+        <br><br>
+        <div>
+            <input type="file" id="fileElem" multiple accept="image/*"  onchange="handleFiles(this)">
+            
+             <a id="postQuery" href="javascript:;" class="weui_btn weui_btn_primary" onclick="UpPhotoFile()" >上传</a>
+                
+           @* <input id="postQuery" style="width: 100%; color: black; text-align: center;top:300px" type="button" onclick="UpPhotoFile();" value="上传" />
+           *@ <div id="loading_background" class="loading_background" style="display: none;">正在上传......</div>
+            
+            
+            <div id="fileList" class="divphoto"></div>
+
+         </div>
+
+
+    </div>
+</body>
+
+<script>
+
+    Id = "@ViewBag.ltdname";
+    $("#SSQYMC").val(Id);
+
+    dkbm = "@ViewBag.dkbh";
+
+    AddZuLinLtdName();
+    var picString = "";
+    window.URL = window.URL || window.webkitURL;
+    var fileElem = document.getElementById("fileElem"),
+    fileList = document.getElementById("fileList");
+    function handleFiles(obj) {
+
+
+      
+        //if (fileList.hasChildNodes() == true) {
+        //    fileList.removeChild(fileList.childNodes[0]);
+        //}
+
+        var files = obj.files,
+        img = new Image();
+        if(window.URL){
+            //File API
+            // alert(files[0].name + "," + files[0].size + " bytes");
+            img.src = window.URL.createObjectURL(files[0]); //创建一个object URL，并不是你的本地路径
+            img.width = 300;
+            img.onload = function(e) {
+                window.URL.revokeObjectURL(this.src); //图片加载后，释放object URL
+            }
+            fileList.appendChild(img);
+        }else if(window.FileReader){
+            //opera不支持createObjectURL/revokeObjectURL方法。我们用FileReader对象来处理
+            var reader = new FileReader();
+            reader.readAsDataURL(files[0]);
+            reader.onload = function(e){
+                // alert(files[0].name + "," +e.total + " bytes");
+                img.src = this.result;
+                img.width = 300;
+                fileList.appendChild(img);
+            }
+        }else{
+            //ie
+            obj.select();
+            obj.blur();
+            var nfile = document.selection.createRange().text;
+            document.selection.empty();
+            img.src = nfile;
+            img.width = 300;
+            img.onload = function () {
+                // alert(nfile+","+img.fileSize + " bytes");
+            }
+            fileList.appendChild(img);
+        }
+
+        
+
+        var reader = new FileReader();
+        reader.readAsDataURL(files[0]);
+        reader.onload = function (e) {
+            picString = picString + this.result +",";
+            //$("#selImg").attr({ "src": picString });
+        }
+    }
+
+    function UpPhotoFile() {
+
+        var WebServer = '';
+        var host = window.location.host;
+        if (host.substring(0, 9) == 'localhost') {
+            WebServer = 'http://' + host;
+        }
+        else {
+            WebServer = 'http://' + host + '/Wjkfq_Gis';
+        }
+        WebServer = WebServer + "/takePhoto/SavePicture";
+
+
+        //$("#postQuery").val('正在上传....');
+       
+        if (picString != "") {
+            var phototype = $('input[name="phototype"]:checked ').val();
+            var SSDKBM = $('input[name= "SSDKHM"]').val();
+            var SSQYMC = $('select[name= "SSQYMC"]').val();
+            var WZZB = $('input[name= "WZZB"]').val();
+            var PicMemo = $('textarea[name= "PicMemo"]').val();
+
+            Loading(true);
+            window.setTimeout(function () {
+                
+                $.ajax({
+                    type: "post",
+                    datatype: "json",
+                    url: WebServer,
+                    data: {
+                        picString: picString,
+                        phototype: phototype,
+                        SSDKBM: SSDKBM,
+                        SSQYMC: SSQYMC,
+                        WZZB: WZZB,
+                        PicMemo:PicMemo
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        /*弹出jqXHR对象的信息*/
+                        Loading(false);
+                        var errormsg = jqXHR.responseText + '--';
+                        errormsg = errormsg + jqXHR.status + '--';
+                        errormsg = errormsg + jqXHR.readyState + '--';
+                        errormsg = errormsg + jqXHR.statusText + '--';
+                        errormsg = errormsg + "textStatus " + textStatus + '--';
+                        errormsg = errormsg + errorThrown;
+                        
+                        alert(errormsg);
+                        //$("#postQuery").val('上传');
+                    },
+                    success: function (result) {
+                        if (result.suc == true) {
+                            Loading(false);
+                            $("#fileElem").val("");
+                            $("#fileList").empty();
+                            picString = "";
+                            alert("图片上传成功!");
+                        }
+                    }
+                });
+            }, 100);
+            
+
+        } else {
+            alert("还没有拍照呢");
+        }
+
+    }
+
+
+    function AddZuLinLtdName() {
+        //根据dkbm找到租赁企业信息
+        $.ajax({ //这里使用到Jquery的ajax方法
+            type: "Get",
+            dataType: "json",   //dataType: 'jsonp',//crossDomain: true,
+            url: WebServer + "/LtdInfoZuLin/QueryLtdInfo", //请求的处理数据 
+            data: { dkbm: dkbm },
+            success: function (data) {
+                try {
+                    var testJson = Id;
+                    if (data != '') {
+                        testJson = testJson + ',' + data;
+                    }
+                    var ltdnames = testJson.split(',');
+
+                    var options = '';
+                    for (var i = 0; i < ltdnames.length; i++) {
+                        options += '<option value="' + ltdnames[i] + '">' + ltdnames[i] + '</option>';
+                    }
+                    $("select#SSQYMC").html(options);
+                }
+                catch (e) { alert(e); }
+            }
+        });
+    }
+
+
+
+    $(function () {
+        var max = $('#count_max').text();
+        $('#textarea').on('input', function () {
+            var text = $(this).val();
+            var len = text.length;
+            $('#count').text(len);
+            if (len > max) {
+                $(this).closest('.weui_cell').addClass('weui_cell_warn');
+            }
+            else {
+                $(this).closest('.weui_cell').removeClass('weui_cell_warn');
+            }
+        });
+
+    });
+</script>
+</html>

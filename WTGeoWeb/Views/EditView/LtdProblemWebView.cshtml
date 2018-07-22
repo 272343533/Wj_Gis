@@ -1,0 +1,154 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>企业信息</title>
+    <link rel="stylesheet" href="~/Content/themes/showview/Site.css" type="text/css" />
+    <style>
+        .label
+        {
+            width: 40%;
+        }
+        .post
+        {
+            width: 100%;
+            float: left;
+            clear: both;
+            border-bottom: 1px #1a2246 dotted;
+        }
+        .valuetxt
+        {
+            text-align: left;
+        }
+        input
+        {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="div100 title yellow" style="text-align:center">
+            @* <a href="javascript:" style="float:left"  onclick="javascript:history.go(-1);"> <span class="btnReturn"> 返回1 </span></a>*@
+
+            <a href="javascript:" style="float:left"  onclick="javascript:$('#divLoadPage').modal('hide');">
+                 <span class="btnReturn"> 返回 </span>
+            企业安全检查信息
+        </div>
+        <form>@* action="/EditView/SaveQyxxInfo" method="post">*@
+            <div id="ltdproblem">
+                <div class="post">
+                  @*  <div class="div100 yellow">地块编码:</div>
+                  *@  <div class="div100">
+                        <input type="hidden" name="OBJECTID" v-model="item.OBJECTID"   class="vieworedit"/></div>
+                </div>
+                <div class="post">
+                    <div class="div100 yellow">所属地块编码:</div>
+                    <div class="div100">
+                        <input name="SSDKBM" v-model="item.SSDKBM"   class="vieworedit"/></div>
+                </div>
+                <div class="post">
+                    <div class="div100 yellow">查处类型:</div>
+                    <div class="div100">
+                        <input name="CCLX" v-model="item.CCLX"   class="vieworedit"/></div>
+                </div>
+                <div class="post">
+                    <div class="div100 yellow">查处代码:</div>
+                    <div class="div100">
+                        <input name="CCDM" v-model="item.CCDM" style="width: 90%"   class="vieworedit" />㎡</div>
+                </div>
+                <div class="post">
+                    <div class="div100 yellow">查处内容:</div>
+                    <div class="div100">
+                        <input name="CCNR" v-model="item.CCNR" style="width: 90%"   class="vieworedit"/>㎡</div>
+                </div>
+                <div class="post">
+                    <div class="div100 yellow">查处日期:</div>
+                    <div class="div100">
+                        <input name="CCRQ" v-model="item.CCRQ" style="width: 90%"   class="vieworedit"/>㎡</div>
+                </div>
+                <div class="post">
+                    <div class="div100 yellow">撤销代码:</div>
+                    <div class="div100">
+                        <input name="CCRQ" v-model="item.CCRQ"   class="vieworedit"/></div>
+                </div>
+                
+                <div class="post">
+                    <div class="div100 yellow">撤销日期:</div>
+                    <div class="div100">
+                        <input name="CXRQ" v-model="item.CXRQ"  disabled="disabled"/></div>
+                </div>
+                <div class="post">
+                    <div class="div100 yellow">删除代码:</div>
+                    <div class="div100">
+                        <input name="SCDM" v-model="item.SCDM"   disabled="disabled"/></div>
+                </div>
+                  <div class="post">
+                    <div class="div100 yellow">所属企业编码:</div>
+                    <div class="div100">
+                        <input name="SSQYBM" v-model="item.SSQYBM"   class="vieworedit"/></div>
+                </div>
+               <div class="post">
+                    <div class="div100 yellow">安全照片点编码:</div>
+                    <div class="div100">
+                        <input name="AQZPDBM" v-model="item.AQZPDBM"   class="vieworedit"/></div>
+                </div>
+           
+   
+            </div>
+        </form>
+    </div>
+    <script type="text/javascript" src="~/Content/themes/showview/vue.js"></script>
+    <script type="text/javascript" src="~/Content/themes/showview/zepto.min.js"></script>
+       <script tyep="text.javascript"  src="~/Scripts/QyTech.js"></script>
+ 
+    <script>
+        Id = "@ViewBag.Id";
+        var vm = new Vue({
+            el: '#ltdproblem',
+            data: {
+                item: [],
+            },
+            methods: {
+                Getdata: function () {
+                    $.post('../EditView/GetLtdProblemInfo', { id: Id }, function (data) {
+                        console.log(data);
+                        if (data != null) {
+                            vm.item = data;
+                        } else {
+                            alert("暂无数据！");
+                        }
+                    });
+                }
+            },
+        });
+     
+        ViewToEdit('保存');
+        vm.Getdata();
+
+
+        var vm_regular = new Vue({
+            el: '#ltdregular',
+            data: {
+                item_reg: [],
+            },
+            methods: {
+                Getdata: function () {
+                    $.post('../EditView/GetLtdRegularInfo', { id: Id }, function (data) {
+                        console.log(data);
+                        if (data != null) {
+                            vm.item = data;
+                        } else {
+                            alert("暂无数据！");
+                        }
+                    });
+                }
+            },
+        });
+
+
+    </script>
+</body>
+</html>

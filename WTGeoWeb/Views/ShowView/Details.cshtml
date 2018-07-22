@@ -1,0 +1,75 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>明细</title>
+    <link rel="stylesheet" href="~/Content/themes/showview/Site.css" type="text/css" />
+    <script type="text/javascript" src="~/Scripts/showview.js"></script>
+    <script type="text/javascript" src="~/Content/themes/showview/vue.js"></script>
+    <script type="text/javascript" src="~/Content/themes/showview/zepto.min.js"></script>
+</head>
+
+<body>
+    <div id="DetailView">
+        <div class="div100 title yellow"><a href="javascript:" style="float:left"  onclick="javascript:history.go(-1);"> <span class="btnReturn"> 返回 </span></a> @ViewBag.TotalTypeName 明细</div>
+        <div style="float: left" v-for="item in items">
+            <div class="div100 b" style="text-align: left">
+                <a href="CompanyDetails?RegionCode={{item.RegionCode}}"><span class="yellow">{{item.LtdNo}} {{item.LtdName}}:</span></a>
+            </div>
+            <div>
+                <div class="div100">&nbsp;&nbsp;占地面积：{{item.RegionArea | Fixed2}}m2 ({{item.RegionArea | ConvertToMu}}亩)</div>
+                <div style="width: 100%; float: left;">&nbsp;&nbsp;建筑占地面积：{{item.FloorArea | Fixed2}}m2 ({{item.FloorArea | ConvertToMu}}亩)</div>
+                <div style="width: 100%; float: left;">&nbsp;&nbsp;建筑面积：{{item.BuildingArea | Fixed2}}m2 ({{item.BuildingArea | ConvertToMu}}亩)</div>
+                @*            <div class="div50" style="text-align: right">占地面积：</div>
+            <div class="div50">0.000.00</div>
+            <div class="div50" style="text-align: right">建筑占地面积：</div>
+            <div class="div50">0.000.00</div>
+            <div class="div50" style="text-align: right">建筑面积：</div>
+            <div class="div50">0.000.00</div>
+            <div class="div50" style="text-align: right">已批准面积：</div>
+            <div class="div50">0.000.00</div>
+            <div class="div50" style="text-align: right">未批准面积：</div>
+            <div class="div50">0.000.00</div>*@
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    VBTotalTypeName = "@ViewBag.TotalTypeName";
+    VBbsOCodes = "@ViewBag.regionCodes";
+    VBCodeType = "@ViewBag.CodeType";
+    var vm = new Vue({
+        el: '#DetailView',
+        data: {
+            items: [],
+        },
+        filters: {
+            ConvertToMu: function (value) {
+                if (value > 0)
+                    return "" + (value / 666).toFixed(2) + "";
+                else
+                    return "";
+            },
+            Fixed2: function (value) {
+                if (value > 0) {
+                    return (value * 1).toFixed(2);
+                }
+                else
+                    return value;
+            }
+        },
+    });
+    $.post('../ShowView/GetTypeDetails', { regionCodes: VBbsOCodes, typename: VBTotalTypeName }, function (data) {
+        var _items = [];
+        if (data.length > 0) {
+            vm.items = data;
+            console.log(vm.items);
+        } else {
+            alert("暂无数据！");
+        }
+    });
+</script>
+</html>

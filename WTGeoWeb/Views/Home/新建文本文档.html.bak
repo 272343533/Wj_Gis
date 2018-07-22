@@ -1,0 +1,12 @@
+<html>
+	<head></head>
+	<script>
+  var data='a:b,c:e';
+  var items=data.split((/[:,]/);
+	         console.log(items);
+</script>
+ <body>
+
+	
+</body>
+</html>
