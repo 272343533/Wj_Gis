@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>界面</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<style type="text/css">
+			input{
+				 border-left:none;
+                 border-right:none;
+                 border-top:none;
+                 border-bottom:1px solid ;
+                 margin:0 0 2px 0;
+                 
+			}
+			#tahead{
+				text-align: center;
+				width: 100%;
+			}
+			table{
+				 table-layout: fixed;
+			}
+            .container{
+				width: 78%;
+            }
+		</style>
+	</head>
+
+	<body>
+		<div class="container">
+		   <!--  <thead >
+				<td width="23%">　</td>
+				<td width="17%">　</td>
+				<td width="9%">　</td>
+				<td width="9%">　</td>
+				<td width="14%">　</td>
+				<td width="14%">　</td>
+				<td width="14%">　</td>
+			</thead> -->
+			<!-- <tr>
+				<td colspan="5"></td>
+				<td >地块编号：</td>
+				<td ><input  type="text"></td>
+			</tr>
+			<tr>
+				<td  height="45" colspan="8" align="center"><font size="20">吴江区工业企业资源集约利用情况表</font></td>
+			</tr>
+			<tr><td colspan="7" align="center" height="15px">（2017年度）</td></tr>
+			<tr>
+				<td>企业名称（公章）：</td>
+				<td colspan="2"><input type="text"></td>
+				<td colspan="2">法定代表人签字： </td>
+				<td colspan="2"><input type="text"></td>
+			</tr>
+			
+			<tr><td colspan="7" height="10px"></td></tr> -->
+			<div id="tahead" >
+				
+				<div style="text-align: right;">
+				地块编号：<input  type="text">
+			    </div>
+			    <div>
+				<font size="20" >吴江区工业企业资源集约利用情况表</font></td>
+				<p><font size="5" >（2017年度）</font></p>
+			   </div>
+			<div>
+				<p ><font size="4" >企业名称（公章）：<input  type="text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;法定代表人签字：<input  type="text"></font></p>				
+			</div>
+            </div>
+        	<div id="div1">
+
+			<strong><font size="3">一、基本信息</font></strong>			    
+				<table cellspacing=0 border=1 style="bordercolor:#C0C0C0;"  width="100%"  cols="7" display:block>
+				<tr>
+					<td width="12%">是否工业企业</td>
+					<td width="25%" colspan="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox">是&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox">否</td>
+					<td width="14%"colspan="2">注册日期（年月）</td>
+					<td width="20%" colspan="2"><input type="text" style="width: 100%"></td></tr>
+				<tr><td>经营地址</td><td colspan="6">吴江区<input type="text" style="width: 20%">镇（区)<input type="text" style="width: 20%"> 村（社区）<input type="text" style="width: 20%"></td></tr>
+				<tr><td>联系人姓名：</td><td colspan="2"><input type="text" style="border: none;width: 60%"></td><td colspan="2">联系人手机：</td><td colspan="2"><input type="text" style="border: none;width: 60%"></td ></tr>
+				<tr><td>电表户号：（所有）</td><td colspan="6"><input type="text" style="border: none;"></td></tr>
+				<tr><td>2016年度总电量</td><td colspan="2"><input type="text" style="border: none;width: 60%">万千瓦时</td><td colspan="2">2017年度总电量</td><td colspan="2"><input type="text" style="border: none;width: 60%">万千瓦时</td></tr>
+				<tr><td>水表户号：（所有）</td><td colspan="6"><input type="text" style="border: none;"></td></tr>
+				<tr><td>2016年度总水量</td><td colspan="2"><input type="text" style="border: none;width: 60%">万千瓦时</td><td colspan="2">2017年度总水量</td><td colspan="2"><input type="text" style="border: none;width: 60%">吨</td></tr>
+				</table>
+				</td>
+				</tr>
+			</div>
+			<div id="div2" >
+			
+			<strong><font size="3">二、资源要素信息</font></strong>
+			<table cellspacing=0 border=1 style="bordercolor:#C0C0C0;"  width="100%" cols="7"  display:block>
+				<tr>
+				<td width="15.2%" ><center>土地信息</center></td>
+				<td width="74.8%" colspan="6" >&nbsp;&nbsp;&nbsp;评价面积<input type="text">亩，其中暂未使用面积<input type="text">亩，其中持证面积<input type="text">亩</td>
+				</tr>
+				<tr>
+				<td rowspan="4"><center>评价面积性质</center></td>
+				<td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox">全部自用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox">自用+出租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox">全部出租&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox">其他<input  type="text">。 </td>
+				</tr>
+						<tr>
+							<td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;其中自用<input type="text">亩，出租<input type="text">亩</td>
+						</tr>
+						<tr>
+							<td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;土地所有权人：<input type="text">。</td>
+						</tr>
+							<tr>
+							<td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;土地使用税缴纳人：<input type="text"></td></tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr align="center">
+							<td >企业名称</td>
+							<td >统一社会信用码 （组织机构码）</td>
+							<td >是否工业</td>
+							<td >分摊用地（亩）</td>
+							<td >电表户号（可填多个）</td>
+							<td >水表户号（可填多个）</td>
+							<td >备注</td>
+						</tr>
+						<tr> 
+							<td >自用</td>
+							<td ><input type="text" style="width: 100%;"></td>
+							<td align="center"><input type="checkbox">是&nbsp;&nbsp;<input type="checkbox">否</td>
+							<td ><input type="text" style="width: 100%;"></td>
+							<td ><input type="text" style="width: 100%;"></td>
+							<td ><input type="text" style="width: 100%;"></td>
+							<td ><input type="text" style="width: 100%;"></td></tr>
+						<tr><td >租户1</td><td><input type="text" style="width: 100%;"></td><td align="center"><input type="checkbox">是&nbsp;&nbsp;<input type="checkbox">否</td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td></tr>
+						<tr><td>租户2</td><td><input type="text" style="width: 100%;"></td><td align="center"><input type="checkbox">是&nbsp;&nbsp;<input type="checkbox">否</td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td></tr>
+						<tr><td>租户3</td><td><input type="text" style="width: 100%;"></td><td align="center"><input type="checkbox">是&nbsp;&nbsp;<input type="checkbox">否</td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td></tr>
+						<tr><td>租户4</td><td><input type="text" style="width: 100%;"></td><td align="center"><input type="checkbox">是&nbsp;&nbsp;<input type="checkbox">否</td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td></tr>
+						<tr><td>租户5</td><td><input type="text" style="width: 100%;"></td><td align="center"><input type="checkbox">是&nbsp;&nbsp;<input type="checkbox">否</td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td><td><input type="text" style="width: 100%;"></td></tr>
+							<tr><td align="center" rowspan="3" style="height: 100px"><strong><font size="3">承租企业盖章</font></strong></td><td colspan="6" rowspan="3"></td></tr>
+								</table>
+				
+			</div>
+			<div id="div3" style="width: 100%">
+				
+			
+		<strong><font size="3">三、综合素质加分信息</font></strong>	
+			<table cellspacing=0 border=1 style="bordercolor:#C0C0C0;"  width="100%"  cols="2">
+			<tr><td style="width: 16.8%;  " >研发机构</td>
+			<td >　
+			  <input type="checkbox">国家级　　　　<input type="checkbox">省级　　　　<input type="checkbox">市级</td></tr>
+			<tr><td>品牌</td>
+			<td >　
+			  <input type="checkbox">驰名商标      <input type="checkbox">著名商标　　　　<input type="checkbox">江苏名牌　　　　<input type="checkbox">知名商标　　　　<input type="checkbox">苏州名牌</td></tr>
+			<tr><td>质量</td>
+			<td>　
+			  <input type="checkbox">中国质量奖     <input type="checkbox">江苏省省长质量奖　　　　<input type="checkbox">苏州市市长质量奖</td></tr>
+			<tr><td>标准</td>
+			<td>　
+			  <input type="checkbox">第一起草人　　<input type="checkbox">国际标准　　　
+			  <input type="checkbox">国家标准　　　
+			  <input type="checkbox">行业标准　　　
+			  <input type="checkbox">参与制定</td></tr>
+			<tr><td>守合同重信用</td>
+			<td >　
+			  <input type="checkbox">国家级　　　　<input type="checkbox">省级　　　　<input type="checkbox">市级</td></tr>
+			<tr><td>安全生产标准化</td>
+			<td >　
+			  <input type="checkbox">通过一级评审  <input type="checkbox">通过二级评审　　　　<input type="checkbox">通过三级评审</td></tr>
+			<tr><td>环保信用</td>
+			<td >　
+			  <input type="checkbox">绿色企业    <input type="checkbox">蓝色企业</td></tr>
+			<tr><td>诚信纳税</td>
+			<td>　纳税信用是否A级　　　
+			  <input type="checkbox">是  <input type="checkbox">否</td></tr>
+			<tr><td>发明专利</td>
+			<td >　近3年有无发明专利授权　　　
+			  <input type="checkbox">是  <input type="checkbox">否</td></tr>
+				</table>
+			</div>
+		
+		<div id="div4">	
+			<strong><font size="3">四、提档降档信息</font></strong>
+		
+				<table cellspacing=0 border=1 style="bordercolor:#C0C0C0;"  width="100%"  >
+					<tr><td >上年度工业设备投入是否超1000万元　　　　<input type="checkbox">是  <input type="checkbox">否</td></tr>
+					<tr><td >是否科技领军人才企业　　　　<input type="checkbox">是  <input type="checkbox">否</td></tr>
+					<tr><td >是否高新技术企业　　　　<input type="checkbox">是  <input type="checkbox">否</td></tr>
+					<tr><td >是否专精特新企业　　　　<input type="checkbox">是  <input type="checkbox">否</td></tr>
+					<tr><td >是否上年度安全生产、环境保护红黄牌未摘牌企业　　　　<input type="checkbox">是  <input type="checkbox">否</td></tr>
+					<tr><td >是否供地未满三年企业　　　　<input type="checkbox">是  <input type="checkbox">否</td></tr>
+					<tr><td >是否通过兼并重组取得土地使用权未满两年企业　　　　<input type="checkbox">是  <input type="checkbox">否</td></tr>
+					<tr><td>是否镇（区）认定暂不适宜参加评价企业　　　　<input type="checkbox">是  <input type="checkbox">否</td></tr>
+				</table>
+		</div>
+	</div>
+
+
+	</body>
+</html>
