@@ -282,17 +282,17 @@
                 <div class="div100 title " id="renttitle">租赁企业</div>
                 <div id="ltdRentcontent">
                     <div class="div100" style="text-align: right; font-size: 0.8em;"></div>
-                      <div  v-for="(index,item) in item_rents">
-                        &nbsp;&nbsp;<span class="">{{index+1}}&nbsp;{{item.ZLQYMC_}}：</span><br />
+                    <div v-for="(item,index) in item_rents">
+                        &nbsp;&nbsp;<span class="">{{index+1}}　{{item.ZLQYMC_}}：</span><br />
                         &nbsp;&nbsp;&nbsp;&nbsp;纳税人识别号:{{item.NSRSBH}}<br />
                         &nbsp;&nbsp;&nbsp;&nbsp;土地证号:{{item.TDZH}}<br />
                         &nbsp;&nbsp;&nbsp;&nbsp;租赁类型:{{item.ZLLX}}<br />
                         &nbsp;&nbsp;&nbsp;&nbsp;公司规模:{{item.GSGM}}<br />
                         &nbsp;&nbsp;&nbsp;&nbsp;法人代表:{{item.FRDB}}<br />
                         &nbsp;&nbsp;&nbsp;&nbsp;产业类型:{{item.CYLX}}<br />
-                  
+
                     </div>
-            </div>
+                </div>
             </div>
         </div>
         
@@ -305,9 +305,13 @@
     <script>
         Id = "@ViewBag.Id";
         var UserCanEdit = @ViewBag.UserCanEdit;
-        $("#btnSubmit").attr("disabled", !UserCanEdit);
-        $("#btnSubmit_Reg").attr("disabled", !UserCanEdit);
-        
+        if (UserCanEdit==false)
+        {
+            
+            $("#btnSubmit").attr("class", "weui_btn weui_btn_disabled weui_btn_default");
+            $("#btnSubmit_Reg").attr("class", "weui_btn weui_btn_disabled weui_btn_default");
+         }
+       
 
         var vm = new Vue({
             el: '#ltdInfo',
