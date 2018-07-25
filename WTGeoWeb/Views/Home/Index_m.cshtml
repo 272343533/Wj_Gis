@@ -11,8 +11,8 @@
 
     <title>界面</title>
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="http://122.114.38.213:8080/arcgis_js_api/library/3.17/3.17/dijit/themes/claro/claro.css">
-    <link rel="stylesheet" href="http://122.114.38.213:8080/arcgis_js_api/library/3.17/3.17/esri/css/esri.css">
+    <link rel="stylesheet" href="http://122.114.190.250:8080/arcgis_js_api/library/3.17/3.17/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://122.114.190.250:8080/arcgis_js_api/library/3.17/3.17/esri/css/esri.css">
 
       <link rel="stylesheet" href="../weui-master/style/weui.css"/>
       <link rel="stylesheet" href="../weui-master/style/weui2.css"/>
@@ -27,7 +27,7 @@
     <script src="~/Scripts/vue.js"></script>
     <script src="~/Scripts/vue-resource.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script type="text/javascript" src="http://122.114.38.213:8080/arcgis_js_api/library/3.17/3.17/init.js"></script>
+    <script type="text/javascript" src="http://122.114.190.250:8080/arcgis_js_api/library/3.17/3.17/init.js"></script>
     <script type="text/javascript" src="~/Scripts/json2.js"></script>
     <script src="~/Scripts/QyTech/nav4.js"></script>
     <script src="~/Scripts/QyTech/Sonic.js"></script>
@@ -146,10 +146,10 @@
 
         function GetGridMapAddrByOrgCode(orgcode) {
             if (orgcode.length >= 12) {//320507100001
-                return 'http://122.114.38.213/arcgis/rest/services/wd/cun' + orgcode + '/MapServer';
+                return 'http://122.114.190.250/arcgis/rest/services/wd/cun' + orgcode + '/MapServer';
             }
             else {
-                return 'http://122.114.38.213/arcgis/rest/services/WTMap/WTService/MapServer';
+                return 'http://122.114.190.250/arcgis/rest/services/WTMap/WTService/MapServer';
             }
         }
 
@@ -179,11 +179,11 @@
             return olayer;
         }
                                           //http://118.123.6.146:14795/arcgis/rest/services/wj/WjMapLocal/MapServer
-        var mapserver1 = MapServer('s1', 'http://122.114.38.213:6080/arcgis/rest/services/WJMap/MyMapService/MapServer', 0, 'Dynamic', true, 1, [4, 5, 6, 7, 8, 9, 10, 11, 12, 13], '');
-        // var mapserver1 = MapServer('s1', 'http://122.114.38.213:6080/arcgis/rest/services/WTMap/WtPublish1/MapServer',0, 'Dynamic', true, 1, [], '');
-        //var mapserver2 = MapServer('s2', 'http://122.114.38.213:6080/arcgis/rest/services/WTMap/WtPublish2/MapServer', 2, 'Dynamic', true, 1, [], '');
-        //var mapserver3 = MapServer('s3', 'http://122.114.38.213:6080/arcgis/rest/services/WTMap/WtPublish3/MapServer', 1, 'Dynamic', true, 1, [], '');
-        //var mapserver4 = MapServer('s4', 'http://122.114.38.213:6080/arcgis/rest/services/WTMap/WTService/MapServer', 0, 'Dynamic', true, 1, [], '');
+        var mapserver1 = MapServer('s1', 'http://122.114.190.250:6080/arcgis/rest/services/WJMap/MyMapService/MapServer', 0, 'Dynamic', true, 1, [4, 5, 6, 7, 8, 9, 10, 11, 12, 13], '');
+        // var mapserver1 = MapServer('s1', 'http://122.114.190.250:6080/arcgis/rest/services/WTMap/WtPublish1/MapServer',0, 'Dynamic', true, 1, [], '');
+        //var mapserver2 = MapServer('s2', 'http://122.114.190.250:6080/arcgis/rest/services/WTMap/WtPublish2/MapServer', 2, 'Dynamic', true, 1, [], '');
+        //var mapserver3 = MapServer('s3', 'http://122.114.190.250:6080/arcgis/rest/services/WTMap/WtPublish3/MapServer', 1, 'Dynamic', true, 1, [], '');
+        //var mapserver4 = MapServer('s4', 'http://122.114.190.250:6080/arcgis/rest/services/WTMap/WTService/MapServer', 0, 'Dynamic', true, 1, [], '');
 
         MapServers.push(mapserver1);
         //MapServers.push(mapserver2);
