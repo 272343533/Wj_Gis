@@ -31,7 +31,7 @@ namespace TDObject.UI
                 bsUser userobj = JsonHelper.DeserializeFormtJsonToObject<bsUser>(json); // TDObject.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", MainForm.LoginUser.bsU_Id);
 
                 //if (da.Md5(tbPassold.Text) != MainForm.LoginUser.Pwd)
-                if (tbPassold.Text != MainForm.LoginUser.Pwd)
+                if (tbPassold.Text != MainForm.LoginUser.LoginPwd)
                 {
                     MessageBox.Show("原密码不正确");
                 }
@@ -39,7 +39,7 @@ namespace TDObject.UI
                 {
                     if (tbPass.Text == tbPass2.Text)
                     {
-                        userobj.Pwd = tbPass.Text.Trim();
+                        userobj.LoginPwd= tbPass.Text.Trim();
 
                         string strui = JsonHelper.SerializeObject<bsUser>(userobj, null);
                         DetailUrl = MainForm.URI + "lyRemoteServ/UdpUserData?userinfo=" + strui;

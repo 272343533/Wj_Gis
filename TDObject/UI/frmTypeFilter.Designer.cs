@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTypeFilter));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -47,7 +48,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridViewImageColumn10 = new System.Windows.Forms.DataGridViewImageColumn();
             this.dataGridViewImageColumn11 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.button3 = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
@@ -188,11 +188,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.chk1_0 = new System.Windows.Forms.CheckBox();
             this.chk1_4 = new System.Windows.Forms.CheckBox();
             this.chk1_3 = new System.Windows.Forms.CheckBox();
             this.chk1_2 = new System.Windows.Forms.CheckBox();
             this.chk1_1 = new System.Windows.Forms.CheckBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.chk2_0 = new System.Windows.Forms.CheckBox();
             this.chk2_3 = new System.Windows.Forms.CheckBox();
             this.chk2_2 = new System.Windows.Forms.CheckBox();
             this.chk2_1 = new System.Windows.Forms.CheckBox();
@@ -201,34 +203,40 @@
             this.rb32 = new System.Windows.Forms.RadioButton();
             this.rb31 = new System.Windows.Forms.RadioButton();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.chk4_0 = new System.Windows.Forms.CheckBox();
             this.chk4_5 = new System.Windows.Forms.CheckBox();
             this.chk4_4 = new System.Windows.Forms.CheckBox();
             this.chk4_3 = new System.Windows.Forms.CheckBox();
             this.chk4_2 = new System.Windows.Forms.CheckBox();
             this.chk4_1 = new System.Windows.Forms.CheckBox();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.chk5_0 = new System.Windows.Forms.CheckBox();
             this.chk5_5 = new System.Windows.Forms.CheckBox();
             this.chk5_4 = new System.Windows.Forms.CheckBox();
             this.chk5_3 = new System.Windows.Forms.CheckBox();
             this.chk5_2 = new System.Windows.Forms.CheckBox();
             this.chk5_1 = new System.Windows.Forms.CheckBox();
             this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.chk6_0 = new System.Windows.Forms.CheckBox();
             this.chk6_4 = new System.Windows.Forms.CheckBox();
             this.chk6_3 = new System.Windows.Forms.CheckBox();
             this.chk6_2 = new System.Windows.Forms.CheckBox();
             this.chk6_1 = new System.Windows.Forms.CheckBox();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.chk7_0 = new System.Windows.Forms.CheckBox();
             this.chk7_5 = new System.Windows.Forms.CheckBox();
             this.chk7_4 = new System.Windows.Forms.CheckBox();
             this.chk7_3 = new System.Windows.Forms.CheckBox();
             this.chk7_2 = new System.Windows.Forms.CheckBox();
             this.chk7_1 = new System.Windows.Forms.CheckBox();
             this.tabPage10 = new System.Windows.Forms.TabPage();
+            this.chk8_0 = new System.Windows.Forms.CheckBox();
             this.chk8_4 = new System.Windows.Forms.CheckBox();
             this.chk8_3 = new System.Windows.Forms.CheckBox();
             this.chk8_2 = new System.Windows.Forms.CheckBox();
             this.chk8_1 = new System.Windows.Forms.CheckBox();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.chk9_0 = new System.Windows.Forms.CheckBox();
             this.chk9_3 = new System.Windows.Forms.CheckBox();
             this.chk9_2 = new System.Windows.Forms.CheckBox();
             this.chk9_1 = new System.Windows.Forms.CheckBox();
@@ -305,29 +313,16 @@
             // dataGridViewImageColumn10
             // 
             this.dataGridViewImageColumn10.HeaderText = "";
-            this.dataGridViewImageColumn10.Image = global::TDObject.Properties.Resources.Save;
+            this.dataGridViewImageColumn10.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn10.Image")));
             this.dataGridViewImageColumn10.Name = "dataGridViewImageColumn10";
             this.dataGridViewImageColumn10.Width = 20;
             // 
             // dataGridViewImageColumn11
             // 
             this.dataGridViewImageColumn11.HeaderText = "";
-            this.dataGridViewImageColumn11.Image = global::TDObject.Properties.Resources.Save;
+            this.dataGridViewImageColumn11.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn11.Image")));
             this.dataGridViewImageColumn11.Name = "dataGridViewImageColumn11";
             this.dataGridViewImageColumn11.Width = 20;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackColor = System.Drawing.Color.Azure;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Location = new System.Drawing.Point(1276, 1);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(33, 23);
-            this.button3.TabIndex = 37;
-            this.button3.Text = "Ⅹ";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // toolStrip1
             // 
@@ -446,16 +441,19 @@
             this.Column7,
             this.Column8,
             this.dataGridViewTextBoxColumn82});
-            this.dgv1.Location = new System.Drawing.Point(22, 59);
+            this.dgv1.Location = new System.Drawing.Point(25, 33);
             this.dgv1.Name = "dgv1";
             this.dgv1.RowTemplate.Height = 23;
+            this.dgv1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv1.Size = new System.Drawing.Size(1193, 401);
             this.dgv1.TabIndex = 10;
+            this.dgv1.Click += new System.EventHandler(this.dgv1_Click);
+            this.dgv1.DoubleClick += new System.EventHandler(this.dgv1_DoubleClick);
             // 
             // Column20
             // 
             this.Column20.HeaderText = "";
-            this.Column20.Image = global::TDObject.Properties.Resources.Save;
+            this.Column20.Image = ((System.Drawing.Image)(resources.GetObject("Column20.Image")));
             this.Column20.Name = "Column20";
             this.Column20.Visible = false;
             this.Column20.Width = 20;
@@ -570,7 +568,7 @@
             // Column21
             // 
             this.Column21.HeaderText = "";
-            this.Column21.Image = global::TDObject.Properties.Resources.Save;
+            this.Column21.Image = ((System.Drawing.Image)(resources.GetObject("Column21.Image")));
             this.Column21.Name = "Column21";
             this.Column21.Width = 20;
             // 
@@ -640,16 +638,16 @@
             this.Column16,
             this.Column17,
             this.dataGridViewTextBoxColumn85});
-            this.dgv31.Location = new System.Drawing.Point(23, 32);
+            this.dgv31.Location = new System.Drawing.Point(28, 17);
             this.dgv31.Name = "dgv31";
             this.dgv31.RowTemplate.Height = 23;
-            this.dgv31.Size = new System.Drawing.Size(33, 419);
+            this.dgv31.Size = new System.Drawing.Size(574, 242);
             this.dgv31.TabIndex = 18;
             // 
             // dataGridViewImageColumn1
             // 
             this.dataGridViewImageColumn1.HeaderText = "";
-            this.dataGridViewImageColumn1.Image = global::TDObject.Properties.Resources.Save;
+            this.dataGridViewImageColumn1.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn1.Image")));
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
             this.dataGridViewImageColumn1.Visible = false;
             this.dataGridViewImageColumn1.Width = 20;
@@ -748,7 +746,7 @@
             // dataGridViewImageColumn2
             // 
             this.dataGridViewImageColumn2.HeaderText = "";
-            this.dataGridViewImageColumn2.Image = global::TDObject.Properties.Resources.Save;
+            this.dataGridViewImageColumn2.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn2.Image")));
             this.dataGridViewImageColumn2.Name = "dataGridViewImageColumn2";
             this.dataGridViewImageColumn2.Width = 20;
             // 
@@ -857,7 +855,7 @@
             // dataGridViewImageColumn3
             // 
             this.dataGridViewImageColumn3.HeaderText = "";
-            this.dataGridViewImageColumn3.Image = global::TDObject.Properties.Resources.Save;
+            this.dataGridViewImageColumn3.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn3.Image")));
             this.dataGridViewImageColumn3.Name = "dataGridViewImageColumn3";
             this.dataGridViewImageColumn3.Width = 20;
             // 
@@ -1000,7 +998,7 @@
             // dataGridViewImageColumn4
             // 
             this.dataGridViewImageColumn4.HeaderText = "";
-            this.dataGridViewImageColumn4.Image = global::TDObject.Properties.Resources.Save;
+            this.dataGridViewImageColumn4.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn4.Image")));
             this.dataGridViewImageColumn4.Name = "dataGridViewImageColumn4";
             this.dataGridViewImageColumn4.Width = 20;
             // 
@@ -1074,7 +1072,7 @@
             // dataGridViewImageColumn5
             // 
             this.dataGridViewImageColumn5.HeaderText = "";
-            this.dataGridViewImageColumn5.Image = global::TDObject.Properties.Resources.Save;
+            this.dataGridViewImageColumn5.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn5.Image")));
             this.dataGridViewImageColumn5.Name = "dataGridViewImageColumn5";
             this.dataGridViewImageColumn5.Width = 20;
             // 
@@ -1155,7 +1153,7 @@
             // dataGridViewImageColumn6
             // 
             this.dataGridViewImageColumn6.HeaderText = "";
-            this.dataGridViewImageColumn6.Image = global::TDObject.Properties.Resources.Save;
+            this.dataGridViewImageColumn6.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn6.Image")));
             this.dataGridViewImageColumn6.Name = "dataGridViewImageColumn6";
             this.dataGridViewImageColumn6.Width = 20;
             // 
@@ -1260,7 +1258,7 @@
             // dataGridViewImageColumn7
             // 
             this.dataGridViewImageColumn7.HeaderText = "";
-            this.dataGridViewImageColumn7.Image = global::TDObject.Properties.Resources.Save;
+            this.dataGridViewImageColumn7.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn7.Image")));
             this.dataGridViewImageColumn7.Name = "dataGridViewImageColumn7";
             this.dataGridViewImageColumn7.Width = 20;
             // 
@@ -1341,7 +1339,7 @@
             // dataGridViewImageColumn8
             // 
             this.dataGridViewImageColumn8.HeaderText = "";
-            this.dataGridViewImageColumn8.Image = global::TDObject.Properties.Resources.Save;
+            this.dataGridViewImageColumn8.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn8.Image")));
             this.dataGridViewImageColumn8.Name = "dataGridViewImageColumn8";
             this.dataGridViewImageColumn8.Width = 20;
             // 
@@ -1424,7 +1422,7 @@
             // dataGridViewImageColumn9
             // 
             this.dataGridViewImageColumn9.HeaderText = "";
-            this.dataGridViewImageColumn9.Image = global::TDObject.Properties.Resources.Save;
+            this.dataGridViewImageColumn9.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn9.Image")));
             this.dataGridViewImageColumn9.Name = "dataGridViewImageColumn9";
             this.dataGridViewImageColumn9.Width = 20;
             // 
@@ -1526,6 +1524,7 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.chk1_0);
             this.tabPage3.Controls.Add(this.chk1_4);
             this.tabPage3.Controls.Add(this.chk1_3);
             this.tabPage3.Controls.Add(this.chk1_2);
@@ -1537,10 +1536,21 @@
             this.tabPage3.TabIndex = 0;
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
+            // chk1_0
+            // 
+            this.chk1_0.AutoSize = true;
+            this.chk1_0.Location = new System.Drawing.Point(36, 101);
+            this.chk1_0.Name = "chk1_0";
+            this.chk1_0.Size = new System.Drawing.Size(48, 16);
+            this.chk1_0.TabIndex = 4;
+            this.chk1_0.Text = "全部";
+            this.chk1_0.UseVisualStyleBackColor = true;
+            this.chk1_0.CheckedChanged += new System.EventHandler(this.chk1_1_CheckedChanged);
+            // 
             // chk1_4
             // 
             this.chk1_4.AutoSize = true;
-            this.chk1_4.Location = new System.Drawing.Point(36, 90);
+            this.chk1_4.Location = new System.Drawing.Point(36, 79);
             this.chk1_4.Name = "chk1_4";
             this.chk1_4.Size = new System.Drawing.Size(66, 16);
             this.chk1_4.TabIndex = 3;
@@ -1551,7 +1561,7 @@
             // chk1_3
             // 
             this.chk1_3.AutoSize = true;
-            this.chk1_3.Location = new System.Drawing.Point(36, 68);
+            this.chk1_3.Location = new System.Drawing.Point(36, 57);
             this.chk1_3.Name = "chk1_3";
             this.chk1_3.Size = new System.Drawing.Size(90, 16);
             this.chk1_3.TabIndex = 2;
@@ -1562,7 +1572,7 @@
             // chk1_2
             // 
             this.chk1_2.AutoSize = true;
-            this.chk1_2.Location = new System.Drawing.Point(36, 46);
+            this.chk1_2.Location = new System.Drawing.Point(36, 35);
             this.chk1_2.Name = "chk1_2";
             this.chk1_2.Size = new System.Drawing.Size(90, 16);
             this.chk1_2.TabIndex = 1;
@@ -1573,7 +1583,7 @@
             // chk1_1
             // 
             this.chk1_1.AutoSize = true;
-            this.chk1_1.Location = new System.Drawing.Point(36, 24);
+            this.chk1_1.Location = new System.Drawing.Point(36, 13);
             this.chk1_1.Name = "chk1_1";
             this.chk1_1.Size = new System.Drawing.Size(90, 16);
             this.chk1_1.TabIndex = 0;
@@ -1583,6 +1593,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.chk2_0);
             this.tabPage4.Controls.Add(this.chk2_3);
             this.tabPage4.Controls.Add(this.chk2_2);
             this.tabPage4.Controls.Add(this.chk2_1);
@@ -1593,10 +1604,21 @@
             this.tabPage4.TabIndex = 1;
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
+            // chk2_0
+            // 
+            this.chk2_0.AutoSize = true;
+            this.chk2_0.Location = new System.Drawing.Point(122, 22);
+            this.chk2_0.Name = "chk2_0";
+            this.chk2_0.Size = new System.Drawing.Size(48, 16);
+            this.chk2_0.TabIndex = 7;
+            this.chk2_0.Text = "全部";
+            this.chk2_0.UseVisualStyleBackColor = true;
+            this.chk2_0.CheckedChanged += new System.EventHandler(this.chk2_1_CheckedChanged);
+            // 
             // chk2_3
             // 
             this.chk2_3.AutoSize = true;
-            this.chk2_3.Location = new System.Drawing.Point(51, 66);
+            this.chk2_3.Location = new System.Drawing.Point(23, 66);
             this.chk2_3.Name = "chk2_3";
             this.chk2_3.Size = new System.Drawing.Size(48, 16);
             this.chk2_3.TabIndex = 6;
@@ -1607,7 +1629,7 @@
             // chk2_2
             // 
             this.chk2_2.AutoSize = true;
-            this.chk2_2.Location = new System.Drawing.Point(51, 44);
+            this.chk2_2.Location = new System.Drawing.Point(23, 44);
             this.chk2_2.Name = "chk2_2";
             this.chk2_2.Size = new System.Drawing.Size(48, 16);
             this.chk2_2.TabIndex = 5;
@@ -1618,7 +1640,7 @@
             // chk2_1
             // 
             this.chk2_1.AutoSize = true;
-            this.chk2_1.Location = new System.Drawing.Point(51, 22);
+            this.chk2_1.Location = new System.Drawing.Point(23, 22);
             this.chk2_1.Name = "chk2_1";
             this.chk2_1.Size = new System.Drawing.Size(48, 16);
             this.chk2_1.TabIndex = 4;
@@ -1678,6 +1700,7 @@
             // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.chk4_0);
             this.tabPage6.Controls.Add(this.chk4_5);
             this.tabPage6.Controls.Add(this.chk4_4);
             this.tabPage6.Controls.Add(this.chk4_3);
@@ -1690,10 +1713,21 @@
             this.tabPage6.ToolTipText = "4";
             this.tabPage6.UseVisualStyleBackColor = true;
             // 
+            // chk4_0
+            // 
+            this.chk4_0.AutoSize = true;
+            this.chk4_0.Location = new System.Drawing.Point(133, 25);
+            this.chk4_0.Name = "chk4_0";
+            this.chk4_0.Size = new System.Drawing.Size(48, 16);
+            this.chk4_0.TabIndex = 9;
+            this.chk4_0.Text = "全部";
+            this.chk4_0.UseVisualStyleBackColor = true;
+            this.chk4_0.CheckedChanged += new System.EventHandler(this.chk4_1_CheckedChanged);
+            // 
             // chk4_5
             // 
             this.chk4_5.AutoSize = true;
-            this.chk4_5.Location = new System.Drawing.Point(46, 97);
+            this.chk4_5.Location = new System.Drawing.Point(22, 97);
             this.chk4_5.Name = "chk4_5";
             this.chk4_5.Size = new System.Drawing.Size(72, 16);
             this.chk4_5.TabIndex = 8;
@@ -1705,7 +1739,7 @@
             // chk4_4
             // 
             this.chk4_4.AutoSize = true;
-            this.chk4_4.Location = new System.Drawing.Point(46, 76);
+            this.chk4_4.Location = new System.Drawing.Point(22, 76);
             this.chk4_4.Name = "chk4_4";
             this.chk4_4.Size = new System.Drawing.Size(72, 16);
             this.chk4_4.TabIndex = 7;
@@ -1717,7 +1751,7 @@
             // chk4_3
             // 
             this.chk4_3.AutoSize = true;
-            this.chk4_3.Location = new System.Drawing.Point(46, 54);
+            this.chk4_3.Location = new System.Drawing.Point(22, 54);
             this.chk4_3.Name = "chk4_3";
             this.chk4_3.Size = new System.Drawing.Size(72, 16);
             this.chk4_3.TabIndex = 6;
@@ -1729,7 +1763,7 @@
             // chk4_2
             // 
             this.chk4_2.AutoSize = true;
-            this.chk4_2.Location = new System.Drawing.Point(46, 32);
+            this.chk4_2.Location = new System.Drawing.Point(22, 32);
             this.chk4_2.Name = "chk4_2";
             this.chk4_2.Size = new System.Drawing.Size(72, 16);
             this.chk4_2.TabIndex = 5;
@@ -1741,7 +1775,7 @@
             // chk4_1
             // 
             this.chk4_1.AutoSize = true;
-            this.chk4_1.Location = new System.Drawing.Point(46, 10);
+            this.chk4_1.Location = new System.Drawing.Point(22, 10);
             this.chk4_1.Name = "chk4_1";
             this.chk4_1.Size = new System.Drawing.Size(72, 16);
             this.chk4_1.TabIndex = 4;
@@ -1752,6 +1786,7 @@
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.chk5_0);
             this.tabPage7.Controls.Add(this.chk5_5);
             this.tabPage7.Controls.Add(this.chk5_4);
             this.tabPage7.Controls.Add(this.chk5_3);
@@ -1764,10 +1799,21 @@
             this.tabPage7.ToolTipText = "5";
             this.tabPage7.UseVisualStyleBackColor = true;
             // 
+            // chk5_0
+            // 
+            this.chk5_0.AutoSize = true;
+            this.chk5_0.Location = new System.Drawing.Point(133, 12);
+            this.chk5_0.Name = "chk5_0";
+            this.chk5_0.Size = new System.Drawing.Size(48, 16);
+            this.chk5_0.TabIndex = 9;
+            this.chk5_0.Text = "全部";
+            this.chk5_0.UseVisualStyleBackColor = true;
+            this.chk5_0.CheckedChanged += new System.EventHandler(this.chk5_1_CheckedChanged);
+            // 
             // chk5_5
             // 
             this.chk5_5.AutoSize = true;
-            this.chk5_5.Location = new System.Drawing.Point(51, 100);
+            this.chk5_5.Location = new System.Drawing.Point(12, 100);
             this.chk5_5.Name = "chk5_5";
             this.chk5_5.Size = new System.Drawing.Size(84, 16);
             this.chk5_5.TabIndex = 8;
@@ -1778,7 +1824,7 @@
             // chk5_4
             // 
             this.chk5_4.AutoSize = true;
-            this.chk5_4.Location = new System.Drawing.Point(51, 78);
+            this.chk5_4.Location = new System.Drawing.Point(12, 78);
             this.chk5_4.Name = "chk5_4";
             this.chk5_4.Size = new System.Drawing.Size(84, 16);
             this.chk5_4.TabIndex = 7;
@@ -1789,7 +1835,7 @@
             // chk5_3
             // 
             this.chk5_3.AutoSize = true;
-            this.chk5_3.Location = new System.Drawing.Point(51, 56);
+            this.chk5_3.Location = new System.Drawing.Point(12, 56);
             this.chk5_3.Name = "chk5_3";
             this.chk5_3.Size = new System.Drawing.Size(72, 16);
             this.chk5_3.TabIndex = 6;
@@ -1800,7 +1846,7 @@
             // chk5_2
             // 
             this.chk5_2.AutoSize = true;
-            this.chk5_2.Location = new System.Drawing.Point(51, 34);
+            this.chk5_2.Location = new System.Drawing.Point(12, 34);
             this.chk5_2.Name = "chk5_2";
             this.chk5_2.Size = new System.Drawing.Size(72, 16);
             this.chk5_2.TabIndex = 5;
@@ -1811,7 +1857,7 @@
             // chk5_1
             // 
             this.chk5_1.AutoSize = true;
-            this.chk5_1.Location = new System.Drawing.Point(51, 12);
+            this.chk5_1.Location = new System.Drawing.Point(12, 12);
             this.chk5_1.Name = "chk5_1";
             this.chk5_1.Size = new System.Drawing.Size(72, 16);
             this.chk5_1.TabIndex = 4;
@@ -1821,6 +1867,7 @@
             // 
             // tabPage8
             // 
+            this.tabPage8.Controls.Add(this.chk6_0);
             this.tabPage8.Controls.Add(this.chk6_4);
             this.tabPage8.Controls.Add(this.chk6_3);
             this.tabPage8.Controls.Add(this.chk6_2);
@@ -1831,10 +1878,21 @@
             this.tabPage8.TabIndex = 5;
             this.tabPage8.UseVisualStyleBackColor = true;
             // 
+            // chk6_0
+            // 
+            this.chk6_0.AutoSize = true;
+            this.chk6_0.Location = new System.Drawing.Point(133, 21);
+            this.chk6_0.Name = "chk6_0";
+            this.chk6_0.Size = new System.Drawing.Size(48, 16);
+            this.chk6_0.TabIndex = 8;
+            this.chk6_0.Text = "全部";
+            this.chk6_0.UseVisualStyleBackColor = true;
+            this.chk6_0.CheckedChanged += new System.EventHandler(this.chk6_1_CheckedChanged);
+            // 
             // chk6_4
             // 
             this.chk6_4.AutoSize = true;
-            this.chk6_4.Location = new System.Drawing.Point(51, 88);
+            this.chk6_4.Location = new System.Drawing.Point(22, 87);
             this.chk6_4.Name = "chk6_4";
             this.chk6_4.Size = new System.Drawing.Size(72, 16);
             this.chk6_4.TabIndex = 7;
@@ -1845,7 +1903,7 @@
             // chk6_3
             // 
             this.chk6_3.AutoSize = true;
-            this.chk6_3.Location = new System.Drawing.Point(51, 66);
+            this.chk6_3.Location = new System.Drawing.Point(22, 65);
             this.chk6_3.Name = "chk6_3";
             this.chk6_3.Size = new System.Drawing.Size(72, 16);
             this.chk6_3.TabIndex = 6;
@@ -1856,7 +1914,7 @@
             // chk6_2
             // 
             this.chk6_2.AutoSize = true;
-            this.chk6_2.Location = new System.Drawing.Point(51, 44);
+            this.chk6_2.Location = new System.Drawing.Point(22, 43);
             this.chk6_2.Name = "chk6_2";
             this.chk6_2.Size = new System.Drawing.Size(66, 16);
             this.chk6_2.TabIndex = 5;
@@ -1867,16 +1925,17 @@
             // chk6_1
             // 
             this.chk6_1.AutoSize = true;
-            this.chk6_1.Location = new System.Drawing.Point(51, 22);
+            this.chk6_1.Location = new System.Drawing.Point(22, 21);
             this.chk6_1.Name = "chk6_1";
-            this.chk6_1.Size = new System.Drawing.Size(60, 16);
+            this.chk6_1.Size = new System.Drawing.Size(66, 16);
             this.chk6_1.TabIndex = 4;
-            this.chk6_1.Text = "超亿元";
+            this.chk6_1.Text = "超1亿元";
             this.chk6_1.UseVisualStyleBackColor = true;
             this.chk6_1.CheckedChanged += new System.EventHandler(this.chk6_1_CheckedChanged);
             // 
             // tabPage9
             // 
+            this.tabPage9.Controls.Add(this.chk7_0);
             this.tabPage9.Controls.Add(this.chk7_5);
             this.tabPage9.Controls.Add(this.chk7_4);
             this.tabPage9.Controls.Add(this.chk7_3);
@@ -1888,10 +1947,21 @@
             this.tabPage9.TabIndex = 6;
             this.tabPage9.UseVisualStyleBackColor = true;
             // 
+            // chk7_0
+            // 
+            this.chk7_0.AutoSize = true;
+            this.chk7_0.Location = new System.Drawing.Point(133, 12);
+            this.chk7_0.Name = "chk7_0";
+            this.chk7_0.Size = new System.Drawing.Size(48, 16);
+            this.chk7_0.TabIndex = 14;
+            this.chk7_0.Text = "全部";
+            this.chk7_0.UseVisualStyleBackColor = true;
+            this.chk7_0.CheckedChanged += new System.EventHandler(this.chk7_1_CheckedChanged);
+            // 
             // chk7_5
             // 
             this.chk7_5.AutoSize = true;
-            this.chk7_5.Location = new System.Drawing.Point(60, 99);
+            this.chk7_5.Location = new System.Drawing.Point(23, 99);
             this.chk7_5.Name = "chk7_5";
             this.chk7_5.Size = new System.Drawing.Size(72, 16);
             this.chk7_5.TabIndex = 13;
@@ -1903,7 +1973,7 @@
             // chk7_4
             // 
             this.chk7_4.AutoSize = true;
-            this.chk7_4.Location = new System.Drawing.Point(60, 78);
+            this.chk7_4.Location = new System.Drawing.Point(23, 78);
             this.chk7_4.Name = "chk7_4";
             this.chk7_4.Size = new System.Drawing.Size(72, 16);
             this.chk7_4.TabIndex = 12;
@@ -1915,7 +1985,7 @@
             // chk7_3
             // 
             this.chk7_3.AutoSize = true;
-            this.chk7_3.Location = new System.Drawing.Point(60, 56);
+            this.chk7_3.Location = new System.Drawing.Point(23, 56);
             this.chk7_3.Name = "chk7_3";
             this.chk7_3.Size = new System.Drawing.Size(72, 16);
             this.chk7_3.TabIndex = 11;
@@ -1927,7 +1997,7 @@
             // chk7_2
             // 
             this.chk7_2.AutoSize = true;
-            this.chk7_2.Location = new System.Drawing.Point(60, 34);
+            this.chk7_2.Location = new System.Drawing.Point(23, 34);
             this.chk7_2.Name = "chk7_2";
             this.chk7_2.Size = new System.Drawing.Size(72, 16);
             this.chk7_2.TabIndex = 10;
@@ -1939,7 +2009,7 @@
             // chk7_1
             // 
             this.chk7_1.AutoSize = true;
-            this.chk7_1.Location = new System.Drawing.Point(60, 12);
+            this.chk7_1.Location = new System.Drawing.Point(23, 12);
             this.chk7_1.Name = "chk7_1";
             this.chk7_1.Size = new System.Drawing.Size(72, 16);
             this.chk7_1.TabIndex = 9;
@@ -1950,6 +2020,7 @@
             // 
             // tabPage10
             // 
+            this.tabPage10.Controls.Add(this.chk8_0);
             this.tabPage10.Controls.Add(this.chk8_4);
             this.tabPage10.Controls.Add(this.chk8_3);
             this.tabPage10.Controls.Add(this.chk8_2);
@@ -1960,10 +2031,21 @@
             this.tabPage10.TabIndex = 7;
             this.tabPage10.UseVisualStyleBackColor = true;
             // 
+            // chk8_0
+            // 
+            this.chk8_0.AutoSize = true;
+            this.chk8_0.Location = new System.Drawing.Point(133, 26);
+            this.chk8_0.Name = "chk8_0";
+            this.chk8_0.Size = new System.Drawing.Size(48, 16);
+            this.chk8_0.TabIndex = 8;
+            this.chk8_0.Text = "全部";
+            this.chk8_0.UseVisualStyleBackColor = true;
+            this.chk8_0.CheckedChanged += new System.EventHandler(this.chk8_1_CheckedChanged);
+            // 
             // chk8_4
             // 
             this.chk8_4.AutoSize = true;
-            this.chk8_4.Location = new System.Drawing.Point(51, 88);
+            this.chk8_4.Location = new System.Drawing.Point(23, 92);
             this.chk8_4.Name = "chk8_4";
             this.chk8_4.Size = new System.Drawing.Size(78, 16);
             this.chk8_4.TabIndex = 7;
@@ -1974,7 +2056,7 @@
             // chk8_3
             // 
             this.chk8_3.AutoSize = true;
-            this.chk8_3.Location = new System.Drawing.Point(51, 66);
+            this.chk8_3.Location = new System.Drawing.Point(23, 70);
             this.chk8_3.Name = "chk8_3";
             this.chk8_3.Size = new System.Drawing.Size(72, 16);
             this.chk8_3.TabIndex = 6;
@@ -1985,7 +2067,7 @@
             // chk8_2
             // 
             this.chk8_2.AutoSize = true;
-            this.chk8_2.Location = new System.Drawing.Point(51, 44);
+            this.chk8_2.Location = new System.Drawing.Point(23, 48);
             this.chk8_2.Name = "chk8_2";
             this.chk8_2.Size = new System.Drawing.Size(72, 16);
             this.chk8_2.TabIndex = 5;
@@ -1996,7 +2078,7 @@
             // chk8_1
             // 
             this.chk8_1.AutoSize = true;
-            this.chk8_1.Location = new System.Drawing.Point(51, 22);
+            this.chk8_1.Location = new System.Drawing.Point(23, 26);
             this.chk8_1.Name = "chk8_1";
             this.chk8_1.Size = new System.Drawing.Size(72, 16);
             this.chk8_1.TabIndex = 4;
@@ -2006,6 +2088,7 @@
             // 
             // tabPage11
             // 
+            this.tabPage11.Controls.Add(this.chk9_0);
             this.tabPage11.Controls.Add(this.chk9_3);
             this.tabPage11.Controls.Add(this.chk9_2);
             this.tabPage11.Controls.Add(this.chk9_1);
@@ -2015,10 +2098,21 @@
             this.tabPage11.TabIndex = 8;
             this.tabPage11.UseVisualStyleBackColor = true;
             // 
+            // chk9_0
+            // 
+            this.chk9_0.AutoSize = true;
+            this.chk9_0.Location = new System.Drawing.Point(120, 23);
+            this.chk9_0.Name = "chk9_0";
+            this.chk9_0.Size = new System.Drawing.Size(48, 16);
+            this.chk9_0.TabIndex = 8;
+            this.chk9_0.Text = "全部";
+            this.chk9_0.UseVisualStyleBackColor = true;
+            this.chk9_0.CheckedChanged += new System.EventHandler(this.checkBox28_CheckedChanged);
+            // 
             // chk9_3
             // 
             this.chk9_3.AutoSize = true;
-            this.chk9_3.Location = new System.Drawing.Point(51, 66);
+            this.chk9_3.Location = new System.Drawing.Point(23, 67);
             this.chk9_3.Name = "chk9_3";
             this.chk9_3.Size = new System.Drawing.Size(60, 16);
             this.chk9_3.TabIndex = 6;
@@ -2029,7 +2123,7 @@
             // chk9_2
             // 
             this.chk9_2.AutoSize = true;
-            this.chk9_2.Location = new System.Drawing.Point(51, 44);
+            this.chk9_2.Location = new System.Drawing.Point(23, 45);
             this.chk9_2.Name = "chk9_2";
             this.chk9_2.Size = new System.Drawing.Size(48, 16);
             this.chk9_2.TabIndex = 5;
@@ -2040,7 +2134,7 @@
             // chk9_1
             // 
             this.chk9_1.AutoSize = true;
-            this.chk9_1.Location = new System.Drawing.Point(51, 22);
+            this.chk9_1.Location = new System.Drawing.Point(23, 23);
             this.chk9_1.Name = "chk9_1";
             this.chk9_1.Size = new System.Drawing.Size(48, 16);
             this.chk9_1.TabIndex = 4;
@@ -2077,7 +2171,6 @@
             this.rb8.Name = "rb8";
             this.rb8.Size = new System.Drawing.Size(119, 16);
             this.rb8.TabIndex = 8;
-            this.rb8.TabStop = true;
             this.rb8.Text = "闲置土地盘活计划";
             this.rb8.UseVisualStyleBackColor = true;
             this.rb8.Click += new System.EventHandler(this.rb1_Click);
@@ -2089,7 +2182,6 @@
             this.rb2.Name = "rb2";
             this.rb2.Size = new System.Drawing.Size(131, 16);
             this.rb2.TabIndex = 7;
-            this.rb2.TabStop = true;
             this.rb2.Text = "安全生产标准话企业";
             this.rb2.UseVisualStyleBackColor = true;
             this.rb2.Click += new System.EventHandler(this.rb1_Click);
@@ -2101,7 +2193,6 @@
             this.rb9.Name = "rb9";
             this.rb9.Size = new System.Drawing.Size(119, 16);
             this.rb9.TabIndex = 6;
-            this.rb9.TabStop = true;
             this.rb9.Text = "企业技术中心台账";
             this.rb9.UseVisualStyleBackColor = true;
             this.rb9.Click += new System.EventHandler(this.rb1_Click);
@@ -2113,7 +2204,6 @@
             this.rb7.Name = "rb7";
             this.rb7.Size = new System.Drawing.Size(95, 16);
             this.rb7.TabIndex = 5;
-            this.rb7.TabStop = true;
             this.rb7.Text = "智能车间企业";
             this.rb7.UseVisualStyleBackColor = true;
             this.rb7.CheckedChanged += new System.EventHandler(this.rb7_CheckedChanged);
@@ -2126,7 +2216,6 @@
             this.rb6.Name = "rb6";
             this.rb6.Size = new System.Drawing.Size(131, 16);
             this.rb6.TabIndex = 4;
-            this.rb6.TabStop = true;
             this.rb6.Text = "新地标计划培育企业";
             this.rb6.UseVisualStyleBackColor = true;
             this.rb6.Click += new System.EventHandler(this.rb1_Click);
@@ -2138,7 +2227,6 @@
             this.rb5.Name = "rb5";
             this.rb5.Size = new System.Drawing.Size(119, 16);
             this.rb5.TabIndex = 3;
-            this.rb5.TabStop = true;
             this.rb5.Text = "智能制造示范企业";
             this.rb5.UseVisualStyleBackColor = true;
             this.rb5.Click += new System.EventHandler(this.rb1_Click);
@@ -2150,7 +2238,6 @@
             this.rb4.Name = "rb4";
             this.rb4.Size = new System.Drawing.Size(119, 16);
             this.rb4.TabIndex = 2;
-            this.rb4.TabStop = true;
             this.rb4.Text = "历年清洁生产企业";
             this.rb4.UseVisualStyleBackColor = true;
             this.rb4.Click += new System.EventHandler(this.rb1_Click);
@@ -2162,7 +2249,6 @@
             this.rb3.Name = "rb3";
             this.rb3.Size = new System.Drawing.Size(71, 16);
             this.rb3.TabIndex = 1;
-            this.rb3.TabStop = true;
             this.rb3.Text = "上市企业";
             this.rb3.UseVisualStyleBackColor = true;
             this.rb3.Click += new System.EventHandler(this.rb1_Click);
@@ -2170,6 +2256,7 @@
             // rb1
             // 
             this.rb1.AutoSize = true;
+            this.rb1.Checked = true;
             this.rb1.Location = new System.Drawing.Point(27, 20);
             this.rb1.Name = "rb1";
             this.rb1.Size = new System.Drawing.Size(83, 16);
@@ -2325,7 +2412,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1310, 477);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.splitter1);
@@ -2586,7 +2672,6 @@
         private System.Windows.Forms.RadioButton rb33;
         private System.Windows.Forms.RadioButton rb32;
         private System.Windows.Forms.RadioButton rb31;
-        private System.Windows.Forms.CheckBox chk4_5;
         private System.Windows.Forms.CheckBox chk5_5;
         private System.Windows.Forms.CheckBox chk7_5;
         private System.Windows.Forms.CheckBox chk7_4;
@@ -2596,7 +2681,6 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridViewImageColumn Column20;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
@@ -2610,5 +2694,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn82;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.CheckBox chk1_0;
+        private System.Windows.Forms.CheckBox chk2_0;
+        public System.Windows.Forms.CheckBox chk4_0;
+        private System.Windows.Forms.CheckBox chk4_5;
+        private System.Windows.Forms.CheckBox chk5_0;
+        private System.Windows.Forms.CheckBox chk6_0;
+        private System.Windows.Forms.CheckBox chk7_0;
+        private System.Windows.Forms.CheckBox chk8_0;
+        private System.Windows.Forms.CheckBox chk9_0;
     }
 }

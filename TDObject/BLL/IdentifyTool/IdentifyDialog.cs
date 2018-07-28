@@ -569,21 +569,21 @@ namespace TDObject.IdentifyTool
             dt.Columns.Add("字段名");
             dt.Columns.Add("字段值");
 
-            lstProperties.DataSource = dt;
-            lstProperties.AllowUserToAddRows = false;
-            
+            //lstProperties.DataSource = dt;  //刷新属性信息房屋和企业范围
+            //lstProperties.AllowUserToAddRows = false;
+
             string identifyFilter = cboLayerFilter.Text.Trim();
-           
-             //在此判断哪个图层 并确定要赋值的listview
+
+            //在此判断哪个图层 并确定要赋值的listview
             if (identifyFilter == "房屋建筑")
             {
                 lstProperties = lstFW;
                 MainForm._TabControl.SelectedIndex = 1;
                 //dt = setDispData<房屋>(identifiedFeature.OID, dt);
                 dt = setDispData<房屋建筑>("房屋建筑", identifiedFeature.OID, dt);
-        
+
             }
-          
+
             if (identifyFilter == "企业范围")
             {
                 lstProperties = dgvQyxx;
@@ -591,10 +591,16 @@ namespace TDObject.IdentifyTool
                 dt = setDispData<企业范围>("企业范围", identifiedFeature.OID, dt);
 
             }
-          
+
 
             lstProperties.DataSource = dt;
             lstProperties.AllowUserToAddRows = false;
+            try
+            {
+                lstProperties.Columns[0].Width = 130;
+                lstProperties.Columns[1].Width = 180;
+            }
+            catch { }
             #region 往listView中添加数据的方法 -- 无用
             //若查询数据不为空则显示数据
             //添加列头

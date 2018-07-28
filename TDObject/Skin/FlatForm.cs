@@ -22,6 +22,9 @@ namespace TDObject
             this.ShowInTaskbar = true;
         }
 
+        
+
+
         private void FlatForm_MouseMove(object sender, MouseEventArgs e)
         {
             FormSkin.MouseMoveForm(this.Handle);
@@ -31,7 +34,5 @@ namespace TDObject
         {
 
         }
-
-     
     }
 }

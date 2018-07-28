@@ -24,12 +24,12 @@ namespace TDObject.UI
 {
     public partial class frmTypeFilter : FlatForm
     {
-        log4net.ILog log = log4net.LogManager.GetLogger("MainForm");
-
+       
         List<IFeature> pGeos = new List<IFeature>();//用于高亮
         IEnvelope newdisp = (IEnvelope)new Envelope();//用于定位
         List<IGeometry> Geos = new List<IGeometry>();
 
+        TDObject.BLL.UIBLL.bllTypeFilter blluifiler = new TDObject.BLL.UIBLL.bllTypeFilter(GlobalVariables.axMapControl);
         int typeindex = 1;
 
         int CurrPageFlag = 1;
@@ -101,6 +101,18 @@ namespace TDObject.UI
                 dgv7.Columns.RemoveAt(0);
                 dgv8.Columns.RemoveAt(0);
                 dgv9.Columns.RemoveAt(0);
+
+                dgv1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgv2.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgv31.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgv32.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgv33.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgv4.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgv5.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgv6.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgv7.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgv8.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                dgv9.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
                 excl.eventNumChanged += new QyTech.ExcelExport.DelegateForExportNo(RefreshPgb);
             }
@@ -186,42 +198,53 @@ namespace TDObject.UI
                 if (refreshflag == 1)
                 {
                     sqlOrderby = "序号";
-                    if (chk1_1.Checked)
+                    if (!chk1_0.Checked)
                     {
-                        sqlwhere += " or 累计销售额合计>=2000";
+                        if (chk1_1.Checked)
+                        {
+                            sqlwhere += " or 累计销售额合计>=2000";
+                        }
+                        if (chk1_2.Checked)
+                        {
+                            sqlwhere += " or 累计销售额合计>=3000";
+                        }
+                        if (chk1_3.Checked)
+                        {
+                            sqlwhere += " or 累计销售额合计>=5000";
+                        }
+                        if (chk1_4.Checked)
+                        {
+                            sqlwhere += " or 累计销售额合计>=100000";
+                        }
                     }
-                    if (chk1_2.Checked)
-                    {
-                        sqlwhere += " or 累计销售额合计>=3000";
-                    }
-                    if (chk1_3.Checked)
-                    {
-                        sqlwhere += " or 累计销售额合计>=5000";
-                    }
-                    if (chk1_4.Checked)
-                    {
-                        sqlwhere += " or 累计销售额合计>=100000";
-                    }
+                    else
+                        sqlwhere = "@@@@";
                 }
                 else if (refreshflag == 2)
                 {
                     sqlOrderby = "序号";
-                    if (chk2_1.Checked)
+                    if (!chk2_0.Checked)
                     {
-                        sqlwhere += " or 标准化级别='" + chk2_1.Text + "'";
+                        if (chk2_1.Checked)
+                        {
+                            sqlwhere += " or 标准化级别='" + chk2_1.Text + "'";
+                        }
+                        if (chk2_2.Checked)
+                        {
+                            sqlwhere += " or  标准化级别='" + chk2_2.Text + "'";
+                        }
+                        if (chk2_3.Checked)
+                        {
+                            sqlwhere += " or  标准化级别='" + chk2_3.Text + "'";
+                        }
                     }
-                    if (chk2_2.Checked)
-                    {
-                        sqlwhere += " or  标准化级别='" + chk2_2.Text + "'";
-                    }
-                    if (chk2_3.Checked)
-                    {
-                        sqlwhere += " or  标准化级别='" + chk2_3.Text + "'";
-                    }
+                    else
+                        sqlwhere = "@@@@";
                 }
                 else if (refreshflag == 131 || refreshflag == 3)
                 {
                     sqlOrderby = "序号";
+                    sqlwhere = "@@@@";
                     //if (cbo31_1.Text != "全部")
                     //{
                     //    sqlwhere += " or 年度=" + cbo31_1.Text;
@@ -230,6 +253,7 @@ namespace TDObject.UI
                 else if (refreshflag == 132)
                 {
                     sqlOrderby = "序号";
+                    sqlwhere = "@@@@";
                     //if (cbo32_1.Text != "全部")
                     //{
                     //    sqlwhere += " or 年度=" + cbo32_1.Text;
@@ -238,6 +262,7 @@ namespace TDObject.UI
                 else if (refreshflag == 133)
                 {
                     sqlOrderby = "序号";
+                    sqlwhere = "@@@@";
                     //if (cbo33_1.Text != "全部")
                     //{
                     //    sqlwhere += " or 年度=" + cbo33_1.Text;
@@ -245,129 +270,156 @@ namespace TDObject.UI
                 }
                 else if (refreshflag == 4)
                 {
-                    if (chk4_1.Checked)
+                    if (!chk4_0.Checked)
                     {
-                        sqlwhere += " or 年度=" + chk4_1.Text.Substring(0, 4);
+                        if (chk4_1.Checked)
+                        {
+                            sqlwhere += " or 年度=" + chk4_1.Text.Substring(0, 4);
+                        }
+                        if (chk4_2.Checked)
+                        {
+                            sqlwhere += " or 年度=" + chk4_2.Text.Substring(0, 4);
+                        }
+                        if (chk4_3.Checked)
+                        {
+                            sqlwhere += " or 年度=" + chk4_3.Text.Substring(0, 4);
+                        }
+                        if (chk4_4.Checked)
+                        {
+                            sqlwhere += " or 年度=" + chk4_4.Text.Substring(0, 4);
+                        }
+                        if (chk4_5.Checked)
+                        {
+                            sqlwhere += " or 年度=" + chk4_5.Text.Substring(0, 4);
+                        }
                     }
-                    if (chk4_2.Checked)
-                    {
-                        sqlwhere += " or 年度=" + chk4_2.Text.Substring(0, 4);
-                    }
-                    if (chk4_3.Checked)
-                    {
-                        sqlwhere += " or 年度=" + chk4_3.Text.Substring(0, 4);
-                    }
-                    if (chk4_4.Checked)
-                    {
-                        sqlwhere += " or 年度=" + chk4_4.Text.Substring(0, 4);
-                    }
-                    if (chk4_5.Checked)
-                    {
-                        sqlwhere += " or 年度=" + chk4_5.Text.Substring(0, 4);
-                    }
+                    else
+                        sqlwhere = "@@@@";
                 }
                 else if (refreshflag == 5)
                 {
-                    if (chk5_1.Checked)
+                    if (!chk5_0.Checked)
                     {
-                        sqlwhere += " or 所属环节='" + chk5_1.Text + "'";
+                        if (chk5_1.Checked)
+                        {
+                            sqlwhere += " or 所属环节='" + chk5_1.Text + "'";
+                        }
+                        if (chk5_2.Checked)
+                        {
+                            sqlwhere += " or 所属环节='" + chk5_2.Text + "'";
+                        }
+                        if (chk5_3.Checked)
+                        {
+                            sqlwhere += " or 所属环节='" + chk5_3.Text + "'";
+                        }
+                        if (chk5_4.Checked)
+                        {
+                            sqlwhere += " or 所属环节='" + chk5_4.Text + "'";
+                        }
+                        if (chk5_5.Checked)
+                        {
+                            sqlwhere += " or 所属环节='" + chk5_5.Text + "'";
+                        }
                     }
-                    if (chk5_2.Checked)
-                    {
-                        sqlwhere += " or 所属环节='" + chk5_2.Text + "'";
-                    }
-                    if (chk5_3.Checked)
-                    {
-                        sqlwhere += " or 所属环节='" + chk5_3.Text + "'";
-                    }
-                    if (chk5_4.Checked)
-                    {
-                        sqlwhere += " or 所属环节='" + chk5_4.Text + "'";
-                    }
-                    if (chk5_5.Checked)
-                    {
-                        sqlwhere += " or 所属环节='" + chk5_5.Text + "'";
-                    }
+                    else
+                        sqlwhere = " or 类型='示范企业'"; 
                 }
                 else if (refreshflag == 6)
                 {
-                    if (chk6_1.Checked)
+                    if (!chk6_0.Checked)
                     {
-                        sqlwhere += " or 目标='" + chk6_1.Text + "'";
+                        if (chk6_1.Checked)
+                        {
+                            sqlwhere += " or SUBSTRING(目标,2,len(目标)-3)>='" + chk6_1.Text.Substring(1,chk6_1.Text.Length-3) + "'";
+                        }
+                        if (chk6_2.Checked)
+                        {
+                            sqlwhere += " or SUBSTRING(目标,2,len(目标)-3)>='" + chk6_2.Text.Substring(1, chk6_2.Text.Length - 3) + "'";
+                        }
+                        if (chk6_3.Checked)
+                        {
+                            sqlwhere += " or SUBSTRING(目标,2,len(目标)-3)>='" + chk6_3.Text.Substring(1, chk6_3.Text.Length -3) + "'";
+                        }
+                        if (chk6_4.Checked)
+                        {
+                            sqlwhere += " or SUBSTRING(目标,2,len(目标)-3)>='" + chk6_4.Text.Substring(1, chk6_4.Text.Length - 3) + "'";
+                        }
                     }
-                    if (chk6_2.Checked)
-                    {
-                        sqlwhere += " or 目标='" + chk6_2.Text + "'";
-                    }
-                    if (chk6_3.Checked)
-                    {
-                        sqlwhere += " or 目标='" + chk6_3.Text + "'";
-                    }
-                    if (chk6_4.Checked)
-                    {
-                        sqlwhere += " or 目标='" + chk6_4.Text + "'";
-                    }
-
+                    else
+                        sqlwhere = "@@@@";
                 }
                 else if (refreshflag == 7)
                 {
-
-                    if (chk7_1.Checked)
+                    if (!chk7_0.Checked)
                     {
-                        sqlwhere += " or 获评年份=" + chk7_1.Text.Substring(0, 4);
+                        if (chk7_1.Checked)
+                        {
+                            sqlwhere += " or 获评年份=" + chk7_1.Text.Substring(0, 4);
+                        }
+                        if (chk7_2.Checked)
+                        {
+                            sqlwhere += " or 获评年份=" + chk7_2.Text.Substring(0, 4);
+                        }
+                        if (chk7_3.Checked)
+                        {
+                            sqlwhere += " or 获评年份=" + chk7_3.Text.Substring(0, 4);
+                        }
+                        if (chk7_4.Checked)
+                        {
+                            sqlwhere += " or 获评年份=" + chk7_4.Text.Substring(0, 4);
+                        }
+                        if (chk7_5.Checked)
+                        {
+                            sqlwhere += " or 获评年份=" + chk7_5.Text.Substring(0, 4);
+                        }
                     }
-                    if (chk7_2.Checked)
-                    {
-                        sqlwhere += " or 获评年份=" + chk7_2.Text.Substring(0, 4);
-                    }
-                    if (chk7_3.Checked)
-                    {
-                        sqlwhere += " or 获评年份=" + chk7_3.Text.Substring(0, 4);
-                    }
-                    if (chk7_4.Checked)
-                    {
-                        sqlwhere += " or 获评年份=" + chk7_4.Text.Substring(0, 4);
-                    }
-                    if (chk7_5.Checked)
-                    {
-                        sqlwhere += " or 获评年份=" + chk7_5.Text.Substring(0, 4);
-                    }
-
+                    else
+                        sqlwhere = "@@@@";
                 }
                 else if (refreshflag == 8)
                 {
-                    if (chk8_1.Checked)
+                    if (!chk8_0.Checked)
                     {
-                        sqlwhere += " or 土地面积>=" + chk8_1.Text.Substring(0, 2);
+                        if (chk8_1.Checked)
+                        {
+                            sqlwhere += " or 土地面积>=" + chk8_1.Text.Substring(0, 2);
+                        }
+                        if (chk8_2.Checked)
+                        {
+                            sqlwhere += " or 土地面积>=" + chk8_2.Text.Substring(0, 2);
+                        }
+                        if (chk8_3.Checked)
+                        {
+                            sqlwhere += " or 土地面积>=" + chk8_3.Text.Substring(0, 2);
+                        }
+                        if (chk8_4.Checked)
+                        {
+                            sqlwhere += " or 土地面积>=" + chk8_4.Text.Substring(0, 3);
+                        }
                     }
-                    if (chk8_2.Checked)
-                    {
-                        sqlwhere += " or 土地面积>=" + chk8_2.Text.Substring(0, 2);
-                    }
-                    if (chk8_3.Checked)
-                    {
-                        sqlwhere += " or 土地面积>=" + chk8_3.Text.Substring(0, 2);
-                    }
-                    if (chk8_4.Checked)
-                    {
-                        sqlwhere += " or 土地面积>=" + chk8_4.Text.Substring(0, 3);
-                    }
+                    else
+                        sqlwhere = "@@@@";
                 }
                 else if (refreshflag == 9)
                 {
                     sqlOrderby = " Convert(int,序号)";
-                    if (chk9_1.Checked)
+                    if (!chk9_0.Checked)
                     {
-                        sqlwhere += " or 级别='" + chk9_1.Text + "'";
+                        if (chk9_1.Checked)
+                        {
+                            sqlwhere += " or 级别='" + chk9_1.Text + "'";
+                        }
+                        if (chk9_2.Checked)
+                        {
+                            sqlwhere += " or 级别='" + chk9_2.Text + "'";
+                        }
+                        if (chk9_3.Checked)
+                        {
+                            sqlwhere += " or 级别='" + chk9_3.Text + "'";
+                        }
                     }
-                    if (chk9_2.Checked)
-                    {
-                        sqlwhere += " or 级别='" + chk9_2.Text + "'";
-                    }
-                    if (chk9_3.Checked)
-                    {
-                        sqlwhere += " or 级别='" + chk9_3.Text + "'";
-                    }
+                    else
+                        sqlwhere = "@@@@";
                 }
             }
             catch (Exception ex)
@@ -377,7 +429,7 @@ namespace TDObject.UI
             }
         }
 
-        private void RefreshData(int refreshflag)
+        private void RefreshData(DataGridView dgv, int refreshflag)
         {
 
             try
@@ -386,11 +438,13 @@ namespace TDObject.UI
                 string sqlOrderby = "";
                 ManageWhereOrderby(refreshflag, ref sqlwhere, ref sqlOrderby);
 
-                if (sqlwhere.Length > 0)
+                if (sqlwhere== "@@@@")
+                    sqlwhere = "";
+                else if (sqlwhere.Length > 0)
                     sqlwhere = sqlwhere.Substring(4);
-                else if (refreshflag < 130)
+                else //if (refreshflag < 130) 没有任何选择，原来没有全部，所以要是否是131，132，133
                 {
-                    this.dgv1.DataSource = null;
+                    dgv.DataSource = null;
                     return;
                 }
                 if (refreshflag == 1)
@@ -497,11 +551,11 @@ namespace TDObject.UI
 
         private void chk1_1_CheckedChanged(object sender, EventArgs e)
         {
-            RefreshData(typeindex);
+            RefreshData(dgv1,typeindex);
         }
         private void chk2_1_CheckedChanged(object sender, EventArgs e)
         {
-            RefreshData(typeindex);
+            RefreshData(dgv2, typeindex);
         }
 
         private void rb31_CheckedChanged(object sender, EventArgs e)
@@ -518,7 +572,7 @@ namespace TDObject.UI
                 tabControl1.SelectedIndex = itypeindex + 1;
                 typeindex = itypeindex + 130;
                 CurrPageFlag = typeindex;
-                RefreshData(typeindex);
+                RefreshData(dgv31, typeindex);
             }
             catch (Exception ex)
             {
@@ -528,33 +582,33 @@ namespace TDObject.UI
         }
         private void chk4_1_CheckedChanged(object sender, EventArgs e)
         {
-            RefreshData(typeindex);
+            RefreshData(dgv4, typeindex);
 
         }
 
         private void chk5_1_CheckedChanged(object sender, EventArgs e)
         {
-            RefreshData(typeindex);
+            RefreshData(dgv5, typeindex);
         }
 
         private void chk6_1_CheckedChanged(object sender, EventArgs e)
         {
-            RefreshData(typeindex);
+            RefreshData(dgv6, typeindex);
         }
 
         private void chk7_1_CheckedChanged(object sender, EventArgs e)
         {
-            RefreshData(typeindex);
+            RefreshData(dgv7, typeindex);
         }
 
         private void chk8_1_CheckedChanged(object sender, EventArgs e)
         {
-            RefreshData(typeindex);
+            RefreshData(dgv8, typeindex);
         }
 
         private void checkBox28_CheckedChanged(object sender, EventArgs e)
         {
-            RefreshData(typeindex);
+            RefreshData(dgv9, typeindex);
         }
 
         private void btnShowMap_Click(object sender, EventArgs e)
@@ -850,6 +904,74 @@ namespace TDObject.UI
                 LayerControl.ExDisplayLtdFeature(GlobalVariables.axMapControl, this.Geos);
             else
                 MessageBox.Show("请首先定位企业，然后高亮显示！");
+        }
+
+        private void dgv1_Click(object sender, EventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            string DKBH="";
+            try
+            {
+                DKBH = GetDkbhForCurrentRow(dgv);
+                if (DKBH!="")
+                    blluifiler.ExPostionOneLtdFeature(DKBH);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void dgv1_DoubleClick(object sender, EventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            string DKBH = "";
+            try
+            {
+                DKBH=GetDkbhForCurrentRow(dgv);
+                if (DKBH != "")
+                    blluifiler.ExPositionAndDisply(DKBH);
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private int GetDgvColumnIndex(DataGridView dgv, string DataPropertyName)
+        {
+            DataGridViewColumn dgvc;
+            int cIndex = -1;
+            for (int i = 0; i < dgv.Columns.Count; i++)
+            {
+                dgvc = dgv.Columns[i];
+                if (dgvc.DataPropertyName == DataPropertyName)
+                {
+                    cIndex = i;
+                    break;
+                }
+            }
+            return cIndex;
+        }
+    private string GetDkbhForCurrentRow(DataGridView dgv)
+        {
+            string DKBH = "";
+            if (dgv.CurrentCell != null)
+            {
+                if (dgv.CurrentCell.RowIndex >= 0)
+                {
+                    int dkghIndex = GetDgvColumnIndex(dgv, "地块编号");
+
+                    if (dkghIndex == -1)
+                    {
+                        MessageBox.Show("没有找到地块编号列！，请联系管理员核实数据.");
+                    }
+                    else if (dgv.Rows[dgv.CurrentCell.RowIndex].Cells[dkghIndex].Value != null)
+                    {
+                        DKBH = dgv.Rows[dgv.CurrentCell.RowIndex].Cells[dkghIndex].Value.ToString();
+
+                    }
+                }
+            }
+            return DKBH;
         }
     }
 }

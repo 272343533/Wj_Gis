@@ -120,7 +120,7 @@ namespace TDObject.UI
                             if (zlobj != null)
                             {
                                 frmAlarmLtdQuery obj = new frmAlarmLtdQuery(true, zlobj.OBJECTID);
-                                obj.ShowDialog();
+                                obj.Show();
                             }
                             else
                             {
@@ -240,7 +240,7 @@ namespace TDObject.UI
 
                 //timer1.Interval = 200;
                 //timer1.Start();
-                pictureBox1.Image = Image.FromStream(System.Net.WebRequest.Create("http://122.114.38.213:8080/Wjkfq_gis/Uploads/" + filename).GetResponse().GetResponseStream());
+                pictureBox1.Image = Image.FromStream(System.Net.WebRequest.Create("http://122.114.190.250:8080/Wjkfq_gis/Uploads/" + filename).GetResponse().GetResponseStream());
                 //timer1.Stop();
 
                  richTextBox1.Text = "      " + photos[CurrPhotoNo - 1].SSQYMC + "\r\n\r\n    " + photos[CurrPhotoNo - 1].PicMemo;
@@ -281,7 +281,7 @@ namespace TDObject.UI
                     //MessageBox.Show("按钮被点击");
                     //frmAlarmLtdQuery obj = new frmAlarmLtdQuery(false,Convert.ToInt32(dataGridView1.Rows[e.RowIndex].Cells[10].Value));
                     frmAlarmLtdQuery obj = new frmAlarmLtdQuery(false, LtdId_);
-                    obj.ShowDialog();
+                    obj.Show();
                 }
                 //DGV下拉框的取值
                 //MessageBox.Show(dataGridView1.Rows[e.RowIndex].Cells[e.ColumnIndex - 1].Value.ToString());

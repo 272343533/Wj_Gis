@@ -109,8 +109,8 @@ namespace TDObject.UI
         {
             //this.axMapControl1.Extent = _axmap.Extent;
 
-            FrmLtdZlqyxx frmobj = new FrmLtdZlqyxx(dkbh);
-            frmobj.ShowDialog();
+            FrmLtdZlqyxx obj = new FrmLtdZlqyxx(dkbh);
+            FormSkin.ShowForm(obj);
         }
 
         private void axMapControl1_OnExtentUpdated(object sender, IMapControlEvents2_OnExtentUpdatedEvent e)
@@ -202,7 +202,7 @@ namespace TDObject.UI
                 List<LtdPhoto> photos = MainForm.EM.GetListNoPaging<LtdPhoto>("SSQYMC='" + ltdname + "'", "OBJECTID desc");
                 if (photos.Count > 0)
                 {
-                    pictureBox1.Image = Image.FromStream(System.Net.WebRequest.Create("http://122.114.38.213:8080/Wjkfq_gis/Uploads/" + photos[0].PICTURE).GetResponse().GetResponseStream());
+                    pictureBox1.Image = Image.FromStream(System.Net.WebRequest.Create("http://122.114.190.250:8080/Wjkfq_gis/Uploads/" + photos[0].PICTURE).GetResponse().GetResponseStream());
                 }
 
             }

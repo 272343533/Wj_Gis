@@ -41,7 +41,7 @@ require([
             query.spatialRelationship =  esri.tasks.Query.SPATIAL_REL_INTERSECTS;
             query.returnGeometry = true;
             //实例化查询对象
-            var queryTask = new esri.tasks.QueryTask("http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/0");
+            var queryTask = new esri.tasks.QueryTask("http://122.114.190.250/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer/0");
             //进行查询                                
             queryTask.execute(query,showFindResult)
             
@@ -92,7 +92,7 @@ ArcMap = function (divid) {
         id: "commonGraphicsLayer"
     });//通用的绘图图层
  
-    var MapServer = "http://122.114.38.213/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer";
+    var MapServer = "http://122.114.190.250/arcgis/rest/services/WTMap/TD_SpatialServerTest/MapServer";
     var layer=new ArcGISDynamicMapServiceLayer(MapServer);
     map.addLayer(layer);
     map.on("click",mapClick);

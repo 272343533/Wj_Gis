@@ -14,11 +14,6 @@ using System.Security.Cryptography;
 using WTGeoWeb.BLL;
 namespace WTGeoWeb.Controllers
 {
-
-
-
- 
-
     public class HomeController : Controller
     {
         ILog log = log4net.LogManager.GetLogger("Home");
@@ -32,11 +27,12 @@ namespace WTGeoWeb.Controllers
         //
         // GET: /Home/
 
-        public ActionResult Index(string userid = "B94155FE-01CC-469F-ACD3-6E59DF45ED59")
+        public ActionResult Index(string userid)
         {
 
             if (userid == null)
                 userid = Guid.Empty.ToString();
+
             log.Error("Index:userid="+userid);
             //根据userid 返回不同的 地址
             if (IsMobileDevice())
@@ -44,7 +40,6 @@ namespace WTGeoWeb.Controllers
                 RedirectResult rr = Redirect(Url.Content("~/Home/index_m?userid=" + userid));
                 log.Error(HttpContext.Request.UserHostAddress + ":" + rr.Url);
                 return rr;
-                //return View("Index_m");
             }
             else
             {
@@ -61,7 +56,7 @@ namespace WTGeoWeb.Controllers
             {
                 ViewBag.bsU_Id = userid;
                 ViewBag.bsR_Name = obj.bsR_Name;
-                ViewBag.UserName = obj.Name;
+                ViewBag.UserName = obj.UserName;
             }
             return View();
         }

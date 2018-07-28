@@ -46,12 +46,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUserMana));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
             this.dgvEmp = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -96,7 +96,6 @@
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.button5);
             this.panel3.Controls.Add(this.dgvEmp);
             this.panel3.Controls.Add(this.toolStrip1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -104,19 +103,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(596, 527);
             this.panel3.TabIndex = 20;
-            // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.BackColor = System.Drawing.Color.Azure;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button5.Location = new System.Drawing.Point(564, 3);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(29, 28);
-            this.button5.TabIndex = 12;
-            this.button5.Text = "X";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // dgvEmp
             // 
@@ -168,7 +154,7 @@
             // toolStripButton1
             // 
             this.toolStripButton1.AutoSize = false;
-            this.toolStripButton1.Image = global::TDObject.Properties.Resources.add_16px_34526_easyicon_net;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(55, 25);
@@ -178,7 +164,7 @@
             // toolStripButton2
             // 
             this.toolStripButton2.AutoSize = false;
-            this.toolStripButton2.Image = global::TDObject.Properties.Resources.Save;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
             this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton2.Name = "toolStripButton2";
             this.toolStripButton2.Size = new System.Drawing.Size(55, 25);
@@ -189,7 +175,7 @@
             // toolStripButton3
             // 
             this.toolStripButton3.AutoSize = false;
-            this.toolStripButton3.Image = global::TDObject.Properties.Resources.delete_exit_remove_16px_5791_easyicon_net;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(55, 25);
@@ -244,7 +230,7 @@
             // 
             this.dataGridViewImageColumn1.Frozen = true;
             this.dataGridViewImageColumn1.HeaderText = "";
-            this.dataGridViewImageColumn1.Image = global::TDObject.Properties.Resources.Save;
+            this.dataGridViewImageColumn1.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn1.Image")));
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
             this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -307,7 +293,7 @@
             // 
             this.Column5.Frozen = true;
             this.Column5.HeaderText = "";
-            this.Column5.Image = global::TDObject.Properties.Resources.Save;
+            this.Column5.Image = ((System.Drawing.Image)(resources.GetObject("Column5.Image")));
             this.Column5.Name = "Column5";
             this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column5.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -331,7 +317,7 @@
             // 
             // Column3
             // 
-            this.Column3.DataPropertyName = "Name";
+            this.Column3.DataPropertyName = "NickName";
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.Column3.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column3.Frozen = true;
@@ -364,7 +350,7 @@
             // 
             // Column4
             // 
-            this.Column4.DataPropertyName = "bsO_Righrs";
+            this.Column4.DataPropertyName = "bsO_RightsCode";
             this.Column4.Frozen = true;
             this.Column4.HeaderText = "管理区权限";
             this.Column4.Name = "Column4";
@@ -418,7 +404,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridViewImageColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;

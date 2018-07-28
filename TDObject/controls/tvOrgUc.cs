@@ -6,7 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using SunMvcExpress.Dao;
+using QyTech.Auth.Dao;
 
 using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.Carto;

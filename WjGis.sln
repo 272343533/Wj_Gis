@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpatialDataDao", "WTGeoDao\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchTranBdCoords", "BatchTranBdCoords\BatchTranBdCoords.csproj", "{41789FEC-F862-4C07-8CF2-8125D3C5833C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommEntrance", "CommqyEntrance\CommEntrance.csproj", "{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,18 @@ Global
 		{41789FEC-F862-4C07-8CF2-8125D3C5833C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{41789FEC-F862-4C07-8CF2-8125D3C5833C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{41789FEC-F862-4C07-8CF2-8125D3C5833C}.Release|x86.ActiveCfg = Release|Any CPU
+		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Debug|x86.Build.0 = Debug|Any CPU
+		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Release|x86.ActiveCfg = Release|Any CPU
+		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

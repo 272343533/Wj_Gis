@@ -57,8 +57,8 @@ namespace TDObject.IdentifyTool
         private void InitialSymbols()
         {
             IColor displayColor = DefineRgbColor(255, 128, 128);
-            IColor outLineColor = DefineRgbColor(0, 0, 0);
-            ILineSymbol outLineSymbol = DefineLineSymbol(1, outLineColor, esriSimpleLineStyle.esriSLSSolid);
+            IColor outLineColor = DefineRgbColor(0,128, 0);
+            ILineSymbol outLineSymbol = DefineLineSymbol(1.5, outLineColor, esriSimpleLineStyle.esriSLSSolid);
             pointSymbol = DefinePointSymbol(13, displayColor, esriSimpleMarkerStyle.esriSMSCircle, outLineSymbol) as ISymbol;
             lineSymbol = DefineLineOutLineSymbol() as ISymbol;
             regionSymbol = DefineFillSymbol(displayColor, esriSimpleFillStyle.esriSFSSolid, outLineSymbol) as ISymbol;
@@ -91,31 +91,42 @@ namespace TDObject.IdentifyTool
         {
             try
             {
-                screenDisplay.StartDrawing(screenDisplay.hDC, (System.Int16)ESRI.ArcGIS.Display.esriScreenCache.esriAllScreenCaches);//.esriNoScreenCache);
-                //注意其先后顺序
-                //画面
-                screenDisplay.SetSymbol(regionSymbol);
-                for (int i = 0; i < polygonsFlashObject.Count; i++)
-                {
-                    screenDisplay.DrawPolygon(polygonsFlashObject[i]);
-                }
-                //画线
-                screenDisplay.SetSymbol(lineSymbol);
-                for (int i = 0; i < polylinesFlashObject.Count; i++)
-                {
-                    screenDisplay.DrawPolyline(polylinesFlashObject[i]);
-                }
-                //画点
-                screenDisplay.SetSymbol(pointSymbol);
-                for (int i = 0; i < pointsFlashObject.Count; i++)
-                {
-                    screenDisplay.DrawPoint(pointsFlashObject[i]);
-                }
-                if (mseconds > 0)
-                {
-                    Thread.Sleep(mseconds);
-                }
-                screenDisplay.FinishDrawing();
+                //if ((screenDisplay.IsCacheDirty((System.Int16)ESRI.ArcGIS.Display.esriScreenCache.esriScreenRecording)))
+                //{
+                    //screenDisplay.StartRecording();
+                    //screenDisplay.RemoveAllCaches();
+                    screenDisplay.StartDrawing(screenDisplay.hDC, (System.Int16)ESRI.ArcGIS.Display.esriScreenCache.esriNoScreenCache);//.esriNoScreenCache);esriAllScreenCaches
+                                                                                                                                       //注意其先后顺序
+                                                                                                                                       //画面
+                    screenDisplay.SetSymbol(regionSymbol);
+                    for (int i = 0; i < polygonsFlashObject.Count; i++)
+                    {
+                        screenDisplay.DrawPolygon(polygonsFlashObject[i]);
+                    }
+                    //画线
+                    screenDisplay.SetSymbol(lineSymbol);
+                    for (int i = 0; i < polylinesFlashObject.Count; i++)
+                    {
+                        screenDisplay.DrawPolyline(polylinesFlashObject[i]);
+                    }
+                    //画点
+                    screenDisplay.SetSymbol(pointSymbol);
+                    for (int i = 0; i < pointsFlashObject.Count; i++)
+                    {
+                        screenDisplay.DrawPoint(pointsFlashObject[i]);
+                    }
+                    if (mseconds > 0)
+                    {
+                        Thread.Sleep(mseconds);
+                    }
+                    screenDisplay.FinishDrawing();
+
+                    //screenDisplay.StopRecording();
+                //}
+                //else
+                //{
+                //    screenDisplay.DrawCache(screenDisplay.hDC, (System.Int16)esriScreenCache.esriScreenRecording,ref 0, ref 0);
+                //}
                 if (mseconds > 0)
                 {
                     mapControl2.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewForeground, null, null);

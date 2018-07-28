@@ -32,13 +32,20 @@
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("运西");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("邱舍工业区");
             System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("屯村社区");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("同里科技产业园");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("同里社区");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("投资类型分析");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("行业企业数量");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("营业额统计");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("税收统计");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("产能统计");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("屯村街道办", new System.Windows.Forms.TreeNode[] {
+            treeNode3,
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("同里科技产业园");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("同里社区");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("同里街道办", new System.Windows.Forms.TreeNode[] {
+            treeNode6,
+            treeNode7});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("税收统计");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("土地面积统计");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("销售额统计");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("能耗统计");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("投资类型分析");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("行业企业数量");
             System.Windows.Forms.DataVisualization.Charting.LineAnnotation lineAnnotation1 = new System.Windows.Forms.DataVisualization.Charting.LineAnnotation();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -80,13 +87,12 @@
             this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column56 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.button3 = new System.Windows.Forms.Button();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvT2_12)).BeginInit();
@@ -361,6 +367,41 @@
             this.panel2.Size = new System.Drawing.Size(337, 336);
             this.panel2.TabIndex = 4;
             // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(177, 315);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(47, 16);
+            this.radioButton3.TabIndex = 6;
+            this.radioButton3.Text = "饼图";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.Click += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(103, 315);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(59, 16);
+            this.radioButton2.TabIndex = 5;
+            this.radioButton2.Text = "折线图";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.Click += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(26, 316);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(59, 16);
+            this.radioButton1.TabIndex = 4;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "柱状图";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
             // treeView1
             // 
             this.treeView1.BackColor = System.Drawing.SystemColors.ActiveCaption;
@@ -381,19 +422,23 @@
             treeNode4.Name = "节点5";
             treeNode4.Tag = "WJKFQ05";
             treeNode4.Text = "屯村社区";
-            treeNode5.Name = "节点1";
-            treeNode5.Tag = "WJKFQ03";
-            treeNode5.Text = "同里科技产业园";
-            treeNode6.Name = "节点41";
-            treeNode6.Tag = "WJKFQ034";
-            treeNode6.Text = "同里社区";
+            treeNode5.Name = "节点0";
+            treeNode5.Tag = "WJKFQ05，WJKFQ06";
+            treeNode5.Text = "屯村街道办";
+            treeNode6.Name = "节点1";
+            treeNode6.Tag = "WJKFQ03";
+            treeNode6.Text = "同里科技产业园";
+            treeNode7.Name = "节点41";
+            treeNode7.Tag = "WJKFQ04";
+            treeNode7.Text = "同里社区";
+            treeNode8.Name = "节点1";
+            treeNode8.Tag = "WJKFQ03，WJKFQ04";
+            treeNode8.Text = "同里街道办";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2,
-            treeNode3,
-            treeNode4,
             treeNode5,
-            treeNode6});
+            treeNode8});
             this.treeView1.Size = new System.Drawing.Size(331, 160);
             this.treeView1.TabIndex = 3;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -409,23 +454,26 @@
             this.treeView2.LineColor = System.Drawing.Color.White;
             this.treeView2.Location = new System.Drawing.Point(6, 169);
             this.treeView2.Name = "treeView2";
-            treeNode7.ForeColor = System.Drawing.Color.Black;
-            treeNode7.Name = "节点3";
-            treeNode7.Text = "投资类型分析";
-            treeNode8.Name = "节点0";
-            treeNode8.Text = "行业企业数量";
-            treeNode9.Name = "节点4";
-            treeNode9.Text = "营业额统计";
-            treeNode10.Name = "节点5";
-            treeNode10.Text = "税收统计";
-            treeNode11.Name = "节点0";
-            treeNode11.Text = "产能统计";
+            treeNode9.Name = "节点5";
+            treeNode9.Text = "税收统计";
+            treeNode10.Name = "节点0";
+            treeNode10.Text = "土地面积统计";
+            treeNode11.Name = "节点4";
+            treeNode11.Text = "销售额统计";
+            treeNode12.Name = "节点1";
+            treeNode12.Text = "能耗统计";
+            treeNode13.ForeColor = System.Drawing.Color.Black;
+            treeNode13.Name = "节点3";
+            treeNode13.Text = "投资类型分析";
+            treeNode14.Name = "节点0";
+            treeNode14.Text = "行业企业数量";
             this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode7,
-            treeNode8,
             treeNode9,
             treeNode10,
-            treeNode11});
+            treeNode11,
+            treeNode12,
+            treeNode13,
+            treeNode14});
             this.treeView2.Size = new System.Drawing.Size(331, 140);
             this.treeView2.TabIndex = 2;
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
@@ -485,67 +533,16 @@
             title1.Text = "行业类型分析";
             this.chart1.Titles.Add(title1);
             // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackColor = System.Drawing.Color.Azure;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Location = new System.Drawing.Point(1205, 0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(33, 23);
-            this.button3.TabIndex = 15;
-            this.button3.Text = "Ⅹ";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(26, 316);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(59, 16);
-            this.radioButton1.TabIndex = 4;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "柱状图";
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(103, 315);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(59, 16);
-            this.radioButton2.TabIndex = 5;
-            this.radioButton2.Text = "折线图";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.Click += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
-            // radioButton3
-            // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(177, 315);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(47, 16);
-            this.radioButton3.TabIndex = 6;
-            this.radioButton3.Text = "饼图";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.Click += new System.EventHandler(this.radioButton1_CheckedChanged);
-            // 
             // FrmRegionTotal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1238, 593);
             this.Controls.Add(this.chart1);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmRegionTotal";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "按管理区统计";
             this.Load += new System.EventHandler(this.FrmRegionTotal_Load);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FrmRegionTotal_MouseMove);
@@ -597,7 +594,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn128;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn132;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn133;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;

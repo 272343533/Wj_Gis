@@ -76,9 +76,10 @@ namespace TDObject
 
         private int loadType =5;
 
-        public static string URI = "http://122.114.38.213:8080/wjkfq_gis/";  
-       
+        public static string URI = "http://122.114.190.250:8080/wjkfq_gis/";
 
+        TDObject.BLL.UIBLL.bllTypeFilter blluifilter; //= new TDObject.BLL.UIBLL.bllTypeFilter();
+       
         /// <summary>
         /// 进度条
         /// </summary>
@@ -136,11 +137,11 @@ namespace TDObject
 
         public MainForm()
         {
-           
-                InitializeComponent();
-                Init();
-                Control.CheckForIllegalCrossThreadCalls = false;
-           
+
+            InitializeComponent();
+            Init();
+            Control.CheckForIllegalCrossThreadCalls = false;
+
         }
         /// <summary>
         /// 初始化
@@ -232,11 +233,11 @@ namespace TDObject
                 //try
                 //{
                 //    IMapServerRESTLayer pRestLayer = new MapServerRESTLayerClass();
-                //    pRestLayer.Connect("http://122.114.38.213:6080/arcgis/rest/services/WTMap/WtPublish1/MapServer");
+                //    pRestLayer.Connect("http://122.114.190.250:6080/arcgis/rest/services/WTMap/WtPublish1/MapServer");
                 //    this.axMapControl1.AddLayer(pRestLayer as ILayer);
                 //    //return;
 
-                //    //IAGSServerObjectName pServerObjectName = GetMapServer("http://122.114.38.213:6080/arcgis/rest/services", "WTMap/WtPublish1", false);
+                //    //IAGSServerObjectName pServerObjectName = GetMapServer("http://122.114.190.250:6080/arcgis/rest/services", "WTMap/WtPublish1", false);
                 //    //IName pName = (IName)pServerObjectName;
                 //    //IAGSServerObject pServerObject = (IAGSServerObject)pName.Open();
                 //    //IMapServer pMapServer = (IMapServer)pServerObject;
@@ -374,7 +375,7 @@ namespace TDObject
                 this.dgvT2_31.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
 
                 _TabControl = this.tabControl1;
-
+           
                 SetBottomViewDisp(false);
                 SetProperViewDisp(false);
                 //this.skinEngine1.SkinFile = Application.StartupPath + @"\MP10.ssk";
@@ -414,16 +415,13 @@ namespace TDObject
                 if (m_LoginStatus == 2)
                 {
 
-                    if (MainForm.LoginUser.bsO_RightsCode == "")
-                        LoginUserRights = "";
-                    else
-                        LoginUserRights = "   and 所属行政村代码='" + MainForm.LoginUser.bsO_RightsCode + "'";
+                   
                     ////////string url = MainForm.URI + "lyRemoteServ/GetAllOrgData?userid=" + MainForm.LoginUser.bsU_Id;
                     ////////string ret = AsyncHttp.CommFun.GetRemoteJson(url);
                     ////////List<bsOrganize> org = JsonHelper.DeserializeJsonToList<bsOrganize>(ret);
                     //tvOrgUc1.RefreshTree(org);
 
-                    this.Text += " (" + LoginUser.Name + "，您好:)";
+                    this.Text += " (" + LoginUser.UserName + "，您好:)";
 
                     // cls.ControlZYFQShow(GlobalVariables.axMapControl, "");
 
@@ -457,13 +455,54 @@ namespace TDObject
                 treeView1.Nodes[0].ExpandAll();
                 treeView2.Nodes[0].ExpandAll();
 
+                AddFXFBXSMenuItem();
             }
             catch (Exception ex)
             {
                 log.Error(this.Name + ":" + ex.Message);
                // MessageBox.Show(ex.Message);
             }
+       }
+
+       private void AddFXFBXSMenuItem()
+        {
+            blluifilter = new TDObject.BLL.UIBLL.bllTypeFilter(this.axMapControl1);
+
+            foreach (string key in blluifilter.menus.Keys)
+            {
+                ToolStripMenuItem tsmi = new ToolStripMenuItem(key);
+                string[] substrs = blluifilter.menus[key].Split(new char[] { ',' });
+                foreach (string substrs1 in substrs)
+                {
+                    string[] subs= substrs1.Split(new char[] { '|' });
+                    ToolStripMenuItem subtsmi = new ToolStripMenuItem(subs[0]);
+                    subtsmi.Tag = key;
+                    subtsmi.Click += new System.EventHandler(FilterHighLightDisplay);
+                    tsmi.DropDownItems.Add(subtsmi);
+                }
+                分项分布显示ToolStripMenuItem.DropDownItems.Add(tsmi);
+            }
         }
+
+        private void FilterHighLightDisplay(object sender, EventArgs e)
+        {
+            try
+            {
+                ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+                string clicktext = tsmi.Text;
+                string ptext = tsmi.Tag.ToString();
+                int index = 1;
+                string value = "";
+                blluifilter.GetIndexAndCondtinoValue(ptext, clicktext, out index, out value);
+                blluifilter.RefreshData(index, value);
+            }
+            catch(Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+        }
+            
+
 
         private void RefreshMapDisplay()
         {
@@ -514,7 +553,7 @@ namespace TDObject
                 LayerForOrgField.Add("土地利用现状", "所属行政村代码");
 
 
-                if (LoginUser.bsO_Righrs != "全部村镇")
+                if (LoginUser.bsO_RightsCode != "全部村镇")
                 {
                     if (layname == "")
                     {
@@ -945,7 +984,7 @@ namespace TDObject
                             if (GlobalVariables.Select.SValue == GlobalVariables.SelectFeatureValue.Qyfw)
                             {
                                 frmAlarmQuery obj = new frmAlarmQuery(Convert.ToInt32(Fields.Substring(0, Fields.Length - 1)));
-                                obj.ShowDialog();
+                                FormSkin.ShowForm(obj);
                             }
                         }
                     }
@@ -968,7 +1007,7 @@ namespace TDObject
                         if (id != null && id != "")
                         {
                             FrmOneLtdAndRentLtdInfo obj = new FrmOneLtdAndRentLtdInfo(id.ToString());
-                            obj.ShowDialog();
+                            FormSkin.ShowForm(obj);
                         }
                     }
                     else
@@ -1008,7 +1047,7 @@ namespace TDObject
                                 if (dkbm != null && dkbm != "")
                                 {
                                     FrmOneLtdAndRentLtdInfo obj = new FrmOneLtdAndRentLtdInfo(dkbm);
-                                    obj.ShowDialog();
+                                    FormSkin.ShowForm(obj);
                                 }
                             }
                         }
@@ -1067,15 +1106,15 @@ namespace TDObject
 
         private void 图层控制ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                FrmLayerSet frmobj = new FrmLayerSet();
-                frmobj.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex.Message);
-            }
+            //try
+            //{
+            //    FrmLayerSet obj = new FrmLayerSet();
+            //    FormSkin.ShowForm(obj);
+            //}
+            //catch (Exception ex)
+            //{
+            //    log.Error(ex.Message);
+            //}
         }
 
        
@@ -1159,8 +1198,14 @@ namespace TDObject
                 {
                     ILayerEffects pLayerEffects = pLayer as ILayerEffects;
                     pLayerEffects.Transparency = Convert.ToInt16(cboTransp.Text.Trim());//设置ILayerEffects接口的Transparency属性使该矢量图层的透明度属性为65.
+
+                    this.axMapControl1.ActiveView.PartialRefresh(ESRI.ArcGIS.Carto.esriViewDrawPhase.esriViewAll, pLayer, null);
+
+
                 }
-                this.axMapControl1.Refresh();
+                else
+                    this.axMapControl1.ActiveView.PartialRefresh(ESRI.ArcGIS.Carto.esriViewDrawPhase.esriViewAll,null, null);
+
             }
             catch (Exception ex)
             {
@@ -1193,48 +1238,48 @@ namespace TDObject
 
         private void button7_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (GlobalVariables.axMapControl.get_Layer(GlobalVariables.axMapControl.LayerCount - 1).Name != "影像")
-                {
-                    if (LoginUser.bsO_Righrs == "全部村镇")
-                        LoadImageLayer("影像", "wd/wt");// "WTMap/WTService");
-                    else if (LoginUser.bsO_Righrs == "宅基村")
-                        LoadImageLayer("影像", "wd/cun320507100202");
-                    else if (LoginUser.bsO_Righrs == "何家角村")
-                        LoadImageLayer("影像", "wd/cun320507100201");
-                    else if (LoginUser.bsO_Righrs == "迎湖村")
-                        LoadImageLayer("影像", "wd/cun320507100203");
-                    else if (LoginUser.bsO_Righrs == "新埂村")
-                        LoadImageLayer("影像", "wd/cun320507100200");
-                    else if (LoginUser.bsO_Righrs == "项路村")
-                        LoadImageLayer("影像", "wd/cun320507100204");
-                    else if (LoginUser.bsO_Righrs == "华阳村")
-                        LoadImageLayer("影像", "wd/cun320507100208");
-                    else if (LoginUser.bsO_Righrs == "四旺村")
-                        LoadImageLayer("影像", "wd/cun320507100207");
-                    else if (LoginUser.bsO_Righrs == "建成区")
-                        LoadImageLayer("影像", "wd/cun320507100001");
+            //try
+            //{
+            //    if (GlobalVariables.axMapControl.get_Layer(GlobalVariables.axMapControl.LayerCount - 1).Name != "影像")
+            //    {
+            //        if (LoginUser.bsO_Righrs == "全部村镇")
+            //            LoadImageLayer("影像", "wd/wt");// "WTMap/WTService");
+            //        else if (LoginUser.bsO_Righrs == "宅基村")
+            //            LoadImageLayer("影像", "wd/cun320507100202");
+            //        else if (LoginUser.bsO_Righrs == "何家角村")
+            //            LoadImageLayer("影像", "wd/cun320507100201");
+            //        else if (LoginUser.bsO_Righrs == "迎湖村")
+            //            LoadImageLayer("影像", "wd/cun320507100203");
+            //        else if (LoginUser.bsO_Righrs == "新埂村")
+            //            LoadImageLayer("影像", "wd/cun320507100200");
+            //        else if (LoginUser.bsO_Righrs == "项路村")
+            //            LoadImageLayer("影像", "wd/cun320507100204");
+            //        else if (LoginUser.bsO_Righrs == "华阳村")
+            //            LoadImageLayer("影像", "wd/cun320507100208");
+            //        else if (LoginUser.bsO_Righrs == "四旺村")
+            //            LoadImageLayer("影像", "wd/cun320507100207");
+            //        else if (LoginUser.bsO_Righrs == "建成区")
+            //            LoadImageLayer("影像", "wd/cun320507100001");
 
 
-                    //LoadImageLayer("影像", "WTMap/SLService");
+            //        //LoadImageLayer("影像", "WTMap/SLService");
 
-                }
+            //    }
 
-                chkImage.Checked = !chkImage.Checked;
-                if (chkImage.Checked)
-                {
-                    this.button7.BackgroundImage = TDObject.Properties.Resources.ditu;
-                }
-                else
-                {
-                    this.button7.BackgroundImage = TDObject.Properties.Resources.weixing;
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex.Message);
-            }
+            //    chkImage.Checked = !chkImage.Checked;
+            //    if (chkImage.Checked)
+            //    {
+            //        this.button7.BackgroundImage = TDObject.Properties.Resources.ditu;
+            //    }
+            //    else
+            //    {
+            //        this.button7.BackgroundImage = TDObject.Properties.Resources.weixing;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    log.Error(ex.Message);
+            //}
          
         }
 
@@ -1475,8 +1520,9 @@ namespace TDObject
             {
                 if (LoginUser.bsR_Name == "管理员")
                 {
+                    
                     frmUserMana obj = new frmUserMana();
-                    obj.ShowDialog();
+                    FormSkin.ShowForm(obj);
                 }
                 else
                 {
@@ -1489,12 +1535,14 @@ namespace TDObject
             }
         }
 
+      
+
         private void 密码修改ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
                 frmChangePwd obj = new frmChangePwd();
-                obj.ShowDialog();
+                FormSkin.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -1740,7 +1788,7 @@ namespace TDObject
         private void 综合查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmComplexQuery obj = new frmComplexQuery();
-            obj.Show();
+            FormSkin.ShowForm(obj);
         }
 
        
@@ -1966,8 +2014,8 @@ namespace TDObject
             try
             {
                 frmMapPreprint obj = new frmMapPreprint(this.axMapControl1);
-                obj.ShowDialog();
-                return;
+                FormSkin.ShowForm(obj);
+             
             }
             catch (Exception ex)
             {
@@ -2701,13 +2749,13 @@ namespace TDObject
         private void 数据导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
            frmDataImport obj = new frmDataImport();
-           obj.ShowDialog();
+            FormSkin.ShowForm(obj);
         }
 
         private void 数据导出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmDataExport obj = new frmDataExport();
-            obj.ShowDialog();
+            FormSkin.ShowForm(obj);
         }
 
         private void btnLtnInfo_Move(object sender, EventArgs e)
@@ -2835,7 +2883,7 @@ namespace TDObject
 
 
                 //frmMapPreprint obj = new frmMapPreprint(this.axMapControl1);
-                //obj.ShowDialog();
+                //obj.Show();
 
                 //PrintActiveViewParameterized(this.axMapControl1.ActiveView,3);
                 TDObject.BLL.Printer.MapPrint.PrintPreView(new PrintPreviewDialog(), this.axMapControl1.ActiveView);
@@ -2850,9 +2898,9 @@ namespace TDObject
         {
             try
             {
-                frmLtdNameTotal objfrmLtdNameTotal = new frmLtdNameTotal(this.axMapControl1.Extent);
+                frmLtdNameTotal obj = new frmLtdNameTotal(this.axMapControl1.Extent);
                 //objfrmLtdNameTotal.axMapControl1.vi = this.axMapControl1.ActiveView;
-                objfrmLtdNameTotal.Show();
+                FormSkin.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -2865,7 +2913,7 @@ namespace TDObject
             try
             {
                 FrmRegionTotal obj = new FrmRegionTotal();
-                obj.Show();
+                FormSkin.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -2893,7 +2941,7 @@ namespace TDObject
             try
             {
                 frmComplexQuery obj = new frmComplexQuery();
-                obj.Show();
+                FormSkin.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -2906,7 +2954,7 @@ namespace TDObject
             try
             {
                 frmLtdInfoAdd obj = new frmLtdInfoAdd();
-                obj.ShowDialog();
+                FormSkin.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -2919,7 +2967,7 @@ namespace TDObject
             try
             {
                 frmLtdInfoModi obj = new frmLtdInfoModi();
-                obj.ShowDialog();
+                FormSkin.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -3015,7 +3063,7 @@ namespace TDObject
             {
                 int ltdobjid = Convert.ToInt32(dgvQyxx.Rows[0].Cells[1].Value);
                 frmAlarmQuery obj = new frmAlarmQuery(ltdobjid);
-                obj.ShowDialog();
+                FormSkin.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -3029,7 +3077,7 @@ namespace TDObject
             {
                 int ltdobjid = Convert.ToInt32(dgvQyxx.Rows[0].Cells[1].Value);
                 FrmLtdZlqyxx obj = new FrmLtdZlqyxx(ltdobjid);
-                obj.ShowDialog();
+                FormSkin.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -3107,7 +3155,7 @@ namespace TDObject
             try
             {
                 frmTotalHY obj = new frmTotalHY();
-                obj.ShowDialog();
+                FormSkin.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -3132,7 +3180,7 @@ namespace TDObject
             try
             {
                 frmTotalFilter obj = new frmTotalFilter();
-                obj.ShowDialog();
+                FormSkin.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -3148,7 +3196,7 @@ namespace TDObject
                 if (dkbm != null && dkbm != "")
                 {
                     FrmOneLtdAndRentLtdInfo obj = new FrmOneLtdAndRentLtdInfo(dkbm);
-                    obj.ShowDialog();
+                    FormSkin.ShowForm(obj);
                 }
             }
             catch (Exception ex)
@@ -3167,7 +3215,7 @@ namespace TDObject
             try
             {
                 frmTypeFilter obj = new frmTypeFilter();
-                obj.ShowDialog();
+                FormSkin.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -3183,7 +3231,7 @@ namespace TDObject
                 if (dkbm != null && dkbm != "")
                 {
                     FrmOneLtdAndRentLtdInfo obj = new FrmOneLtdAndRentLtdInfo(dkbm);
-                    obj.ShowDialog();
+                    FormSkin.ShowForm(obj);
                 }
             }
             catch (Exception ex)
@@ -3195,13 +3243,13 @@ namespace TDObject
         private void 吴江区工业企业资源集约利用情况上报ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmUpReport1 obj = new FrmUpReport1();
-            obj.ShowDialog();
+            FormSkin.ShowForm(obj);
         }
 
         private void 分项数据导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmTypeImport obj = new FrmTypeImport();
-            obj.ShowDialog();
+            FormSkin.ShowForm(obj);
         }
 
         public void ChangeMapExtent(IGeometry pGeo)

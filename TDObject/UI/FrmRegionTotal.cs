@@ -36,7 +36,10 @@ namespace TDObject.UI
                 CurrGlqName = treeView1.Nodes[0].Text;
                 CurrTotalType = treeView2.Nodes[0].Text;
                 treeView1.SelectedNode = treeView1.Nodes[0];
-            }
+
+                dgvT2_11.RowPostPaint += new DataGridViewRowPostPaintEventHandler(FormSkin.dgv_RowPostPaint);
+                dgvT2_12.RowPostPaint += new DataGridViewRowPostPaintEventHandler(FormSkin.dgv_RowPostPaint);
+              }
             catch (Exception ex)
             {
                 log.Error(this.Name + ":" + ex.Message);
@@ -81,47 +84,46 @@ namespace TDObject.UI
 
         private void RefreshChart()
         {
-            chart1.Titles[0].Text = CurrGlqName + " " + CurrTotalType;
-
+           
             //更改图形数据
            List<bsTotalResult> ts = new List<bsTotalResult>();
+            chart1.Series[0].ChartType = SeriesChartType.Column;
 
             if (CurrTotalType == "投资类型分析")
             {
-                chart1.Series[0].ChartType = SeriesChartType.Column;
-                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区投资类型分析' and GLQName='" + CurrGlqName + "'", "");
+                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区"+CurrTotalType+"' and GLQName='" + CurrGlqName + "'", "");
             }
             else if (CurrTotalType == "行业企业数量")
             {
-                chart1.Series[0].ChartType = SeriesChartType.Column;
-                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区行业企业数量' and GLQName='" + CurrGlqName + "'", "");
+                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
 
             }
-            else if (CurrTotalType == "营业额统计")
+            else if (CurrTotalType == "销售额统计")
             {
-                chart1.Series[0].ChartType = SeriesChartType.Column;
-                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区行业营业额统计' and GLQName='" + CurrGlqName + "'", "");
+                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区行业" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
             }
             else if (CurrTotalType == "税收统计")
             {
-                chart1.Series[0].ChartType = SeriesChartType.Column;
-                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区行业税收统计' and GLQName='" + CurrGlqName + "'", "");
+                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区行业" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
             }
-            else if (CurrTotalType == "产能统计")
+            else if (CurrTotalType == "土地面积统计")
             {
-                chart1.Series[0].ChartType = SeriesChartType.Column;
-                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区行业产能统计' and GLQName='" + CurrGlqName + "'", "");
+                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区行业" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
             }
 
+            double sum = 0;
             chart1.Series[0].Points.Clear();
             for (int i = 0; i < ts.Count; i++)
             {
                 bsTotalResult item = ts[i];
+                sum += item.TotalValue==null?0:item.TotalValue.Value;
                 chart1.Series[0].Points.AddXY(i + 1, item.TotalValue);
                 chart1.Series[0].Points[i].LegendText = item.TypeDesp;
 
                 if (CurrTotalType == "投资类型分析" || CurrTotalType == "行业企业数量")
                     chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "家";
+                else if (CurrTotalType== "土地面积统计")
+                    chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "亩";
                 else
                     chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "万元";
 
@@ -130,6 +132,13 @@ namespace TDObject.UI
                 //chart1.Series[0].ax
 
             }
+            if (CurrTotalType == "投资类型分析" || CurrTotalType == "行业企业数量")
+                chart1.Titles[0].Text = CurrGlqName + " " + CurrTotalType + "    (共" + sum.ToString() + "家)";
+            else if (CurrTotalType == "土地面积统计")
+                chart1.Titles[0].Text = CurrGlqName + " " + CurrTotalType + "    (共" + sum.ToString()  + "亩";
+            else
+                chart1.Titles[0].Text = CurrGlqName + " " + CurrTotalType + "    (共" + sum.ToString() + "万元)";
+
             chart1.Show();
          }
         private void treeView2_AfterSelect(object sender, TreeViewEventArgs e)

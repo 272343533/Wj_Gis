@@ -20,8 +20,8 @@ namespace TDObject.UI
         private void FrmUpReport1_Load(object sender, EventArgs e)
         {
             webBrowser1.Navigate("file:///" + Environment.CurrentDirectory + "/Html/UpReport1Web.html");
-           // webBrowser1.Navigate("http://122.114.38.213:8080/WjKfq_gis/UpReport1Web.html");
-            //webBrowser1.Url =new Uri("http://122.114.38.213:8080/WjKfq_gis/UpReport1Web.html");
+           // webBrowser1.Navigate("http://122.114.190.250:8080/WjKfq_gis/UpReport1Web.html");
+            //webBrowser1.Url =new Uri("http://122.114.190.250:8080/WjKfq_gis/UpReport1Web.html");
             //webBrowser1.Navigate("file:///" + Environment.CurrentDirectory + "/Html/吴江区工业企业资源集约利用情况表.mht");
         }
 

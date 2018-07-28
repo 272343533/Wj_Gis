@@ -57,15 +57,19 @@ namespace TDObject.UI
                 bsUser ui = new bsUser();
                 ui.bsU_Id =Guid.NewGuid();
                 ui.bsO_Name = treeOrg.SelectedNode.Text;
-                ui.Name = "新增用户";
-                 ui.LoginName = "";
-                ui.bsO_Righrs = "吴江经济技术开发区";
-                ui.Pwd ="123456";
+                ui.UserName = "亲";
+                ui.LoginName = "wj";
+                ui.NickName = "新增用户";
+                ui.LoginPwd ="123456";
+                ui.RegDt = DateTime.Now;
+                ui.ValidDate =Convert.ToDateTime("2099-12-31");
                 ui.bsR_Name ="浏览人员";
+                ui.AccountStatus = "正常";
+                ui.bsO_RightsCode = "吴江经济技术开发区";
 
-                string strui = JsonHelper.SerializeObject<bsUser>(ui, null);
-                string url = MainForm.URI + "lyRemoteServ/AddUserData?userinfo=" + strui;
-                string ret = AsyncHttp.CommFun.GetRemoteJson(url);
+                string ret = MainForm.EM.Add<bsUser>(ui);
+
+
                 if (ret != "")
                     MessageBox.Show(ret);
                 else
@@ -85,32 +89,21 @@ namespace TDObject.UI
 
                 foreach (bsUser ui in uis)
                 {
-                    if (ui.LoginName == null || ui.Name == null || ui.LoginName.Trim() == "" || ui.Name.Trim() == "")
+                    if (ui.LoginName == null || ui.LoginName == null || ui.NickName.Trim() == "" || ui.NickName.Trim() == "")
                     {
-                        MessageBox.Show("用户的登录名和姓名不能为空，请检查！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("用户的登录名和昵称不能为空，请检查！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     }
 
-
-                    string url = MainForm.URI + "lyRemoteServ/GetOneUserData?id=" + ui.bsU_Id.ToString();
-                    string ret = AsyncHttp.CommFun.GetRemoteJson(url);
-                    bsUser dbobj = JsonHelper.DeserializeJsonToObject<bsUser>(ret);
+                    bsUser dbobj = MainForm.EM.GetByPk<bsUser>("bsU_Id", ui.bsU_Id);
                     //bsUser dbobj = EntityManager<bsUser>.GetByPk<bsUser>("bsU_Id",ui.bsU_Id);
 
                     dbobj.bsR_Name = ui.bsR_Name;
                     dbobj.LoginName = ui.LoginName;
-                    dbobj.Name = ui.Name;
-                    dbobj.bsO_Righrs = ui.bsO_Righrs;
-                    if (dbobj.bsO_Id == null)
-                    {
-                        dbobj.bsO_Id = Guid.Parse("8E0CEA4C-1F0E-4E8B-AB16-960FF9570C8B");
-                        dbobj.bsO_Name = "望亭镇";
-                    }
-                    //if (dbobj.bsO_Id
+                    dbobj.UserName = ui.UserName;
 
-                    string strui = JsonHelper.SerializeObject<bsUser>(dbobj, null);
-                    url = MainForm.URI + "lyRemoteServ/UdpUserData?userinfo=" + strui;
-                    ret = AsyncHttp.CommFun.GetRemoteJson(url);
+                    string ret=MainForm.EM.Modify<bsUser>(dbobj);
+                   
                     if (ret != "")
                         MessageBox.Show(ret);
                    // EntityManager<bsUser>.Modify(dbobj);
@@ -152,7 +145,7 @@ namespace TDObject.UI
                 //string ret = AsyncHttp.CommFun.GetRemoteJson(url);
                 //users = JsonHelper.DeserializeJsonToList<bsUser>(ret);
                if (bsO_Name==this.treeOrg.Nodes[0].Text)
-                   users = MainForm.EM.GetListNoPaging<bsUser>("", "bsR_Name,LoginName");
+                   users = MainForm.EM.GetListNoPaging<bsUser>("bso_Name!='System'", "bsR_Name,LoginName");
                else
                    users = MainForm.EM.GetListNoPaging<bsUser>("bsO_Name='"+bsO_Name+"'", "bsR_Name,LoginName");
                 List<bsUser> tmps = new List<bsUser>();
@@ -185,28 +178,24 @@ namespace TDObject.UI
 
             try
             {
-                string url = MainForm.URI + "lyRemoteServ/GetOneUserData?id=" + bsU_Id.ToString();
-                string ret = AsyncHttp.CommFun.GetRemoteJson(url);
-                bsUser dbobj = JsonHelper.DeserializeJsonToObject<bsUser>(ret);
-                //bsUser dbobj = EntityManager<bsUser>.GetByPk<bsUser>("bsU_Id",ui.bsU_Id);
-
+                bsUser dbobj = MainForm.EM.GetByPk<bsUser>("bsU_Id", bsU_Id);
+               
                 dbobj.bsR_Name = operrights;
                 dbobj.LoginName = loginname;
-                dbobj.Name = name;
-                dbobj.bsO_Righrs = orgrights;
+                dbobj.UserName = name;
+                
                 if (dbobj.bsO_Id == null)
                 {
                     dbobj.bsO_Id = Guid.Parse("8E0CEA4C-1F0E-4E8B-AB16-960FF9570C8B");
                     dbobj.bsO_Name = "吴江经济开发区";
                 }
                 //if (dbobj.bsO_Id
+                string ret = MainForm.EM.Modify<bsUser>(dbobj);
 
-
-
-                string strui = JsonHelper.SerializeObject<bsUser>(dbobj, null);
-                url = MainForm.URI + "lyRemoteServ/UdpUserData?userinfo=" + strui;
-                ret = AsyncHttp.CommFun.GetRemoteJson(url);
-                return "保存成功！";
+                if (ret == "")
+                    return "保存成功！";
+                else
+                    return ret;
             }
             catch (Exception ex)
             {
@@ -217,35 +206,45 @@ namespace TDObject.UI
         private void dgvEmp_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             CurrRowIndex=e.RowIndex;
-            currentUiid = Guid.Parse(dgvEmp.Rows[e.RowIndex].Cells[1].Value.ToString());
-
-            if (e.ColumnIndex ==0)
+            try
             {
-              
-                    string name=dgvEmp.Rows[e.RowIndex].Cells[3].Value.ToString();
-                    string loginname=dgvEmp.Rows[e.RowIndex].Cells[4].Value.ToString();
-                    string operrights=dgvEmp.Rows[e.RowIndex].Cells[5].Value.ToString();
-                    string orgrights=dgvEmp.Rows[e.RowIndex].Cells[6].Value.ToString();
+                currentUiid = Guid.Parse(dgvEmp.Rows[e.RowIndex].Cells[1].Value.ToString());
 
-                    string ret=SaveEmp(currentUiid,name, loginname, operrights, orgrights);
+                if (e.ColumnIndex == 0)
+                {
+                    string orgrights;
+                    string name = dgvEmp.Rows[e.RowIndex].Cells[3].Value.ToString();
+                    string loginname = dgvEmp.Rows[e.RowIndex].Cells[4].Value.ToString();
+                    string operrights = dgvEmp.Rows[e.RowIndex].Cells[5].Value.ToString();
+                    if(dgvEmp.Rows[e.RowIndex].Cells[6].Value!=null)
+                        orgrights = dgvEmp.Rows[e.RowIndex].Cells[6].Value.ToString();
+                    else
+                        orgrights = "吴江经济技术开发区";
+
+                    string ret = SaveEmp(currentUiid, name, loginname, operrights, orgrights);
 
                     if (ret != "")
                         MessageBox.Show(ret);
-               
-            }
-            //else
-            //{
-            //    IsTreeNodeRefresh = true;
-            //    this.comboBox1.Text = this.dgvEmp.Rows[e.RowIndex].Cells[4].Value.ToString();
-            //    string strrights = this.dgvEmp.Rows[e.RowIndex].Cells[5].Value.ToString();
-            //    foreach (TreeNode tn in treeView1.Nodes)
-            //    {
-            //        RefreshTreeRights(tn, strrights);
-            //    }
 
-            //    IsTreeNodeRefresh = false;
-              
-            //}
+                }
+                //else
+                //{
+                //    IsTreeNodeRefresh = true;
+                //    this.comboBox1.Text = this.dgvEmp.Rows[e.RowIndex].Cells[4].Value.ToString();
+                //    string strrights = this.dgvEmp.Rows[e.RowIndex].Cells[5].Value.ToString();
+                //    foreach (TreeNode tn in treeView1.Nodes)
+                //    {
+                //        RefreshTreeRights(tn, strrights);
+                //    }
+
+                //    IsTreeNodeRefresh = false;
+
+                //}
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
         }
 
         private void RefreshTreeRights(TreeNode tn,string rights)
@@ -310,11 +309,6 @@ namespace TDObject.UI
         private void dgvEmp_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)

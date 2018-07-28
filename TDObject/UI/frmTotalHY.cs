@@ -103,8 +103,7 @@ namespace TDObject.UI
         {
             try
             {
-                chart1.Titles[0].Text = CurrHYName + " " + CurrTotalType;
-
+              
                 //更改图形数据
                 chart1.Series[0].Points.Clear();
                 List<bsTotalResult> ts = new List<bsTotalResult>();
@@ -114,41 +113,58 @@ namespace TDObject.UI
                     chart1.Series[0].ChartType = SeriesChartType.Column;
                     ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业投资类型分析' and GLQName='" + CurrHYName + "'", "");
                 }
-                else if (CurrTotalType == "管理区企业数量")
+                else if (CurrTotalType == "行业企业数量")
                 {
                     chart1.Series[0].ChartType = SeriesChartType.Column;
                     ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业管理区企业数量' and GLQName='" + CurrHYName + "'", "");
 
                 }
-                else if (CurrTotalType == "营业额统计")
+                else if (CurrTotalType == "销售额统计")
                 {
                     chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业管理区营业额统计' and GLQName='" + CurrHYName + "'", "");
+                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业管理区销售额统计' and GLQName='" + CurrHYName + "'", "");
                 }
                 else if (CurrTotalType == "税收统计")
                 {
                     chart1.Series[0].ChartType = SeriesChartType.Column;
                     ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业管理区税收统计' and GLQName='" + CurrHYName + "'", "");
                 }
-                else if (CurrTotalType == "产能统计")
+                else if (CurrTotalType == "能耗统计")
                 {
                     chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业管理区产能统计' and GLQName='" + CurrHYName + "'", "");
+                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业管理区能耗统计' and GLQName='" + CurrHYName + "'", "");
                 }
+                else if (CurrTotalType == "土地面积统计")
+                {
+                    chart1.Series[0].ChartType = SeriesChartType.Column;
+                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业管理区土地面积统计' and GLQName='" + CurrHYName + "'", "");
+                }
+                double sum = 0;
                 for (int i = 0; i < ts.Count; i++)
                 {
                     bsTotalResult item = ts[i];
+                    sum += item.TotalValue.Value;
+
                     chart1.Series[0].Points.AddXY(i + 1, item.TotalValue);
                     chart1.Series[0].Points[i].LegendText = item.TypeDesp;
                     if (CurrTotalType == "投资类型分析" ||CurrTotalType == "管理区企业数量")
                         chart1.Series[0].Points[i].Label = item.TotalValue.ToString()+"家";
+                    else if (CurrTotalType == "土地面积统计")
+                        chart1.Series[0].Points[i].Label = item.TotalValue.ToString()+"亩";
                     else
-                        chart1.Series[0].Points[i].Label = item.TotalValue.ToString()+"万元";
+                        chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "万元";
                     chart1.Series[0].Points[i].LabelToolTip = item.TypeDesp;
                     chart1.Series[0].Points[i].AxisLabel = item.TypeDesp;
                     //chart1.Series[0].ax
 
                 }
+                if (CurrTotalType == "投资类型分析" || CurrTotalType == "管理区企业数量")
+                    chart1.Titles[0].Text = CurrHYName + " " + CurrTotalType + "    (共" + sum.ToString() + "家)";
+                else if (CurrTotalType == "土地面积统计")
+                    chart1.Titles[0].Text = CurrHYName + " " + CurrTotalType + "    (共" + sum.ToString() + "亩)";
+                else
+                    chart1.Titles[0].Text = CurrHYName + " " + CurrTotalType + "    (共" + sum.ToString() + "万元)";
+            
             }
             catch (Exception ex)
             {

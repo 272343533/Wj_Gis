@@ -122,8 +122,9 @@
     <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\WTGeoWeb\WebPub\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WebPub\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="QyTech.Core">
       <HintPath>..\..\WTGeoWeb\WebPub\QyTech.Core.dll</HintPath>
@@ -191,14 +192,10 @@
     <Compile Include="BLL\Printer\ToPrint.cs" />
     <Compile Include="BLL\TotalInfo.cs" />
     <Compile Include="BLL\TotalInfoForAdmin.cs" />
+    <Compile Include="BLL\UIBLL\bllTypeFilter.cs" />
     <Compile Include="controls\Class1.cs" />
-    <Compile Include="controls\tvOrgUc.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="controls\tvOrgUc.Designer.cs">
-      <DependentUpon>tvOrgUc.cs</DependentUpon>
-    </Compile>
     <Compile Include="CreateNewDocument.cs" />
+    <Compile Include="DAOBLL\HttpRequery.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +209,12 @@
     <Compile Include="MapControl\LayerControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Skin\FlatFormWithTop.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Skin\FlatFormWithTop.Designer.cs">
+      <DependentUpon>FlatFormWithTop.cs</DependentUpon>
+    </Compile>
     <Compile Include="Skin\FlatForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -358,12 +361,6 @@
     <Compile Include="UI\frmDataImport.Designer.cs">
       <DependentUpon>frmDataImport.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\FrmLayerSet.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\FrmLayerSet.Designer.cs">
-      <DependentUpon>FrmLayerSet.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -473,9 +470,6 @@
     <EmbeddedResource Include="BLL\IdentifyTool\IdentifyDialog.resx">
       <DependentUpon>IdentifyDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="controls\tvOrgUc.resx">
-      <DependentUpon>tvOrgUc.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -490,6 +484,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Skin\FlatFormWithTop.resx">
+      <DependentUpon>FlatFormWithTop.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Skin\FlatForm.resx">
       <DependentUpon>FlatForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -534,9 +531,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmDataImport.resx">
       <DependentUpon>frmDataImport.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\FrmLayerSet.resx">
-      <DependentUpon>FrmLayerSet.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>

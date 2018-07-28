@@ -146,7 +146,6 @@
     <Compile Include="BLL\CommSetting.cs" />
     <Compile Include="BLL\GCJ2WGS.cs" />
     <Compile Include="Controllers\LtdInfoZuLinController.cs" />
-    <Compile Include="Json\JsonHelper.cs" />
     <Compile Include="BLL\TotalInfo.cs" />
     <Compile Include="BLL\LayerInfo.cs" />
     <Compile Include="Controllers\BdMapCoorsUtilController.cs" />
@@ -163,7 +162,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Json\LimitPropsContractResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -251,6 +249,7 @@
     <Content Include="Scripts\showview.js" />
     <Content Include="Scripts\vue-resource.js" />
     <Content Include="Scripts\vue.js" />
+    <Content Include="Scripts\vue.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="themes\main_m.css" />
     <Content Include="themes\main_pc.css" />
@@ -292,7 +291,7 @@
     <Content Include="Views\takePhoto\DispCheckPic.cshtml" />
     <Content Include="Views\EditView\LtdRegularWebView.cshtml" />
     <Content Include="Views\EditView\LtdProblemWebView.cshtml" />
-    <None Include="Views\Home\Index_m_F.cshtml" />
+    <Content Include="Views\Home\Index_NewForCust.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

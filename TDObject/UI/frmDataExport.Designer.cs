@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDataExport));
             this.dataGridViewButtonColumn1 = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.button5 = new System.Windows.Forms.Button();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.pgbExport = new System.Windows.Forms.ProgressBar();
@@ -40,6 +40,38 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.dgvSj = new System.Windows.Forms.DataGridView();
+            this.Column3 = new System.Windows.Forms.DataGridViewImageColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.dgvJfj = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -106,38 +138,6 @@
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewImageColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl2.SuspendLayout();
             this.tabPage5.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -154,19 +154,6 @@
             this.dataGridViewButtonColumn1.Text = "保存";
             this.dataGridViewButtonColumn1.UseColumnTextForButtonValue = true;
             this.dataGridViewButtonColumn1.Width = 60;
-            // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.BackColor = System.Drawing.Color.Azure;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button5.Location = new System.Drawing.Point(1008, 0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(33, 23);
-            this.button5.TabIndex = 15;
-            this.button5.Text = "Ⅹ";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // tabControl2
             // 
@@ -320,6 +307,205 @@
             this.dgvSj.Size = new System.Drawing.Size(994, 367);
             this.dgvSj.TabIndex = 1;
             this.dgvSj.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSj_CellContentClick);
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "";
+            this.Column3.Image = ((System.Drawing.Image)(resources.GetObject("Column3.Image")));
+            this.Column3.Name = "Column3";
+            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Column3.Visible = false;
+            this.Column3.Width = 20;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "XH";
+            this.Column1.HeaderText = "序号";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 60;
+            // 
+            // Column2
+            // 
+            this.Column2.DataPropertyName = "YF";
+            this.Column2.HeaderText = "月份";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 60;
+            // 
+            // Column4
+            // 
+            this.Column4.DataPropertyName = "DWDM";
+            this.Column4.HeaderText = "单位代码";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.DataPropertyName = "DW";
+            this.Column5.HeaderText = "单位";
+            this.Column5.Name = "Column5";
+            this.Column5.Width = 120;
+            // 
+            // Column6
+            // 
+            this.Column6.DataPropertyName = "SQ";
+            this.Column6.HeaderText = "市区";
+            this.Column6.Name = "Column6";
+            // 
+            // Column7
+            // 
+            this.Column7.DataPropertyName = "QY";
+            this.Column7.HeaderText = "区域";
+            this.Column7.Name = "Column7";
+            // 
+            // Column8
+            // 
+            this.Column8.DataPropertyName = "ZS";
+            this.Column8.HeaderText = "住所";
+            this.Column8.Name = "Column8";
+            // 
+            // Column10
+            // 
+            this.Column10.DataPropertyName = "JYFW";
+            this.Column10.HeaderText = "经营范围";
+            this.Column10.Name = "Column10";
+            // 
+            // Column11
+            // 
+            this.Column11.DataPropertyName = "ZCSJ";
+            this.Column11.HeaderText = "注册时间";
+            this.Column11.Name = "Column11";
+            // 
+            // Column12
+            // 
+            this.Column12.DataPropertyName = "ZHY";
+            this.Column12.HeaderText = "主行业";
+            this.Column12.Name = "Column12";
+            // 
+            // Column13
+            // 
+            this.Column13.DataPropertyName = "HYXF";
+            this.Column13.HeaderText = "行业细分";
+            this.Column13.Name = "Column13";
+            // 
+            // Column14
+            // 
+            this.Column14.DataPropertyName = "GM";
+            this.Column14.HeaderText = "规模";
+            this.Column14.Name = "Column14";
+            // 
+            // Column15
+            // 
+            this.Column15.DataPropertyName = "QYS";
+            this.Column15.HeaderText = "企业数";
+            this.Column15.Name = "Column15";
+            // 
+            // Column16
+            // 
+            this.Column16.DataPropertyName = "CBRS";
+            this.Column16.HeaderText = "参保人数";
+            this.Column16.Name = "Column16";
+            // 
+            // Column17
+            // 
+            this.Column17.DataPropertyName = "GS";
+            this.Column17.HeaderText = "国税";
+            this.Column17.Name = "Column17";
+            // 
+            // Column18
+            // 
+            this.Column18.DataPropertyName = "DS";
+            this.Column18.HeaderText = "地税";
+            this.Column18.Name = "Column18";
+            // 
+            // Column19
+            // 
+            this.Column19.DataPropertyName = "XS";
+            this.Column19.HeaderText = "销售";
+            this.Column19.Name = "Column19";
+            // 
+            // Column20
+            // 
+            this.Column20.DataPropertyName = "ZD";
+            this.Column20.HeaderText = "占地";
+            this.Column20.Name = "Column20";
+            // 
+            // Column21
+            // 
+            this.Column21.DataPropertyName = "QZCZ";
+            this.Column21.HeaderText = "其中持证";
+            this.Column21.Name = "Column21";
+            // 
+            // Column22
+            // 
+            this.Column22.DataPropertyName = "YN";
+            this.Column22.HeaderText = "用能";
+            this.Column22.Name = "Column22";
+            // 
+            // Column23
+            // 
+            this.Column23.DataPropertyName = "YD";
+            this.Column23.HeaderText = "用电";
+            this.Column23.Name = "Column23";
+            // 
+            // Column24
+            // 
+            this.Column24.DataPropertyName = "PF";
+            this.Column24.HeaderText = "排放";
+            this.Column24.Name = "Column24";
+            // 
+            // Column25
+            // 
+            this.Column25.DataPropertyName = "YFJFZC";
+            this.Column25.HeaderText = "研发经费支出";
+            this.Column25.Name = "Column25";
+            // 
+            // Column26
+            // 
+            this.Column26.DataPropertyName = "PJZGRS";
+            this.Column26.HeaderText = "平均职工人数";
+            this.Column26.Name = "Column26";
+            // 
+            // Column27
+            // 
+            this.Column27.DataPropertyName = "GDZCZJ";
+            this.Column27.HeaderText = "固定资产折旧";
+            this.Column27.Name = "Column27";
+            // 
+            // Column28
+            // 
+            this.Column28.DataPropertyName = "(无)SCSJE";
+            this.Column28.HeaderText = "生产税净额";
+            this.Column28.Name = "Column28";
+            // 
+            // Column29
+            // 
+            this.Column29.DataPropertyName = "YYYE";
+            this.Column29.HeaderText = "营业盈余";
+            this.Column29.Name = "Column29";
+            // 
+            // Column30
+            // 
+            this.Column30.DataPropertyName = "ZGGZZE";
+            this.Column30.HeaderText = "职工工资总额";
+            this.Column30.Name = "Column30";
+            // 
+            // Column31
+            // 
+            this.Column31.DataPropertyName = "SS";
+            this.Column31.HeaderText = "税收";
+            this.Column31.Name = "Column31";
+            // 
+            // Column32
+            // 
+            this.Column32.DataPropertyName = "ZJZ";
+            this.Column32.HeaderText = "增加值";
+            this.Column32.Name = "Column32";
+            // 
+            // Column33
+            // 
+            this.Column33.DataPropertyName = "MJSS";
+            this.Column33.HeaderText = "亩均税收";
+            this.Column33.Name = "Column33";
             // 
             // tabPage3
             // 
@@ -762,211 +948,11 @@
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.Visible = false;
             // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "";
-            this.Column3.Image = global::TDObject.Properties.Resources.Save;
-            this.Column3.Name = "Column3";
-            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Column3.Visible = false;
-            this.Column3.Width = 20;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "XH";
-            this.Column1.HeaderText = "序号";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 60;
-            // 
-            // Column2
-            // 
-            this.Column2.DataPropertyName = "YF";
-            this.Column2.HeaderText = "月份";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 60;
-            // 
-            // Column4
-            // 
-            this.Column4.DataPropertyName = "DWDM";
-            this.Column4.HeaderText = "单位代码";
-            this.Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            this.Column5.DataPropertyName = "DW";
-            this.Column5.HeaderText = "单位";
-            this.Column5.Name = "Column5";
-            this.Column5.Width = 120;
-            // 
-            // Column6
-            // 
-            this.Column6.DataPropertyName = "SQ";
-            this.Column6.HeaderText = "市区";
-            this.Column6.Name = "Column6";
-            // 
-            // Column7
-            // 
-            this.Column7.DataPropertyName = "QY";
-            this.Column7.HeaderText = "区域";
-            this.Column7.Name = "Column7";
-            // 
-            // Column8
-            // 
-            this.Column8.DataPropertyName = "ZS";
-            this.Column8.HeaderText = "住所";
-            this.Column8.Name = "Column8";
-            // 
-            // Column10
-            // 
-            this.Column10.DataPropertyName = "JYFW";
-            this.Column10.HeaderText = "经营范围";
-            this.Column10.Name = "Column10";
-            // 
-            // Column11
-            // 
-            this.Column11.DataPropertyName = "ZCSJ";
-            this.Column11.HeaderText = "注册时间";
-            this.Column11.Name = "Column11";
-            // 
-            // Column12
-            // 
-            this.Column12.DataPropertyName = "ZHY";
-            this.Column12.HeaderText = "主行业";
-            this.Column12.Name = "Column12";
-            // 
-            // Column13
-            // 
-            this.Column13.DataPropertyName = "HYXF";
-            this.Column13.HeaderText = "行业细分";
-            this.Column13.Name = "Column13";
-            // 
-            // Column14
-            // 
-            this.Column14.DataPropertyName = "GM";
-            this.Column14.HeaderText = "规模";
-            this.Column14.Name = "Column14";
-            // 
-            // Column15
-            // 
-            this.Column15.DataPropertyName = "QYS";
-            this.Column15.HeaderText = "企业数";
-            this.Column15.Name = "Column15";
-            // 
-            // Column16
-            // 
-            this.Column16.DataPropertyName = "CBRS";
-            this.Column16.HeaderText = "参保人数";
-            this.Column16.Name = "Column16";
-            // 
-            // Column17
-            // 
-            this.Column17.DataPropertyName = "GS";
-            this.Column17.HeaderText = "国税";
-            this.Column17.Name = "Column17";
-            // 
-            // Column18
-            // 
-            this.Column18.DataPropertyName = "DS";
-            this.Column18.HeaderText = "地税";
-            this.Column18.Name = "Column18";
-            // 
-            // Column19
-            // 
-            this.Column19.DataPropertyName = "XS";
-            this.Column19.HeaderText = "销售";
-            this.Column19.Name = "Column19";
-            // 
-            // Column20
-            // 
-            this.Column20.DataPropertyName = "ZD";
-            this.Column20.HeaderText = "占地";
-            this.Column20.Name = "Column20";
-            // 
-            // Column21
-            // 
-            this.Column21.DataPropertyName = "QZCZ";
-            this.Column21.HeaderText = "其中持证";
-            this.Column21.Name = "Column21";
-            // 
-            // Column22
-            // 
-            this.Column22.DataPropertyName = "YN";
-            this.Column22.HeaderText = "用能";
-            this.Column22.Name = "Column22";
-            // 
-            // Column23
-            // 
-            this.Column23.DataPropertyName = "YD";
-            this.Column23.HeaderText = "用电";
-            this.Column23.Name = "Column23";
-            // 
-            // Column24
-            // 
-            this.Column24.DataPropertyName = "PF";
-            this.Column24.HeaderText = "排放";
-            this.Column24.Name = "Column24";
-            // 
-            // Column25
-            // 
-            this.Column25.DataPropertyName = "YFJFZC";
-            this.Column25.HeaderText = "研发经费支出";
-            this.Column25.Name = "Column25";
-            // 
-            // Column26
-            // 
-            this.Column26.DataPropertyName = "PJZGRS";
-            this.Column26.HeaderText = "平均职工人数";
-            this.Column26.Name = "Column26";
-            // 
-            // Column27
-            // 
-            this.Column27.DataPropertyName = "GDZCZJ";
-            this.Column27.HeaderText = "固定资产折旧";
-            this.Column27.Name = "Column27";
-            // 
-            // Column28
-            // 
-            this.Column28.DataPropertyName = "(无)SCSJE";
-            this.Column28.HeaderText = "生产税净额";
-            this.Column28.Name = "Column28";
-            // 
-            // Column29
-            // 
-            this.Column29.DataPropertyName = "YYYE";
-            this.Column29.HeaderText = "营业盈余";
-            this.Column29.Name = "Column29";
-            // 
-            // Column30
-            // 
-            this.Column30.DataPropertyName = "ZGGZZE";
-            this.Column30.HeaderText = "职工工资总额";
-            this.Column30.Name = "Column30";
-            // 
-            // Column31
-            // 
-            this.Column31.DataPropertyName = "SS";
-            this.Column31.HeaderText = "税收";
-            this.Column31.Name = "Column31";
-            // 
-            // Column32
-            // 
-            this.Column32.DataPropertyName = "ZJZ";
-            this.Column32.HeaderText = "增加值";
-            this.Column32.Name = "Column32";
-            // 
-            // Column33
-            // 
-            this.Column33.DataPropertyName = "MJSS";
-            this.Column33.HeaderText = "亩均税收";
-            this.Column33.Name = "Column33";
-            // 
             // frmDataExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1042, 488);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.tabControl2);
             this.Name = "frmDataExport";
             this.Text = "数据导入";
@@ -1046,7 +1032,6 @@
         private System.Windows.Forms.TabControl tabControl2;
         private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn22;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;

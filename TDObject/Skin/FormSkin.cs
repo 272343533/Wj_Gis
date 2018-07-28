@@ -43,7 +43,21 @@ namespace TDObject
             frmobj.BackColor = SystemColors.GradientInactiveCaption;
             frmobj.StartPosition = FormStartPosition.CenterScreen;
         }
-            
 
+        public static void ShowForm(Form frm)
+        {
+            FlatFormWithTop pfrm = new FlatFormWithTop(frm);
+            pfrm.Show();
+        }
+
+        public static void dgv_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            SolidBrush b = new SolidBrush(dgv.RowHeadersDefaultCellStyle.ForeColor);
+
+            e.Graphics.DrawString((e.RowIndex + 1).ToString(System.Globalization.CultureInfo.CurrentUICulture), dgv.DefaultCellStyle.Font, b, e.RowBounds.Location.X + 20, e.RowBounds.Location.Y + 4);
+
+
+        }
     }
 }

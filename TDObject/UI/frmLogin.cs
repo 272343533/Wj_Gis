@@ -10,12 +10,12 @@ using System.Windows.Forms;
 using SunMvcExpress.Dao;
 using QyTech.Core;
 using QyTech.Core.BLL;
-using QyTech.Core.BLL;
 using System.Net.Http;
 
 using Newtonsoft.Json;
 using System.Threading;
 using QyTech.Json;
+using System.IO;
 
 namespace TDObject
 {
@@ -25,8 +25,11 @@ namespace TDObject
         //LoginUser luser;
 
         //public LoginUser CurrentLoginUser { get { return luser; } }
-        //private const string Uri = "http://122.114.38.213/arc_gis/countries?format=json";  
-       
+        //private const string Uri = "http://122.114.190.250/arc_gis/countries?format=json";  
+        BinaryWriter bw;
+        BinaryReader br;
+        string filename = "mydata";
+        string passwordkey = "abcdefghigklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRST";
 
         public frmLogin()
         {
@@ -102,7 +105,7 @@ namespace TDObject
             bsUser luser = MainForm.EM.GetByPk<bsUser>("LoginName", username);
             try
             {
-                luser.LLoginDT = DateTime.Now;
+                luser.LoginDt = DateTime.Now;
                 MainForm.EM.Modify<bsUser>(luser);
             }
             catch { }
@@ -125,6 +128,28 @@ namespace TDObject
                 }
                 this.pbrLoad.Value = this.pbrLoad.Maximum;
 
+                //保存账号
+               try
+                {
+                    bw = new BinaryWriter(new FileStream(filename,FileMode.OpenOrCreate));
+                    string content = username + "@@@@" + strpwd;
+                    content = String.Format("{0, -50}", content);
+                    byte[] bytes = System.Text.Encoding.Default.GetBytes(content);
+                    StringBuilder ps = new StringBuilder();
+                    for (int i = 0; i < bytes.Length; i++)
+                    {
+                        int c = bytes[i] ^ passwordkey[i];
+                        ps.Append(c + " ");
+                    }
+
+                    bw.Write(ps.ToString());
+                    bw.Close();
+
+                }
+                catch (IOException ex)
+                {
+                   
+                }
 
             }
             else
@@ -132,6 +157,37 @@ namespace TDObject
                 MessageBox.Show("用户名或密码不正确", "提示", MessageBoxButtons.OK);
              }
 
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            panel1.Parent = pictureBox1;
+
+            try
+            {
+                br = new BinaryReader(new FileStream(filename,FileMode.Open));
+                try
+                {
+                    string passwd = br.ReadString();
+                    string[] ps = passwd.Split(' ');
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < ps.Length - 1; i++)
+                    {
+                        sb.Append((char)(passwordkey[i] ^ int.Parse(ps[i]))); //异或解密， 转换成char
+                    }
+                    passwd = sb.ToString();
+
+                    string[] strs = passwd.Split(new string[] { "@@@@" }, 2, StringSplitOptions.RemoveEmptyEntries);
+                    this.tbUserName.Text = strs[0];
+                    this.tbPassword.Text = strs[1].Trim();
+                    br.Close();
+                }
+                catch { br.Close(); }
+            }
+            catch (IOException ex)
+            {
+                return;
+            }
         }
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button5 = new System.Windows.Forms.Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDataImport));
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
@@ -177,19 +177,6 @@
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvJfj)).BeginInit();
             this.SuspendLayout();
-            // 
-            // button5
-            // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.BackColor = System.Drawing.Color.Azure;
-            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button5.Location = new System.Drawing.Point(1008, 0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(33, 23);
-            this.button5.TabIndex = 15;
-            this.button5.Text = "Ⅹ";
-            this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // tabControl2
             // 
@@ -725,7 +712,7 @@
             // Column3
             // 
             this.Column3.HeaderText = "";
-            this.Column3.Image = global::TDObject.Properties.Resources.Save;
+            this.Column3.Image = ((System.Drawing.Image)(resources.GetObject("Column3.Image")));
             this.Column3.Name = "Column3";
             this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Column3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
@@ -1281,7 +1268,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1042, 488);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.tabControl2);
             this.Name = "frmDataImport";
             this.Text = "数据导入";
@@ -1337,7 +1323,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn61;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn62;
         private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cboYear;

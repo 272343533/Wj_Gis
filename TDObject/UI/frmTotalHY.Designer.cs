@@ -37,31 +37,31 @@
             System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(5D, 324D);
             System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(6D, 82D);
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("投资类型分析");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("管理区企业数量");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("营业额统计");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("税收统计");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("产能统计");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("通用设备制造业");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("金属制品业");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("非金属矿物制品业");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("电气机械和器材制造业");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("橡胶和塑料制品业");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("木材加工和木");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("化学原料和化学制品制造业");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("专用设备制造业");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("文教、工美、体育和娱乐用品制造业");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("金属制品业");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("通用设备制造业");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("金属制品业");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("非金属矿物制品业");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("电气机械和器材制造业");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("橡胶和塑料制品业");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("木材加工和木");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("化学原料和化学制品制造业");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("专用设备制造业");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("文教、工美、体育和娱乐用品制造业");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("金属制品业");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("税收统计");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("土地面积统计");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("销售额统计");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("能耗统计");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("投资类型分析");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("行业企业数量");
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel2 = new System.Windows.Forms.Panel();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.treeView2 = new System.Windows.Forms.TreeView();
             this.treeView1 = new System.Windows.Forms.TreeView();
+            this.treeView2 = new System.Windows.Forms.TreeView();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -86,26 +86,12 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.button3);
             this.panel1.Controls.Add(this.chart1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(285, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(721, 595);
             this.panel1.TabIndex = 3;
-            // 
-            // button3
-            // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.BackColor = System.Drawing.Color.Azure;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button3.Location = new System.Drawing.Point(689, -1);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(33, 23);
-            this.button3.TabIndex = 9;
-            this.button3.Text = "Ⅹ";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // chart1
             // 
@@ -163,10 +149,10 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.treeView2);
             this.panel2.Controls.Add(this.radioButton3);
             this.panel2.Controls.Add(this.radioButton2);
             this.panel2.Controls.Add(this.radioButton1);
-            this.panel2.Controls.Add(this.treeView2);
             this.panel2.Controls.Add(this.treeView1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
@@ -212,35 +198,6 @@
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.Click += new System.EventHandler(this.radioButton2_Click);
             // 
-            // treeView2
-            // 
-            this.treeView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView2.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.treeView2.Font = new System.Drawing.Font("楷体", 12F);
-            this.treeView2.ForeColor = System.Drawing.Color.Blue;
-            this.treeView2.Location = new System.Drawing.Point(3, 436);
-            this.treeView2.Name = "treeView2";
-            treeNode1.Name = "节点3";
-            treeNode1.Text = "投资类型分析";
-            treeNode2.Name = "节点1";
-            treeNode2.Text = "管理区企业数量";
-            treeNode3.Name = "节点4";
-            treeNode3.Text = "营业额统计";
-            treeNode4.Name = "节点5";
-            treeNode4.Text = "税收统计";
-            treeNode5.Name = "节点0";
-            treeNode5.Text = "产能统计";
-            this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5});
-            this.treeView2.Size = new System.Drawing.Size(270, 128);
-            this.treeView2.TabIndex = 2;
-            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
-            // 
             // treeView1
             // 
             this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -252,37 +209,36 @@
             this.treeView1.FullRowSelect = true;
             this.treeView1.Location = new System.Drawing.Point(0, 3);
             this.treeView1.Name = "treeView1";
-            treeNode6.Name = "节点0";
-            treeNode6.Tag = "320584400222";
-            treeNode6.Text = "通用设备制造业";
-            treeNode7.Name = "节点1";
-            treeNode7.Tag = "320584400223";
-            treeNode7.Text = "金属制品业";
-            treeNode8.Name = "节点2";
-            treeNode8.Tag = "320584400224";
-            treeNode8.Text = "非金属矿物制品业";
-            treeNode9.Name = "节点3";
-            treeNode9.Tag = "320584101203";
-            treeNode9.Text = "电气机械和器材制造业";
-            treeNode10.Name = "节点4";
-            treeNode10.Tag = "320584101202";
-            treeNode10.Text = "橡胶和塑料制品业";
-            treeNode11.Name = "节点5";
-            treeNode11.Tag = "320584101205";
-            treeNode11.Text = "木材加工和木";
-            treeNode12.Name = "节点0";
-            treeNode12.Tag = "320584101209";
-            treeNode12.Text = "化学原料和化学制品制造业";
-            treeNode13.Name = "节点1";
-            treeNode13.Tag = "320584101200";
-            treeNode13.Text = "专用设备制造业";
-            treeNode14.Name = "320584101204";
-            treeNode14.Text = "文教、工美、体育和娱乐用品制造业";
-            treeNode15.Name = "节点0";
-            treeNode15.Tag = "";
-            treeNode15.Text = "金属制品业";
+            treeNode7.Name = "节点0";
+            treeNode7.Tag = "320584400222";
+            treeNode7.Text = "通用设备制造业";
+            treeNode8.Name = "节点1";
+            treeNode8.Tag = "320584400223";
+            treeNode8.Text = "金属制品业";
+            treeNode9.Name = "节点2";
+            treeNode9.Tag = "320584400224";
+            treeNode9.Text = "非金属矿物制品业";
+            treeNode10.Name = "节点3";
+            treeNode10.Tag = "320584101203";
+            treeNode10.Text = "电气机械和器材制造业";
+            treeNode11.Name = "节点4";
+            treeNode11.Tag = "320584101202";
+            treeNode11.Text = "橡胶和塑料制品业";
+            treeNode12.Name = "节点5";
+            treeNode12.Tag = "320584101205";
+            treeNode12.Text = "木材加工和木";
+            treeNode13.Name = "节点0";
+            treeNode13.Tag = "320584101209";
+            treeNode13.Text = "化学原料和化学制品制造业";
+            treeNode14.Name = "节点1";
+            treeNode14.Tag = "320584101200";
+            treeNode14.Text = "专用设备制造业";
+            treeNode15.Name = "320584101204";
+            treeNode15.Text = "文教、工美、体育和娱乐用品制造业";
+            treeNode16.Name = "节点0";
+            treeNode16.Tag = "";
+            treeNode16.Text = "金属制品业";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6,
             treeNode7,
             treeNode8,
             treeNode9,
@@ -291,10 +247,46 @@
             treeNode12,
             treeNode13,
             treeNode14,
-            treeNode15});
+            treeNode15,
+            treeNode16});
             this.treeView1.Size = new System.Drawing.Size(273, 427);
             this.treeView1.TabIndex = 4;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            // 
+            // treeView2
+            // 
+            this.treeView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.treeView2.Font = new System.Drawing.Font("楷体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.treeView2.ForeColor = System.Drawing.Color.Black;
+            this.treeView2.LineColor = System.Drawing.Color.White;
+            this.treeView2.Location = new System.Drawing.Point(6, 437);
+            this.treeView2.Name = "treeView2";
+            treeNode1.Name = "节点5";
+            treeNode1.Text = "税收统计";
+            treeNode2.Name = "节点0";
+            treeNode2.Text = "土地面积统计";
+            treeNode3.Name = "节点4";
+            treeNode3.Text = "销售额统计";
+            treeNode4.Name = "节点1";
+            treeNode4.Text = "能耗统计";
+            treeNode5.ForeColor = System.Drawing.Color.Black;
+            treeNode5.Name = "节点3";
+            treeNode5.Text = "投资类型分析";
+            treeNode6.Name = "节点0";
+            treeNode6.Text = "行业企业数量";
+            this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6});
+            this.treeView2.Size = new System.Drawing.Size(264, 127);
+            this.treeView2.TabIndex = 10;
+            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
             // 
             // frmTotalHY
             // 
@@ -302,11 +294,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1009, 601);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmTotalHY";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "按行业统计";
             this.Load += new System.EventHandler(this.FrmRegionTotal_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -324,11 +314,10 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.TreeView treeView2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.TreeView treeView2;
     }
 }

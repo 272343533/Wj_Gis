@@ -148,13 +148,13 @@ namespace WTGeoWeb.Controllers
             else
             {
                 bsUser userobj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_id", Guid.Parse(userid));
-                if (userobj.bsO_Righrs == "全部村镇")
+                if (userobj.bsO_RightsCode == "全部村镇")
                 {
                     list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsOrganize>("OrgType='村' or OrgType='镇'", "");
                 }
                 else
                 {
-                    list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsOrganize>(" Name like '%镇%' or Name like '%" + userobj.bsO_Righrs + "%' and (OrgType='村' or OrgType='镇')", "");
+                    list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsOrganize>(" Name like '%镇%' or Name like '%" + userobj.bsO_RightsCode + "%' and (OrgType='村' or OrgType='镇')", "");
                 }
             }
             string json = JsonHelper.SerializeObjects<bsOrganize>(list, new List<string>());
@@ -165,12 +165,19 @@ namespace WTGeoWeb.Controllers
      
 
         # region  用户信息
-        public string GetAllUserInfoData()
+        public string GetAllUserInfoData(string bsoname)
         {
             log.Info("GetUserInfoData:");
             List<bsUser> list = new List<bsUser>();
-            list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsUser>("", "bsR_Name,LoginName");
-
+          
+            if (bsoname == null || bsoname == "")
+            {
+                list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsUser>("bso_Name!='System'", "bsR_Name,LoginName");
+            }
+            else
+            {
+                list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsUser>("bsO_Name='" + bsoname + "'", "bsR_Name,LoginName");
+            }
             string json = JsonHelper.SerializeObjects<bsUser>(list, new List<string>());
 
             return json;
@@ -188,7 +195,7 @@ namespace WTGeoWeb.Controllers
         {
             log.Info("AddUserData:" + userinfo);
             bsUser obj = JsonHelper.DeserializeFormtJsonToObject<bsUser>(userinfo);
-            obj.Pwd = MD5(obj.Pwd);
+            obj.LoginPwd = MD5(obj.LoginPwd);
             string ret = WTGeoWeb.BLL.CommSetting.EM.Add<bsUser>(obj);
 
             if (ret == "")
@@ -196,29 +203,7 @@ namespace WTGeoWeb.Controllers
             else
                 return ret;
         }
-        public string AddWebUser(string username,string pwd)
-        {
-            //bsUser obj = new bsUser();
-            //obj.bsU_Id = Guid.NewGuid();
-            //obj.bsO_Id = Guid.Parse("8E0CEA4C-1F0E-4E8B-AB16-960FF9570C8B");
-            //obj.bsO_Name = "望亭镇";
-            //obj.LoginName = username;
-            //obj.Pwd = MD5(pwd);
-            //obj.Name = username;
-            //obj.bsR_Name = "浏览人员";
-            //obj.bsO_Righrs = "全部村镇";
-            //obj.bsO_RightsCode = "";
-
-            //string ret = WTGeoWeb.BLL.CommSetting.EM.Add<bsUser>(obj);
-            //log.Error(username + ":" + pwd + "---" + ret);
-            //if (ret == "")
-            //    return "";
-            //else if (ret.Contains("Ix_LoginName"))
-            //    return "账号已使用，请更改登录名！";
-            //else
-            //    return ret;
-            return "系统正在测试！";
-        }
+        
 
         public string DelUserData(string id)
         {
@@ -246,11 +231,11 @@ namespace WTGeoWeb.Controllers
             bsUser obj = JsonHelper.DeserializeFormtJsonToObject<bsUser>(userinfo);
             bsUser dbobj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", obj.bsU_Id);
             dbobj.LoginName = obj.LoginName;
-            dbobj.Name = obj.Name;
+            dbobj.NickName = obj.NickName;
             dbobj.bsR_Name = obj.bsR_Name;
-            dbobj.LLoginDT = obj.LLoginDT;
-            dbobj.Pwd = obj.Pwd;
-            dbobj.bsO_Righrs = obj.bsO_Righrs;
+            dbobj.LoginDt = obj.LoginDt;
+            dbobj.LoginPwd = obj.LoginPwd;
+            dbobj.bsO_RightsCode = obj.bsO_RightsCode;
             string ret = WTGeoWeb.BLL.CommSetting.EM.Modify<bsUser>(dbobj);
 
             if (ret == "")
