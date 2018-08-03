@@ -145,6 +145,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="BLL\CommSetting.cs" />
     <Compile Include="BLL\GCJ2WGS.cs" />
+    <Compile Include="Controllers\bsVisitLogController.cs" />
     <Compile Include="Controllers\LtdInfoZuLinController.cs" />
     <Compile Include="BLL\TotalInfo.cs" />
     <Compile Include="BLL\LayerInfo.cs" />
@@ -243,6 +244,8 @@
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\QyTech.js" />
+    <Content Include="Scripts\QyTech\Arcgis\Layers.js" />
+    <Content Include="Scripts\QyTech\Arcgis\Wjkfq.js" />
     <Content Include="Scripts\QyTech\myArc.js" />
     <Content Include="Scripts\QyTech\nav4.js" />
     <Content Include="Scripts\result.js" />
@@ -292,6 +295,8 @@
     <Content Include="Views\EditView\LtdRegularWebView.cshtml" />
     <Content Include="Views\EditView\LtdProblemWebView.cshtml" />
     <Content Include="Views\Home\Index_NewForCust.cshtml" />
+    <Content Include="Views\Home\Helper.cshtml" />
+    <Content Include="Views\Home\Index_m_SubLayer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

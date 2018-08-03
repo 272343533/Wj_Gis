@@ -55,7 +55,7 @@ namespace TDObject
             DataGridView dgv = sender as DataGridView;
             SolidBrush b = new SolidBrush(dgv.RowHeadersDefaultCellStyle.ForeColor);
 
-            e.Graphics.DrawString((e.RowIndex + 1).ToString(System.Globalization.CultureInfo.CurrentUICulture), dgv.DefaultCellStyle.Font, b, e.RowBounds.Location.X + 20, e.RowBounds.Location.Y + 4);
+            e.Graphics.DrawString((e.RowIndex + 1).ToString(System.Globalization.CultureInfo.CurrentUICulture), dgv.DefaultCellStyle.Font, b, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
 
 
         }

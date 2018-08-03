@@ -153,9 +153,9 @@
             this.panel4.Controls.Add(this.splitter3);
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 221);
+            this.panel4.Location = new System.Drawing.Point(0, 67);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1067, 373);
+            this.panel4.Size = new System.Drawing.Size(1067, 527);
             this.panel4.TabIndex = 7;
             // 
             // splitter3
@@ -174,7 +174,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1067, 373);
+            this.panel5.Size = new System.Drawing.Size(1067, 527);
             this.panel5.TabIndex = 4;
             // 
             // dgvT2_11
@@ -208,9 +208,10 @@
             this.dgvT2_11.Location = new System.Drawing.Point(0, 0);
             this.dgvT2_11.Name = "dgvT2_11";
             this.dgvT2_11.RowTemplate.Height = 23;
-            this.dgvT2_11.Size = new System.Drawing.Size(1067, 373);
+            this.dgvT2_11.Size = new System.Drawing.Size(1067, 527);
             this.dgvT2_11.TabIndex = 15;
             this.dgvT2_11.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvT2_11_CellContentClick);
+            this.dgvT2_11.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvT2_11_RowPostPaint);
             // 
             // Column12
             // 
@@ -351,7 +352,7 @@
             // splitter2
             // 
             this.splitter2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitter2.Location = new System.Drawing.Point(0, 218);
+            this.splitter2.Location = new System.Drawing.Point(0, 64);
             this.splitter2.Name = "splitter2";
             this.splitter2.Size = new System.Drawing.Size(1067, 3);
             this.splitter2.TabIndex = 6;
@@ -369,7 +370,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1067, 218);
+            this.panel3.Size = new System.Drawing.Size(1067, 64);
             this.panel3.TabIndex = 5;
             this.panel3.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel3_MouseMove);
             // 
@@ -377,7 +378,7 @@
             // 
             this.button5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.button5.Image = global::TDObject.Properties.Resources.colorize_16px_34613_easyicon_net;
-            this.button5.Location = new System.Drawing.Point(559, 192);
+            this.button5.Location = new System.Drawing.Point(559, 38);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(88, 23);
             this.button5.TabIndex = 14;
@@ -394,7 +395,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbConditon.Location = new System.Drawing.Point(17, 8);
             this.gbConditon.Name = "gbConditon";
-            this.gbConditon.Size = new System.Drawing.Size(1038, 185);
+            this.gbConditon.Size = new System.Drawing.Size(1038, 31);
             this.gbConditon.TabIndex = 4;
             this.gbConditon.TabStop = false;
             // 
@@ -402,7 +403,7 @@
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.button2.Image = global::TDObject.Properties.Resources.Alarme_old_school_16px_502143_easyicon_net;
-            this.button2.Location = new System.Drawing.Point(749, 189);
+            this.button2.Location = new System.Drawing.Point(749, 35);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(90, 23);
             this.button2.TabIndex = 12;
@@ -415,7 +416,7 @@
             // 
             this.btnShowMap.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnShowMap.Image = global::TDObject.Properties.Resources.marker_position_24px_12829_easyicon_net;
-            this.btnShowMap.Location = new System.Drawing.Point(465, 192);
+            this.btnShowMap.Location = new System.Drawing.Point(465, 38);
             this.btnShowMap.Name = "btnShowMap";
             this.btnShowMap.Size = new System.Drawing.Size(88, 23);
             this.btnShowMap.TabIndex = 11;
@@ -428,7 +429,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(868, 200);
+            this.label1.Location = new System.Drawing.Point(283, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(0, 12);
             this.label1.TabIndex = 9;
@@ -437,7 +438,7 @@
             // 
             this.checkBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(61, 199);
+            this.checkBox1.Location = new System.Drawing.Point(61, 45);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(48, 16);
             this.checkBox1.TabIndex = 8;
@@ -449,7 +450,7 @@
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.button1.Image = global::TDObject.Properties.Resources.search_16px_34193_easyicon_net;
-            this.button1.Location = new System.Drawing.Point(283, 192);
+            this.button1.Location = new System.Drawing.Point(202, 38);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -547,6 +548,8 @@
             treeNode17});
             this.treeView1.Size = new System.Drawing.Size(190, 532);
             this.treeView1.TabIndex = 3;
+            this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // dataGridViewTextBoxColumn1
             // 

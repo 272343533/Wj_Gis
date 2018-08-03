@@ -40,12 +40,17 @@
             System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("同里街道办", new System.Windows.Forms.TreeNode[] {
             treeNode6,
             treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("税收统计");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("土地面积统计");
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("销售额统计");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("能耗统计");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("投资类型分析");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("行业企业数量");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("吴江经济技术开发区", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode5,
+            treeNode8});
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("税收统计");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("土地面积统计");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("销售额统计");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("能耗统计");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("投资类型分析");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("行业企业数量");
             System.Windows.Forms.DataVisualization.Charting.LineAnnotation lineAnnotation1 = new System.Windows.Forms.DataVisualization.Charting.LineAnnotation();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -434,12 +439,12 @@
             treeNode8.Name = "节点1";
             treeNode8.Tag = "WJKFQ03，WJKFQ04";
             treeNode8.Text = "同里街道办";
+            treeNode9.Name = "节点0";
+            treeNode9.Tag = "WJKFQ01,WJKFQ02,WJKFQ03,WJKFQ04,WJKFQ05,WJKFQ06";
+            treeNode9.Text = "吴江经济技术开发区";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode5,
-            treeNode8});
-            this.treeView1.Size = new System.Drawing.Size(331, 160);
+            treeNode9});
+            this.treeView1.Size = new System.Drawing.Size(331, 173);
             this.treeView1.TabIndex = 3;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
@@ -452,29 +457,29 @@
             this.treeView2.Font = new System.Drawing.Font("楷体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.treeView2.ForeColor = System.Drawing.Color.Black;
             this.treeView2.LineColor = System.Drawing.Color.White;
-            this.treeView2.Location = new System.Drawing.Point(6, 169);
+            this.treeView2.Location = new System.Drawing.Point(6, 182);
             this.treeView2.Name = "treeView2";
-            treeNode9.Name = "节点5";
-            treeNode9.Text = "税收统计";
-            treeNode10.Name = "节点0";
-            treeNode10.Text = "土地面积统计";
-            treeNode11.Name = "节点4";
-            treeNode11.Text = "销售额统计";
-            treeNode12.Name = "节点1";
-            treeNode12.Text = "能耗统计";
-            treeNode13.ForeColor = System.Drawing.Color.Black;
-            treeNode13.Name = "节点3";
-            treeNode13.Text = "投资类型分析";
-            treeNode14.Name = "节点0";
-            treeNode14.Text = "行业企业数量";
+            treeNode10.Name = "节点5";
+            treeNode10.Text = "税收统计";
+            treeNode11.Name = "节点0";
+            treeNode11.Text = "土地面积统计";
+            treeNode12.Name = "节点4";
+            treeNode12.Text = "销售额统计";
+            treeNode13.Name = "节点1";
+            treeNode13.Text = "能耗统计";
+            treeNode14.ForeColor = System.Drawing.Color.Black;
+            treeNode14.Name = "节点3";
+            treeNode14.Text = "投资类型分析";
+            treeNode15.Name = "节点0";
+            treeNode15.Text = "行业企业数量";
             this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode9,
             treeNode10,
             treeNode11,
             treeNode12,
             treeNode13,
-            treeNode14});
-            this.treeView2.Size = new System.Drawing.Size(331, 140);
+            treeNode14,
+            treeNode15});
+            this.treeView2.Size = new System.Drawing.Size(331, 127);
             this.treeView2.TabIndex = 2;
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
             // 

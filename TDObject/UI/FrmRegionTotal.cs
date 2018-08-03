@@ -28,8 +28,13 @@ namespace TDObject.UI
         {
             try
             {
+                this.dgvT2_11.AutoGenerateColumns = false;
+                this.dgvT2_12.AutoGenerateColumns = false;
+
                 dgvT2_11.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
                 dgvT2_12.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dgvT2_11.RowPostPaint += new DataGridViewRowPostPaintEventHandler(FormSkin.dgv_RowPostPaint);
+                dgvT2_12.RowPostPaint += new DataGridViewRowPostPaintEventHandler(FormSkin.dgv_RowPostPaint);
 
                 treeView1.ExpandAll();
 
@@ -37,9 +42,7 @@ namespace TDObject.UI
                 CurrTotalType = treeView2.Nodes[0].Text;
                 treeView1.SelectedNode = treeView1.Nodes[0];
 
-                dgvT2_11.RowPostPaint += new DataGridViewRowPostPaintEventHandler(FormSkin.dgv_RowPostPaint);
-                dgvT2_12.RowPostPaint += new DataGridViewRowPostPaintEventHandler(FormSkin.dgv_RowPostPaint);
-              }
+                  }
             catch (Exception ex)
             {
                 log.Error(this.Name + ":" + ex.Message);
@@ -55,8 +58,6 @@ namespace TDObject.UI
                 TreeNode tn = e.Node;
                 CurrGlqName = tn.Text;
                 chart1.Titles[0].Text = CurrGlqName + " " + CurrTotalType;
-                this.dgvT2_11.AutoGenerateColumns = false;
-                this.dgvT2_12.AutoGenerateColumns = false;
                 string strDm = tn.Tag.ToString();
                 List<企业范围> _ltdobjs = TDObject.BLL.CommSetting.EM.GetListNoPaging<企业范围>("charindex(ssglqdm,'" + strDm + "')>0", "");
                 this.dgvT2_11.DataSource = _ltdobjs;

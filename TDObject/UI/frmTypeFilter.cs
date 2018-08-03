@@ -115,6 +115,28 @@ namespace TDObject.UI
                 dgv9.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
                 excl.eventNumChanged += new QyTech.ExcelExport.DelegateForExportNo(RefreshPgb);
+
+
+                this.dgv2.Click += new System.EventHandler(this.dgv1_Click);
+                this.dgv2.DoubleClick += new System.EventHandler(this.dgv1_DoubleClick);
+                this.dgv31.Click += new System.EventHandler(this.dgv1_Click);
+                this.dgv31.DoubleClick += new System.EventHandler(this.dgv1_DoubleClick);
+                this.dgv32.Click += new System.EventHandler(this.dgv1_Click);
+                this.dgv32.DoubleClick += new System.EventHandler(this.dgv1_DoubleClick);
+                this.dgv33.Click += new System.EventHandler(this.dgv1_Click);
+                this.dgv33.DoubleClick += new System.EventHandler(this.dgv1_DoubleClick);
+                this.dgv4.Click += new System.EventHandler(this.dgv1_Click);
+                this.dgv4.DoubleClick += new System.EventHandler(this.dgv1_DoubleClick);
+                this.dgv5.Click += new System.EventHandler(this.dgv1_Click);
+                this.dgv5.DoubleClick += new System.EventHandler(this.dgv1_DoubleClick);
+                this.dgv6.Click += new System.EventHandler(this.dgv1_Click);
+                this.dgv6.DoubleClick += new System.EventHandler(this.dgv1_DoubleClick);
+                this.dgv7.Click += new System.EventHandler(this.dgv1_Click);
+                this.dgv8.DoubleClick += new System.EventHandler(this.dgv1_DoubleClick);
+                this.dgv8.Click += new System.EventHandler(this.dgv1_Click);
+                this.dgv8.DoubleClick += new System.EventHandler(this.dgv1_DoubleClick);
+                this.dgv9.Click += new System.EventHandler(this.dgv1_Click);
+                this.dgv9.DoubleClick += new System.EventHandler(this.dgv1_DoubleClick);
             }
             catch (Exception ex)
             {
@@ -914,7 +936,7 @@ namespace TDObject.UI
             {
                 DKBH = GetDkbhForCurrentRow(dgv);
                 if (DKBH!="")
-                    blluifiler.ExPostionOneLtdFeature(DKBH);
+                    blluifiler.ExDisplayOneLtdFeature(DKBH);
             }
             catch (Exception ex)
             {
@@ -929,7 +951,7 @@ namespace TDObject.UI
             {
                 DKBH=GetDkbhForCurrentRow(dgv);
                 if (DKBH != "")
-                    blluifiler.ExPositionAndDisply(DKBH);
+                    blluifiler.ExPostionOneLtdFeature(DKBH);
             }
             catch (Exception ex)
             {

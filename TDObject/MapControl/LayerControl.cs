@@ -567,11 +567,9 @@ namespace TDObject.MapControl
             {
                 try
                 {
-                    //IEnvelope range = pGeo.Envelope;
-                    //range.Expand(1.1, 1.1, true);
-                    //mapControl.FullExtent= pGeo.Envelope;
-
-                    mapControl.Extent = pGeo.Envelope;
+                    IEnvelope range = pGeo.Envelope;
+                    range.Expand(120, 120, false);
+                    mapControl.Extent = range;
                 }
                 catch(Exception ex)
                 {

@@ -126,6 +126,16 @@
           <Property Name="BrowserType" Type="varchar" MaxLength="50" />
           <Property Name="ExComplQueryCond" Type="varchar" MaxLength="500" />
         </EntityType>
+        <EntityType Name="bsVisitLog">
+          <Key>
+            <PropertyRef Name="VisitId" />
+          </Key>
+          <Property Name="VisitDt" Type="datetime" />
+          <Property Name="userId" Type="uniqueidentifier" />
+          <Property Name="VisitDesp" Type="varchar" MaxLength="200" />
+          <Property Name="Brower" Type="varchar" MaxLength="50" />
+          <Property Name="VisitId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="Excel2FieldMap">
           <Key>
             <PropertyRef Name="Id" />
@@ -638,6 +648,7 @@
           <EntitySet Name="bsOrganize" EntityType="Self.bsOrganize" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bsSoftCustInfo" EntityType="Self.bsSoftCustInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bsUser" EntityType="Self.bsUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bsVisitLog" EntityType="Self.bsVisitLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Excel2FieldMap" EntityType="Self.Excel2FieldMap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LtdProblem" EntityType="Self.LtdProblem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LtdRegular" EntityType="Self.LtdRegular" Schema="dbo" store:Type="Tables" />
@@ -841,6 +852,7 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
           <EntitySet Name="z租赁企业信息表" EntityType="wj_GisDbModel.z租赁企业信息表" />
           <EntitySet Name="房屋建筑" EntityType="wj_GisDbModel.房屋建筑" />
           <EntitySet Name="企业范围" EntityType="wj_GisDbModel.企业范围" />
+          <EntitySet Name="bsVisitLog" EntityType="wj_GisDbModel.bsVisitLog" />
         </EntityContainer>
         <EntityType Name="bsHYDL">
           <Key>
@@ -1455,6 +1467,16 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
           <Property Name="DYQK_" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ZLWZ_" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="XSZD_" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="bsVisitLog">
+          <Key>
+            <PropertyRef Name="VisitId" />
+          </Key>
+          <Property Name="VisitDt" Type="DateTime" Precision="3" />
+          <Property Name="userId" Type="Guid" />
+          <Property Name="VisitDesp" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Brower" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VisitId" Type="Guid" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2104,6 +2126,17 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
                 <ScalarProperty Name="NSRSBH" ColumnName="NSRSBH" />
                 <ScalarProperty Name="DKBH" ColumnName="DKBH" />
                 <ScalarProperty Name="OBJECTID" ColumnName="OBJECTID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bsVisitLog">
+            <EntityTypeMapping TypeName="wj_GisDbModel.bsVisitLog">
+              <MappingFragment StoreEntitySet="bsVisitLog">
+                <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+                <ScalarProperty Name="Brower" ColumnName="Brower" />
+                <ScalarProperty Name="VisitDesp" ColumnName="VisitDesp" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="VisitDt" ColumnName="VisitDt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

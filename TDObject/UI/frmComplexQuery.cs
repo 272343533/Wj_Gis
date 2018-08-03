@@ -120,6 +120,7 @@ namespace TDObject.UI
 
             foreach (TreeNode tn in this.treeView1.Nodes[0].Nodes)
             {
+                tn.Checked = false;
                 if (query.Contains(tn.Text))
                 {
                     tn.Checked = true;
@@ -146,21 +147,17 @@ namespace TDObject.UI
                 {
                     refdgvT2_11(showCell);
                 }
-                //Refresh the tree with the checked
-                treeView1.Nodes[0].Nodes[0].Checked = true;
-                treeView1.Nodes[0].Nodes[1].Checked = true;
-
-          
+                         
                 //填充combox选项
                 comboitems.Add("cbo_aqscdj", "全部,一级,二级,三级");
                 comboitems.Add("cbo_hhpcf", "全部,红牌,黄牌");
                 comboitems.Add("cbo_xdbqy", "全部,超1亿元,超5亿元,超10亿元,超20亿元");
-                //comboitems.Add("cbo_hydl", "全部,");从数据库中获取
+                comboitems.Add("cbo_hydl", "");//从数据库中获取
                 comboitems.Add("cbo_yye", "全部,2000万以上,3000万以上,5000万以上,1亿以上");
                 comboitems.Add("cbo_ss", "全部,,2000万以上,3000万以上,5000万以上");
                 comboitems.Add("cbo_zncj", "全部,2015年,2016年,2017年,2018年");//智能车间
                 comboitems.Add("cbo_tdphjh", "全部,10亩以上,20亩以上,50亩以上,100亩以上");
-                comboitems.Add("cbo_ssqk", "台资拟上市,三板挂牌,主板后备");
+                comboitems.Add("cbo_ssqk", "全部,台资拟上市,三板挂牌,主板后备");
                 comboitems.Add("cbo_zxhp", "全部,市级,省级,国家级");
                 comboitems.Add("cbo_znzz", "全部,台智能设计,智能生产,智能装备,供应链管理,生产性电商");
 
@@ -359,8 +356,15 @@ namespace TDObject.UI
 
             if ("cbo_ssqk" == itemname)
             { 
+                if (itemtext == "全部")
+                {
+                    Conditions += " and (DKBH in (" + " select 地块编号 from t同里镇开发区上市企业台帐台资 where 地块编号 is not null)";
+                    Conditions += " or DKBH in (" + " select 地块编号 from t同里镇开发区上市企业台帐三板 where 地块编号 is not null)";
+                    Conditions += " or DKBH in (" + " select 地块编号 from t同里镇开发区上市企业台帐主版后备 where 地块编号 is not null)";
+                    Conditions += ")";
+                }
                 if (itemtext== "台资拟上市")
-                 Conditions += " and DKBH in (" + " select 地块编号 from t同里镇开发区上市企业台帐台资 where 地块编号 is not null)";
+                    Conditions += " and DKBH in (" + " select 地块编号 from t同里镇开发区上市企业台帐台资 where 地块编号 is not null)";
 
                 if (itemtext == "三板挂牌")
                     Conditions += " and DKBH in (" + " select 地块编号 from t同里镇开发区上市企业台帐三板 where 地块编号 is not null)";
@@ -611,6 +615,27 @@ namespace TDObject.UI
         private void frmComplexQuery_FormClosing(object sender, FormClosingEventArgs e)
         {
            
+        }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+           
+        }
+
+        private void dgvT2_11_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            FormSkin.dgv_RowPostPaint(sender, e);
+        }
+
+        private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node.Text == treeView1.Nodes[0].Text)
+            {
+                foreach (TreeNode tn in e.Node.Nodes)
+                {
+                    tn.Checked = e.Node.Checked;
+                }
+            }
         }
     }
 }

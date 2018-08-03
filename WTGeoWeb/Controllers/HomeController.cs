@@ -48,6 +48,19 @@ namespace WTGeoWeb.Controllers
             }
         }
 
+        public ActionResult Index_m_SubLayer(string userid)
+        {
+            bsUser obj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", Guid.Parse(userid));
+            log.Info("login1:" + obj.bsR_Name);
+            if (obj != null)
+            {
+                ViewBag.bsU_Id = userid;
+                ViewBag.bsR_Name = obj.bsR_Name;
+                ViewBag.UserName = obj.UserName;
+            }
+            return View();
+        }
+
         public ActionResult Index_m(string userid)
         {
             bsUser obj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", Guid.Parse(userid));
@@ -72,9 +85,9 @@ namespace WTGeoWeb.Controllers
                 log.Info("login:"+username + "--" + password+".");
                 if ((username != null && password != null))
                 {
-                    bsUser obj = WTGeoWeb.BLL.CommSetting.EM.GetBySql<bsUser>("LoginName='" + username + "' and Pwd='" + MD5(password) + "'");
+                    bsUser obj = WTGeoWeb.BLL.CommSetting.EM.GetBySql<bsUser>("LoginName='" + username + "' and LoginPwd='" + MD5(password) + "'");
 
-                    log.Info("login1:" + obj.bsR_Name);
+                    log.Info("home-login:" + obj.bsR_Name);
                     if (obj != null)
                     {
                         return obj.bsU_Id.ToString();
@@ -139,6 +152,10 @@ namespace WTGeoWeb.Controllers
             return View();
         }
 
+        public ActionResult Helper()
+        {
+            return View();
+        }
 
         /// <summary>
         /// 判断是否移动设备。

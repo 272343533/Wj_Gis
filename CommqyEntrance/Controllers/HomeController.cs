@@ -14,6 +14,8 @@ using System.Security.Cryptography;
 using QyTech.BLL;
 using System.Data.Objects;
 
+
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 namespace CommEntrance.Controllers
 {
 
@@ -24,6 +26,7 @@ namespace CommEntrance.Controllers
         public string AppName;
         public string AppVer;
         public string ValidUrl;
+        public string HelpUrl;
     }
     
     public class HomeController : Controller
@@ -33,32 +36,46 @@ namespace CommEntrance.Controllers
         [HttpPost]
         public string Login(string username, string password)
         {
-            string jsonret = "";
+            log.Info("login:" + username + "--" + password + ".");
+            string jsonret = "http://122.114.190.250:8080/Wjkfq_gis/Home/Helper";
             LoginMess lm = new LoginMess();
+            lm.HelpUrl = "http://122.114.190.250:8080/wjkfq_gis/Home/helper";
             try
             {
-                log.Info("login:"+username + "--" + password+".");
-                if ((username != null && password != null))
+                 if ((username != null && password != null))
                 {
                     //ObjectContext dblink = new QyTech_AuthEntities();
                     //EntityManager EM = new EntityManager(dblink);
 
                     bsUser obj = CommSetting.EM.GetBySql<bsUser>("LoginName='" + username + "' and LoginPwd='" + MD5(password) + "'");
-                    lm.ValidUrl = "http://117.121.102.226:80/commentrance/home/login";
-                    lm.ValidUrl += "," + "http://122.114.190.250:8080/commentrance/home/login";
+                    lm.ValidUrl = "http://122.114.190.250:8080/commentrance/home/login";
+                    lm.ValidUrl += "," + "http://117.121.102.226:80/commentrance/home/login";
                     lm.ValidUrl += "," + "http://219.243.12.234:80/commentrance/home/login";
                     lm.ValidUrl += "," + "http://219.243.12.231:80/commentrance/home/login";
                     lm.ValidUrl += "," + "http://60.2.27.75:8081/commentrance/home/login";
-                    lm.AppName = "土地深化利用v1.1";
-                    lm.AppVer = "1.1";
                     if (obj != null)
                     {
                         lm.UserId = obj.bsU_Id.ToString();
                         bsSoftCustInfo sciobj = QyTech.BLL.CommSetting.EM.GetByPk<bsSoftCustInfo>("bsS_Id", obj.bsO_Id);
-                        if (sciobj!=null)
+                        if (sciobj != null)
                         {
                             lm.UserUrl = sciobj.AppHomeUrl + "?userid=" + lm.UserId;
+                            lm.AppName =sciobj.AppName;
+                            lm.AppVer = sciobj.LastVersion;
                         }
+
+                        List<bsCommEntranceUrl> Urls = QyTech.BLL.CommSetting.EM.GetListNoPaging<bsCommEntranceUrl>("", "Id");
+                        if (Urls.Count > 0)
+                        {
+                            lm.ValidUrl = "";
+                            foreach (bsCommEntranceUrl ce in Urls)
+                            {
+                                lm.ValidUrl += "," + ce.CommEntrance+ "/commentrance/home/login";
+                            }
+                       
+                            lm.ValidUrl = lm.ValidUrl.Substring(1);
+                        }
+                       
 
                         jsonret = jsonMsgHelper.Create(0, lm, "");
                     }
@@ -95,12 +112,16 @@ namespace CommEntrance.Controllers
             obj.bsU_Id = Guid.NewGuid();
             obj.bsO_Id = Guid.Parse("8E0CEA4C-1F0E-4E8B-AB16-960FF9570C8B");
             obj.bsO_Name = "望亭镇";
+            obj.UserName = "web_"+username;
             obj.LoginName = username;
             obj.LoginPwd = MD5(pwd);
-            obj.UserName = username;
+            obj.NickName = username;
             obj.bsR_Name = "浏览人员";
-           
 
+            obj.RegDt = DateTime.Now;
+            obj.ValidDate = Convert.ToDateTime("2099-12-31");
+            obj.AccountStatus = "正常";
+            obj.bsR_Name = "浏览人员";
             string ret = QyTech.BLL.CommSetting.EM.Add<bsUser>(obj);
             log.Error(username + ":" + pwd + "---" + ret);
             if (ret == "")
@@ -111,5 +132,8 @@ namespace CommEntrance.Controllers
                 return ret;
             return "系统正在测试！";
         }
+
+        
+
     }
 }

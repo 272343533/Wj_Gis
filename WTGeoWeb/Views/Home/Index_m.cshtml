@@ -21,7 +21,7 @@
 
 
     <link href="~/themes/Site.css" rel="stylesheet" />
-
+    
     <link href="~/themes/menu.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script src="~/Scripts/vue.min.js"></script>
@@ -177,7 +177,7 @@
             olayer.LayerQueryIndex = LayerQueryIndex;
             olayer.FunId = FunId;
             return olayer;
-        }
+        } 
                                           //http://118.123.6.146:14795/arcgis/rest/services/wj/WjMapLocal/MapServer
         var mapserver1 = MapServer('s1', 'http://122.114.190.250:6080/arcgis/rest/services/WJMap/MyMapService/MapServer', 0, 'Dynamic', true, 1, [4, 5, 6, 7, 8, 9, 10, 11, 12, 13], '');
         // var mapserver1 = MapServer('s1', 'http://122.114.190.250:6080/arcgis/rest/services/WTMap/WtPublish1/MapServer',0, 'Dynamic', true, 1, [], '');
@@ -262,8 +262,67 @@
         }
 
 
-        var arrFeaturelayers = [];
+        var arrFeaturelayerUrls = [];
 
+        function InitFeatureLayer() {
+            for (var i = 0; i < 14; i++) {
+                arrFeaturelayers.push(MapServer + '/1');
+            }
+            for (var i = 0; i < arrFeaturelayers.length; i++) {
+                fealayer = new esri.layers.FeatureLayer(MapServer[1].Url + '/' + featureindex, {
+                    mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
+                    outFields: ["*"],
+                    hasAttributionData: true,
+                    opacity: 1;//dic_LayerTrans[featureindex]
+                })
+            }
+
+            var featureindex;
+            for (var i = 0; i < DjFeatureLayers.length; i++) {
+                var layname = DjFeatureLayers[i];
+                for (var i = 0; i < dic_Layer[layname].LayerQueryIndex.length; i++) {
+                    featureindex = dic_Layer[layname].LayerQueryIndex[i];
+                    fealayer = new esri.layers.FeatureLayer(MapServer[1].Url + '/' + featureindex, {
+                        mode: esri.layers.FeatureLayer.MODE_SNAPSHOT,
+                        outFields: ["*"],
+                        hasAttributionData: true,
+                        opacity: dic_LayerTrans[featureindex]
+                    })
+
+                    var statesLabel = new TextSymbol().setColor(new Color("#0a162c"));
+                    statesLabel.font.setSize("15pt");
+                    statesLabel.font.setWeight(700);
+                    var labelClass = new LabelClass({
+                        "labelExpressionInfo": {
+                            "value": "{labelField}"
+                        }
+                    });
+                    labelClass.symbol = statesLabel;
+                    featureLayer.setLabelingInfo([labelClass]);
+
+                    arrFeaturelayers.push(fealayer);
+                    map.addLayer(fealayer, 2);
+                    // if (FeaLayer[featureindex] != "") {
+                    //     //fealayer = FeaLayer[featureindex];
+                    //     fealayer = map.getLayer('graphicsLayer2');
+                    //     //map.getLayer(map.layerIds[j]);
+                    //    // fealayer.opacity = 0;// dic_LayerTrans[featureindex];
+
+                    //     fealayer.opacity =0.5;
+                    //     //fealayer.visible = true;
+                    //}
+
+                    // fealayer = GetFeatureLayer(featureindex, )
+                    // if (fealayer !== undefined) {
+                    //     arrFeaturelayers.push(fealayer);
+                    //     map.addLayer(fealayer, 2)
+                    // }
+                    // else {
+                    //     console.log(featureindex + ' not create');
+                    // };
+                }
+            }
+        }
 
         // var dic_Menu2ServerAddr=new Array();
         // dic_Menu2ServerAddr['101']=WebServer+'/showview/resultview';
@@ -1169,10 +1228,13 @@
             UserName = "@ViewBag.UserName";
             if (UserOperRight != "管理员") {
                 UserCanEdit = false;
-                alert("当前用户为浏览人员，不能修改提交数据！");
-                  // $('#F110"').attr("display", "none");
+                alert("当前用户为浏览人员，不能修改提交数据！");//程序需要获取位置数据，数据存储权限\r\n");
+                // $('#F110"').attr("display", "none");
                 //$('#F110"').attr("visibility", "hidden");
             }
+            //else {
+            //    alert('程序需要获取位置数据，数据存储权限\r\n');
+            //}
             $("#F110").attr("disabled", !UserCanEdit);
          
             var host = window.location.host;
@@ -1215,9 +1277,47 @@
             //启动定位
             setTimeout('FindPos()', 1000);
 
-
+            SaveUserBrwoserInfo(bsU_Id, UserName+':index_m ready');
 
         });
+
+        function SaveUserBrwoserInfo(userid, visitdesp) {
+
+            var p = navigator.platform;
+            var brower = {};
+            brower.win = p.indexOf("Win") == 0;
+            brower.mac = p.indexOf("Mac") == 0;
+            brower.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+            var userbrower = "";
+            if (brower.win)
+                userbrower = "win";
+            else if (brower.mac)
+                userbrower = "mac";
+            else if (browe.x11)
+                userbrower = "x11"
+
+            var formData = new FormData();
+            formData.append('userid', userid);
+            formData.append('browser', userbrower);
+            formData.append('visitdesp', visitdesp);
+
+            $.ajax({
+                url: '../bsVisitLog/Add',
+                type: 'POST',
+                data: formData,
+                dataType: 'JSON',
+                async: false,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (returndata) {
+                    //alert(returndata.code);
+                },
+                error: function (returndata) {
+                    //alert(returndata);
+                }
+            });
+        }
 
         function GetFeatureLayer(lindex, opacity) {
             require([

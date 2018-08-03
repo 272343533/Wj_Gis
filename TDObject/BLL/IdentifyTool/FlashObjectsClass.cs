@@ -56,7 +56,7 @@ namespace TDObject.IdentifyTool
 
         private void InitialSymbols()
         {
-            IColor displayColor = DefineRgbColor(255, 128, 128);
+            IColor displayColor = DefineRgbColor(255,0,0);// (255, 128, 128);
             IColor outLineColor = DefineRgbColor(0,128, 0);
             ILineSymbol outLineSymbol = DefineLineSymbol(1.5, outLineColor, esriSimpleLineStyle.esriSLSSolid);
             pointSymbol = DefinePointSymbol(13, displayColor, esriSimpleMarkerStyle.esriSMSCircle, outLineSymbol) as ISymbol;

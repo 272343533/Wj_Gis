@@ -1193,19 +1193,23 @@ namespace TDObject
             //dgvFW.Columns[1].Width;
             try
             {
-                IGeoFeatureLayer pLayer = LayerControl.getGeoLayer(this.axMapControl1, this.cboLayerName.Text);
-                if (pLayer is IFeatureLayer)//如果第一个图层时矢量图层
+                if (this.cboLayerName.Text == "")
                 {
-                    ILayerEffects pLayerEffects = pLayer as ILayerEffects;
-                    pLayerEffects.Transparency = Convert.ToInt16(cboTransp.Text.Trim());//设置ILayerEffects接口的Transparency属性使该矢量图层的透明度属性为65.
+                    IGeoFeatureLayer pLayer = LayerControl.getGeoLayer(this.axMapControl1, this.cboLayerName.Text);
+                    if (pLayer is IFeatureLayer)//如果第一个图层时矢量图层
+                    {
+                        ILayerEffects pLayerEffects = pLayer as ILayerEffects;
+                        pLayerEffects.Transparency = Convert.ToInt16(cboTransp.Text.Trim());//设置ILayerEffects接口的Transparency属性使该矢量图层的透明度属性为65.
 
-                    this.axMapControl1.ActiveView.PartialRefresh(ESRI.ArcGIS.Carto.esriViewDrawPhase.esriViewAll, pLayer, null);
+                        this.axMapControl1.ActiveView.PartialRefresh(ESRI.ArcGIS.Carto.esriViewDrawPhase.esriViewAll, pLayer, null);
 
 
+                    }
+                    else
+                        this.axMapControl1.ActiveView.PartialRefresh(ESRI.ArcGIS.Carto.esriViewDrawPhase.esriViewAll, null, null);
                 }
                 else
-                    this.axMapControl1.ActiveView.PartialRefresh(ESRI.ArcGIS.Carto.esriViewDrawPhase.esriViewAll,null, null);
-
+                    this.axMapControl1.ActiveView.PartialRefresh(ESRI.ArcGIS.Carto.esriViewDrawPhase.esriViewAll, null, null);
             }
             catch (Exception ex)
             {

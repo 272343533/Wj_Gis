@@ -560,6 +560,22 @@ namespace SunMvcExpress.Dao
             }
         }
         private ObjectSet<企业范围> _企业范围;
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        public ObjectSet<bsVisitLog> bsVisitLog
+        {
+            get
+            {
+                if ((_bsVisitLog == null))
+                {
+                    _bsVisitLog = base.CreateObjectSet<bsVisitLog>("bsVisitLog");
+                }
+                return _bsVisitLog;
+            }
+        }
+        private ObjectSet<bsVisitLog> _bsVisitLog;
 
         #endregion
 
@@ -811,6 +827,14 @@ namespace SunMvcExpress.Dao
         public void AddTo企业范围(企业范围 企业范围)
         {
             base.AddObject("企业范围", 企业范围);
+        }
+    
+        /// <summary>
+        /// 用于向 bsVisitLog EntitySet 添加新对象的方法，已弃用。请考虑改用关联的 ObjectSet&lt;T&gt; 属性的 .Add 方法。
+        /// </summary>
+        public void AddTobsVisitLog(bsVisitLog bsVisitLog)
+        {
+            base.AddObject("bsVisitLog", bsVisitLog);
         }
 
         #endregion
@@ -2986,6 +3010,159 @@ namespace SunMvcExpress.Dao
         private global::System.String _ExComplQueryCond;
         partial void OnExComplQueryCondChanging(global::System.String value);
         partial void OnExComplQueryCondChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// 没有元数据文档可用。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="wj_GisDbModel", Name="bsVisitLog")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class bsVisitLog : EntityObject
+    {
+        #region 工厂方法
+    
+        /// <summary>
+        /// 创建新的 bsVisitLog 对象。
+        /// </summary>
+        /// <param name="visitId">VisitId 属性的初始值。</param>
+        public static bsVisitLog CreatebsVisitLog(global::System.Guid visitId)
+        {
+            bsVisitLog bsVisitLog = new bsVisitLog();
+            bsVisitLog.VisitId = visitId;
+            return bsVisitLog;
+        }
+
+        #endregion
+
+        #region 基元属性
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> VisitDt
+        {
+            get
+            {
+                return _VisitDt;
+            }
+            set
+            {
+                OnVisitDtChanging(value);
+                ReportPropertyChanging("VisitDt");
+                _VisitDt = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VisitDt");
+                OnVisitDtChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _VisitDt;
+        partial void OnVisitDtChanging(Nullable<global::System.DateTime> value);
+        partial void OnVisitDtChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> userId
+        {
+            get
+            {
+                return _userId;
+            }
+            set
+            {
+                OnuserIdChanging(value);
+                ReportPropertyChanging("userId");
+                _userId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("userId");
+                OnuserIdChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _userId;
+        partial void OnuserIdChanging(Nullable<global::System.Guid> value);
+        partial void OnuserIdChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String VisitDesp
+        {
+            get
+            {
+                return _VisitDesp;
+            }
+            set
+            {
+                OnVisitDespChanging(value);
+                ReportPropertyChanging("VisitDesp");
+                _VisitDesp = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("VisitDesp");
+                OnVisitDespChanged();
+            }
+        }
+        private global::System.String _VisitDesp;
+        partial void OnVisitDespChanging(global::System.String value);
+        partial void OnVisitDespChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Brower
+        {
+            get
+            {
+                return _Brower;
+            }
+            set
+            {
+                OnBrowerChanging(value);
+                ReportPropertyChanging("Brower");
+                _Brower = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Brower");
+                OnBrowerChanged();
+            }
+        }
+        private global::System.String _Brower;
+        partial void OnBrowerChanging(global::System.String value);
+        partial void OnBrowerChanged();
+    
+        /// <summary>
+        /// 没有元数据文档可用。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid VisitId
+        {
+            get
+            {
+                return _VisitId;
+            }
+            set
+            {
+                if (_VisitId != value)
+                {
+                    OnVisitIdChanging(value);
+                    ReportPropertyChanging("VisitId");
+                    _VisitId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("VisitId");
+                    OnVisitIdChanged();
+                }
+            }
+        }
+        private global::System.Guid _VisitId;
+        partial void OnVisitIdChanging(global::System.Guid value);
+        partial void OnVisitIdChanged();
 
         #endregion
 
