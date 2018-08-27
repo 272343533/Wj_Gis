@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace TDObject.UI
 {
-    public partial class FrmUpReport1 : FlatForm
+    public partial class FrmUpReport1 : QyTech.SkinForm.qyForm
     {
         public FrmUpReport1()
         {

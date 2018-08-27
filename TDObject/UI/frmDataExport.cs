@@ -12,11 +12,11 @@ using Microsoft.Office.Interop.Excel;
 using System.Data.OleDb;
 
 using SunMvcExpress.Dao;
-using QyTech.ExcelExport;
+using QyTech.ExcelOper;
 
 namespace TDObject.UI
 {
-    public partial class frmDataExport : FlatForm
+    public partial class frmDataExport : QyTech.SkinForm.qyForm
     {
         public frmDataExport()
         {
@@ -33,8 +33,8 @@ namespace TDObject.UI
         {
             try
             {
-                dgvSj.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgvJfj.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dgvSj.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgvJfj.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
                 this.cboNd.SelectedIndex = 0;
 
@@ -179,7 +179,7 @@ namespace TDObject.UI
 
         private void tabControl2_MouseMove(object sender, MouseEventArgs e)
         {
-            FormSkin.MouseMoveForm(this.Handle);
+            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void dgvExcel_MouseMove(object sender, MouseEventArgs e)

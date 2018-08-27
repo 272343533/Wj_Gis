@@ -12,7 +12,7 @@ using SunMvcExpress.Dao;
 
 namespace TDObject.UI
 {
-    public partial class frmLtdInfoPop : FlatForm
+    public partial class frmLtdInfoPop : QyTech.SkinForm.qyForm
     {
         string dkbh_;
         public frmLtdInfoPop(string dkbh)

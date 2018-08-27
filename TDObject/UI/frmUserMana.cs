@@ -10,12 +10,14 @@ using System.Windows.Forms;
 using SunMvcExpress.Dao;
 using QyTech.Core;
 using QyTech.Core.BLL;
-using QyTech.Core.BLL;
 using QyTech.Json;
+using QyTech.SkinForm.Controls;
+using QyTech.SkinForm.Component;
+
 
 namespace TDObject.UI
 {
-    public partial class frmUserMana : FlatForm
+    public partial class frmUserMana : QyTech.SkinForm.qyForm
     {
 
 
@@ -33,14 +35,25 @@ namespace TDObject.UI
 
         private void frmUserMana_Load(object sender, EventArgs e)
         {
-            //this.dgvEmp.DataError += delegate(dgvEmp, DataGridViewDataErrorEventArgs e) { };
-           // this.dgvEmp.Columns[5].DataPropertyName = "bsR_Name";
-            treeOrg.Nodes[0].ExpandAll();
-            this.treeOrg.SelectedNode = treeOrg.Nodes[0];
+            try
+            {
+                //this.dgvEmp.DataError += delegate(dgvEmp, DataGridViewDataErrorEventArgs e) { };
+                // this.dgvEmp.Columns[5].DataPropertyName = "bsR_Name";
 
-          //  RefreshUserInfoDgv(treeOrg.Nodes[0].Text);
+                //  RefreshUserInfoDgv(treeOrg.Nodes[0].Text);
+                List<QyTech.Auth.Dao.bsOrganize> orgs = MainForm.QyTech_EM.GetListNoPaging<QyTech.Auth.Dao.bsOrganize>("bsO_Id='C6D2FF6A-10AC-4A42-B228-2EB8584EFB98'  or (bsS_Id='C6D2FF6A-10AC-4A42-B228-2EB8584EFB98' and bsoAttr='行政')", "Code");
+                //List<QyTech.Auth.Dao.bsOrganize> bsorgs = new List<QyTech.Auth.Dao.bsOrganize>();
+                //foreach (bsOrganize org in orgs)
+                //{
+                //    QyTech.Auth.Dao.bsOrganize bsorg = EntityOperate.Copy<QyTech.Auth.Dao.bsOrganize>(org);
+                //    bsorgs.Add(bsorg);
+                //}
+                this.treeOrg.RefreshTree(orgs);
+                treeOrg.Nodes[0].ExpandAll();
+                this.treeOrg.SelectedNode = treeOrg.Nodes[0];
 
-            
+            }
+            catch (Exception ex) { log.Error(ex.Message); }
         }
 
         private void toolStripButton1_Click(object sender, System.EventArgs e)
@@ -73,7 +86,7 @@ namespace TDObject.UI
                 if (ret != "")
                     MessageBox.Show(ret);
                 else
-                    RefreshUserInfoDgv(this.treeOrg.SelectedNode.Text);
+                    RefreshUserInfoDgv(this.treeOrg.SelectedNode.Tag);
             }
             catch (Exception ex)
             {
@@ -123,7 +136,7 @@ namespace TDObject.UI
                 try
                 {
                     //String ret =EntityManager<bsUser>.Delete<bsUser>("bsU_Id",currentUiid);
-                    string url = MainForm.URI + "lyRemoteServ/DelUserData?id=" + currentUiid.ToString();
+                    string url = MainForm.App_URI + "lyRemoteServ/DelUserData?id=" + currentUiid.ToString();
                     string ret = AsyncHttp.CommFun.GetRemoteJson(url);
                    
                     if (ret=="")
@@ -133,21 +146,22 @@ namespace TDObject.UI
                 {
                     MessageBox.Show("删除失败！" + ex.Message);
                 }
-                RefreshUserInfoDgv(this.treeOrg.SelectedNode.Text);
+                RefreshUserInfoDgv(this.treeOrg.SelectedNode.Tag);
             }
         }
 
-        private void RefreshUserInfoDgv(string bsO_Name)
+        private void RefreshUserInfoDgv(object nodetag)
         {
             try
             {
-                //string url = MainForm.URI + "lyRemoteServ/GetAllUserInfoData";
+                QyTech.Auth.Dao.bsOrganize org = nodetag as QyTech.Auth.Dao.bsOrganize;
+                //string url = MainForm.App_URI + "lyRemoteServ/GetAllUserInfoData";
                 //string ret = AsyncHttp.CommFun.GetRemoteJson(url);
                 //users = JsonHelper.DeserializeJsonToList<bsUser>(ret);
-               if (bsO_Name==this.treeOrg.Nodes[0].Text)
+               if (org.Name == this.treeOrg.Nodes[0].Text)
                    users = MainForm.EM.GetListNoPaging<bsUser>("bso_Name!='System'", "bsR_Name,LoginName");
                else
-                   users = MainForm.EM.GetListNoPaging<bsUser>("bsO_Name='"+bsO_Name+"'", "bsR_Name,LoginName");
+                   users = MainForm.EM.GetListNoPaging<bsUser>("bsO_Id='"+ org.bsO_Id+ "'", "bsR_Name,LoginName");
                 List<bsUser> tmps = new List<bsUser>();
                 foreach (bsUser bsu in users)
                 {
@@ -323,7 +337,8 @@ namespace TDObject.UI
 
         private void treeOrg_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            RefreshUserInfoDgv(this.treeOrg.SelectedNode.Text);
+            TreeView tv = sender as TreeView;
+            RefreshUserInfoDgv(tv.SelectedNode.Tag);
         }
     }
 }

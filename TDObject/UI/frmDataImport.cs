@@ -12,14 +12,14 @@ using Microsoft.Office.Interop.Excel;
 using System.Data.OleDb;
 
 using SunMvcExpress.Dao;
-using QyTech.ExcelExport;
+using QyTech.ExcelOper;
 using System.Reflection;
 
 
 
 namespace TDObject.UI
 {
-    public partial class frmDataImport : FlatForm
+    public partial class frmDataImport : QyTech.SkinForm.qyForm
     {
         public frmDataImport()
         {
@@ -31,12 +31,13 @@ namespace TDObject.UI
         List<经发局表格> objs1;
 
         Dictionary<string, string> dic_ExcelColumn2FieldName = new Dictionary<string, string>();
-        List<Excel2FieldMap> efMs;
+        List<QyTech.Auth.Dao.bsFName2ExcelColMap> efMs;
 
         QyExcelHelper exExcelHelper = new QyExcelHelper("local");
 
         DataSet ds = new DataSet();//新建数据集
-             
+
+        List<string> ExcelCols = new List<string>();
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -94,6 +95,14 @@ namespace TDObject.UI
                     dgvExcel.DataSource = ds.Tables[0];
            
                 }
+                dt = ds.Tables[0];
+                //记录excel列名称
+                ExcelCols.Clear();
+                foreach(DataColumn dc in dt.Columns)
+                {
+                    ExcelCols.Add(dc.ColumnName);
+                }
+
             }
             catch (Exception ex)
             {
@@ -116,6 +125,9 @@ namespace TDObject.UI
 
         private void button3_Click(object sender, EventArgs e)
         {
+            int BatchCount = 100;
+            List<市局表格> objs_sjbg = new List<市局表格>();
+
             try
             {
                 object val;
@@ -127,9 +139,9 @@ namespace TDObject.UI
                     }
                     else
                     {
-                        efMs = MainForm.EM.GetListNoPaging<Excel2FieldMap>("TableName='" + cboType.Text + "'", "ExcelCNo");
+                        efMs = MainForm.QyTech_EM.GetListNoPaging<QyTech.Auth.Dao.bsFName2ExcelColMap>("TableName='" + cboType.Text + "'", "ExcelCNo");
                         dic_ExcelColumn2FieldName.Clear();
-                        foreach (Excel2FieldMap m in efMs)
+                        foreach (QyTech.Auth.Dao.bsFName2ExcelColMap m in efMs)
                         {
                             dic_ExcelColumn2FieldName.Add(m.ExcelCName, m.FName);
                         }
@@ -139,7 +151,6 @@ namespace TDObject.UI
                         {
 
                             System.Data.DataTable dt = ds.Tables[0];
-
                             for (int r = 0; r < dt.Rows.Count; r++)
                             {
                                 if (cboType.Text == "市局表格")
@@ -182,7 +193,13 @@ namespace TDObject.UI
                                         }
                                         catch (Exception ex) { log.Error(ex.Message); }
                                     }
-                                    MainForm.EM.Add<市局表格>(sjobj);
+                                    objs_sjbg.Add(sjobj);
+                                    if (objs_sjbg.Count==BatchCount || r==dt.Rows.Count-1)
+                                    {
+                                        MainForm.EM.Add<市局表格>(objs_sjbg);
+                                        objs_sjbg.Clear();
+                                        //MainForm.EM.Add<市局表格>(sjobj);
+                                    }
                                     RefreshPgb(r + 1, dt.Rows.Count);
                                 }
                                 else if (cboType.Text == "经发局表格")
@@ -239,9 +256,9 @@ namespace TDObject.UI
         {
             try
             {
-                dgvSj.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgvJfj.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgvExcel.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dgvSj.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgvJfj.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgvExcel.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
                 this.cboNd.SelectedIndex = 0;
 
@@ -360,7 +377,7 @@ namespace TDObject.UI
 
         private void tabControl2_MouseMove(object sender, MouseEventArgs e)
         {
-            FormSkin.MouseMoveForm(this.Handle);
+            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void dgvExcel_MouseMove(object sender, MouseEventArgs e)
@@ -382,6 +399,15 @@ namespace TDObject.UI
             }
         }
 
-      
+        private void qyBtn1_Click(object sender, EventArgs e)
+        {
+            if (ExcelCols==null ||ExcelCols.Count==0)
+            {
+                MessageBox.Show("请先选择excel文件!");
+                return;
+            }
+            QyTech.SkinForm.UICreate.frmFName2ExcelCol obj = new QyTech.SkinForm.UICreate.frmFName2ExcelCol("wj_GisDb","经发局表格", ExcelCols);
+            obj.Show();
+        }
     }
 }

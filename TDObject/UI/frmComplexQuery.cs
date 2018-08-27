@@ -22,7 +22,7 @@ namespace TDObject.UI
 {
 
 
-    public partial class frmComplexQuery : FlatForm
+    public partial class frmComplexQuery : QyTech.SkinForm.qyForm
     {
 
         IEnvelope newdisp = (IEnvelope)new Envelope();//用于定位
@@ -49,7 +49,6 @@ namespace TDObject.UI
 
             {
                 string Querys1 = string.Empty;//保存查询条件
-                string Querys2 = string.Empty;//保存查询条件
                 SetLabelY = 0;
                 int SelectNum = -1;
                 int LocationX, LocationY;
@@ -64,34 +63,11 @@ namespace TDObject.UI
                         LocationX = SelectNum % 4 * 250;
                         LocationY = 10 + SelectNum / 4 * 45;
 
-                        string cname = tn.Name.Substring(3);
+                        //string cname = tn.Name.Substring(3);
 
-                        if (cname.Substring(0, 3) == "cbo")//combox
-                        {
-                            CreateCombobox(tn.Text, cname, comboitems[cname], LocationX, LocationY);
-                            Querys1 += tn.Text + ",";
-                            Querys2 += tn.Name + ",";
-                        }
-                        else if (cname.Substring(0, 3) == "txt")
-                        {
-                            //text
-                            CreateTextDisplay(tn.Text, cname, LocationX, LocationY);
-                            Querys1 += tn.Text + ",";
-                            Querys2 += tn.Name + ",";
-                        }//else if (NumRangeFields.Contains<string>(tn.Text))
-                         //{
-                         //    //number range
-                         //    CreateNumRange(tn.Text, tn.Name, SelectNum % 2 == 1 ? 500 : 20, 10 + SelectNum / 2 * 45);
-                         //    Querys1 += tn.Text + ",";
-                         //    Querys2 += tn.Name + ",";
+                        CreateDynConditionDisplay(tn.Tag as bsDynCondition, LocationX, LocationY);
+                        Querys1 += "," + tn.Text;
 
-                        //}
-                        //else if (DaRangeFields.Contains<string>(tn.Text))
-                        //{
-                        //    CreatDaRange(tn.Text, tn.Name, SelectNum % 2 == 1 ? 500 : 20, 10 + SelectNum / 2 * 45);
-                        //    Querys1 += tn.Text + ",";
-                        //    Querys2 += tn.Name + ",";
-                        //}
 
 
                         panel3.Height = 90 + SelectNum / 4 * 45;
@@ -132,9 +108,29 @@ namespace TDObject.UI
         {
             try
             {
-                this.dgvT2_11.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                this.dgvT2_11.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
+
+                //根据用户填充左侧条件列表
+                List<bsDynCondition> conds;
+                if (MainForm.LoginUser.bsO_Id==Guid.Parse("C6D2FF6A-10AC-4A42-B228-2EB8584EFB98"))
+                    conds= MainForm.EM.GetListNoPaging<bsDynCondition>("", "condNo");
+                else
+                    conds = MainForm.EM.GetListNoPaging<bsDynCondition>("RoleName ='所有' or RoleName='" + MainForm.LoginUser.bsO_Name + "'", "condNo");
+
+                this.treeView1.Nodes[0].Nodes.Clear();
+
+                foreach (bsDynCondition cond in conds)
+                {
+                    TreeNode tn = new TreeNode(cond.condName);
+                    tn.Tag = cond;
+                    if (cond.CompName!=null)
+                        tn.Name = cond.CompName;
+                    this.treeView1.Nodes[0].Nodes.Add(tn);
+                }
                 this.treeView1.ExpandAll();
+
+
                 string query = MainForm.LoginUser.ExComplQueryCond;
                 string showCell = string.Empty;
               
@@ -148,20 +144,7 @@ namespace TDObject.UI
                     refdgvT2_11(showCell);
                 }
                          
-                //填充combox选项
-                comboitems.Add("cbo_aqscdj", "全部,一级,二级,三级");
-                comboitems.Add("cbo_hhpcf", "全部,红牌,黄牌");
-                comboitems.Add("cbo_xdbqy", "全部,超1亿元,超5亿元,超10亿元,超20亿元");
-                comboitems.Add("cbo_hydl", "");//从数据库中获取
-                comboitems.Add("cbo_yye", "全部,2000万以上,3000万以上,5000万以上,1亿以上");
-                comboitems.Add("cbo_ss", "全部,,2000万以上,3000万以上,5000万以上");
-                comboitems.Add("cbo_zncj", "全部,2015年,2016年,2017年,2018年");//智能车间
-                comboitems.Add("cbo_tdphjh", "全部,10亩以上,20亩以上,50亩以上,100亩以上");
-                comboitems.Add("cbo_ssqk", "全部,台资拟上市,三板挂牌,主板后备");
-                comboitems.Add("cbo_zxhp", "全部,市级,省级,国家级");
-                comboitems.Add("cbo_znzz", "全部,台智能设计,智能生产,智能装备,供应链管理,生产性电商");
-
-
+             
                 button3_Click(this.button3, null);
 
 
@@ -173,7 +156,32 @@ namespace TDObject.UI
         }
 
         #region 条件创建
-        private void CreateTextDisplay(string labText, string textName, int x, int y, int labwidth = 90, int textwidth = 150)
+        private void CreateDynConditionDisplay(bsDynCondition cond, int x, int y, int labwidth = 90, int textwidth = 150)
+        {
+            if (cond.compType=="textbox")
+            {
+                CreateTextDisplay(cond.condName, cond.CompName, cond, x, y, labwidth, textwidth);
+            }
+            else if (cond.compType == "combox")
+            {
+                CreateCombobox(cond.condName, cond.CompName, cond.compitems, cond, x, y, labwidth, textwidth);
+            }
+            //else if (NumRangeFields.Contains<string>(tn.Text))
+            //{
+            //    //number range
+            //    CreateNumRange(tn.Text, tn.Name, SelectNum % 2 == 1 ? 500 : 20, 10 + SelectNum / 2 * 45);
+            //    Querys1 += tn.Text + ",";
+            //    Querys2 += tn.Name + ",";
+
+            //}
+            //else if (DaRangeFields.Contains<string>(tn.Text))
+            //{
+            //    CreatDaRange(tn.Text, tn.Name, SelectNum % 2 == 1 ? 500 : 20, 10 + SelectNum / 2 * 45);
+            //    Querys1 += tn.Text + ",";
+            //    Querys2 += tn.Name + ",";
+            //}
+        }
+        private void CreateTextDisplay(string labText, string textName,object tag, int x, int y, int labwidth = 90, int textwidth = 150)
         {
             Label l = new Label();
             l.Text = labText;
@@ -185,11 +193,13 @@ namespace TDObject.UI
             TextBox tb = new TextBox();
             tb.Location = new System.Drawing.Point(x + 100, y);
             tb.Width = textwidth;
-            tb.Name = textName;
+            if (textName!=null)
+                tb.Name = textName;
+            tb.Tag = tag;
 
             this.gbConditon.Controls.Add(tb);
         }
-        private void CreateCombobox(string labText, string comname,string items, int x, int y, int labwidth = 90, int comboxwidth = 150)
+        private void CreateCombobox(string labText, string comname,string items, object tag, int x, int y, int labwidth = 90, int comboxwidth = 150)
         {
             Label l = new Label();
             l.Text = labText;
@@ -202,6 +212,8 @@ namespace TDObject.UI
             cb.Location = new System.Drawing.Point(x + 100, y);
             cb.Width = comboxwidth;
             cb.Name = comname;
+            cb.Tag = tag;
+
             if (items.Trim() != "")
             {
                 string[] sitems = items.Split(new char[] { ',' });
@@ -287,9 +299,9 @@ namespace TDObject.UI
                 //Conditions += MainForm.LoginUserRights;
                 //string detailUrl="";
                 //if (Conditions!="")
-                //    detailUrl = MainForm.URI+ "lyRemoteServ/DoComplexQuery?sqlconf=" + Conditions;
+                //    detailUrl = MainForm.App_URI+ "lyRemoteServ/DoComplexQuery?sqlconf=" + Conditions;
                 //else
-                //    detailUrl = MainForm.URI + "lyRemoteServ/DoComplexQuery" ;
+                //    detailUrl = MainForm.App_URI + "lyRemoteServ/DoComplexQuery" ;
                 //string ret = AsyncHttp.CommFun.GetRemoteJson(detailUrl);
                 //list = JsonHelper.DeserializeJsonToList<企业范围>(ret);
 
@@ -310,51 +322,51 @@ namespace TDObject.UI
             }
         }
 
-        private string GetItemCondition(string itemname, string itemtext)
+        private string GetItemCondition(bsDynCondition cond, string itemtext)
         {
             string Conditions = "";
+            string itemname = cond.condName;
+
+            string[] sqls = cond.Sql.Split(new char[] { '|' });
+            int sqlindex = 0;
+            if (cond.compType=="textbox")
+            {
+                Conditions += " and " + cond.Sql.Replace("@@@@", itemtext);
+            }
+            else if (cond.compType== "combox")
+            {
+                foreach(string c in cond.compitems.Split(new char[] {','}))
+                {
+                    if (c == itemtext)
+                        break;
+                    sqlindex++;
+                }
+                if (sqlindex > sqls.Length)
+                    sqlindex = sqls.Length - 1;//没有对应的就用最后一个
+            }
+
+
             if (itemtext.Trim() == "")
                 return "";
 
-            if ("txt_dkbm" == itemname)
-                Conditions += " and DKBH ='" + itemtext + "'";
-            if ("txt_nsrsbh" == itemname)
-                Conditions += " and NSRSBH = '" + itemtext + "'";
-            if ("cbo_hydl" == itemname)
-                Conditions += " and HYDL like '%" + itemtext + "%'";
-            if ("txt_jyfw" == itemname)
-                Conditions += " and JYFW like '%" + itemtext + "%'";
-            if ("txtyddwmc" == itemname)
-                Conditions += " and YDQYMC like '%" + itemtext + "%'";
-            if ("this.txt_zdzlyy" == itemname)
-                Conditions += " and ZLQYMC_ like '%" + itemtext + "%'";
+            if ("地块编号,纳税人识别号,行业大类,经营范围,用地单位名称,租赁单位名称,红黄牌处罚情况,标准化等级,智能工厂".Contains(itemname))
+                Conditions += " and "+ sqls[sqlindex].Replace("@@@@",itemtext);
+
+            if ("技术中心获批级别" == itemname)
+                Conditions += " and " + sqls[sqlindex];
+
+            if ("智能车间" == itemname)
+                Conditions += " and " + sqls[sqlindex].Replace("@@@@", itemtext.Substring(0, 4));
+
+            if ("地标性企业" == itemname)
+                Conditions += " and " + sqls[sqlindex].Replace("@@@@", itemtext.Substring(1, itemtext.Length - 3));
+           
+            if ("营业额，税收，土地盘活计划" == itemname)
+                Conditions += " and " + sqls[sqlindex].Replace("@@@@", itemtext.Substring(0, itemtext.Length - 3));
 
 
-
-
-            if ("cbo_hhpcf" == itemname)
-                Conditions += " and DKBH in (" + " select SSDKBM from LtdProblem " + (itemtext == "全部" ? ")" : "where CCLX='"+ itemtext+"')");
-
-            if ("cbo_zncj" == itemname)
-                Conditions += " and DKBH in (" + " select 地块编号 from t智能车间 " + (itemtext == "全部" ? ")" : "where 获评年份='" + itemtext.Substring(0, 4) + "')");
-
-            if ("cbo_xdbqy" == itemname)
-                Conditions += " and DKBH in (" + " select 地块编号 from t新地标计划企业名单 " + (itemtext == "全部" ? ")" : "where substring(目标,1,len(目标)-3)='" + itemtext.Substring(1,itemtext.Length-3) + "')");
-
-            if ("cbo_yye" == itemname)
-                Conditions += " and DKBH in (" + " select 地块编号 from t开发区2000万企业 " + (itemtext == "全部" ? ")" : "where 累计销售额合计" + itemtext.Substring(0, itemtext.Length - 3) + ")");
-
-            if ("cbo_ss" == itemname)
-                Conditions += " and DKBH in (" + " select 地块编号 from t开发区2000万企业 " + (itemtext == "全部" ? ")" : "where 税收>=" + itemtext.Substring(0, itemtext.Length - 3) + ")");
-
-            if ("cbo_aqscdj" == itemname)
-                Conditions += " and DKBH in (" + " select 地块编号 from t标准化级别 "+ (itemtext == "全部"? ")" : "where 标准化级别='" + itemtext + "')");
-               
-
-            if ("cbo_tdphjh" == itemname)
-                Conditions += " and DKBH in (" + " select 地块编号 from t闲置土地盘活计划表 " + (itemtext == "全部" ? ")" : "where 土地面积>=" + itemtext.Substring(0, itemtext.Length - 3) + ")");
-
-            if ("cbo_ssqk" == itemname)
+                   
+            if ("上市情况" == itemname)
             { 
                 if (itemtext == "全部")
                 {
@@ -372,13 +384,7 @@ namespace TDObject.UI
                 if (itemtext == "主板后备")
                     Conditions += " and DKBH in (" + " select 地块编号 from t同里镇开发区上市企业台帐主版后备 where 地块编号 is not null)";
             }
-            if ("cbo_zxhp" == itemname)
-                Conditions += " and DKBH in (" + " select 地块编号 from t企业技术中心台账 where 地块编号 is not null)";
-
-            if ("cbo_znzz" == itemname)
-                Conditions += " and DKBH in (" + " select 地块编号 from t吴江区智能制造示范试点企业名单 " + (itemtext == "全部" ? ")" : "where 所属环节='" + itemtext + "')");
-
-
+          
             return Conditions;
         }
 
@@ -440,11 +446,11 @@ namespace TDObject.UI
             {
                 if (c is TextBox)
                 {
-                    Conditions += GetItemCondition(c.Name, c.Text);
+                    Conditions += GetItemCondition(c.Tag as bsDynCondition, c.Text);
                 }
                 else if (c is ComboBox)
                 {
-                    Conditions += GetItemCondition(c.Name, c.Text);
+                    Conditions += GetItemCondition(c.Tag as bsDynCondition, c.Text);
                 }
                 //else if (c is DateTimePicker)
                 //{
@@ -584,7 +590,7 @@ namespace TDObject.UI
             else
             {
                 frmAlarmQuery obj = new frmAlarmQuery(objid);
-                FormSkin.ShowForm(obj);
+                QyTech.SkinForm.qyFormUtil.ShowForm(obj);
             }
         }
 
@@ -601,7 +607,7 @@ namespace TDObject.UI
 
         private void panel3_MouseMove(object sender, MouseEventArgs e)
         {
-            FormSkin.MouseMoveForm(this.Handle);
+            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -624,7 +630,10 @@ namespace TDObject.UI
 
         private void dgvT2_11_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            FormSkin.dgv_RowPostPaint(sender, e);
+            DataGridView dgv = sender as DataGridView;
+            SolidBrush b = new SolidBrush(dgv.RowHeadersDefaultCellStyle.ForeColor);
+            e.Graphics.DrawString((e.RowIndex + 1).ToString(System.Globalization.CultureInfo.CurrentUICulture), dgv.DefaultCellStyle.Font, b, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
+
         }
 
         private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)

@@ -239,7 +239,7 @@ namespace WTGeoWeb.BLL
 
 
             //List<string> objs = TDObject.BLL.CommSetting.EM.GetAllByStorProcedure<string>("splyGetCGDLTotalType",new object[]{});
-            string detailUrl = MainForm.URI + "lyRemoteServ/GetCGDLTotalTyp";
+            string detailUrl = MainForm.App_URI + "lyRemoteServ/GetCGDLTotalTyp";
             string json = CommFun.GetRemoteJson(detailUrl);
             List<string> objs = JsonHelper.DeserializeJsonToList<string>(json);
             

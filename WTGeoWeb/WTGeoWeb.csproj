@@ -244,6 +244,10 @@
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\QyTech.js" />
+    <Content Include="Scripts\QyTech\Arcgis\BDAnoLayer.js.js" />
+    <Content Include="Scripts\QyTech\Arcgis\BDimgLayer.js" />
+    <Content Include="Scripts\QyTech\Arcgis\BDVecLayer.js" />
+    <Content Include="Scripts\QyTech\Arcgis\BaiduLayer.js" />
     <Content Include="Scripts\QyTech\Arcgis\Layers.js" />
     <Content Include="Scripts\QyTech\Arcgis\Wjkfq.js" />
     <Content Include="Scripts\QyTech\myArc.js" />

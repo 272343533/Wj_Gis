@@ -22,7 +22,7 @@ using ESRI.ArcGIS.Geometry;
 
 namespace TDObject.UI
 {
-    public partial class frmTypeFilter : FlatForm
+    public partial class frmTypeFilter : QyTech.SkinForm.qyForm
     {
        
         List<IFeature> pGeos = new List<IFeature>();//用于高亮
@@ -34,7 +34,7 @@ namespace TDObject.UI
 
         int CurrPageFlag = 1;
 
-        QyTech.ExcelExport.QyExcelHelper excl = new QyTech.ExcelExport.QyExcelHelper("local");
+        QyTech.ExcelOper.QyExcelHelper excl = new QyTech.ExcelOper.QyExcelHelper("local");
                        
         public frmTypeFilter()
         {
@@ -49,17 +49,17 @@ namespace TDObject.UI
                 tabControl2.ItemSize = new Size(0, 1);
 
                 //设置默认风格
-                dgv1.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv2.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv31.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv32.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv33.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv4.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv5.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv6.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv7.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv8.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv9.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dgv1.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv2.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv31.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv32.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv33.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv4.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv5.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv6.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv7.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv8.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv9.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
                 //初始化列数据属性字段
                 RefreshDgvColumnPropertyValue(dgv1);
@@ -114,7 +114,7 @@ namespace TDObject.UI
                 dgv8.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgv9.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-                excl.eventNumChanged += new QyTech.ExcelExport.DelegateForExportNo(RefreshPgb);
+                excl.eventNumChanged += new QyTech.ExcelOper.DelegateForExportNo(RefreshPgb);
 
 
                 this.dgv2.Click += new System.EventHandler(this.dgv1_Click);
@@ -917,7 +917,7 @@ namespace TDObject.UI
 
         private void toolStrip1_MouseMove(object sender, MouseEventArgs e)
         {
-            FormSkin.MouseMoveForm(this.Handle);
+            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)

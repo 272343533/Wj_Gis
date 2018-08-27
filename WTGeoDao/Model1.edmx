@@ -31,6 +31,35 @@
           <Property Name="FullName" Type="varchar" MaxLength="50" />
           <Property Name="DispNo" Type="int" />
         </EntityType>
+        <EntityType Name="bsArcLayer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="FullName" Type="varchar" MaxLength="150" />
+          <Property Name="LTyle" Type="varchar" MaxLength="50" />
+          <Property Name="mdbDbName" Type="varchar" MaxLength="50" />
+          <Property Name="StyleFileName" Type="varchar" MaxLength="50" />
+          <Property Name="SymbolType" Type="varchar" MaxLength="50" />
+          <Property Name="SytleFileldName" Type="varchar" MaxLength="50" />
+          <Property Name="DislNo" Type="int" />
+          <Property Name="IsVisible" Type="bit" />
+          <Property Name="IsValid" Type="bit" />
+        </EntityType>
+        <EntityType Name="bsDynCondition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="50" />
+          <Property Name="condName" Type="varchar" MaxLength="50" />
+          <Property Name="condNo" Type="int" />
+          <Property Name="CompName" Type="varchar" MaxLength="50" />
+          <Property Name="compType" Type="varchar" MaxLength="50" />
+          <Property Name="compitems" Type="varchar" MaxLength="4000" />
+          <Property Name="Sql" Type="varchar" MaxLength="1000" />
+        </EntityType>
         <EntityType Name="bsHYDL">
           <Key>
             <PropertyRef Name="Id" />
@@ -136,16 +165,6 @@
           <Property Name="Brower" Type="varchar" MaxLength="50" />
           <Property Name="VisitId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
-        <EntityType Name="Excel2FieldMap">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TableName" Type="varchar" MaxLength="50" />
-          <Property Name="ExcelCNo" Type="int" />
-          <Property Name="ExcelCName" Type="varchar" MaxLength="50" />
-          <Property Name="FName" Type="varchar" MaxLength="50" />
-        </EntityType>
         <EntityType Name="LtdProblem">
           <Key>
             <PropertyRef Name="OBJECTID" />
@@ -179,6 +198,15 @@
           <Property Name="DWMC" Type="varchar" MaxLength="100" />
           <Property Name="IsRentLtd" Type="bit" />
         </EntityType>
+        <EntityType Name="t安全事故情况">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="公司名称" Type="varchar" MaxLength="100" />
+          <Property Name="事故类型" Type="varchar" MaxLength="50" />
+          <Property Name="年份" Type="varchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="t标准化级别">
           <Key>
             <PropertyRef Name="Id" />
@@ -190,6 +218,51 @@
           <Property Name="是否公告" Type="varchar" MaxLength="10" />
           <Property Name="标准化级别" Type="varchar" MaxLength="10" />
           <Property Name="地块编号" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="t高企">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="统一社会信用代码" Type="varchar" MaxLength="50" />
+          <Property Name="组织机构代码" Type="varchar" MaxLength="50" />
+          <Property Name="企业名称" Type="varchar" MaxLength="100" />
+          <Property Name="证书编号" Type="varchar" MaxLength="50" />
+          <Property Name="发证日期" Type="varchar" MaxLength="50" />
+          <Property Name="是否“四上”企业" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="t工程技术研究中心">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="统一社会信用代码" Type="varchar" MaxLength="50" />
+          <Property Name="组织机构代码" Type="varchar" MaxLength="50" />
+          <Property Name="企业名称" Type="varchar" MaxLength="100" />
+          <Property Name="研发机构名称" Type="varchar" MaxLength="50" />
+          <Property Name="研发机构类型" Type="varchar" MaxLength="50" />
+          <Property Name="研发机构级别" Type="varchar" MaxLength="50" />
+          <Property Name="认定文件名称或文号" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="t工业固定资产">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="项目代码" Type="varchar" MaxLength="50" />
+          <Property Name="公司名称" Type="varchar" MaxLength="100" />
+          <Property Name="建设性质" Type="varchar" MaxLength="50" />
+          <Property Name="项目类别" Type="varchar" MaxLength="50" />
+          <Property Name="本年完成投资" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="t规上企业名单">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="法人代码" Type="varchar" MaxLength="50" />
+          <Property Name="企业名称" Type="varchar" MaxLength="100" />
+          <Property Name="序号" Type="int" />
         </EntityType>
         <EntityType Name="t开发区2000万企业">
           <Key>
@@ -206,6 +279,15 @@
           <Property Name="税收上年同期" Type="float" />
           <Property Name="税收增减率" Type="float" />
           <Property Name="地块编号" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="t立案处罚情况">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="企业名称" Type="varchar" MaxLength="100" />
+          <Property Name="立案查处类型" Type="varchar" MaxLength="50" />
+          <Property Name="年份" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="t企业技术中心台账">
           <Key>
@@ -643,17 +725,135 @@
           <Property Name="ZLWZ_" Type="nvarchar" MaxLength="50" />
           <Property Name="XSZD_" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“wj_GisDb.sde.dbtune”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="dbtune">
+          <Key>
+            <PropertyRef Name="keyword" />
+            <PropertyRef Name="parameter_name" />
+          </Key>
+          <Property Name="keyword" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="parameter_name" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="config_string" Type="nvarchar" MaxLength="2048" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6013: 表/视图“wj_GisDb.sde.SDE_generate_guid”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="SDE_generate_guid">
+          <Property Name="guidstr" Type="nvarchar" MaxLength="38" />
+        </EntityType>-->
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“wj_GisDb.sde.ST_GEOMETRY_COLUMNS”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="ST_GEOMETRY_COLUMNS">
+          <Key>
+            <PropertyRef Name="table_schema" />
+            <PropertyRef Name="table_name" />
+            <PropertyRef Name="column_name" />
+            <PropertyRef Name="type_schema" />
+            <PropertyRef Name="type_name" />
+            <PropertyRef Name="srs_id" />
+          </Key>
+          <Property Name="table_schema" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="table_name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="column_name" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="type_schema" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="type_name" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="srs_id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“wj_GisDb.sde.ST_SPATIAL_REFERENCE_SYSTEMS”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="ST_SPATIAL_REFERENCE_SYSTEMS">
+          <Key>
+            <PropertyRef Name="srs_id" />
+            <PropertyRef Name="x_offset" />
+            <PropertyRef Name="x_scale" />
+            <PropertyRef Name="y_offset" />
+            <PropertyRef Name="y_scale" />
+            <PropertyRef Name="z_offset" />
+            <PropertyRef Name="z_scale" />
+            <PropertyRef Name="m_offset" />
+            <PropertyRef Name="m_scale" />
+            <PropertyRef Name="definition" />
+          </Key>
+          <Property Name="srs_id" Type="int" Nullable="false" />
+          <Property Name="x_offset" Type="float" Nullable="false" />
+          <Property Name="x_scale" Type="float" Nullable="false" />
+          <Property Name="y_offset" Type="float" Nullable="false" />
+          <Property Name="y_scale" Type="float" Nullable="false" />
+          <Property Name="z_offset" Type="float" Nullable="false" />
+          <Property Name="z_scale" Type="float" Nullable="false" />
+          <Property Name="m_offset" Type="float" Nullable="false" />
+          <Property Name="m_scale" Type="float" Nullable="false" />
+          <Property Name="organization" Type="nvarchar" MaxLength="255" />
+          <Property Name="organization_coordsys_id" Type="int" />
+          <Property Name="definition" Type="varchar" MaxLength="1024" Nullable="false" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6013: 表/视图“wj_GisDb.sde.vwQyxx”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
+        <EntityType Name="vwQyxx">
+          <Property Name="ID" Type="varchar" MaxLength="21" />
+          <Property Name="DKBH" Type="nvarchar" MaxLength="50" />
+          <Property Name="NSRSBH" Type="nvarchar" MaxLength="50" />
+          <Property Name="YDQYMC" Type="nvarchar" MaxLength="150" />
+          <Property Name="TDZL" Type="nvarchar" MaxLength="150" />
+          <Property Name="ZCLX" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZCSJ" Type="datetime2" Precision="7" />
+          <Property Name="JYFW" Type="nvarchar" MaxLength="255" />
+          <Property Name="HYDL" Type="nvarchar" MaxLength="150" />
+          <Property Name="HYLXXF" Type="nvarchar" MaxLength="150" />
+          <Property Name="FZMJ_" Type="float" />
+          <Property Name="ZDMJ" Type="float" />
+          <Property Name="JZZDMJ" Type="float" />
+          <Property Name="JZMJ" Type="float" />
+          <Property Name="QSXZ" Type="nvarchar" MaxLength="50" />
+          <Property Name="TDYT" Type="nvarchar" MaxLength="50" />
+          <Property Name="LZZJGDM" Type="nvarchar" MaxLength="50" />
+          <Property Name="HGDM" Type="nvarchar" MaxLength="50" />
+          <Property Name="HYLXDM" Type="nvarchar" MaxLength="50" />
+          <Property Name="LAODIKUAIHAO" Type="nvarchar" MaxLength="50" />
+          <Property Name="SSXZQDM" Type="nvarchar" MaxLength="50" />
+          <Property Name="SSGLQDM" Type="nvarchar" MaxLength="50" />
+          <Property Name="SYQLX_" Type="nvarchar" MaxLength="50" />
+          <Property Name="PZYT_" Type="nvarchar" MaxLength="50" />
+          <Property Name="TDZH_" Type="nvarchar" MaxLength="50" />
+          <Property Name="SFWZLQY_" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZLQYMC_" Type="nvarchar" MaxLength="255" />
+          <Property Name="SZDWMC_" Type="nvarchar" MaxLength="255" />
+          <Property Name="ZLLX_" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZJ_" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZCZB_" Type="nvarchar" MaxLength="50" />
+          <Property Name="GSGM_" Type="nvarchar" MaxLength="50" />
+          <Property Name="FRDB_" Type="nvarchar" MaxLength="50" />
+          <Property Name="LXDH_" Type="nvarchar" MaxLength="50" />
+          <Property Name="TXDZ_" Type="nvarchar" MaxLength="255" />
+          <Property Name="CYLX_" Type="nvarchar" MaxLength="50" />
+          <Property Name="JJLX_" Type="nvarchar" MaxLength="50" />
+          <Property Name="CYLX1" Type="nvarchar" MaxLength="50" />
+          <Property Name="NH_" Type="nvarchar" MaxLength="50" />
+          <Property Name="CZ_" Type="nvarchar" MaxLength="50" />
+          <Property Name="SS_" Type="nvarchar" MaxLength="50" />
+          <Property Name="JSQK_" Type="nvarchar" MaxLength="50" />
+          <Property Name="DYQK_" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZLWZ_" Type="nvarchar" MaxLength="50" />
+          <Property Name="XSZD_" Type="nvarchar" MaxLength="50" />
+        </EntityType>-->
         <EntityContainer Name="wj_GisDbModelStoreContainer">
+          <EntitySet Name="bsArcLayer" EntityType="Self.bsArcLayer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bsDynCondition" EntityType="Self.bsDynCondition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bsHYDL" EntityType="Self.bsHYDL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bsOrganize" EntityType="Self.bsOrganize" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bsSoftCustInfo" EntityType="Self.bsSoftCustInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bsUser" EntityType="Self.bsUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bsVisitLog" EntityType="Self.bsVisitLog" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Excel2FieldMap" EntityType="Self.Excel2FieldMap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LtdProblem" EntityType="Self.LtdProblem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LtdRegular" EntityType="Self.LtdRegular" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t安全事故情况" EntityType="Self.t安全事故情况" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t标准化级别" EntityType="Self.t标准化级别" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t高企" EntityType="Self.t高企" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t工程技术研究中心" EntityType="Self.t工程技术研究中心" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t工业固定资产" EntityType="Self.t工业固定资产" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t规上企业名单" EntityType="Self.t规上企业名单" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t开发区2000万企业" EntityType="Self.t开发区2000万企业" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t立案处罚情况" EntityType="Self.t立案处罚情况" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t企业技术中心台账" EntityType="Self.t企业技术中心台账" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t清洁生产历年" EntityType="Self.t清洁生产历年" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t同里镇开发区上市企业台帐三板" EntityType="Self.t同里镇开发区上市企业台帐三板" Schema="dbo" store:Type="Tables" />
@@ -815,21 +1015,62 @@ FROM [dbo].[房屋建筑] AS [房屋建筑]</DefiningQuery>
 [企业范围].[XSZD_] AS [XSZD_]
 FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="dbtune" EntityType="Self.dbtune" store:Type="Views" store:Schema="sde">
+            <DefiningQuery>SELECT 
+[dbtune].[keyword] AS [keyword], 
+[dbtune].[parameter_name] AS [parameter_name], 
+[dbtune].[config_string] AS [config_string]
+FROM [sde].[dbtune] AS [dbtune]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ST_GEOMETRY_COLUMNS" EntityType="Self.ST_GEOMETRY_COLUMNS" store:Type="Views" store:Schema="sde">
+            <DefiningQuery>SELECT 
+[ST_GEOMETRY_COLUMNS].[table_schema] AS [table_schema], 
+[ST_GEOMETRY_COLUMNS].[table_name] AS [table_name], 
+[ST_GEOMETRY_COLUMNS].[column_name] AS [column_name], 
+[ST_GEOMETRY_COLUMNS].[type_schema] AS [type_schema], 
+[ST_GEOMETRY_COLUMNS].[type_name] AS [type_name], 
+[ST_GEOMETRY_COLUMNS].[srs_id] AS [srs_id]
+FROM [sde].[ST_GEOMETRY_COLUMNS] AS [ST_GEOMETRY_COLUMNS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ST_SPATIAL_REFERENCE_SYSTEMS" EntityType="Self.ST_SPATIAL_REFERENCE_SYSTEMS" store:Type="Views" store:Schema="sde">
+            <DefiningQuery>SELECT 
+[ST_SPATIAL_REFERENCE_SYSTEMS].[srs_id] AS [srs_id], 
+[ST_SPATIAL_REFERENCE_SYSTEMS].[x_offset] AS [x_offset], 
+[ST_SPATIAL_REFERENCE_SYSTEMS].[x_scale] AS [x_scale], 
+[ST_SPATIAL_REFERENCE_SYSTEMS].[y_offset] AS [y_offset], 
+[ST_SPATIAL_REFERENCE_SYSTEMS].[y_scale] AS [y_scale], 
+[ST_SPATIAL_REFERENCE_SYSTEMS].[z_offset] AS [z_offset], 
+[ST_SPATIAL_REFERENCE_SYSTEMS].[z_scale] AS [z_scale], 
+[ST_SPATIAL_REFERENCE_SYSTEMS].[m_offset] AS [m_offset], 
+[ST_SPATIAL_REFERENCE_SYSTEMS].[m_scale] AS [m_scale], 
+[ST_SPATIAL_REFERENCE_SYSTEMS].[organization] AS [organization], 
+[ST_SPATIAL_REFERENCE_SYSTEMS].[organization_coordsys_id] AS [organization_coordsys_id], 
+[ST_SPATIAL_REFERENCE_SYSTEMS].[definition] AS [definition]
+FROM [sde].[ST_SPATIAL_REFERENCE_SYSTEMS] AS [ST_SPATIAL_REFERENCE_SYSTEMS]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="wj_GisDbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="wj_GisDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bsArcLayer" EntityType="wj_GisDbModel.bsArcLayer" />
+          <EntitySet Name="bsDynCondition" EntityType="wj_GisDbModel.bsDynCondition" />
           <EntitySet Name="bsHYDL" EntityType="wj_GisDbModel.bsHYDL" />
           <EntitySet Name="bsOrganize" EntityType="wj_GisDbModel.bsOrganize" />
           <EntitySet Name="bsSoftCustInfo" EntityType="wj_GisDbModel.bsSoftCustInfo" />
           <EntitySet Name="bsUser" EntityType="wj_GisDbModel.bsUser" />
-          <EntitySet Name="Excel2FieldMap" EntityType="wj_GisDbModel.Excel2FieldMap" />
+          <EntitySet Name="bsVisitLog" EntityType="wj_GisDbModel.bsVisitLog" />
           <EntitySet Name="LtdProblem" EntityType="wj_GisDbModel.LtdProblem" />
           <EntitySet Name="LtdRegular" EntityType="wj_GisDbModel.LtdRegular" />
+          <EntitySet Name="t安全事故情况" EntityType="wj_GisDbModel.t安全事故情况" />
           <EntitySet Name="t标准化级别" EntityType="wj_GisDbModel.t标准化级别" />
+          <EntitySet Name="t高企" EntityType="wj_GisDbModel.t高企" />
+          <EntitySet Name="t工程技术研究中心" EntityType="wj_GisDbModel.t工程技术研究中心" />
+          <EntitySet Name="t工业固定资产" EntityType="wj_GisDbModel.t工业固定资产" />
+          <EntitySet Name="t规上企业名单" EntityType="wj_GisDbModel.t规上企业名单" />
           <EntitySet Name="t开发区2000万企业" EntityType="wj_GisDbModel.t开发区2000万企业" />
+          <EntitySet Name="t立案处罚情况" EntityType="wj_GisDbModel.t立案处罚情况" />
           <EntitySet Name="t企业技术中心台账" EntityType="wj_GisDbModel.t企业技术中心台账" />
           <EntitySet Name="t清洁生产历年" EntityType="wj_GisDbModel.t清洁生产历年" />
           <EntitySet Name="t同里镇开发区上市企业台帐三板" EntityType="wj_GisDbModel.t同里镇开发区上市企业台帐三板" />
@@ -852,8 +1093,39 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
           <EntitySet Name="z租赁企业信息表" EntityType="wj_GisDbModel.z租赁企业信息表" />
           <EntitySet Name="房屋建筑" EntityType="wj_GisDbModel.房屋建筑" />
           <EntitySet Name="企业范围" EntityType="wj_GisDbModel.企业范围" />
-          <EntitySet Name="bsVisitLog" EntityType="wj_GisDbModel.bsVisitLog" />
+          <EntitySet Name="dbtune" EntityType="wj_GisDbModel.dbtune" />
+          <EntitySet Name="ST_GEOMETRY_COLUMNS" EntityType="wj_GisDbModel.ST_GEOMETRY_COLUMNS" />
+          <EntitySet Name="ST_SPATIAL_REFERENCE_SYSTEMS" EntityType="wj_GisDbModel.ST_SPATIAL_REFERENCE_SYSTEMS" />
         </EntityContainer>
+        <EntityType Name="bsArcLayer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FullName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="LTyle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mdbDbName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StyleFileName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SymbolType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SytleFileldName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DislNo" Type="Int32" />
+          <Property Name="IsVisible" Type="Boolean" />
+          <Property Name="IsValid" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="bsDynCondition">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="condName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="condNo" Type="Int32" />
+          <Property Name="CompName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="compType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="compitems" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="Sql" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="bsHYDL">
           <Key>
             <PropertyRef Name="Id" />
@@ -937,15 +1209,15 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
           <Property Name="BrowserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ExComplQueryCond" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Excel2FieldMap">
+        <EntityType Name="bsVisitLog">
           <Key>
-            <PropertyRef Name="Id" />
+            <PropertyRef Name="VisitId" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ExcelCNo" Type="Int32" />
-          <Property Name="ExcelCName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VisitDt" Type="DateTime" Precision="3" />
+          <Property Name="userId" Type="Guid" />
+          <Property Name="VisitDesp" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Brower" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VisitId" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="LtdProblem">
           <Key>
@@ -980,6 +1252,15 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
           <Property Name="DWMC" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="IsRentLtd" Type="Boolean" />
         </EntityType>
+        <EntityType Name="t安全事故情况">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="公司名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="事故类型" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="年份" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="t标准化级别">
           <Key>
             <PropertyRef Name="Id" />
@@ -991,6 +1272,51 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
           <Property Name="是否公告" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="标准化级别" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="地块编号" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t高企">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="统一社会信用代码" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="组织机构代码" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="企业名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="证书编号" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="发证日期" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="是否_四上_企业" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t工程技术研究中心">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="统一社会信用代码" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="组织机构代码" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="企业名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="研发机构名称" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="研发机构类型" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="研发机构级别" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="认定文件名称或文号" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t工业固定资产">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="项目代码" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="公司名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="建设性质" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="项目类别" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="本年完成投资" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t规上企业名单">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="法人代码" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="企业名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="序号" Type="Int32" />
         </EntityType>
         <EntityType Name="t开发区2000万企业">
           <Key>
@@ -1007,6 +1333,15 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
           <Property Name="税收上年同期" Type="Double" />
           <Property Name="税收增减率" Type="Double" />
           <Property Name="地块编号" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="t立案处罚情况">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="企业名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="立案查处类型" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="年份" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="t企业技术中心台账">
           <Key>
@@ -1468,15 +1803,56 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
           <Property Name="ZLWZ_" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="XSZD_" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="bsVisitLog">
+        <EntityType Name="dbtune">
           <Key>
-            <PropertyRef Name="VisitId" />
+            <PropertyRef Name="keyword" />
+            <PropertyRef Name="parameter_name" />
           </Key>
-          <Property Name="VisitDt" Type="DateTime" Precision="3" />
-          <Property Name="userId" Type="Guid" />
-          <Property Name="VisitDesp" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Brower" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="VisitId" Type="Guid" Nullable="false" />
+          <Property Name="keyword" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="parameter_name" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="config_string" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ST_GEOMETRY_COLUMNS">
+          <Key>
+            <PropertyRef Name="table_schema" />
+            <PropertyRef Name="table_name" />
+            <PropertyRef Name="column_name" />
+            <PropertyRef Name="type_schema" />
+            <PropertyRef Name="type_name" />
+            <PropertyRef Name="srs_id" />
+          </Key>
+          <Property Name="table_schema" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="table_name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="column_name" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="type_schema" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="type_name" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="srs_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ST_SPATIAL_REFERENCE_SYSTEMS">
+          <Key>
+            <PropertyRef Name="srs_id" />
+            <PropertyRef Name="x_offset" />
+            <PropertyRef Name="x_scale" />
+            <PropertyRef Name="y_offset" />
+            <PropertyRef Name="y_scale" />
+            <PropertyRef Name="z_offset" />
+            <PropertyRef Name="z_scale" />
+            <PropertyRef Name="m_offset" />
+            <PropertyRef Name="m_scale" />
+            <PropertyRef Name="definition" />
+          </Key>
+          <Property Name="srs_id" Type="Int32" Nullable="false" />
+          <Property Name="x_offset" Type="Double" Nullable="false" />
+          <Property Name="x_scale" Type="Double" Nullable="false" />
+          <Property Name="y_offset" Type="Double" Nullable="false" />
+          <Property Name="y_scale" Type="Double" Nullable="false" />
+          <Property Name="z_offset" Type="Double" Nullable="false" />
+          <Property Name="z_scale" Type="Double" Nullable="false" />
+          <Property Name="m_offset" Type="Double" Nullable="false" />
+          <Property Name="m_scale" Type="Double" Nullable="false" />
+          <Property Name="organization" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="organization_coordsys_id" Type="Int32" />
+          <Property Name="definition" Type="String" Nullable="false" MaxLength="1024" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1484,6 +1860,37 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="wj_GisDbModelStoreContainer" CdmEntityContainer="wj_GisDbEntities">
+          <EntitySetMapping Name="bsArcLayer">
+            <EntityTypeMapping TypeName="wj_GisDbModel.bsArcLayer">
+              <MappingFragment StoreEntitySet="bsArcLayer">
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="IsVisible" ColumnName="IsVisible" />
+                <ScalarProperty Name="DislNo" ColumnName="DislNo" />
+                <ScalarProperty Name="SytleFileldName" ColumnName="SytleFileldName" />
+                <ScalarProperty Name="SymbolType" ColumnName="SymbolType" />
+                <ScalarProperty Name="StyleFileName" ColumnName="StyleFileName" />
+                <ScalarProperty Name="mdbDbName" ColumnName="mdbDbName" />
+                <ScalarProperty Name="LTyle" ColumnName="LTyle" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bsDynCondition">
+            <EntityTypeMapping TypeName="wj_GisDbModel.bsDynCondition">
+              <MappingFragment StoreEntitySet="bsDynCondition">
+                <ScalarProperty Name="Sql" ColumnName="Sql" />
+                <ScalarProperty Name="compitems" ColumnName="compitems" />
+                <ScalarProperty Name="compType" ColumnName="compType" />
+                <ScalarProperty Name="CompName" ColumnName="CompName" />
+                <ScalarProperty Name="condNo" ColumnName="condNo" />
+                <ScalarProperty Name="condName" ColumnName="condName" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="bsHYDL">
             <EntityTypeMapping TypeName="wj_GisDbModel.bsHYDL">
               <MappingFragment StoreEntitySet="bsHYDL">
@@ -1571,14 +1978,14 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Excel2FieldMap">
-            <EntityTypeMapping TypeName="wj_GisDbModel.Excel2FieldMap">
-              <MappingFragment StoreEntitySet="Excel2FieldMap">
-                <ScalarProperty Name="FName" ColumnName="FName" />
-                <ScalarProperty Name="ExcelCName" ColumnName="ExcelCName" />
-                <ScalarProperty Name="ExcelCNo" ColumnName="ExcelCNo" />
-                <ScalarProperty Name="TableName" ColumnName="TableName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <EntitySetMapping Name="bsVisitLog">
+            <EntityTypeMapping TypeName="wj_GisDbModel.bsVisitLog">
+              <MappingFragment StoreEntitySet="bsVisitLog">
+                <ScalarProperty Name="VisitId" ColumnName="VisitId" />
+                <ScalarProperty Name="Brower" ColumnName="Brower" />
+                <ScalarProperty Name="VisitDesp" ColumnName="VisitDesp" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="VisitDt" ColumnName="VisitDt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1617,6 +2024,16 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="t安全事故情况">
+            <EntityTypeMapping TypeName="wj_GisDbModel.t安全事故情况">
+              <MappingFragment StoreEntitySet="t安全事故情况">
+                <ScalarProperty Name="年份" ColumnName="年份" />
+                <ScalarProperty Name="事故类型" ColumnName="事故类型" />
+                <ScalarProperty Name="公司名称" ColumnName="公司名称" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="t标准化级别">
             <EntityTypeMapping TypeName="wj_GisDbModel.t标准化级别">
               <MappingFragment StoreEntitySet="t标准化级别">
@@ -1626,6 +2043,55 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
                 <ScalarProperty Name="年份" ColumnName="年份" />
                 <ScalarProperty Name="企业名称" ColumnName="企业名称" />
                 <ScalarProperty Name="序号" ColumnName="序号" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t高企">
+            <EntityTypeMapping TypeName="wj_GisDbModel.t高企">
+              <MappingFragment StoreEntitySet="t高企">
+                <ScalarProperty Name="是否_四上_企业" ColumnName="是否“四上”企业" />
+                <ScalarProperty Name="发证日期" ColumnName="发证日期" />
+                <ScalarProperty Name="证书编号" ColumnName="证书编号" />
+                <ScalarProperty Name="企业名称" ColumnName="企业名称" />
+                <ScalarProperty Name="组织机构代码" ColumnName="组织机构代码" />
+                <ScalarProperty Name="统一社会信用代码" ColumnName="统一社会信用代码" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t工程技术研究中心">
+            <EntityTypeMapping TypeName="wj_GisDbModel.t工程技术研究中心">
+              <MappingFragment StoreEntitySet="t工程技术研究中心">
+                <ScalarProperty Name="认定文件名称或文号" ColumnName="认定文件名称或文号" />
+                <ScalarProperty Name="研发机构级别" ColumnName="研发机构级别" />
+                <ScalarProperty Name="研发机构类型" ColumnName="研发机构类型" />
+                <ScalarProperty Name="研发机构名称" ColumnName="研发机构名称" />
+                <ScalarProperty Name="企业名称" ColumnName="企业名称" />
+                <ScalarProperty Name="组织机构代码" ColumnName="组织机构代码" />
+                <ScalarProperty Name="统一社会信用代码" ColumnName="统一社会信用代码" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t工业固定资产">
+            <EntityTypeMapping TypeName="wj_GisDbModel.t工业固定资产">
+              <MappingFragment StoreEntitySet="t工业固定资产">
+                <ScalarProperty Name="本年完成投资" ColumnName="本年完成投资" />
+                <ScalarProperty Name="项目类别" ColumnName="项目类别" />
+                <ScalarProperty Name="建设性质" ColumnName="建设性质" />
+                <ScalarProperty Name="公司名称" ColumnName="公司名称" />
+                <ScalarProperty Name="项目代码" ColumnName="项目代码" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t规上企业名单">
+            <EntityTypeMapping TypeName="wj_GisDbModel.t规上企业名单">
+              <MappingFragment StoreEntitySet="t规上企业名单">
+                <ScalarProperty Name="序号" ColumnName="序号" />
+                <ScalarProperty Name="企业名称" ColumnName="企业名称" />
+                <ScalarProperty Name="法人代码" ColumnName="法人代码" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1644,6 +2110,16 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
                 <ScalarProperty Name="纳税人名称" ColumnName="纳税人名称" />
                 <ScalarProperty Name="序号" ColumnName="序号" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="t立案处罚情况">
+            <EntityTypeMapping TypeName="wj_GisDbModel.t立案处罚情况">
+              <MappingFragment StoreEntitySet="t立案处罚情况">
+                <ScalarProperty Name="年份" ColumnName="年份" />
+                <ScalarProperty Name="立案查处类型" ColumnName="立案查处类型" />
+                <ScalarProperty Name="企业名称" ColumnName="企业名称" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2129,14 +2605,42 @@ FROM [dbo].[企业范围] AS [企业范围]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="bsVisitLog">
-            <EntityTypeMapping TypeName="wj_GisDbModel.bsVisitLog">
-              <MappingFragment StoreEntitySet="bsVisitLog">
-                <ScalarProperty Name="VisitId" ColumnName="VisitId" />
-                <ScalarProperty Name="Brower" ColumnName="Brower" />
-                <ScalarProperty Name="VisitDesp" ColumnName="VisitDesp" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="VisitDt" ColumnName="VisitDt" />
+          <EntitySetMapping Name="dbtune">
+            <EntityTypeMapping TypeName="wj_GisDbModel.dbtune">
+              <MappingFragment StoreEntitySet="dbtune">
+                <ScalarProperty Name="config_string" ColumnName="config_string" />
+                <ScalarProperty Name="parameter_name" ColumnName="parameter_name" />
+                <ScalarProperty Name="keyword" ColumnName="keyword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ST_GEOMETRY_COLUMNS">
+            <EntityTypeMapping TypeName="wj_GisDbModel.ST_GEOMETRY_COLUMNS">
+              <MappingFragment StoreEntitySet="ST_GEOMETRY_COLUMNS">
+                <ScalarProperty Name="srs_id" ColumnName="srs_id" />
+                <ScalarProperty Name="type_name" ColumnName="type_name" />
+                <ScalarProperty Name="type_schema" ColumnName="type_schema" />
+                <ScalarProperty Name="column_name" ColumnName="column_name" />
+                <ScalarProperty Name="table_name" ColumnName="table_name" />
+                <ScalarProperty Name="table_schema" ColumnName="table_schema" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ST_SPATIAL_REFERENCE_SYSTEMS">
+            <EntityTypeMapping TypeName="wj_GisDbModel.ST_SPATIAL_REFERENCE_SYSTEMS">
+              <MappingFragment StoreEntitySet="ST_SPATIAL_REFERENCE_SYSTEMS">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="organization_coordsys_id" ColumnName="organization_coordsys_id" />
+                <ScalarProperty Name="organization" ColumnName="organization" />
+                <ScalarProperty Name="m_scale" ColumnName="m_scale" />
+                <ScalarProperty Name="m_offset" ColumnName="m_offset" />
+                <ScalarProperty Name="z_scale" ColumnName="z_scale" />
+                <ScalarProperty Name="z_offset" ColumnName="z_offset" />
+                <ScalarProperty Name="y_scale" ColumnName="y_scale" />
+                <ScalarProperty Name="y_offset" ColumnName="y_offset" />
+                <ScalarProperty Name="x_scale" ColumnName="x_scale" />
+                <ScalarProperty Name="x_offset" ColumnName="x_offset" />
+                <ScalarProperty Name="srs_id" ColumnName="srs_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

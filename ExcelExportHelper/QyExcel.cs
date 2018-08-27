@@ -7,7 +7,8 @@ using Microsoft.Office.Interop.Excel;
 using QyTech.Core;
 using System.Windows.Forms;
 
-namespace QyTech.ExcelExport
+[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
+namespace QyTech.ExcelOper
 {
     public enum NullValueHandling
     {

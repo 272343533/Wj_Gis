@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDataImport));
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.qyBtn_Map = new QyTech.SkinForm.Controls.qyBtn();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.button4 = new System.Windows.Forms.Button();
             this.cboMonth = new System.Windows.Forms.ComboBox();
@@ -167,6 +168,7 @@
             this.dataGridViewTextBoxColumn60 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn61 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn62 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewImageColumn1 = new System.Windows.Forms.DataGridViewImageColumn();
             this.tabControl2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvExcel)).BeginInit();
@@ -192,6 +194,7 @@
             // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.qyBtn_Map);
             this.tabPage4.Controls.Add(this.progressBar1);
             this.tabPage4.Controls.Add(this.button4);
             this.tabPage4.Controls.Add(this.cboMonth);
@@ -212,6 +215,17 @@
             this.tabPage4.TabIndex = 0;
             this.tabPage4.Text = "数据导入";
             this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // qyBtn_Map
+            // 
+            this.qyBtn_Map.Location = new System.Drawing.Point(549, 17);
+            this.qyBtn_Map.Name = "qyBtn_Map";
+            this.qyBtn_Map.Size = new System.Drawing.Size(42, 23);
+            this.qyBtn_Map.TabIndex = 34;
+            this.qyBtn_Map.Text = "映射";
+            this.qyBtn_Map.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.qyBtn_Map.UseVisualStyleBackColor = true;
+            this.qyBtn_Map.Click += new System.EventHandler(this.qyBtn1_Click);
             // 
             // progressBar1
             // 
@@ -249,7 +263,7 @@
             "10",
             "11",
             "12"});
-            this.cboMonth.Location = new System.Drawing.Point(845, 18);
+            this.cboMonth.Location = new System.Drawing.Point(886, 17);
             this.cboMonth.Name = "cboMonth";
             this.cboMonth.Size = new System.Drawing.Size(49, 20);
             this.cboMonth.TabIndex = 31;
@@ -258,7 +272,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(816, 23);
+            this.label5.Location = new System.Drawing.Point(857, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 12);
             this.label5.TabIndex = 30;
@@ -268,7 +282,7 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(703, 21);
+            this.label4.Location = new System.Drawing.Point(744, 20);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 12);
             this.label4.TabIndex = 29;
@@ -282,7 +296,7 @@
             "2018",
             "2017",
             "2016"});
-            this.cboYear.Location = new System.Drawing.Point(733, 18);
+            this.cboYear.Location = new System.Drawing.Point(774, 17);
             this.cboYear.Name = "cboYear";
             this.cboYear.Size = new System.Drawing.Size(71, 20);
             this.cboYear.TabIndex = 27;
@@ -298,7 +312,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button3.Location = new System.Drawing.Point(929, 17);
+            this.button3.Location = new System.Drawing.Point(951, 15);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 25;
@@ -321,7 +335,7 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(559, 24);
+            this.label2.Location = new System.Drawing.Point(600, 23);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(29, 12);
             this.label2.TabIndex = 28;
@@ -345,7 +359,7 @@
             "市局表格",
             "开发区表格",
             "经发局表格"});
-            this.cboType.Location = new System.Drawing.Point(594, 19);
+            this.cboType.Location = new System.Drawing.Point(635, 18);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(98, 20);
             this.cboType.TabIndex = 26;
@@ -1263,6 +1277,15 @@
             this.dataGridViewTextBoxColumn62.Name = "dataGridViewTextBoxColumn62";
             this.dataGridViewTextBoxColumn62.Width = 60;
             // 
+            // dataGridViewImageColumn1
+            // 
+            this.dataGridViewImageColumn1.HeaderText = "";
+            this.dataGridViewImageColumn1.Image = ((System.Drawing.Image)(resources.GetObject("dataGridViewImageColumn1.Image")));
+            this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
+            this.dataGridViewImageColumn1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewImageColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.dataGridViewImageColumn1.Width = 20;
+            // 
             // frmDataImport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -1427,5 +1450,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn93;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column35;
         private System.Windows.Forms.ProgressBar progressBar1;
+        private QyTech.SkinForm.Controls.qyBtn qyBtn_Map;
+        private System.Windows.Forms.DataGridViewImageColumn dataGridViewImageColumn1;
     }
 }

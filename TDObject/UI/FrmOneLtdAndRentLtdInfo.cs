@@ -38,7 +38,7 @@ using TDObject;
 
 namespace TDObject.UI
 {
-    public partial class FrmOneLtdAndRentLtdInfo : FlatForm
+    public partial class FrmOneLtdAndRentLtdInfo : QyTech.SkinForm.qyForm
     {
         private string dkbh;
 
@@ -57,9 +57,9 @@ namespace TDObject.UI
         {
             try
             {
-                dgvT2_11.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dgvT2_11.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
-                dgvT2_12.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dgvT2_12.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
                 //this.Size =new Size(SystemInformation.WorkingArea.Width,400);
                 List<企业范围> objs = MainForm.EM.GetListNoPaging<企业范围>("DKBH='" + dkbh + "'", "");
@@ -95,7 +95,7 @@ namespace TDObject.UI
 
         private void dgvT2_12_MouseMove(object sender, MouseEventArgs e)
         {
-            FormSkin.MouseMoveForm(this.Handle);
+            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
 

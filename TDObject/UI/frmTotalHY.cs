@@ -13,7 +13,7 @@ using SunMvcExpress.Dao;
 
 namespace TDObject.UI
 {
-    public partial class frmTotalHY : FlatForm
+    public partial class frmTotalHY : QyTech.SkinForm.qyForm
     {
         public frmTotalHY()
         {
@@ -179,7 +179,7 @@ namespace TDObject.UI
 
         private void chart1_MouseMove(object sender, MouseEventArgs e)
         {
-            FormSkin.MouseMoveForm(this.Handle);
+            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void radioButton2_Click(object sender, EventArgs e)

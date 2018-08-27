@@ -32,7 +32,9 @@ namespace TDObject.MapControl
         public static Dictionary<string, string> FieldName2Desp_Tdlyxz= new Dictionary<string,string>();
 
         public static Dictionary<string, Dictionary<string, string>> FieldName2Desps = new Dictionary<string, Dictionary<string, string>>();
- 
+
+        public static Dictionary<string, bsArcLayer> dbLayers = new Dictionary<string, bsArcLayer>();
+
 
         static GlobalVariables()
         {
@@ -43,18 +45,20 @@ namespace TDObject.MapControl
             LayerName2FullName.Add("道路注记", "道路注记");
             LayerName2FullName.Add("河流注记", "河流注记");
             LayerName2FullName.Add("企业范围", "企业范围");
-            LayerName2FullName.Add("房屋建筑", "房屋建筑");
+             LayerName2FullName.Add("房屋建筑", "房屋建筑");
             LayerName2FullName.Add("红牌警告点位置", "红牌警告点位置");
             LayerName2FullName.Add("黄牌警告点位置", "黄牌警告点位置");
             LayerName2FullName.Add("安全检查点位置", "安全检查点位置");
             LayerName2FullName.Add("企业照片点位置", "企业照片点位置");
             LayerName2FullName.Add("影像", "WTMap/WTService");
+            LayerName2FullName.Add("城市规划", "城市规划");
+            LayerName2FullName.Add("城市规划注记注记2", "城市规划注记注记2");
 
 
 
-           
 
-//添加默认标注信息
+
+            //添加默认标注信息
             GlobalVariables.LayTextSymbolStyleName.Clear();
             GlobalVariables.LayTextSymbolStyleName.Add("历年批次", "默认标注");
             GlobalVariables.LayTextSymbolStyleName.Add("城市规划", "默认标注");
@@ -290,71 +294,69 @@ namespace TDObject.MapControl
             //        break;
             //    }
             //}
-
-            if (m_FeatureLayer.Name == GlobalVariables.LayerName2FullName["行政区"])
-            {
+            //面对象：行政区，管理区，河流，城市规划，房屋建筑，企业范围
+            if (m_FeatureLayer.Name == GlobalVariables.LayerName2FullName["行政区"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateFillSymbol("行政区");
             }
-            else if (m_FeatureLayer.Name =="管理区")
-            {
+            else if (m_FeatureLayer.Name =="管理区")            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateFillSymbol("管理区界线");
             }
-            else if (m_FeatureLayer.Name == LayerName2FullName["河流"])
-            {
+            else if (m_FeatureLayer.Name == LayerName2FullName["河流"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateFillSymbol("河流", "默认");
             }
-            else if (m_FeatureLayer.Name == LayerName2FullName["河流注记"])
-            {
+            else if (m_FeatureLayer.Name == LayerName2FullName["河流注记"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateFillSymbol("河流注记");
             }
-           
+            else if (m_FeatureLayer.Name == LayerName2FullName["城市规划"])            {
+                ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
+                color.CreateFillSymbolByFields("城规地类名称", "城市规划");
+            }
+            else if (m_FeatureLayer.Name == LayerName2FullName["城市规划注记注记2"])            {
+                ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
+                color.CreateFillSymbol("城市规划注记注记2", "城市规划");
+            }
+            else if (m_FeatureLayer.Name == LayerName2FullName["道路注记"])            {
+                ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
+                color.CreateFillSymbol("道路注记");
+            }
+            else if (m_FeatureLayer.Name == GlobalVariables.LayerName2FullName["房屋建筑"])            {
+                ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
+                color.CreateFillSymbol("房屋建筑");
+            }
+            else if (m_FeatureLayer.Name == GlobalVariables.LayerName2FullName["企业范围"])            {
+                ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
+                color.CreateFillSymbol("企业范围");
+            }
+
             //Line 填充
-            else if (m_FeatureLayer.Name == GlobalVariables.LayerName2FullName["道路"])
-            {
+            else if (m_FeatureLayer.Name == GlobalVariables.LayerName2FullName["道路"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateLineSymbol("道路", "默认");
             }
            
-            //面填充
-            else if (m_FeatureLayer.Name == LayerName2FullName["道路注记"])
-            {
-                ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
-                color.CreateFillSymbol("道路注记");
-            }
-            else if (m_FeatureLayer.Name == GlobalVariables.LayerName2FullName["房屋建筑"])
-            {
-                ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
-                color.CreateFillSymbol("房屋建筑");
-            }
-            else if (m_FeatureLayer.Name == GlobalVariables.LayerName2FullName["企业范围"])
-            {
-                ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
-                color.CreateFillSymbol("企业范围");
-            }
-           else if (m_FeatureLayer.Name == LayerName2FullName["红牌警告点位置"])
-            {
+            //点填充
+           
+            else if (m_FeatureLayer.Name == LayerName2FullName["红牌警告点位置"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateMarkerSymbol("红牌警告点位置", "默认");
             }
-            else if (m_FeatureLayer.Name == LayerName2FullName["黄牌警告点位置"])
-            {
+            else if (m_FeatureLayer.Name == LayerName2FullName["黄牌警告点位置"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateMarkerSymbol("黄牌警告点位置", "默认");
             }
-            else if (m_FeatureLayer.Name == LayerName2FullName["企业照片点位置"])
-            {
+            else if (m_FeatureLayer.Name == LayerName2FullName["企业照片点位置"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateMarkerSymbol("企业照片点位置", "默认");
             }
-            else if (m_FeatureLayer.Name == LayerName2FullName["安全检查点位置"])
-            {
+            else if (m_FeatureLayer.Name == LayerName2FullName["安全检查点位置"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateMarkerSymbol("安全检查点位置", "默认");
             }
+          
         }
 
         /// <summary>

@@ -126,6 +126,72 @@ namespace BatchTranBdCoords
             sR.Close();
         }
 
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int LineCount = 0;
+            string ls = "";
+            StreamReader sR = new StreamReader(fName, Encoding.Default);
+            ls = sR.ReadLine();
+            while (ls != null)
+            {
+                LineCount++;
+                ls = sR.ReadLine();
+            }
+            sR.Close();
+
+            progressBar1.Minimum = 0;
+            progressBar1.Maximum = LineCount;
+
+
+
+            string newName = fName + "Meter.txt";
+            if (File.Exists(newName))
+            {
+                try
+                {
+                    File.Delete(newName);
+                }
+                catch { MessageBox.Show("目标文件已存在，不能删除"); }
+            }
+            StreamWriter sW = new StreamWriter(newName, true, Encoding.Default);
+
+            // 同样也可以指定编码方式 
+            //StreamReader sR2 = new StreamReader(@"c:\temp\a.txt", Encoding.UTF8);
+            // FileStream fS = new FileStream(@"C:\temp\a.txt", FileMode.Open, FileAccess.Read, FileShare.None); 
+
+            // 读一行 
+            sR = new StreamReader(fName, Encoding.Default);
+            LineCount = 0;
+            string nextLine = sR.ReadLine();
+            while (nextLine != null)
+            {
+                string[] lines = nextLine.Split(new char[] { ',' });
+                //转换
+                BaiDuApiMapFromTo bd092IIobj = GetMapCorrJson(5, 6, Convert.ToDouble(lines[2]), Convert.ToDouble(lines[3]));
+
+
+                if (bd092IIobj != null)
+                {
+                    lines[2] = bd092IIobj.result[0].x.ToString();
+                    lines[3] = bd092IIobj.result[0].y.ToString();
+                }
+
+                //写文件
+                string newLine = lines[0];
+                newLine += lines[1] + ",";
+                newLine += lines[2] + ",";
+                newLine += lines[3] + ",";
+                newLine += lines[4] + ",";
+
+                sW.WriteLine(newLine);
+                progressBar1.Value = LineCount++;
+                nextLine = sR.ReadLine();
+            }
+            sW.Close();
+            sR.Close();
+        }
+
         public BaiDuApiMapFromTo GetMapCorrJson(int mapfrom, int mapto, double lng, double lat)
         {
             try

@@ -18,7 +18,7 @@ using ESRI.ArcGIS.Geometry;
 
 namespace TDObject.UI
 {
-    public partial class frmTotalFilter : FlatForm
+    public partial class frmTotalFilter : QyTech.SkinForm.qyForm
     {
 
         log4net.ILog log = log4net.LogManager.GetLogger("MainForm");
@@ -108,17 +108,17 @@ namespace TDObject.UI
                 cbo9_1.SelectedIndex = 0;
                 cbo9_2.SelectedIndex = 0;
 
-                dgv1.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv2.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv31.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv32.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv33.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv4.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv5.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv6.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv7.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv8.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgv9.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dgv1.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv2.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv31.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv32.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv33.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv4.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv5.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv6.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv7.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv8.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
+                dgv9.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
                 //取消第o列
                 dgv1.Columns.RemoveAt(0);
@@ -453,7 +453,7 @@ namespace TDObject.UI
 
         private void dgv1_MouseMove(object sender, MouseEventArgs e)
         {
-            FormSkin.MouseMoveForm(this.Handle);
+            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void AddDefaultRecord(object sender, EventArgs e)

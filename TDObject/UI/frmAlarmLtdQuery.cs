@@ -15,7 +15,7 @@ using SunMvcExpress.Dao;
 
 namespace TDObject.UI
 {
-    public partial class frmAlarmLtdQuery : FlatForm
+    public partial class frmAlarmLtdQuery : QyTech.SkinForm.qyForm
     {
         private int OBJECTID;
         private bool IsRent;
@@ -152,7 +152,7 @@ namespace TDObject.UI
 
         private void toolStripButton4_Click(object sender, EventArgs e)
         {
-            dataGridView1.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+            dataGridView1.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
             LtdProblem ltdobj;
 

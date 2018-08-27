@@ -16,7 +16,7 @@ using SunMvcExpress.Dao;
 
 namespace TDObject.UI
 {
-    public partial class frmLtdInfoAdd : FlatForm
+    public partial class frmLtdInfoAdd : QyTech.SkinForm.qyForm
     {
 
         List<z新增企业信息表> objs;
@@ -32,7 +32,7 @@ namespace TDObject.UI
             {
                 comboBox1.SelectedIndex =0;
                 dgv1.AllowUserToAddRows = false;
-                dgv1.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dgv1.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
          
                 //string fName=System.Windows.Forms.Application.StartupPath+@"\DemoExcel\C、新增企业信息表.xlsx";
                 //string strCon = "provider=Microsoft.Ace.OleDb.12.0;data source=" + fName + ";extended properties='excel 12.0;HDR=YES;IMEX=1'";//关键是红色区域

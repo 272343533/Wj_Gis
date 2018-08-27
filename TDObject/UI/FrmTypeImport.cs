@@ -12,19 +12,19 @@ using Microsoft.Office.Interop.Excel;
 using System.Data.OleDb;
 
 using SunMvcExpress.Dao;
-using QyTech.ExcelExport;
+using QyTech.ExcelOper;
 using System.Reflection;
 
 
 
 namespace TDObject.UI
 {
-    public partial class FrmTypeImport : FlatForm
+    public partial class FrmTypeImport : QyTech.SkinForm.qyForm
     {
 
         DataSet ds = new DataSet();//新建数据集
         Dictionary<string, string> dic_ExcelColumn2FieldName = new Dictionary<string, string>();
-        List<Excel2FieldMap> efMs;
+        //List<Excel2FieldMap> efMs;
 
 
         public FrmTypeImport()
@@ -36,7 +36,7 @@ namespace TDObject.UI
         {
             try
             {
-                dgvExcel.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dgvExcel.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
                
             }
@@ -101,6 +101,7 @@ namespace TDObject.UI
 
         private void button3_Click(object sender, EventArgs e)
         {
+            int BatchCount = 100;
             try
             {
                 if (ds.Tables.Count > 0)
@@ -144,7 +145,7 @@ namespace TDObject.UI
                                                 log.Error(ex.Message);
                                             }
                                         }
-                                        catch (Exception ex) { }
+                                        catch (Exception ex) { log.Error(ex.Message); }
                                     }
                                     MainForm.EM.Add<t标准化级别>(sjobj);
                                     RefreshPgb(r+1, dt.Rows.Count);

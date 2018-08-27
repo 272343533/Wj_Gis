@@ -31,7 +31,7 @@ using TDObject.IdentifyTool;
 
 namespace TDObject.UI
 {
-    public partial class frmLtdNameTotal : FlatForm
+    public partial class frmLtdNameTotal : QyTech.SkinForm.qyForm
     {
         IEnvelope _ext;
 
@@ -55,7 +55,7 @@ namespace TDObject.UI
         {
             try
             {
-                dataGridView1.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dataGridView1.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
                 List<企业范围> objs = BLL.CommSetting.EM.GetListNoPaging<企业范围>("", "YDQYMC");
                 dataGridView1.AutoGenerateColumns = false;
@@ -110,7 +110,7 @@ namespace TDObject.UI
             //this.axMapControl1.Extent = _axmap.Extent;
 
             FrmLtdZlqyxx obj = new FrmLtdZlqyxx(dkbh);
-            FormSkin.ShowForm(obj);
+            QyTech.SkinForm.qyFormUtil.ShowForm(obj);
         }
 
         private void axMapControl1_OnExtentUpdated(object sender, IMapControlEvents2_OnExtentUpdatedEvent e)

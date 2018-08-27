@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using SunMvcExpress.Dao;
 namespace TDObject.UI
 {
-    public partial class FrmAdd2Bzh : FlatForm
+    public partial class FrmAdd2Bzh : QyTech.SkinForm.qyForm
     {
         string addormodify = "add";
 

@@ -12,7 +12,7 @@ using SunMvcExpress.Dao;
 
 namespace TDObject.UI
 {
-    public partial class frmAlarmQuery : FlatForm
+    public partial class frmAlarmQuery : QyTech.SkinForm.qyForm
     {
 
         private string YdLtdOrRentLtd="YdLtd";
@@ -43,8 +43,8 @@ namespace TDObject.UI
 
             try
             {
-                dataGridView1.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dataGridView2.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dataGridView1.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
+                dataGridView2.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
                 RowIndex[0] = -1;
                 RowIndex[1] = -1;

@@ -699,7 +699,8 @@ namespace TDObject.IdentifyTool
         //}
         private static DataTable setDispData<T>(string TType,int OID,DataTable dt)
         {
-          //  DataTable dt = new DataTable();
+          
+            //  DataTable dt = new DataTable();
             DataRow dr = dt.NewRow();
             dr[0] = "编码";
             dr[1] = OID;
@@ -708,7 +709,7 @@ namespace TDObject.IdentifyTool
 
             //add by szw on 2017-08-16 begin
               
-            string detailUrl = MainForm.URI + "lyRemoteServ/GetGisObj?TType=" + TType + "&id=" + OID.ToString();
+            string detailUrl = MainForm.App_URI + "lyRemoteServ/GetGisObj?TType=" + TType + "&id=" + OID.ToString();
 
             string ret = AsyncHttp.CommFun.GetRemoteJson(detailUrl);
 
@@ -722,6 +723,10 @@ namespace TDObject.IdentifyTool
           
             if (obj == null)
                 return dt;
+
+            QyTech.SkinForm.UICreate.frmAdd frmobj = new QyTech.SkinForm.UICreate.frmAdd("企业范围", obj);
+            QyTech.SkinForm.qyFormUtil.ShowForm(frmobj);
+           
             Type type = obj.GetType();
             System.Reflection.PropertyInfo[] pi = type.GetProperties();
             foreach (System.Reflection.PropertyInfo p in pi)

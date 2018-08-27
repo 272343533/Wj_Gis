@@ -12,7 +12,7 @@ using System.Reflection;
 
 namespace TDObject.UI
 {
-    public partial class frmAdd33Ssqy : FlatForm
+    public partial class frmAdd33Ssqy : QyTech.SkinForm.qyForm
     {
         string addormodify = "add";
 

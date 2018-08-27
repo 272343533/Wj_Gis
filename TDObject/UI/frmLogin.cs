@@ -47,7 +47,7 @@ namespace TDObject
         {
             string username = this.tbUserName.Text;
             string strpwd = this.tbPassword.Text.Trim();
-            string detailUrl = MainForm.URI + "home/loginbyjson?username=" + username + "&password=" + strpwd;
+            string detailUrl = MainForm.App_URI + "home/loginbyjson?username=" + username + "&password=" + strpwd;
 
             string ret = "";// AsyncHttp.CommFun.GetRemoteJson(detailUrl);
 
@@ -80,7 +80,7 @@ namespace TDObject
 
 
             //                   string strui = JsonHelper.SerializeObject<bsUser>(luser, null);
-            //                   string url = MainForm.URI + "lyRemoteServ/UdpUserData?userinfo=" + strui;
+            //                   string url = MainForm.App_URI + "lyRemoteServ/UdpUserData?userinfo=" + strui;
             //                   ret = AsyncHttp.CommFun.GetRemoteJson(url);
 
             //                   //EntityManager<bsUser>.Modify<bsUser>(luser);

@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WjGis", "TDObject\WjGis.csproj", "{639A8E53-DC12-46F2-8778-FCDAE8991823}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QyTech.ExcelExport", "ExcelExportHelper\QyTech.ExcelExport.csproj", "{FD78D2FE-09F3-4C11-9C27-88D1DBF120A8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QyTech.ExcelOper", "ExcelExportHelper\QyTech.ExcelOper.csproj", "{FD78D2FE-09F3-4C11-9C27-88D1DBF120A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WTGeoWeb", "WTGeoWeb\WTGeoWeb.csproj", "{53703517-FDF0-4B9A-80DC-E4834FC504D6}"
 EndProject
@@ -14,6 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchTranBdCoords", "BatchTranBdCoords\BatchTranBdCoords.csproj", "{41789FEC-F862-4C07-8CF2-8125D3C5833C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommEntrance", "CommqyEntrance\CommEntrance.csproj", "{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QyTech.SkinForm", "QyTech.Skin\QyTech.SkinForm.csproj", "{712E014E-BC82-4094-8078-CB0636993DE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSkin", "TestSkin\TestSkin.csproj", "{D3BF8FC5-1493-4E3C-A819-C4581A322700}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +91,30 @@ Global
 		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Release|x86.ActiveCfg = Release|Any CPU
 		{4E80EB4C-1E82-4F65-B08E-CB2E9300B6A9}.Release|x86.Build.0 = Release|Any CPU
+		{712E014E-BC82-4094-8078-CB0636993DE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{712E014E-BC82-4094-8078-CB0636993DE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{712E014E-BC82-4094-8078-CB0636993DE0}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{712E014E-BC82-4094-8078-CB0636993DE0}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{712E014E-BC82-4094-8078-CB0636993DE0}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{712E014E-BC82-4094-8078-CB0636993DE0}.Debug|x86.Build.0 = Debug|Any CPU
+		{712E014E-BC82-4094-8078-CB0636993DE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{712E014E-BC82-4094-8078-CB0636993DE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{712E014E-BC82-4094-8078-CB0636993DE0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{712E014E-BC82-4094-8078-CB0636993DE0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{712E014E-BC82-4094-8078-CB0636993DE0}.Release|x86.ActiveCfg = Release|Any CPU
+		{712E014E-BC82-4094-8078-CB0636993DE0}.Release|x86.Build.0 = Release|Any CPU
+		{D3BF8FC5-1493-4E3C-A819-C4581A322700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3BF8FC5-1493-4E3C-A819-C4581A322700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3BF8FC5-1493-4E3C-A819-C4581A322700}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D3BF8FC5-1493-4E3C-A819-C4581A322700}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D3BF8FC5-1493-4E3C-A819-C4581A322700}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D3BF8FC5-1493-4E3C-A819-C4581A322700}.Debug|x86.Build.0 = Debug|Any CPU
+		{D3BF8FC5-1493-4E3C-A819-C4581A322700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3BF8FC5-1493-4E3C-A819-C4581A322700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3BF8FC5-1493-4E3C-A819-C4581A322700}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D3BF8FC5-1493-4E3C-A819-C4581A322700}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D3BF8FC5-1493-4E3C-A819-C4581A322700}.Release|x86.ActiveCfg = Release|Any CPU
+		{D3BF8FC5-1493-4E3C-A819-C4581A322700}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

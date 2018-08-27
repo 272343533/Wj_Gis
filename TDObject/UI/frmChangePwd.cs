@@ -15,7 +15,7 @@ using SunMvcExpress.Dao;
 
 namespace TDObject.UI
 {
-    public partial class frmChangePwd : FlatForm
+    public partial class frmChangePwd : QyTech.SkinForm.qyForm
     {
         public frmChangePwd()
         {
@@ -26,7 +26,7 @@ namespace TDObject.UI
         {
             try
             {
-                string DetailUrl = MainForm.URI + "/lyRemoteServ/GetOneUserData?id=" + MainForm.LoginUser.bsU_Id.ToString();
+                string DetailUrl = MainForm.App_URI + "/lyRemoteServ/GetOneUserData?id=" + MainForm.LoginUser.bsU_Id.ToString();
                 string json = AsyncHttp.CommFun.GetRemoteJson(DetailUrl);
                 bsUser userobj = JsonHelper.DeserializeFormtJsonToObject<bsUser>(json); // TDObject.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", MainForm.LoginUser.bsU_Id);
 
@@ -42,7 +42,7 @@ namespace TDObject.UI
                         userobj.LoginPwd= tbPass.Text.Trim();
 
                         string strui = JsonHelper.SerializeObject<bsUser>(userobj, null);
-                        DetailUrl = MainForm.URI + "lyRemoteServ/UdpUserData?userinfo=" + strui;
+                        DetailUrl = MainForm.App_URI + "lyRemoteServ/UdpUserData?userinfo=" + strui;
                         string ret = AsyncHttp.CommFun.GetRemoteJson(DetailUrl);
 
                         if (ret != "")
@@ -72,7 +72,7 @@ namespace TDObject.UI
 
         private void frmChangePwd_MouseMove(object sender, MouseEventArgs e)
         {
-            FormSkin.MouseMoveForm(this.Handle);
+            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
     }
 }

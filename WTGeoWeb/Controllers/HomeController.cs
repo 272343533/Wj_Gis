@@ -50,14 +50,14 @@ namespace WTGeoWeb.Controllers
 
         public ActionResult Index_m_SubLayer(string userid)
         {
-            bsUser obj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", Guid.Parse(userid));
-            log.Info("login1:" + obj.bsR_Name);
-            if (obj != null)
-            {
-                ViewBag.bsU_Id = userid;
-                ViewBag.bsR_Name = obj.bsR_Name;
-                ViewBag.UserName = obj.UserName;
-            }
+            //bsUser obj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", Guid.Parse(userid));
+            //log.Info("login1:" + obj.bsR_Name);
+            //if (obj != null)
+            //{
+            //    ViewBag.bsU_Id = userid;
+            //    ViewBag.bsR_Name = obj.bsR_Name;
+            //    ViewBag.UserName = obj.UserName;
+            //}
             return View();
         }
 

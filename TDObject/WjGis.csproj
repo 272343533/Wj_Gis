@@ -126,14 +126,23 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\WebPub\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="QyTech.Auth.Dao, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\WebPub\QyTech.Auth.Dao.dll</HintPath>
+    </Reference>
     <Reference Include="QyTech.Core">
       <HintPath>..\..\WTGeoWeb\WebPub\QyTech.Core.dll</HintPath>
     </Reference>
-    <Reference Include="QyTech.ExcelExportHelper">
-      <HintPath>..\Debug\QyTech.ExcelExportHelper.dll</HintPath>
+    <Reference Include="QyTech.ExcelOper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Debug\QyTech.ExcelOper.dll</HintPath>
     </Reference>
     <Reference Include="QyTech.Json">
       <HintPath>..\..\WTGeoWeb\WebPub\QyTech.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="QyTech.SkinForm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Debug\QyTech.SkinForm.dll</HintPath>
     </Reference>
     <Reference Include="SunMvcExpress.Dao, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -209,36 +218,35 @@
     <Compile Include="MapControl\LayerControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Skin\FlatFormWithTop.cs">
+    <Compile Include="UI\AddUI\frmAddFwjz.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Skin\FlatFormWithTop.Designer.cs">
-      <DependentUpon>FlatFormWithTop.cs</DependentUpon>
+    <Compile Include="UI\AddUI\frmAddFwjz.Designer.cs">
+      <DependentUpon>frmAddFwjz.cs</DependentUpon>
     </Compile>
-    <Compile Include="Skin\FlatForm.cs">
+    <Compile Include="UI\AddUI\frmAddLtdInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Skin\FlatForm.Designer.cs">
-      <DependentUpon>FlatForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Skin\FormExit.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Skin\FormExit.Designer.cs">
-      <DependentUpon>FormExit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Skin\FormSkin.cs" />
-    <Compile Include="Skin\QyProgressBar.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Skin\QyProgressBar.Designer.cs">
-      <DependentUpon>QyProgressBar.cs</DependentUpon>
+    <Compile Include="UI\AddUI\frmAddLtdInfo.Designer.cs">
+      <DependentUpon>frmAddLtdInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\AddUI\FrmAddLtdRegular.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\AddUI\FrmAddLtdRegular.Designer.cs">
       <DependentUpon>FrmAddLtdRegular.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AddUI\frmFName2ExcelCol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AddUI\frmFName2ExcelCol.Designer.cs">
+      <DependentUpon>frmFName2ExcelCol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmExcelImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmExcelImport.Designer.cs">
+      <DependentUpon>frmExcelImport.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\FrmTypeImport.cs">
       <SubType>Form</SubType>
@@ -484,20 +492,20 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Skin\FlatFormWithTop.resx">
-      <DependentUpon>FlatFormWithTop.cs</DependentUpon>
+    <EmbeddedResource Include="UI\AddUI\frmAddFwjz.resx">
+      <DependentUpon>frmAddFwjz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Skin\FlatForm.resx">
-      <DependentUpon>FlatForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Skin\FormExit.resx">
-      <DependentUpon>FormExit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Skin\QyProgressBar.resx">
-      <DependentUpon>QyProgressBar.cs</DependentUpon>
+    <EmbeddedResource Include="UI\AddUI\frmAddLtdInfo.resx">
+      <DependentUpon>frmAddLtdInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AddUI\FrmAddLtdRegular.resx">
       <DependentUpon>FrmAddLtdRegular.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AddUI\frmFName2ExcelCol.resx">
+      <DependentUpon>frmFName2ExcelCol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmExcelImport.resx">
+      <DependentUpon>frmExcelImport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FrmTypeImport.resx">
       <DependentUpon>FrmTypeImport.cs</DependentUpon>

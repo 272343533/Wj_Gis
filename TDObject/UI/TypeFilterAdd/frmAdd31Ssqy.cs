@@ -11,7 +11,7 @@ using SunMvcExpress.Dao;
 
 namespace TDObject.UI
 {
-    public partial class frmAdd31Ssqy : FlatForm
+    public partial class frmAdd31Ssqy : QyTech.SkinForm.qyForm
     {
         string addormodify = "add";
 

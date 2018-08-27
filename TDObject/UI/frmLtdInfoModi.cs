@@ -15,7 +15,7 @@ using SunMvcExpress.Dao;
 
 namespace TDObject.UI
 {
-    public partial class frmLtdInfoModi : FlatForm
+    public partial class frmLtdInfoModi : QyTech.SkinForm.qyForm
     {
 
      
@@ -32,7 +32,7 @@ namespace TDObject.UI
         {
             try
             {
-                dgv1.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dgv1.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
                 comboBox1.SelectedIndex = 0;
 
                 //string fName = System.Windows.Forms.Application.StartupPath + @"\DemoExcel\D、企业变化信息表.xlsx";
@@ -52,7 +52,7 @@ namespace TDObject.UI
                 //dataGridView1.AutoGenerateColumns = true;
                 //dataGridView1.Columns.Clear();
                 //dataGridView1.DataSource = ds.Tables[0];
-                dgv1.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dgv1.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
                 dgv1.AutoGenerateColumns = false;
                 dgv1.AllowUserToAddRows = false;
 
@@ -123,7 +123,7 @@ namespace TDObject.UI
 
         private void frmLtdInfoModi_MouseDown(object sender, MouseEventArgs e)
         {
-            FormSkin.MouseMoveForm(this.Handle);
+            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void button3_Click(object sender, EventArgs e)

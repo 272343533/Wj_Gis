@@ -43,6 +43,9 @@ using ESRI.ArcGIS.Output;
 
 using System.Drawing.Printing;
 
+using QyTech.SkinForm;
+using QyTech.SkinForm.Controls;
+
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 namespace TDObject
@@ -64,6 +67,7 @@ namespace TDObject
 
         private string localmapName = Application.StartupPath + @"\" + "WjMapLocal.mxd";
         private static string localMdbName = Application.StartupPath + @"\WjMapLocal.mdb";
+        private static string localMdbName_csgh = Application.StartupPath + @"\WjMapLocal_Csgh.mdb";
 
         arcGisMap gismap = new arcGisMap();
 
@@ -76,7 +80,8 @@ namespace TDObject
 
         private int loadType =5;
 
-        public static string URI = "http://122.114.190.250:8080/wjkfq_gis/";
+        public static string QyTechAuth_URI = "http://122.114.190.250:8080/wjkfq_gis/";
+        public static string App_URI = "http://122.114.190.250:8080/wjkfq_gis/";
 
         TDObject.BLL.UIBLL.bllTypeFilter blluifilter; //= new TDObject.BLL.UIBLL.bllTypeFilter();
        
@@ -99,9 +104,10 @@ namespace TDObject
         private List<企业范围> _ltdobjs;
 
         private List<z租赁企业信息表> _ltdobjs1;
-     
+
 
         public static EntityManager EM = new EntityManager(new SunMvcExpress.Dao.wj_GisDbEntities());
+        public static EntityManager QyTech_EM = new EntityManager(new QyTech.Auth.Dao.QyTech_AuthEntities());
 
 
         FlashObjectsClass flashObjects = new FlashObjectsClass();
@@ -230,6 +236,72 @@ namespace TDObject
         {
             try
             {
+                List<string> layers = new List<string>();
+               
+                layers.Clear();
+                layers.Add("道路"); layers.Add("道路注记");
+                layers.Add("城市规划"); //layers.Add("城市规划注记注记2");
+                layers.Add("河流"); layers.Add("河流注记");
+
+                layers.Add("行政区");
+                layers.Add("发展总公司");
+                layers.Add("红牌警告点位置");
+                layers.Add("黄牌警告点位置");
+                layers.Add("企业照片点位置");
+                layers.Add("安全检查点位置");
+
+                layers.Add("房屋建筑");
+                layers.Add("企业范围");
+                layers.Add("管理区");
+                LoadLocalMap(localMdbName, layers);
+
+                //layers.Clear();
+                //layers.Add("城市规划"); layers.Add("城市规划注记注记2");
+                //LoadLocalMap(localMdbName_csgh, layers);
+
+
+                GlobalVariables.addLayer = true;
+            }
+            catch (Exception ex)
+            {
+                log.Error(this.Name + ":" + ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void LoadLocalMap(string dbname,List<string> layers)
+        {
+            try
+            {
+
+                IWorkspaceFactory pFactory = new AccessWorkspaceFactoryClass();
+                //IWorkspace pWorkspace = pFactory.OpenFromFile(Application.StartupPath + @"\WtLocal.mdb", 0);
+                IWorkspace pWorkspace = pFactory.OpenFromFile(dbname, 0);
+                IFeatureWorkspace pFeatWorkspace = pWorkspace as IFeatureWorkspace;
+
+                foreach (string layername in layers)
+                {
+                    try
+                    {
+                            IFeatureClass m_FeatureClass = pFeatWorkspace.OpenFeatureClass(layername);
+
+                            //判断是否已添加（或判断过下面的if且不成立）过当前图层 不知道为什么有时候会出现重复加载
+                            IFeatureLayer m_FeatureLayer = new FeatureLayerClass();
+                            m_FeatureLayer.FeatureClass = m_FeatureClass;
+                            m_FeatureLayer.Name = m_FeatureClass.AliasName;
+                            m_FeatureLayer.Selectable = false;
+
+                            GlobalVariables.axMapControl.AddLayer(m_FeatureLayer, GlobalVariables.axMapControl.LayerCount);   //加载到map窗口
+                        
+                            //GlobalVariables.SymbolLayer(m_FeatureLayer);
+                    }
+                    catch (Exception ex)
+                    {
+                        log.Error("LoadMap_loadtype is 5_" + layername + ex.Message + ex.StackTrace);
+                    }
+                }
+
+
                 //try
                 //{
                 //    IMapServerRESTLayer pRestLayer = new MapServerRESTLayerClass();
@@ -251,62 +323,6 @@ namespace TDObject
                 //    MessageBox.Show(ex.Message);
                 //}
                 //return;
-
-
-                IWorkspaceFactory pFactory = new AccessWorkspaceFactoryClass();
-
-
-                //IWorkspace pWorkspace = pFactory.OpenFromFile(Application.StartupPath + @"\WtLocal.mdb", 0);
-                IWorkspace pWorkspace = pFactory.OpenFromFile(localMdbName, 0);
-
-
-
-
-                IFeatureWorkspace pFeatWorkspace = pWorkspace as IFeatureWorkspace;
-
-
-
-                List<string> layers = new List<string>();
-                layers.Add("道路"); layers.Add("道路注记");
-                layers.Add("河流"); layers.Add("河流注记");
-
-                layers.Add("行政区");
-                // layers.Add("发展总公司");
-                layers.Add("红牌警告点位置");
-                layers.Add("黄牌警告点位置");
-                layers.Add("企业照片点位置");
-                layers.Add("安全检查点位置");
-
-                layers.Add("房屋建筑");
-                layers.Add("企业范围");
-                layers.Add("管理区");
-
-
-                foreach (string layername in layers)
-                {
-                    try
-                    {
-                        IFeatureClass m_FeatureClass = pFeatWorkspace.OpenFeatureClass(layername);
-
-                        //判断是否已添加（或判断过下面的if且不成立）过当前图层 不知道为什么有时候会出现重复加载
-                        IFeatureLayer m_FeatureLayer = new FeatureLayerClass();
-                        m_FeatureLayer.FeatureClass = m_FeatureClass;
-                        m_FeatureLayer.Name = m_FeatureClass.AliasName;
-                        m_FeatureLayer.Selectable = false;
-
-                        GlobalVariables.axMapControl.AddLayer(m_FeatureLayer, GlobalVariables.axMapControl.LayerCount);   //加载到map窗口
-
-                        GlobalVariables.SymbolLayer(m_FeatureLayer);
-                    }
-                    catch (Exception ex)
-                    {
-                        log.Error("LoadMap_loadtype is 5_" + layername + ex.Message + ex.StackTrace);
-                    }
-                }
-
-
-
-                GlobalVariables.addLayer = true;
             }
             catch (Exception ex)
             {
@@ -365,14 +381,14 @@ namespace TDObject
         {
             try
             {
-                this.dgvCSGH.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                this.dgvFW.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                this.dgvQycc.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                this.dgvQyxx.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                this.dgvT2_11.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                this.dgvT2_12.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                this.dgvT2_21.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                this.dgvT2_31.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                this.dgvCSGH.AlternatingRowsDefaultCellStyle =QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
+                this.dgvFW.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
+                this.dgvQycc.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
+                this.dgvQyxx.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
+                this.dgvT2_11.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
+                this.dgvT2_12.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
+                this.dgvT2_21.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
+                this.dgvT2_31.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
 
                 _TabControl = this.tabControl1;
            
@@ -380,6 +396,13 @@ namespace TDObject
                 SetProperViewDisp(false);
                 //this.skinEngine1.SkinFile = Application.StartupPath + @"\MP10.ssk";
                 //webBrowser1.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(web_DocumentCompleted);
+                List<bsArcLayer> layers = MainForm.EM.GetListNoPaging<bsArcLayer>("IsValid=1", "DislNo");
+                foreach(bsArcLayer l in layers)
+                {
+                    GlobalVariables.dbLayers.Add(l.Name, l);
+                }
+
+
 
                 dicLayerDisp.Add("红牌警告点位置", false);
                 dicLayerDisp.Add("黄牌警告点位置", false);
@@ -407,16 +430,17 @@ namespace TDObject
                     Thread.Sleep(1000);
                 }
 
-                LayerControl.SetVisibleLayer(GlobalVariables.axMapControl, "", "管理区,行政区,房屋建筑,企业范围,道路,河流,道路注记,河流注记");
 
                 //确定各图层位置
-                ChangeLayerPos("企业照片点位置,红牌警告点位置,黄牌警告点位置,安全检查点位置,行政区,管理区,房屋建筑,企业范围,道路注记,河流注记,道路,河流");//D_Spatial.SDE.
+               // ChangeLayerPos("企业照片点位置,红牌警告点位置,黄牌警告点位置,安全检查点位置,行政区,管理区,房屋建筑,企业范围,城市规划注记注记2,城市规划,道路注记,河流注记,道路,河流");//D_Spatial.SDE.
+                //确定可见性
+               // LayerControl.SetVisibleLayer(GlobalVariables.axMapControl, "", "管理区,行政区,房屋建筑,企业范围,城市规划注记注记2,城市规划,道路,河流,道路注记,河流注记");
 
                 if (m_LoginStatus == 2)
                 {
 
                    
-                    ////////string url = MainForm.URI + "lyRemoteServ/GetAllOrgData?userid=" + MainForm.LoginUser.bsU_Id;
+                    ////////string url = MainForm.App_URI + "lyRemoteServ/GetAllOrgData?userid=" + MainForm.LoginUser.bsU_Id;
                     ////////string ret = AsyncHttp.CommFun.GetRemoteJson(url);
                     ////////List<bsOrganize> org = JsonHelper.DeserializeJsonToList<bsOrganize>(ret);
                     //tvOrgUc1.RefreshTree(org);
@@ -456,6 +480,10 @@ namespace TDObject
                 treeView2.Nodes[0].ExpandAll();
 
                 AddFXFBXSMenuItem();
+
+
+                this.axTOCControl1.SetBuddyControl(GlobalVariables.axMapControl);
+
             }
             catch (Exception ex)
             {
@@ -984,7 +1012,7 @@ namespace TDObject
                             if (GlobalVariables.Select.SValue == GlobalVariables.SelectFeatureValue.Qyfw)
                             {
                                 frmAlarmQuery obj = new frmAlarmQuery(Convert.ToInt32(Fields.Substring(0, Fields.Length - 1)));
-                                FormSkin.ShowForm(obj);
+                                QyTech.SkinForm.qyFormUtil.ShowForm(obj);
                             }
                         }
                     }
@@ -1007,7 +1035,7 @@ namespace TDObject
                         if (id != null && id != "")
                         {
                             FrmOneLtdAndRentLtdInfo obj = new FrmOneLtdAndRentLtdInfo(id.ToString());
-                            FormSkin.ShowForm(obj);
+                            QyTech.SkinForm.qyFormUtil.ShowForm(obj);
                         }
                     }
                     else
@@ -1047,7 +1075,7 @@ namespace TDObject
                                 if (dkbm != null && dkbm != "")
                                 {
                                     FrmOneLtdAndRentLtdInfo obj = new FrmOneLtdAndRentLtdInfo(dkbm);
-                                    FormSkin.ShowForm(obj);
+                                    qyFormUtil.ShowForm(obj);
                                 }
                             }
                         }
@@ -1109,7 +1137,7 @@ namespace TDObject
             //try
             //{
             //    FrmLayerSet obj = new FrmLayerSet();
-            //    FormSkin.ShowForm(obj);
+            //    qyFormUtil.ShowForm(obj);
             //}
             //catch (Exception ex)
             //{
@@ -1458,7 +1486,7 @@ namespace TDObject
         {
             try
             {
-                //statusBarXY.Text = string.Format("{0}, {1}  {2}", e.mapX.ToString("#######.##"), e.mapY.ToString("#######.##"), axMapControl1.MapUnits.ToString().Substring(4));
+                statusBarXY.Text = string.Format("{0}, {1}  {2}", e.mapX.ToString("#######.##"), e.mapY.ToString("#######.##"), axMapControl1.MapUnits.ToString().Substring(4));
                 if (GlobalVariables.Select.SType != GlobalVariables.SelectType.enull && GlobalVariables.Select.SOperFun == GlobalVariables.SelectFunGroup.QueryLayerInfo)
                 {
                     identifyDialog.OnMouseMove(e.mapX, e.mapY);
@@ -1526,7 +1554,7 @@ namespace TDObject
                 {
                     
                     frmUserMana obj = new frmUserMana();
-                    FormSkin.ShowForm(obj);
+                    qyFormUtil.ShowForm(obj);
                 }
                 else
                 {
@@ -1546,7 +1574,7 @@ namespace TDObject
             try
             {
                 frmChangePwd obj = new frmChangePwd();
-                FormSkin.ShowForm(obj);
+                qyFormUtil.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -1792,7 +1820,7 @@ namespace TDObject
         private void 综合查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmComplexQuery obj = new frmComplexQuery();
-            FormSkin.ShowForm(obj);
+            qyFormUtil.ShowForm(obj);
         }
 
        
@@ -2018,7 +2046,7 @@ namespace TDObject
             try
             {
                 frmMapPreprint obj = new frmMapPreprint(this.axMapControl1);
-                FormSkin.ShowForm(obj);
+                qyFormUtil.ShowForm(obj);
              
             }
             catch (Exception ex)
@@ -2106,7 +2134,7 @@ namespace TDObject
                         if (DialogResult.OK == sfd.ShowDialog())
                         {
                             string modelName = sfd.FileName;// @"用地企业信息表";
-                            QyTech.ExcelExport.QyExcelHelper excl = new QyTech.ExcelExport.QyExcelHelper("local");
+                            QyTech.ExcelOper.QyExcelHelper excl = new QyTech.ExcelOper.QyExcelHelper("local");
                             //string p = "Id,bsO_Id,TotalDTType,FromDt,ddd,OrgName";
                             //导出的数据项
                             //string items = "用地单位名称,所属行政村名称,土地发证面积,实际占地面积,建筑占地面积,建筑面积,批准用途,实际用途,是否为租赁企业,企业性质,注册资本,法人代表,联系电话,土地座落,通讯地址,产业类型,能耗,产值,税收,租金,行业类型,经济类型,资产类型,抵押情况,企业代码";
@@ -2140,7 +2168,7 @@ namespace TDObject
                         if (DialogResult.OK == sfd.ShowDialog())
                         {
                             string modelName = sfd.FileName;//@"z租赁企业信息表";
-                            QyTech.ExcelExport.QyExcelHelper excl = new QyTech.ExcelExport.QyExcelHelper("local");
+                            QyTech.ExcelOper.QyExcelHelper excl = new QyTech.ExcelOper.QyExcelHelper("local");
                             //string items = "租赁企业名称,所属行政村名称,用地企业名称,企业性质,注册资本,法人代表,联系电话,土地座落,通讯地址,产业类型,能耗,产值,税收,租金,行业类型,经济类型,资产类型,抵押情况,企业代码";
                             string items = "DKBH,NSRSBH,YDQYMC,TDZL,ZCLX,ZCSJ,JYFW,HYDL,HYLXXF,FZMJ_,ZDMJ,JZZDMJ,JZMJ,QSXZ,TDYT,LZZJGDM,HGDM,HYLXDM,LAODIKUAIHAO,SSXZQDM,SSGLQDM,SYQLX_,PZYT_,TDZH_,SFWZLQY_,ZLQYMC_,SZDWMC_,ZLLX_,ZJ_,ZCZB_,GSGM_,FRDB_,LXDH_,TXDZ_,CYLX_,JJLX_,CYLX1,NH_,CZ_,SS_,JSQK_,DYQK_,ZLWZ_,XSZD_";
                             string saveToPath = excl.ExportListToExcl<z租赁企业信息表>(objs, modelName, items,"yyyy-MM-dd",true,2,2,"local");
@@ -2753,13 +2781,13 @@ namespace TDObject
         private void 数据导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
            frmDataImport obj = new frmDataImport();
-            FormSkin.ShowForm(obj);
+            qyFormUtil.ShowForm(obj);
         }
 
         private void 数据导出ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmDataExport obj = new frmDataExport();
-            FormSkin.ShowForm(obj);
+            qyFormUtil.ShowForm(obj);
         }
 
         private void btnLtnInfo_Move(object sender, EventArgs e)
@@ -2904,7 +2932,7 @@ namespace TDObject
             {
                 frmLtdNameTotal obj = new frmLtdNameTotal(this.axMapControl1.Extent);
                 //objfrmLtdNameTotal.axMapControl1.vi = this.axMapControl1.ActiveView;
-                FormSkin.ShowForm(obj);
+                qyFormUtil.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -2917,7 +2945,7 @@ namespace TDObject
             try
             {
                 FrmRegionTotal obj = new FrmRegionTotal();
-                FormSkin.ShowForm(obj);
+                qyFormUtil.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -2945,7 +2973,7 @@ namespace TDObject
             try
             {
                 frmComplexQuery obj = new frmComplexQuery();
-                FormSkin.ShowForm(obj);
+                qyFormUtil.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -2958,7 +2986,7 @@ namespace TDObject
             try
             {
                 frmLtdInfoAdd obj = new frmLtdInfoAdd();
-                FormSkin.ShowForm(obj);
+                qyFormUtil.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -2971,7 +2999,7 @@ namespace TDObject
             try
             {
                 frmLtdInfoModi obj = new frmLtdInfoModi();
-                FormSkin.ShowForm(obj);
+                qyFormUtil.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -3067,7 +3095,7 @@ namespace TDObject
             {
                 int ltdobjid = Convert.ToInt32(dgvQyxx.Rows[0].Cells[1].Value);
                 frmAlarmQuery obj = new frmAlarmQuery(ltdobjid);
-                FormSkin.ShowForm(obj);
+                qyFormUtil.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -3081,7 +3109,7 @@ namespace TDObject
             {
                 int ltdobjid = Convert.ToInt32(dgvQyxx.Rows[0].Cells[1].Value);
                 FrmLtdZlqyxx obj = new FrmLtdZlqyxx(ltdobjid);
-                FormSkin.ShowForm(obj);
+                qyFormUtil.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -3159,7 +3187,7 @@ namespace TDObject
             try
             {
                 frmTotalHY obj = new frmTotalHY();
-                FormSkin.ShowForm(obj);
+                qyFormUtil.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -3184,7 +3212,7 @@ namespace TDObject
             try
             {
                 frmTotalFilter obj = new frmTotalFilter();
-                FormSkin.ShowForm(obj);
+                qyFormUtil.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -3200,7 +3228,7 @@ namespace TDObject
                 if (dkbm != null && dkbm != "")
                 {
                     FrmOneLtdAndRentLtdInfo obj = new FrmOneLtdAndRentLtdInfo(dkbm);
-                    FormSkin.ShowForm(obj);
+                    qyFormUtil.ShowForm(obj);
                 }
             }
             catch (Exception ex)
@@ -3219,7 +3247,7 @@ namespace TDObject
             try
             {
                 frmTypeFilter obj = new frmTypeFilter();
-                FormSkin.ShowForm(obj);
+                qyFormUtil.ShowForm(obj);
             }
             catch (Exception ex)
             {
@@ -3235,7 +3263,7 @@ namespace TDObject
                 if (dkbm != null && dkbm != "")
                 {
                     FrmOneLtdAndRentLtdInfo obj = new FrmOneLtdAndRentLtdInfo(dkbm);
-                    FormSkin.ShowForm(obj);
+                    qyFormUtil.ShowForm(obj);
                 }
             }
             catch (Exception ex)
@@ -3247,13 +3275,13 @@ namespace TDObject
         private void 吴江区工业企业资源集约利用情况上报ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmUpReport1 obj = new FrmUpReport1();
-            FormSkin.ShowForm(obj);
+            qyFormUtil.ShowForm(obj);
         }
 
         private void 分项数据导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmTypeImport obj = new FrmTypeImport();
-            FormSkin.ShowForm(obj);
+            qyFormUtil.ShowForm(obj);
         }
 
         public void ChangeMapExtent(IGeometry pGeo)
@@ -3345,7 +3373,12 @@ namespace TDObject
             //} 
             //axMapControl1.ActiveView.GraphicsContainer.AddElement(pElement, 0);// 添加 pElement
         }
-     
+
+        private void excel数据导入ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmExcelImport obj = new frmExcelImport();
+            obj.ShowDialog();
+        }
     }
 
     public class keyvalue

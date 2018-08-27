@@ -15,7 +15,7 @@ using QyTech.Core.BLL;
 
 namespace TDObject.UI
 {
-    public partial class FrmLtdZlqyxx : FlatForm
+    public partial class FrmLtdZlqyxx : QyTech.SkinForm.qyForm
     {
         private 企业范围 LtdXx;
         public MainForm parentform;
@@ -50,7 +50,7 @@ namespace TDObject.UI
         //        foreach (z租赁企业信息表 ui in uis)
         //        {
                     
-        //            //string url = MainForm.URI + "lyRemoteServ/GetOneZlqyxxData?id=" + ui.OBJECTID.ToString();
+        //            //string url = MainForm.App_URI + "lyRemoteServ/GetOneZlqyxxData?id=" + ui.OBJECTID.ToString();
         //            //string ret = AsyncHttp.CommFun.GetRemoteJson(url);
         //            //z租赁企业信息表 dbobj = JsonHelper.DeserializeJsonToObject<z租赁企业信息表>(ret);
         //            z租赁企业信息表 dbobj = MainForm.EM.GetByPk<z租赁企业信息表>("OBJECTID", ui.OBJECTID);
@@ -74,7 +74,7 @@ namespace TDObject.UI
         //            string ret = MainForm.EM.Modify<z租赁企业信息表>(dbobj);
 
         //            //string strui = JsonHelper.SerializeObject<z租赁企业信息表>(dbobj, null);
-        //            //url = MainForm.URI + "lyRemoteServ/UdpZlqyxxbData?info=" + strui;
+        //            //url = MainForm.App_URI + "lyRemoteServ/UdpZlqyxxbData?info=" + strui;
         //            //ret = AsyncHttp.CommFun.GetRemoteJson(url);
         //            if (ret != "")
         //                MessageBox.Show(ret);
@@ -92,7 +92,7 @@ namespace TDObject.UI
         {
             try
             {
-                dgvT2_12.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
+                dgvT2_12.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
                 RefreshMainInfoDgv();
             }
@@ -108,7 +108,7 @@ namespace TDObject.UI
             try
             {
 
-                //string url = MainForm.URI + "lyRemoteServ/GetAllUserInfoData";
+                //string url = MainForm.App_URI + "lyRemoteServ/GetAllUserInfoData";
                 //string ret = AsyncHttp.CommFun.GetRemoteJson(url);
                 //List<z租赁企业信息表> dbobjs = JsonHelper.DeserializeJsonToList<z租赁企业信息表>(ret);
 
@@ -154,7 +154,7 @@ namespace TDObject.UI
 
         private void FrmLtdZlqyxx_MouseMove(object sender, MouseEventArgs e)
         {
-            FormSkin.MouseMoveForm(this.Handle);
+            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
     }

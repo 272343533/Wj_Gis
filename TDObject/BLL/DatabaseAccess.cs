@@ -98,7 +98,7 @@ namespace TDObject.BLL
             int resultCode = 0;
             try
             {
-                string detailUrl = MainForm.URI + "lyRemoteServ/GetGisObj?TType=" + TType + "&id=" + layerInfo["编码"];
+                string detailUrl = MainForm.App_URI + "lyRemoteServ/GetGisObj?TType=" + TType + "&id=" + layerInfo["编码"];
 
                 string ret = AsyncHttp.CommFun.GetRemoteJson(detailUrl);
 
@@ -166,7 +166,7 @@ namespace TDObject.BLL
                 }
                 else
                 {
-                    detailUrl = MainForm.URI + "lyRemoteServ/UpdGisObj?TType=" + TType + "&json=" + json;
+                    detailUrl = MainForm.App_URI + "lyRemoteServ/UpdGisObj?TType=" + TType + "&json=" + json;
 
                     ret = AsyncHttp.CommFun.GetRemoteJson(detailUrl);
                 }

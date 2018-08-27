@@ -6,7 +6,7 @@ using System.Reflection;
 using Microsoft.Office.Interop.Excel;
 using QyTech.Core;
 using System.Windows.Forms;
-namespace QyTech.ExcelExport
+namespace QyTech.ExcelOper
 {
     /// <summary>
     /// excl导出设置

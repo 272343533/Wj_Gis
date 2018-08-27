@@ -14,7 +14,7 @@ using QyTech.Core.BLL;
 
 namespace TDObject.UI
 {
-    public partial class FrmRegionTotal : FlatForm
+    public partial class FrmRegionTotal : QyTech.SkinForm.qyForm
     {
         public FrmRegionTotal()
         {
@@ -31,10 +31,10 @@ namespace TDObject.UI
                 this.dgvT2_11.AutoGenerateColumns = false;
                 this.dgvT2_12.AutoGenerateColumns = false;
 
-                dgvT2_11.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgvT2_12.AlternatingRowsDefaultCellStyle = FormSkin.DgvDefaultAlterCellStyle;
-                dgvT2_11.RowPostPaint += new DataGridViewRowPostPaintEventHandler(FormSkin.dgv_RowPostPaint);
-                dgvT2_12.RowPostPaint += new DataGridViewRowPostPaintEventHandler(FormSkin.dgv_RowPostPaint);
+                dgvT2_11.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
+                dgvT2_12.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
+                dgvT2_11.RowPostPaint += new DataGridViewRowPostPaintEventHandler(dgv_RowPostPaint);
+                dgvT2_12.RowPostPaint += new DataGridViewRowPostPaintEventHandler(dgv_RowPostPaint);
 
                 treeView1.ExpandAll();
 
@@ -48,6 +48,14 @@ namespace TDObject.UI
                 log.Error(this.Name + ":" + ex.Message);
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void dgv_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            SolidBrush b = new SolidBrush(dgv.RowHeadersDefaultCellStyle.ForeColor);
+            e.Graphics.DrawString((e.RowIndex + 1).ToString(System.Globalization.CultureInfo.CurrentUICulture), dgv.DefaultCellStyle.Font, b, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
+
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -177,7 +185,7 @@ namespace TDObject.UI
         {
             try
             {
-                FormSkin.MouseMoveForm(this.Handle);
+                QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
             }
             catch (Exception ex)
             {

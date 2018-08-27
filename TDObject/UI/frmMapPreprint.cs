@@ -25,7 +25,7 @@ using ESRI.ArcGIS.Geometry;
 
 namespace TDObject.UI
 {
-    public partial class frmMapPreprint : FlatForm
+    public partial class frmMapPreprint : QyTech.SkinForm.qyForm
     {
         public AxMapControl _axMap;
 
@@ -311,7 +311,7 @@ namespace TDObject.UI
 
         private void frmMapPreprint_MouseMove(object sender, MouseEventArgs e)
         {
-            FormSkin.MouseMoveForm(this.Handle);
+            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void button4_Click(object sender, EventArgs e)
