@@ -179,15 +179,15 @@
             return olayer;
         } 
                                           //http://118.123.6.146:14795/arcgis/rest/services/wj/WjMapLocal/MapServer
-        var mapserver1 = MapServer('s1', 'http://122.114.190.250:6080/arcgis/rest/services/WJMap/MyMapService/MapServer', 0, 'Dynamic', true, 1, [4, 5, 6, 7, 8, 9, 10, 11, 12, 13], '');
-        // var mapserver1 = MapServer('s1', 'http://122.114.190.250:6080/arcgis/rest/services/WTMap/WtPublish1/MapServer',0, 'Dynamic', true, 1, [], '');
-        //var mapserver2 = MapServer('s2', 'http://122.114.190.250:6080/arcgis/rest/services/WTMap/WtPublish2/MapServer', 2, 'Dynamic', true, 1, [], '');
+        var mapserver1 = MapServer('s1', 'http://122.114.190.250:6080/arcgis/rest/services/WJMap/MyMapService/MapServer', 0, 'Dynamic', true, 1, [4, 5, 6, 7], '');
+        var mapserver2 = MapServer('s2', 'http://122.114.190.250:6080/arcgis/rest/services/WJMap/MyMapService/MapServer', 1, 'Dynamic', true, 1, [], '');
+        var mapserver3 = MapServer('s3', 'http://122.114.190.250:6080/arcgis/rest/services/WJMap/MyMapService/MapServer', 2, 'Dynamic', true, 1, [11, 12, 13, 14, 15, 16], '');
         //var mapserver3 = MapServer('s3', 'http://122.114.190.250:6080/arcgis/rest/services/WTMap/WtPublish3/MapServer', 1, 'Dynamic', true, 1, [], '');
         //var mapserver4 = MapServer('s4', 'http://122.114.190.250:6080/arcgis/rest/services/WTMap/WTService/MapServer', 0, 'Dynamic', true, 1, [], '');
 
         MapServers.push(mapserver1);
-        //MapServers.push(mapserver2);
-        //MapServers.push(mapserver3);
+        MapServers.push(mapserver2);
+        MapServers.push(mapserver3);
         //MapServers.push(mapserver4);
 
 
@@ -203,11 +203,15 @@
         var Layer6 = Layer("管理区", true, "", "", 0, 5, [5], '');
         var Layer7 = Layer("房屋建筑", true, "fwjzWebView", "OBJECTID", 0, 6, [6], '');
         var Layer8 = Layer("企业范围", true, "QyxxWebView", "DKBH", 0, 7, [7], '');
-        var Layer9 = Layer("道路注记", true, "", "", 0, 8, [8, 9], '');
 
-        var Layer10 = Layer("河流注记", true, "", "", 0, 10, [10, 11], '');
-        var Layer11 = Layer("道路", true, "", "", 0, 12, [12], '');
-        var Layer12 = Layer("河流", true, "", "", 0, 13, [13], '');
+        var Layer8_1 = Layer("城市规划注记注记2", false, "", "", 1, 8, [8,9], '');
+        var Layer8_2 = Layer("城市规划", false, "", "", 1, 8, [8,9,10], '');
+
+        var Layer9 = Layer("道路注记", true, "", "", 2, 11, [11, 12], '');
+
+        var Layer10 = Layer("河流注记", true, "", "", 2, 13, [13, 14], '');
+        var Layer11 = Layer("道路", true, "", "", 2, 15, [15], '');
+        var Layer12 = Layer("河流", true, "", "",2, 16, [16], '');
 
         //var weiLayer = Layer('影像', false, "", "", 3, 0, [0], '');
 
@@ -220,6 +224,9 @@
         dic_Layer['管理区'] = Layer6;
         dic_Layer['房屋建筑'] = Layer7;
         dic_Layer['企业范围'] = Layer8;
+
+        dic_Layer['城市规划注记注记2'] = Layer8_1;
+        dic_Layer['城市规划'] = Layer8_2;
 
         dic_Layer['道路注记'] = Layer9;
 
@@ -240,6 +247,11 @@
         LayerOrder.push('管理区');
         LayerOrder.push('房屋建筑');
         LayerOrder.push('企业范围');
+
+        LayerOrder.push('城市规划注记注记2');
+        LayerOrder.push('城市规划');
+
+
         LayerOrder.push('道路注记');
         LayerOrder.push('河流注记');
         LayerOrder.push('道路');
@@ -248,7 +260,7 @@
 
 
         var dic_LayerTrans = new Array();
-        for (var i = 0; i < 12; i++) {
+        for (var i = 0; i < 14; i++) {
             dic_LayerTrans[i] = 1;
         }
         //dic_LayerTrans[16] = 0.4;
@@ -265,7 +277,7 @@
         var arrFeaturelayerUrls = [];
 
         function InitFeatureLayer() {
-            for (var i = 0; i < 14; i++) {
+            for (var i = 0; i < 17; i++) {
                 arrFeaturelayers.push(MapServer + '/1');
             }
             for (var i = 0; i < arrFeaturelayers.length; i++) {
@@ -388,12 +400,28 @@
 				    var options = { logo: false, slider: false, };
 				    map = new Map("map", options);
 
-				    var s = 0;
-				    var VectorLayer4 = new ArcGISDynamicMapServiceLayer(MapServers[s].Url);
-				    VectorLayer4.opacity = MapServers[s].Opacity;
-				    map.addLayer(VectorLayer4, 1);
-				    setLayers(VectorLayer4, MapServers[s].visibleSubLayindex);
-				    MapServers[s].LoadLayer = VectorLayer4;
+                    var s = 2;
+                    var VectorLayer3 = new ArcGISDynamicMapServiceLayer(MapServers[s].Url);
+                    VectorLayer3.opacity = MapServers[s].Opacity;
+                    map.addLayer(VectorLayer3, 1);
+                    setLayers(VectorLayer3, MapServers[s].visibleSubLayindex);
+                    MapServers[s].LoadLayer = VectorLayer3;
+
+                    var s = 1;
+                    var VectorLayer2 = new ArcGISDynamicMapServiceLayer(MapServers[s].Url);
+                    VectorLayer2.opacity = MapServers[s].Opacity;
+                    map.addLayer(VectorLayer2, 1);
+                    setLayers(VectorLayer2, MapServers[s].visibleSubLayindex);
+                    MapServers[s].LoadLayer = VectorLayer2;
+
+
+                    var s = 0;
+                    var VectorLayer1 = new ArcGISDynamicMapServiceLayer(MapServers[s].Url);
+                    VectorLayer1.opacity = MapServers[s].Opacity;
+                    map.addLayer(VectorLayer1, 1);
+                    setLayers(VectorLayer1, MapServers[s].visibleSubLayindex);
+                    MapServers[s].LoadLayer = VectorLayer1;
+
 
 
 				    map.on("click", mapClick);
@@ -546,13 +574,14 @@
             }
 
             if (btnid == 'F101') {
-                DjFeatureLayers.remove('建设管制核查');
-                DjFeatureLayers.remove('城市规划核查');
-                dic_Layer['基本农田核查'].visible = true;
-                dic_Layer['建设管制核查'].visible = false;
-                dic_Layer['城市规划核查'].visible = false;
-                $("#F102").attr("class", "btn btn-default layernodisp");
-                $("#F103").attr("class", "btn btn-default layernodisp");
+                //DjFeatureLayers.remove('建设管制核查');
+                //DjFeatureLayers.remove('城市规划核查');
+                dic_Layer['城市规划注记注记2'].visible = true;
+                dic_Layer['城市规划'].visible = true;
+                //dic_Layer['建设管制核查'].visible = false;
+                //dic_Layer['城市规划核查'].visible = false;
+                //$("#F102").attr("class", "btn btn-default layernodisp");
+                //$("#F103").attr("class", "btn btn-default layernodisp");
             }
             else if (btnid == 'F102') {
 
@@ -585,15 +614,15 @@
             if (DjFeatureLayers.length > 0) {
                 var s = 1;
                 var VectorLayer = new esri.layers.ArcGISDynamicMapServiceLayer(MapServers[s].Url);
-                if (DjFeatureLayers[0] == "基本农田核查") {
-                    VectorLayer.opacity = dic_LayerTrans[16];// 0.5;//dic_LayerTrans[featureindex]
+                if (DjFeatureLayers[0] == "城市规划") {
+                    VectorLayer.opacity = dic_LayerTrans[10];// 0.5;//dic_LayerTrans[featureindex]
                 }
-                else if (DjFeatureLayers[0] == "建设管制核查") {
-                    VectorLayer.opacity = dic_LayerTrans[19];// 0.5;//dic_LayerTrans[featureindex]
-                }
-                else {//城市规划核查
-                    VectorLayer.opacity = dic_LayerTrans[21];// 0.5;//dic_LayerTrans[featureindex]
-                }
+                //else if (DjFeatureLayers[0] == "建设管制核查") {
+                //    VectorLayer.opacity = dic_LayerTrans[19];// 0.5;//dic_LayerTrans[featureindex]
+                //}
+                //else {//城市规划核查
+                //    VectorLayer.opacity = dic_LayerTrans[21];// 0.5;//dic_LayerTrans[featureindex]
+                //}
                 MapServers[s].LoadLayer = VectorLayer;
 
                 map.addLayer(VectorLayer, MapServers[s].LayerNo);
@@ -603,7 +632,7 @@
             }
 
             return;
-
+            //以下代码无效
             var fealayer;
             for (var i = arrFeaturelayers.length - 1; i >= 0 ; i--) {
                 fealayer = arrFeaturelayers[i];
@@ -1920,15 +1949,15 @@
                 <nav>
                     <div id="nav4_ul" class="nav_4" style="color: yellow">
                         <ul class="box">
-                             <li>
-                               @* <a href="javascript:;" class="" id="FunGroup1"><span>企业核查</span></a>*@
+                            <li>
+                                @* <a href="javascript:;" class="" id="FunGroup1"><span>企业核查</span></a>*@
                                  <a href="#"><span onclick="btnDispLayer(id,'城市规划')" id="F101">城市规划</span></a>
-                               <!--  <dl>
-                                    <dd><a href="#" class="menuitem"><span onclick="btnDispLayer(id,'城市规划')" id="F101">城市规划</span></a></dd>
-                                    <dd><a href="#" class="menuitem"><span onclick="btnDispLayer(id,'建设管制核查')" id="F102">建设管制核查 </span></a></dd>
-                                    <dd><a href="#" class="menuitem"><span onclick="btnDispLayer(id,'城市规划核查')" id="F103">城市规划核查</span></a></dd>
+                                <!--  <dl>
+         <dd><a href="#" class="menuitem"><span onclick="btnDispLayer(id,'城市规划')" id="F101">城市规划</span></a></dd>
+         <dd><a href="#" class="menuitem"><span onclick="btnDispLayer(id,'建设管制核查')" id="F102">建设管制核查 </span></a></dd>
+         <dd><a href="#" class="menuitem"><span onclick="btnDispLayer(id,'城市规划核查')" id="F103">城市规划核查</span></a></dd>
 
-                                </dl>-->
+     </dl>-->
                             </li>
                             <li>
                                 <!--     <a href="#"   data-toggle="modal" data-target="#PosLtd" ><span  onclick="MenuClick(id)" id="301">企业定位</span></a>
@@ -2187,15 +2216,15 @@
         }
 
         function ShowSettingTransModel(CheckLayerName) {
-            if (DjFeatureLayers[0] == '基本农田核查') {
+            if (DjFeatureLayers[0] == '城市规划') {
                 $("#st_checktrans").val(100 * dic_LayerTrans[16]);
             }
-            else if (DjFeatureLayers[0] == '建设管制核查') {
-                $("#st_checktrans").val(100 * dic_LayerTrans[19]);
-            }
-            else if (DjFeatureLayers[0] == '城市规划核查') {
-                $("#st_checktrans").val(100 * dic_LayerTrans[21]);//"城市规划核查"
-            }
+            //else if (DjFeatureLayers[0] == '建设管制核查') {
+            //    $("#st_checktrans").val(100 * dic_LayerTrans[19]);
+            //}
+            //else if (DjFeatureLayers[0] == '城市规划核查') {
+            //    $("#st_checktrans").val(100 * dic_LayerTrans[21]);//"城市规划核查"
+            //}
 
             //$("#st_hgjbntbhq").val(100 * dic_LayerTrans[16]);
             //$("#st_mzjcss").val(100 * dic_LayerTrans[17]);
@@ -2207,16 +2236,19 @@
         }
 
         function SubmitSetTrans() {
-            if (DjFeatureLayers[0] == '基本农田核查') {
-                dic_LayerTrans[16] = $("#st_checktrans").val() / 100;
-                dic_LayerTrans[17] = $("#st_checktrans").val() / 100;//面状基础设施
+            if (DjFeatureLayers[0] == '城市规划') {
+                dic_LayerTrans[10] = $("#st_checktrans").val() / 100;// 建设管制
             }
-            else if (DjFeatureLayers[0] == '建设管制核查') {
-                dic_LayerTrans[19] = $("#st_checktrans").val() / 100;// 建设管制
-            }
-            else if (DjFeatureLayers[0] == '城市规划核查') {
-                dic_LayerTrans[21] = $("#st_checktrans").val() / 100;//"城市规划核查"
-            }
+            //if (DjFeatureLayers[0] == '基本农田核查') {
+            //    dic_LayerTrans[16] = $("#st_checktrans").val() / 100;
+            //    dic_LayerTrans[17] = $("#st_checktrans").val() / 100;//面状基础设施
+            //}
+            //else if (DjFeatureLayers[0] == '建设管制核查') {
+            //    dic_LayerTrans[19] = $("#st_checktrans").val() / 100;// 建设管制
+            //}
+            //else if (DjFeatureLayers[0] == '城市规划核查') {
+            //    dic_LayerTrans[21] = $("#st_checktrans").val() / 100;//"城市规划核查"
+            //}
 
             //Trans_Nt16=$("#st_hgjbntbhq").val()/100;;//规划基本农田
             //rans_Nt17=$("#st_mzjcss").val()/100;//面状基础设施

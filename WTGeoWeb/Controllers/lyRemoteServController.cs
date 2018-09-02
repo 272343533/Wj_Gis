@@ -80,9 +80,13 @@ namespace WTGeoWeb.Controllers
                 企业范围 tobject = EM.GetByPk<企业范围>("OBJECTID", id);
                 json = JsonHelper.SerializeObject<企业范围>(tobject, null);
             }
-           
-            
-           
+            else if (TType == "城市规划")
+            {
+                城市规划 tobject = EM.GetByPk<城市规划>("OBJECTID", id);
+                json = JsonHelper.SerializeObject<城市规划>(tobject, null);
+            }
+
+
             return json;
 
         }
@@ -100,7 +104,7 @@ namespace WTGeoWeb.Controllers
 
                 ret = EM.Modify<房屋建筑>(tobject);
             }
-            else
+            else if (TType == "企业范围")
             {
                 企业范围 obj = JsonHelper.DeserializeFormtJsonToObject<企业范围>(json);
                 企业范围 tobject = EM.GetByPk<企业范围>("OBJECTID", obj.OBJECTID);
@@ -108,7 +112,14 @@ namespace WTGeoWeb.Controllers
 
                 ret = EM.Modify<企业范围>(tobject);
             }
+            else if (TType == "城市规划")
+            {
+                城市规划 obj = JsonHelper.DeserializeFormtJsonToObject<城市规划>(json);
+                城市规划 tobject = EM.GetByPk<城市规划>("OBJECTID", obj.OBJECTID);
+                EntityOperate.Copy<城市规划>(obj, tobject, "OBJECTID");
 
+                ret = EM.Modify<城市规划>(tobject);
+            }
             return ret;
         }
 
