@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.panTop = new System.Windows.Forms.Panel();
+            this.lblFormTitle = new System.Windows.Forms.Label();
             this.btnMin = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.lblTitle = new System.Windows.Forms.Label();
             this.panTop.SuspendLayout();
             this.SuspendLayout();
             // 
             // panTop
             // 
             this.panTop.BackColor = System.Drawing.Color.Silver;
-            this.panTop.Controls.Add(this.lblTitle);
+            this.panTop.Controls.Add(this.lblFormTitle);
             this.panTop.Controls.Add(this.btnMin);
             this.panTop.Controls.Add(this.btnClose);
             this.panTop.Dock = System.Windows.Forms.DockStyle.Top;
@@ -47,6 +47,16 @@
             this.panTop.Size = new System.Drawing.Size(284, 28);
             this.panTop.TabIndex = 4;
             this.panTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            // 
+            // lblFormTitle
+            // 
+            this.lblFormTitle.AutoSize = true;
+            this.lblFormTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblFormTitle.Font = new System.Drawing.Font("楷体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblFormTitle.Location = new System.Drawing.Point(24, 6);
+            this.lblFormTitle.Name = "lblFormTitle";
+            this.lblFormTitle.Size = new System.Drawing.Size(0, 16);
+            this.lblFormTitle.TabIndex = 5;
             // 
             // btnMin
             // 
@@ -74,16 +84,6 @@
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
-            this.lblTitle.Font = new System.Drawing.Font("楷体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTitle.Location = new System.Drawing.Point(24, 6);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(0, 16);
-            this.lblTitle.TabIndex = 5;
-            // 
             // qyFormWithTitle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -93,9 +93,7 @@
             this.Controls.Add(this.panTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "qyFormWithTitle";
-            this.Text = "FlatForm";
-            this.Load += new System.EventHandler(this.FlatForm_Load);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.FlatForm_MouseMove);
+            this.Text = "FlatFormWithTitle";
             this.panTop.ResumeLayout(false);
             this.panTop.PerformLayout();
             this.ResumeLayout(false);
@@ -106,6 +104,6 @@
         private System.Windows.Forms.Panel panTop;
         private System.Windows.Forms.Button btnMin;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.Label lblFormTitle;
     }
 }

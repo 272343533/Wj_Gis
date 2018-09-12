@@ -14,7 +14,18 @@ namespace QyTech.SkinForm.Controls
     {
         public qyPbr()
         {
-            
+
+        }
+        public int PercentValue {
+            set {
+                this.Value = value;
+
+                string strText = value.ToString() + "%";
+                Font font = new Font("Arial", (float)7, FontStyle.Regular);
+                PointF pointF = new PointF(this.Width / 2 - (int)font.Size, this.Height / 2 - (int)font.Size);
+                this.CreateGraphics().DrawString(strText, font, Brushes.Black, pointF);
+            }
         }
     }
+    
 }

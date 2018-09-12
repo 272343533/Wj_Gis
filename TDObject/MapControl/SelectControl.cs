@@ -20,14 +20,14 @@ namespace TDObject.MapControl
         public static bool m_TerminatedAnalysis = false;
 
         /// <summary>
-        /// 设置可选图层
+        /// 设置可选图层,使其可见
         /// </summary>
-        public static void SetSelectableLayer()
+        public static void SetSelectableLayer(GlobalVariables.SelectFeatureValue sfv)
         {
             try
             {
                 string LayerName = string.Empty;
-                if (GlobalVariables.Select.SValue != GlobalVariables.SelectFeatureValue.enull)
+                if (sfv != GlobalVariables.SelectFeatureValue.enull)
                 {
                     switch (GlobalVariables.Select.SValue)
                     {
@@ -38,48 +38,27 @@ namespace TDObject.MapControl
                         case GlobalVariables.SelectFeatureValue.Zhenjie:
                             LayerName = GlobalVariables.LayerName2FullName[ "镇界"];
                             break;
-                        //镇界
-                        case GlobalVariables.SelectFeatureValue.FreeRegion:
-                            LayerName = GlobalVariables.LayerName2FullName[ "自由分区"];
-                            break;
-
-                        case GlobalVariables.SelectFeatureValue.GLQ:
-                            LayerName = GlobalVariables.LayerName2FullName[ "工业管理区"];
-                            break;
-                        case GlobalVariables.SelectFeatureValue.XZ:
-                            LayerName = GlobalVariables.LayerName2FullName[ "土地现状数据"];
-                            break;
-                        case GlobalVariables.SelectFeatureValue.GH:
-                            LayerName = GlobalVariables.LayerName2FullName[ "土地规划"];
-                            break;
-                        case GlobalVariables.SelectFeatureValue.PC:
-                            LayerName = GlobalVariables.LayerName2FullName[ "历年批次"];
-                            break;
-
-                        case GlobalVariables.SelectFeatureValue.Kjsq:
-                            LayerName = GlobalVariables.LayerName2FullName["可建设区"];
-                            break;
-                        case GlobalVariables.SelectFeatureValue.Tdlyxz:
-                            LayerName = GlobalVariables.LayerName2FullName["土地利用现状"];
-                            break;
-                        case GlobalVariables.SelectFeatureValue.Gd:
-                            LayerName = GlobalVariables.LayerName2FullName["供地"];
-                            break;
-                        case GlobalVariables.SelectFeatureValue.Qyfw:
+                        case GlobalVariables.SelectFeatureValue.QiYeFangWei:
                             LayerName = GlobalVariables.LayerName2FullName["企业范围"];
                             break;
-                        case GlobalVariables.SelectFeatureValue.Gyqs:
-                            LayerName = GlobalVariables.LayerName2FullName["国有权属"];
-                            break;
-                        case GlobalVariables.SelectFeatureValue.LtdPic:
-                            LayerName = GlobalVariables.LayerName2FullName["企业照片点位置"];
-                            break;
-                        case GlobalVariables.SelectFeatureValue.FW:
+                        case GlobalVariables.SelectFeatureValue.FangWu:
                             LayerName = GlobalVariables.LayerName2FullName["房屋建筑"];
                             break;
-                    
-
-                        //管理区
+                        case GlobalVariables.SelectFeatureValue.ChengShiGuiHua:
+                            LayerName = GlobalVariables.LayerName2FullName["城市规划"];
+                            break;
+                        case GlobalVariables.SelectFeatureValue.QiYeZhaoPianXinxi:
+                            LayerName = GlobalVariables.LayerName2FullName["企业照片点位置"];
+                            break;
+                        case GlobalVariables.SelectFeatureValue.AnQuanJianCha:
+                            LayerName = GlobalVariables.LayerName2FullName["安全检查点位置"];
+                            break;
+                        case GlobalVariables.SelectFeatureValue.HuangPai:
+                            LayerName = GlobalVariables.LayerName2FullName["黄牌警告点位置 "];
+                            break;
+                        case GlobalVariables.SelectFeatureValue.HongPai:
+                            LayerName = GlobalVariables.LayerName2FullName["红牌警告点位置"];
+                            break;
                         default: break;
                     }
                 }
@@ -184,23 +163,16 @@ namespace TDObject.MapControl
                                 field = pFields.FindField("行政镇代码");
                                 value += feature.get_Value(field).ToString() + ",";//.get_Value(1).ToString();//就可以得到任意字段的值了 
                                 break;
-                            case GlobalVariables.SelectFeatureValue.GLQ:
-                                field = pFields.FindField("地块编号");
+
+                            case GlobalVariables.SelectFeatureValue.QiYeFangWei:
+                                field = pFields.FindField("OBJECTID");
                                 value += feature.get_Value(field).ToString() + ",";//.get_Value(1).ToString();//就可以得到任意字段的值了 
                                 break;
-                            case GlobalVariables.SelectFeatureValue.XZ:
-                                field = pFields.FindField("地块编码");
+                            case GlobalVariables.SelectFeatureValue.FangWu:
+                                field = pFields.FindField("OBJECTID");
                                 value += feature.get_Value(field).ToString() + ",";//.get_Value(1).ToString();//就可以得到任意字段的值了 
                                 break;
-                            case GlobalVariables.SelectFeatureValue.GH:
-                                field = pFields.FindField("地块编号");
-                                value += feature.get_Value(field).ToString() + ",";//.get_Value(1).ToString();//就可以得到任意字段的值了 
-                                break;
-                            case GlobalVariables.SelectFeatureValue.PC:
-                                field = pFields.FindField("地块编码");
-                                value += feature.get_Value(field).ToString() + ",";//.get_Value(1).ToString();//就可以得到任意字段的值了 
-                                break;
-                            case GlobalVariables.SelectFeatureValue.Qyfw:
+                            case GlobalVariables.SelectFeatureValue.ChengShiGuiHua:
                                 field = pFields.FindField("OBJECTID");
                                 value += feature.get_Value(field).ToString() + ",";//.get_Value(1).ToString();//就可以得到任意字段的值了 
                                 break;

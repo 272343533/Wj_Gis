@@ -13,6 +13,7 @@ using System.Data.Objects.DataClasses;
 using QyTech.Core;
 using QyTech.Json;
 using TDObject;
+using QyTech.Auth.Dao;
 
 namespace TDObject.BLL
 {
@@ -22,7 +23,10 @@ namespace TDObject.BLL
 
         public static Dictionary<Type, string[]> canUpdateAttribute = new Dictionary<Type, string[]>();
 
+        
          static DatabaseAccess() {
+            //List<bsFunField> ffields = MainForm.QyTech_EM.GetListNoPaging<bsFunField>("", "");
+
              canUpdateAttribute.Add(typeof(房屋建筑), new string[] { "JZBH", "SSDKBH", "SSYDQYMC", "SSZLQYDM", "SSZLQYMC", "LCS", "JZZDMJ", "JZZDMJ", "SSXZQDM", "SSXZQMC", "SSGLQDM", "SSGLQMC"});
             canUpdateAttribute.Add(typeof(企业范围), new string[] { "DKBH", "NSRSBH", "YDQYMC", "TDZL", "ZCLX", "ZCSJ", "JYFW", "HYDL", "FZMJ_", "ZDMJ", "JZZDMJ", "JZMJ", "QSXZ"});
          }
@@ -163,6 +167,14 @@ namespace TDObject.BLL
                     EntityOperate.Copy<企业范围>(obj, tobject, "OBJECTID");
 
                     ret = MainForm.EM.Modify<企业范围>(tobject);
+                }
+                else if (TType=="城市规划")
+                {
+                    城市规划 obj2 = obj as 城市规划;
+                    城市规划 tobject = MainForm.EM.GetByPk<城市规划>("OBJECTID", obj2.OBJECTID);
+                    EntityOperate.Copy<城市规划>(obj2, tobject, "OBJECTID");
+
+                    ret = MainForm.EM.Modify<城市规划>(obj2);
                 }
                 else
                 {

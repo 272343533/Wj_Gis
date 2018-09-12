@@ -138,6 +138,15 @@ namespace TDObject.IdentifyTool
             }
         }
 
+        public void ClearDisplay()
+        {
+            try
+            {
+                mapControl2.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewForeground, null, null);
+            }
+            catch { }
+        }
+
         public void FlashObjects(LayerIdentifiedResult layerFlash)
         {
             screenDisplay.StartDrawing(screenDisplay.hDC, (System.Int16)ESRI.ArcGIS.Display.esriScreenCache.esriNoScreenCache);

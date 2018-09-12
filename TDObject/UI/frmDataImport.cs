@@ -26,9 +26,9 @@ namespace TDObject.UI
             InitializeComponent();
         }
 
-        List<市局表格> objs;
-        List<开发区表格> objs2;
-        List<经发局表格> objs1;
+        List<t市局表格> objs;
+      
+        List<t经发局表格> objs1;
 
         Dictionary<string, string> dic_ExcelColumn2FieldName = new Dictionary<string, string>();
         List<QyTech.Auth.Dao.bsFName2ExcelColMap> efMs;
@@ -126,7 +126,7 @@ namespace TDObject.UI
         private void button3_Click(object sender, EventArgs e)
         {
             int BatchCount = 100;
-            List<市局表格> objs_sjbg = new List<市局表格>();
+            List<t市局表格> objs_sjbg = new List<t市局表格>();
 
             try
             {
@@ -153,9 +153,9 @@ namespace TDObject.UI
                             System.Data.DataTable dt = ds.Tables[0];
                             for (int r = 0; r < dt.Rows.Count; r++)
                             {
-                                if (cboType.Text == "市局表格")
+                                if (cboType.Text == "t市局表格")
                                 {
-                                    市局表格 sjobj = new 市局表格();
+                                    t市局表格 sjobj = new t市局表格();
                                     for (int c = 0; c < dt.Columns.Count; c++)
                                     {
                                         try
@@ -196,15 +196,15 @@ namespace TDObject.UI
                                     objs_sjbg.Add(sjobj);
                                     if (objs_sjbg.Count==BatchCount || r==dt.Rows.Count-1)
                                     {
-                                        MainForm.EM.Add<市局表格>(objs_sjbg);
+                                        MainForm.EM.Add<t市局表格>(objs_sjbg);
                                         objs_sjbg.Clear();
-                                        //MainForm.EM.Add<市局表格>(sjobj);
+                                        //MainForm.EM.Add<t市局表格>(sjobj);
                                     }
                                     RefreshPgb(r + 1, dt.Rows.Count);
                                 }
-                                else if (cboType.Text == "经发局表格")
+                                else if (cboType.Text == "t经发局表格")
                                 {
-                                    经发局表格 sjobj = new 经发局表格();
+                                    t经发局表格 sjobj = new t经发局表格();
                                     sjobj.ND = Convert.ToInt32(cboYear.Text);
                                     for (int c = 0; c < dt.Columns.Count; c++)
                                     {
@@ -233,7 +233,7 @@ namespace TDObject.UI
                                         }
                                         catch (Exception ex) { log.Error(ex.Message); }
                                     }
-                                    MainForm.EM.Add<经发局表格>(sjobj);
+                                    MainForm.EM.Add<t经发局表格>(sjobj);
                                     RefreshPgb(r + 1, dt.Rows.Count);
                                 }
                             }
@@ -279,14 +279,14 @@ namespace TDObject.UI
             {
                 if (tabControl1.SelectedIndex == 0)
                 {
-                    objs = MainForm.EM.GetListNoPaging<市局表格>("ND='" + cboNd.Text.Substring(0, 4) + "'", "XH");
+                    objs = MainForm.EM.GetListNoPaging<t市局表格>("ND='" + cboNd.Text.Substring(0, 4) + "'", "XH");
                     dgvSj.AutoGenerateColumns = false;
                     dgvSj.DataSource = objs;
                 }
                 else if (tabControl1.SelectedIndex == 1)
                 {
-                    objs1 = MainForm.EM.GetListNoPaging<经发局表格>("ND=" + cboNd.Text.Substring(0, 4), "");
-                    //List<经发局表格> objs1 = MainForm.EM.GetListNoPaging<经发局表格>("", "");
+                    objs1 = MainForm.EM.GetListNoPaging<t经发局表格>("ND=" + cboNd.Text.Substring(0, 4), "");
+                    //List<t经发局表格> objs1 = MainForm.EM.GetListNoPaging<t经发局表格>("", "");
                     dgvJfj.AutoGenerateColumns = false;
                     dgvJfj.DataSource = objs1;
                 }
@@ -304,10 +304,10 @@ namespace TDObject.UI
             {
                 if (e.ColumnIndex == 0)
                 {
-                    List<市局表格> uis = dgvSj.DataSource as List<市局表格>;
+                    List<t市局表格> uis = dgvSj.DataSource as List<t市局表格>;
 
-                    市局表格 obj = uis[e.RowIndex];
-                    string ret = MainForm.EM.Modify<市局表格>(obj);
+                    t市局表格 obj = uis[e.RowIndex];
+                    string ret = MainForm.EM.Modify<t市局表格>(obj);
                     if (ret == "")
                         MessageBox.Show("保存成功！");
                     else
@@ -322,39 +322,17 @@ namespace TDObject.UI
             }
         }
 
-        private void dgvKfqnd_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                if (e.ColumnIndex == 0)
-                {
-                    List<开发区表格> uis = dgvSj.DataSource as List<开发区表格>;
-
-                    开发区表格 obj = uis[e.RowIndex];
-                    string ret = MainForm.EM.Modify<开发区表格>(obj);
-                    if (ret == "")
-                        MessageBox.Show("保存成功！");
-                    else
-                        MessageBox.Show(ret);
-                }
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex.Message);
-                MessageBox.Show(ex.Message);
-            }
-        }
-
+       
         private void dgvJfj_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
                 if (e.ColumnIndex == 0)
                 {
-                    List<经发局表格> uis = dgvSj.DataSource as List<经发局表格>;
+                    List<t经发局表格> uis = dgvSj.DataSource as List<t经发局表格>;
 
-                    经发局表格 obj = uis[e.RowIndex];
-                    string ret = MainForm.EM.Modify<经发局表格>(obj);
+                    t经发局表格 obj = uis[e.RowIndex];
+                    string ret = MainForm.EM.Modify<t经发局表格>(obj);
                     if (ret == "")
                         MessageBox.Show("保存成功！");
                     else
@@ -377,7 +355,7 @@ namespace TDObject.UI
 
         private void tabControl2_MouseMove(object sender, MouseEventArgs e)
         {
-            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
+            //QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void dgvExcel_MouseMove(object sender, MouseEventArgs e)
@@ -406,7 +384,7 @@ namespace TDObject.UI
                 MessageBox.Show("请先选择excel文件!");
                 return;
             }
-            QyTech.SkinForm.UICreate.frmFName2ExcelCol obj = new QyTech.SkinForm.UICreate.frmFName2ExcelCol("wj_GisDb","经发局表格", ExcelCols);
+            QyTech.SkinForm.UICreate.frmFName2ExcelCol obj = new QyTech.SkinForm.UICreate.frmFName2ExcelCol("wj_GisDb","t经发局表格", ExcelCols);
             obj.Show();
         }
     }

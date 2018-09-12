@@ -65,6 +65,35 @@ namespace TDObject.MapControl
             }
         }
 
+        public static void SetVisibleStatus(AxMapControl ax1, string displayname, bool dispornot,string filter)
+        {
+            try
+            {
+                for (int i = 0; i < ax1.Map.LayerCount; i++)
+                {
+                    ILayer layobj = ax1.get_Layer(i);
+                    if (displayname == layobj.Name)
+                    {
+                        layobj.Visible = dispornot;
+                        if (dispornot)
+                        {
+                            IFeatureLayerDefinition pFlDefinition = layobj as IFeatureLayerDefinition;
+                            pFlDefinition.DefinitionExpression = filter;
+                        }
+                        IViewRefresh viewRefresh = ax1.Map as IViewRefresh;
+                        viewRefresh.ProgressiveDrawing = false;
+                        viewRefresh.RefreshItem(layobj);
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+            ax1.Refresh();
+        }
+       
         public static void SetVisibleStatus(AxMapControl ax1, string displayname,bool dispornot)
         {
             try
@@ -100,6 +129,8 @@ namespace TDObject.MapControl
             }
             ax1.Refresh();
         }
+
+
 
         public static void SetVisibleLayer(AxMapControl ax1, string preLayerName, string dispLaynames)
         {
@@ -142,6 +173,7 @@ namespace TDObject.MapControl
                 log.Error(ex.Message);
             }
         }
+       
         public static bool GetVisibleStatus( string LayersName)
         {
             try
@@ -568,7 +600,10 @@ namespace TDObject.MapControl
                 try
                 {
                     IEnvelope range = pGeo.Envelope;
-                    range.Expand(120, 120, false);
+                    if (range.Height>range.Width)
+                        range.Expand(120, 120, false);
+                    else
+                        range.Expand(200, 200, false);
                     mapControl.Extent = range;
                 }
                 catch(Exception ex)
@@ -601,6 +636,27 @@ namespace TDObject.MapControl
                 pFeature = featureCursor.NextFeature();
             }
               
+            return pGeo;
+        }
+
+
+        public static List<IFeature> getIGeosBystrField(ILayer layer, string field, string values)
+        {
+            List<IFeature> pGeo = new List<IFeature>();
+            IFeatureLayer featureLayer = layer as IFeatureLayer;
+            IFeatureSelection featureSelection = featureLayer as IFeatureSelection;
+            IFeatureClass featureClass = featureLayer.FeatureClass;
+
+            IQueryFilter queryFilter = new QueryFilterClass();
+            queryFilter.WhereClause = field + " in ('" + values.Replace(",","','") + "')";
+            IFeatureCursor featureCursor = featureClass.Search(queryFilter, true);
+            IFeature pFeature = featureCursor.NextFeature();
+            while (pFeature != null)
+            {
+                pGeo.Add(pFeature);
+                pFeature = featureCursor.NextFeature();
+            }
+
             return pGeo;
         }
         public static List<IFeature> getIGeoByFields(ILayer layer, string field, int value)

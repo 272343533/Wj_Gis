@@ -24,10 +24,20 @@ namespace TDObject.UI
         string CurrGlqName ="运东";
         string CurrTotalType = "投资类型分析";
 
+        List<string> yms;
         private void FrmRegionTotal_Load(object sender, EventArgs e)
         {
             try
             {
+                //获取统计时间数据
+                List<string> items = TDObject.DAOBLL.ImportTBll.GetYearMonths("t企业基础数据");
+                cboYearMonth.DataSource = items;
+                if (cboYearMonth.Items.Count > 0)
+                    cboYearMonth.SelectedIndex = 0;
+
+                cboYearMonth.Refresh();
+
+
                 this.dgvT2_11.AutoGenerateColumns = false;
                 this.dgvT2_12.AutoGenerateColumns = false;
 
@@ -38,11 +48,20 @@ namespace TDObject.UI
 
                 treeView1.ExpandAll();
 
+                //首先获取最新年月
+                yms = TDObject.DAOBLL.ImportTBll.GetYearMonths("t企业基础数据");
+                if (yms.Count == 0)
+                {
+                    MessageBox.Show("请确保有企业基础数据！");
+                }
+
                 CurrGlqName = treeView1.Nodes[0].Text;
                 CurrTotalType = treeView2.Nodes[0].Text;
                 treeView1.SelectedNode = treeView1.Nodes[0];
 
-                  }
+                
+
+            }
             catch (Exception ex)
             {
                 log.Error(this.Name + ":" + ex.Message);
@@ -67,12 +86,19 @@ namespace TDObject.UI
                 CurrGlqName = tn.Text;
                 chart1.Titles[0].Text = CurrGlqName + " " + CurrTotalType;
                 string strDm = tn.Tag.ToString();
-                List<企业范围> _ltdobjs = TDObject.BLL.CommSetting.EM.GetListNoPaging<企业范围>("charindex(ssglqdm,'" + strDm + "')>0", "");
-                this.dgvT2_11.DataSource = _ltdobjs;
+                
+               
+                string where = "年度+'-'+月份='" + yms[0] + "' and 单位 in (select 纳税人名称 from bsLtdInfo where 租赁企业否=0 and charindex(所属管理区,'" + strDm + "')>0)";
+                List<t企业基础数据> _ltdobjs = TDObject.BLL.CommSetting.EM.GetListNoPaging<t企业基础数据>(where, "");
+                //dgvT2_11.Columns.Clear();
+                //this.dgvT2_11.DataSource = _ltdobjs;
+                TDObject.UI.UIDgvColumnsSetting.RefreshLtdImportInfo(dgvT2_11, _ltdobjs, "t企业基础数据", 0);
 
-
-                List<z租赁企业信息表> _ltdobjs1 = TDObject.BLL.CommSetting.EM.GetListNoPaging<z租赁企业信息表>("charindex(ssglqdm,'" + strDm + "')>0", "");
-                this.dgvT2_12.DataSource = _ltdobjs1;
+                where = "年度+'-'+月份='" + yms[0] + "' and 单位 in (select 纳税人名称 from bsLtdInfo where 租赁企业否=1 and charindex(所属管理区,'" + strDm + "')>0)";
+                List<t企业基础数据> _ltdobjs1 = TDObject.BLL.CommSetting.EM.GetListNoPaging<t企业基础数据>(where, "");
+                //dgvT2_12.Columns.Clear();
+                //this.dgvT2_12.DataSource = _ltdobjs1;
+                TDObject.UI.UIDgvColumnsSetting.RefreshLtdImportInfo(dgvT2_12, _ltdobjs1, "t企业基础数据", 0);
 
                 foreach (TreeNode subtn in (sender as TreeView).Nodes)
                 {
@@ -93,33 +119,44 @@ namespace TDObject.UI
 
         private void RefreshChart()
         {
-           
+            string Ym = this.cboYearMonth.Text;
+            if (Ym == "")
+            {
+                MessageBox.Show("请选择月份！"); ;
+                return;
+            }
+            string YearMonth = "YearMonth='" + Ym + "' and ";
+
+
             //更改图形数据
-           List<bsTotalResult> ts = new List<bsTotalResult>();
+            List<bsTotalResult> ts = new List<bsTotalResult>();
             chart1.Series[0].ChartType = SeriesChartType.Column;
 
             if (CurrTotalType == "投资类型分析")
             {
-                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区"+CurrTotalType+"' and GLQName='" + CurrGlqName + "'", "");
+                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("YearMonth='" + Ym.Substring(0, 4) + "' and " + "TotalType='管理区" +CurrTotalType+"' and GLQName='" + CurrGlqName + "'", "");
             }
             else if (CurrTotalType == "行业企业数量")
             {
-                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
+                ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='管理区" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
 
             }
             else if (CurrTotalType == "销售额统计")
             {
-                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区行业" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
+                ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='管理区行业" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
             }
             else if (CurrTotalType == "税收统计")
             {
-                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区行业" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
+                ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='管理区行业" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
             }
             else if (CurrTotalType == "土地面积统计")
             {
-                ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='管理区行业" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
+                ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='管理区行业" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
             }
-
+            else if (CurrTotalType == "能耗统计")
+            {
+                ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='管理区行业" + CurrTotalType + "' and GLQName='" + CurrGlqName + "'", "");
+            }
             double sum = 0;
             chart1.Series[0].Points.Clear();
             for (int i = 0; i < ts.Count; i++)
@@ -131,8 +168,10 @@ namespace TDObject.UI
 
                 if (CurrTotalType == "投资类型分析" || CurrTotalType == "行业企业数量")
                     chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "家";
-                else if (CurrTotalType== "土地面积统计")
+                else if (CurrTotalType == "土地面积统计")
                     chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "亩";
+                else if (CurrTotalType== "能耗统计")
+                    chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "千瓦时";
                 else
                     chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "万元";
 
@@ -144,7 +183,9 @@ namespace TDObject.UI
             if (CurrTotalType == "投资类型分析" || CurrTotalType == "行业企业数量")
                 chart1.Titles[0].Text = CurrGlqName + " " + CurrTotalType + "    (共" + sum.ToString() + "家)";
             else if (CurrTotalType == "土地面积统计")
-                chart1.Titles[0].Text = CurrGlqName + " " + CurrTotalType + "    (共" + sum.ToString()  + "亩";
+                chart1.Titles[0].Text = CurrGlqName + " " + CurrTotalType + "    (共" + sum.ToString() + "亩）";
+            else if (CurrTotalType == "能耗统计")
+                chart1.Titles[0].Text = CurrGlqName + " " + CurrTotalType + "    (共" + sum.ToString() + "千瓦时）";
             else
                 chart1.Titles[0].Text = CurrGlqName + " " + CurrTotalType + "    (共" + sum.ToString() + "万元)";
 
@@ -185,7 +226,7 @@ namespace TDObject.UI
         {
             try
             {
-                QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
+                //QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
             }
             catch (Exception ex)
             {

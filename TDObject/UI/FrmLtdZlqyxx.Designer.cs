@@ -28,17 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvT2_12 = new System.Windows.Forms.DataGridView();
-            this.Column27 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Column57 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn122 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn123 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn124 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn127 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn128 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn132 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn133 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,97 +38,21 @@
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvT2_12 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn118 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column57 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn122 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn123 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn124 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn125 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn126 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvT2_12)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgvT2_12
-            // 
-            this.dgvT2_12.AllowUserToAddRows = false;
-            this.dgvT2_12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvT2_12.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvT2_12.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column27,
-            this.Column57,
-            this.dataGridViewTextBoxColumn122,
-            this.dataGridViewTextBoxColumn123,
-            this.dataGridViewTextBoxColumn124,
-            this.dataGridViewTextBoxColumn125,
-            this.dataGridViewTextBoxColumn127,
-            this.dataGridViewTextBoxColumn128,
-            this.dataGridViewTextBoxColumn132,
-            this.dataGridViewTextBoxColumn133});
-            this.dgvT2_12.Location = new System.Drawing.Point(6, 27);
-            this.dgvT2_12.Name = "dgvT2_12";
-            this.dgvT2_12.RowTemplate.Height = 23;
-            this.dgvT2_12.Size = new System.Drawing.Size(835, 233);
-            this.dgvT2_12.TabIndex = 14;
-            // 
-            // Column27
-            // 
-            this.Column27.HeaderText = "选择";
-            this.Column27.Name = "Column27";
-            this.Column27.Width = 40;
-            // 
-            // Column57
-            // 
-            this.Column57.DataPropertyName = "DKBH";
-            this.Column57.HeaderText = "地块编号";
-            this.Column57.Name = "Column57";
-            // 
-            // dataGridViewTextBoxColumn122
-            // 
-            this.dataGridViewTextBoxColumn122.DataPropertyName = "OBJECTID";
-            this.dataGridViewTextBoxColumn122.HeaderText = "objid";
-            this.dataGridViewTextBoxColumn122.Name = "dataGridViewTextBoxColumn122";
-            this.dataGridViewTextBoxColumn122.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn123
-            // 
-            this.dataGridViewTextBoxColumn123.DataPropertyName = "DKBH";
-            this.dataGridViewTextBoxColumn123.HeaderText = "地块编号";
-            this.dataGridViewTextBoxColumn123.Name = "dataGridViewTextBoxColumn123";
-            this.dataGridViewTextBoxColumn123.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn124
-            // 
-            this.dataGridViewTextBoxColumn124.DataPropertyName = "NSRSBH";
-            this.dataGridViewTextBoxColumn124.HeaderText = "纳税人识别号";
-            this.dataGridViewTextBoxColumn124.Name = "dataGridViewTextBoxColumn124";
-            this.dataGridViewTextBoxColumn124.Width = 110;
-            // 
-            // dataGridViewTextBoxColumn125
-            // 
-            this.dataGridViewTextBoxColumn125.DataPropertyName = "ZLQYMC_";
-            this.dataGridViewTextBoxColumn125.HeaderText = "租赁企业名称";
-            this.dataGridViewTextBoxColumn125.Name = "dataGridViewTextBoxColumn125";
-            this.dataGridViewTextBoxColumn125.Width = 110;
-            // 
-            // dataGridViewTextBoxColumn127
-            // 
-            this.dataGridViewTextBoxColumn127.DataPropertyName = "SZDWMC";
-            this.dataGridViewTextBoxColumn127.HeaderText = "收租单位名称";
-            this.dataGridViewTextBoxColumn127.Name = "dataGridViewTextBoxColumn127";
-            this.dataGridViewTextBoxColumn127.Width = 110;
-            // 
-            // dataGridViewTextBoxColumn128
-            // 
-            this.dataGridViewTextBoxColumn128.DataPropertyName = "PZYT";
-            this.dataGridViewTextBoxColumn128.HeaderText = "批准用途";
-            this.dataGridViewTextBoxColumn128.Name = "dataGridViewTextBoxColumn128";
-            // 
-            // dataGridViewTextBoxColumn132
-            // 
-            this.dataGridViewTextBoxColumn132.DataPropertyName = "TDZH";
-            this.dataGridViewTextBoxColumn132.HeaderText = "土地证号";
-            this.dataGridViewTextBoxColumn132.Name = "dataGridViewTextBoxColumn132";
-            // 
-            // dataGridViewTextBoxColumn133
-            // 
-            this.dataGridViewTextBoxColumn133.DataPropertyName = "CYLX";
-            this.dataGridViewTextBoxColumn133.HeaderText = "产业类型";
-            this.dataGridViewTextBoxColumn133.Name = "dataGridViewTextBoxColumn133";
             // 
             // label1
             // 
@@ -209,13 +122,117 @@
             this.dataGridViewTextBoxColumn9.HeaderText = "产业类型";
             this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
             // 
+            // dgvT2_12
+            // 
+            this.dgvT2_12.AllowUserToAddRows = false;
+            this.dgvT2_12.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvT2_12.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvT2_12.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn118,
+            this.Column57,
+            this.dataGridViewTextBoxColumn122,
+            this.dataGridViewTextBoxColumn123,
+            this.dataGridViewTextBoxColumn124,
+            this.dataGridViewTextBoxColumn125,
+            this.dataGridViewTextBoxColumn126,
+            this.Column20,
+            this.Column21,
+            this.Column22,
+            this.Column23,
+            this.Column24});
+            this.dgvT2_12.Location = new System.Drawing.Point(12, 26);
+            this.dgvT2_12.Name = "dgvT2_12";
+            this.dgvT2_12.RowTemplate.Height = 23;
+            this.dgvT2_12.Size = new System.Drawing.Size(825, 233);
+            this.dgvT2_12.TabIndex = 16;
+            // 
+            // dataGridViewTextBoxColumn118
+            // 
+            this.dataGridViewTextBoxColumn118.DataPropertyName = "Id";
+            this.dataGridViewTextBoxColumn118.HeaderText = "Id";
+            this.dataGridViewTextBoxColumn118.Name = "dataGridViewTextBoxColumn118";
+            this.dataGridViewTextBoxColumn118.Visible = false;
+            // 
+            // Column57
+            // 
+            this.Column57.DataPropertyName = "地块编号";
+            this.Column57.HeaderText = "地块编号";
+            this.Column57.Name = "Column57";
+            this.Column57.Width = 80;
+            // 
+            // dataGridViewTextBoxColumn122
+            // 
+            this.dataGridViewTextBoxColumn122.DataPropertyName = "序号";
+            this.dataGridViewTextBoxColumn122.HeaderText = "序号";
+            this.dataGridViewTextBoxColumn122.Name = "dataGridViewTextBoxColumn122";
+            this.dataGridViewTextBoxColumn122.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn123
+            // 
+            this.dataGridViewTextBoxColumn123.DataPropertyName = "年度";
+            this.dataGridViewTextBoxColumn123.HeaderText = "年度";
+            this.dataGridViewTextBoxColumn123.Name = "dataGridViewTextBoxColumn123";
+            this.dataGridViewTextBoxColumn123.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn124
+            // 
+            this.dataGridViewTextBoxColumn124.DataPropertyName = "月份";
+            this.dataGridViewTextBoxColumn124.HeaderText = "月份";
+            this.dataGridViewTextBoxColumn124.Name = "dataGridViewTextBoxColumn124";
+            this.dataGridViewTextBoxColumn124.Width = 40;
+            // 
+            // dataGridViewTextBoxColumn125
+            // 
+            this.dataGridViewTextBoxColumn125.DataPropertyName = "单位代码";
+            this.dataGridViewTextBoxColumn125.HeaderText = "单位代码";
+            this.dataGridViewTextBoxColumn125.Name = "dataGridViewTextBoxColumn125";
+            // 
+            // dataGridViewTextBoxColumn126
+            // 
+            this.dataGridViewTextBoxColumn126.DataPropertyName = "单位";
+            this.dataGridViewTextBoxColumn126.HeaderText = "单位";
+            this.dataGridViewTextBoxColumn126.Name = "dataGridViewTextBoxColumn126";
+            this.dataGridViewTextBoxColumn126.Width = 150;
+            // 
+            // Column20
+            // 
+            this.Column20.DataPropertyName = "市区";
+            this.Column20.HeaderText = "市区";
+            this.Column20.Name = "Column20";
+            // 
+            // Column21
+            // 
+            this.Column21.DataPropertyName = "区域";
+            this.Column21.HeaderText = "区域";
+            this.Column21.Name = "Column21";
+            // 
+            // Column22
+            // 
+            this.Column22.DataPropertyName = "经营现状";
+            this.Column22.HeaderText = "经营现状";
+            this.Column22.Name = "Column22";
+            // 
+            // Column23
+            // 
+            this.Column23.DataPropertyName = "是否工业";
+            this.Column23.HeaderText = "是否工业";
+            this.Column23.Name = "Column23";
+            // 
+            // Column24
+            // 
+            this.Column24.DataPropertyName = "等级";
+            this.Column24.HeaderText = "等级";
+            this.Column24.Name = "Column24";
+            // 
             // FrmLtdZlqyxx
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(849, 262);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvT2_12);
+            this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FrmLtdZlqyxx";
@@ -231,18 +248,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dgvT2_12;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Column27;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column57;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn122;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn123;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn124;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn125;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn127;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn128;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn132;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn133;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -253,7 +258,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-
-
+        private System.Windows.Forms.DataGridView dgvT2_12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn118;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column57;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn122;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn123;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn124;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn125;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn126;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column22;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column23;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column24;
     }
 }

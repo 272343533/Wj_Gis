@@ -27,7 +27,7 @@ namespace QyTech.SkinForm
 
         private void FlatForm_MouseMove(object sender, MouseEventArgs e)
         {
-            qyFormUtil.MouseMoveForm(this.Handle);
+           // qyFormUtil.MouseMoveForm(this.Handle);
         }
 
     }

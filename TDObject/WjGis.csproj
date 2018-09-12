@@ -204,7 +204,11 @@
     <Compile Include="BLL\UIBLL\bllTypeFilter.cs" />
     <Compile Include="controls\Class1.cs" />
     <Compile Include="CreateNewDocument.cs" />
+    <Compile Include="DAOBLL\DbTableConvertor.cs" />
     <Compile Include="DAOBLL\HttpRequery.cs" />
+    <Compile Include="DAOBLL\ImportTBll.cs" />
+    <Compile Include="DAOBLL\RoleRelBll.cs" />
+    <Compile Include="DAOBLL\SqlUtil.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -224,6 +228,18 @@
     <Compile Include="UI\AddUI\frmAddFwjz.Designer.cs">
       <DependentUpon>frmAddFwjz.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\AddUI\frmbsLtdInfoAdd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AddUI\frmbsLtdInfoAdd.Designer.cs">
+      <DependentUpon>frmbsLtdInfoAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AddUI\frmAddLtdBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AddUI\frmAddLtdBase.Designer.cs">
+      <DependentUpon>frmAddLtdBase.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\AddUI\frmAddLtdInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,11 +258,41 @@
     <Compile Include="UI\AddUI\frmFName2ExcelCol.Designer.cs">
       <DependentUpon>frmFName2ExcelCol.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\frmExcelImportYM.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmExcelImportYM.Designer.cs">
+      <DependentUpon>frmExcelImportYM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmExcelImport_JC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmExcelImport_JC.Designer.cs">
+      <DependentUpon>frmExcelImport_JC.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\frmExcelImport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\frmExcelImport.Designer.cs">
       <DependentUpon>frmExcelImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmbsLtdInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmbsLtdInfo.Designer.cs">
+      <DependentUpon>frmbsLtdInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmTotalFilterNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmTotalFilterNew.Designer.cs">
+      <DependentUpon>frmTotalFilterNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmTypeFilterNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmTypeFilterNew.Designer.cs">
+      <DependentUpon>frmTypeFilterNew.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\FrmTypeImport.cs">
       <SubType>Form</SubType>
@@ -471,6 +517,7 @@
     <Compile Include="UI\frmTotalHY.Designer.cs">
       <DependentUpon>frmTotalHY.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UIDgvColumnsSetting.cs" />
     <EmbeddedResource Include="BLL\DrawLayer\DrawTool.resx">
       <DependentUpon>DrawTool.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -495,6 +542,12 @@
     <EmbeddedResource Include="UI\AddUI\frmAddFwjz.resx">
       <DependentUpon>frmAddFwjz.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\AddUI\frmbsLtdInfoAdd.resx">
+      <DependentUpon>frmbsLtdInfoAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AddUI\frmAddLtdBase.resx">
+      <DependentUpon>frmAddLtdBase.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\AddUI\frmAddLtdInfo.resx">
       <DependentUpon>frmAddLtdInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -504,8 +557,23 @@
     <EmbeddedResource Include="UI\AddUI\frmFName2ExcelCol.resx">
       <DependentUpon>frmFName2ExcelCol.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmExcelImportYM.resx">
+      <DependentUpon>frmExcelImportYM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmExcelImport_JC.resx">
+      <DependentUpon>frmExcelImport_JC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\frmExcelImport.resx">
       <DependentUpon>frmExcelImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmbsLtdInfo.resx">
+      <DependentUpon>frmbsLtdInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmTotalFilterNew.resx">
+      <DependentUpon>frmTotalFilterNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmTypeFilterNew.resx">
+      <DependentUpon>frmTypeFilterNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FrmTypeImport.resx">
       <DependentUpon>FrmTypeImport.cs</DependentUpon>

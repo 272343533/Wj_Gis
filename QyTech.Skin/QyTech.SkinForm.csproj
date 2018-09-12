@@ -59,14 +59,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AsyncHttp\CommFun.cs" />
+    <Compile Include="Component\qyBtn_Query.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Component\qyBtn_ok.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Component\qyTvOrg.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\qyDynGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\qyTreeView.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Form\qyFormContainer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\qyFormContainer.Designer.cs">
+      <DependentUpon>qyFormContainer.cs</DependentUpon>
     </Compile>
     <Compile Include="Form\qyFormWithTitle.cs">
       <SubType>Form</SubType>
@@ -98,12 +110,6 @@
     <Compile Include="Form\qyForm.Designer.cs">
       <DependentUpon>qyForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form\qyFormContainer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form\qyFormContainer.Designer.cs">
-      <DependentUpon>qyFormContainer.cs</DependentUpon>
-    </Compile>
     <Compile Include="Component\qyBtn_cancel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -116,6 +122,10 @@
     <Compile Include="UICreate\UIFun\UICreate.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\qyFormContainer.resx">
+      <DependentUpon>qyFormContainer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\qyFormWithTitle.resx">
       <DependentUpon>qyFormWithTitle.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -125,10 +135,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\qyForm.resx">
       <DependentUpon>qyForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form\qyFormContainer.resx">
-      <DependentUpon>qyFormContainer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources.resx">

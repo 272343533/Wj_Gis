@@ -15,6 +15,7 @@ namespace QyTech.SkinForm.Controls
     /// </summary>
     public class qyDgv : DataGridView
     {
+
         #region 初始化
         public qyDgv()
         {
@@ -51,6 +52,8 @@ namespace QyTech.SkinForm.Controls
             AlternatingRowsDefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.FromArgb(255, 255, 224, 192) };
             RowPostPaint += new DataGridViewRowPostPaintEventHandler(dgv_RowPostPaint);
 
+           // Anchor = AnchorStyles.Bottom;
+
         }
 
         public static DataGridViewCellStyle DgvDefaultAlterCellStyle
@@ -79,9 +82,12 @@ namespace QyTech.SkinForm.Controls
 
         public void dgv_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            DataGridView dgv = sender as DataGridView;
-            SolidBrush b = new SolidBrush(dgv.RowHeadersDefaultCellStyle.ForeColor);
-            e.Graphics.DrawString((e.RowIndex + 1).ToString(System.Globalization.CultureInfo.CurrentUICulture), dgv.DefaultCellStyle.Font, b, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
+            if (RowHeadersVisible)
+            {
+                DataGridView dgv = sender as DataGridView;
+                SolidBrush b = new SolidBrush(dgv.RowHeadersDefaultCellStyle.ForeColor);
+                e.Graphics.DrawString((e.RowIndex + 1).ToString(System.Globalization.CultureInfo.CurrentUICulture), dgv.DefaultCellStyle.Font, b, e.RowBounds.Location.X + 10, e.RowBounds.Location.Y + 4);
+            }
         }
         #endregion
         public void addModifyButton(DataGridView dgv)

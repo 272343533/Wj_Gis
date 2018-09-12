@@ -72,7 +72,7 @@ namespace TDObject.UI
 
         private void frmChangePwd_MouseMove(object sender, MouseEventArgs e)
         {
-            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
+           // QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
     }
 }

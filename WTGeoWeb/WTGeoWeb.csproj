@@ -157,6 +157,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LtdInfoController.cs" />
     <Compile Include="Controllers\lyRemoteServController.cs" />
+    <Compile Include="Controllers\ProblemHuangPaiController.cs" />
+    <Compile Include="Controllers\ProblemLtdPhotoController.cs" />
+    <Compile Include="Controllers\ProblemLtdAnQuanController.cs" />
     <Compile Include="Controllers\QueryTotalController.cs" />
     <Compile Include="Controllers\ShowViewController.cs" />
     <Compile Include="Controllers\takePhotoController.cs" />
@@ -301,6 +304,8 @@
     <Content Include="Views\Home\Index_NewForCust.cshtml" />
     <Content Include="Views\Home\Helper.cshtml" />
     <Content Include="Views\Home\Index_m_SubLayer.cshtml" />
+    <Content Include="Views\Home\Index_m - 复制.cshtml" />
+    <Content Include="Views\ProblemLtdPhoto\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

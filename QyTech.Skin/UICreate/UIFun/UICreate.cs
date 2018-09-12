@@ -10,7 +10,7 @@ namespace QyTech.SkinForm.UICreate
 {
     public class UICreate
     {
-        public static void CreateTextDisplay( GroupBox gbContainer,string labText, string FName,object FValue, int x, int y, int labwidth = 90, int textwidth = 150)
+        public static void CreateTextDisplay( GroupBox gbContainer,string labText, string FName,object FValue,int x, int y, object querytag = null, int labwidth = 90, int textwidth = 150)
         {
             Label l = new Label();
             l.Name = "lbl_" + FName;
@@ -25,9 +25,30 @@ namespace QyTech.SkinForm.UICreate
             tb.Width = textwidth;
             tb.Name = FName;
             tb.Text = FValue.ToString();
+            tb.Tag = querytag;
             gbContainer.Controls.Add(tb);
         }
-        public static void CreateCombobox(GroupBox gbContainer, string labText, string FName, string items, object FValue, int x, int y, int labwidth = 90, int comboxwidth = 150)
+        
+         public static void CreateMultiTextDisplay(GroupBox gbContainer, string labText, string FName, object FValue, int x, int y, int labwidth = 90, int textwidth = 150)
+        {
+            Label l = new Label();
+            l.Name = "lbl_" + FName;
+            l.Text = labText;
+            l.Location = new System.Drawing.Point(x, y);//(300,...)
+            l.Width = labwidth;
+            l.TextAlign = ContentAlignment.MiddleRight;
+            gbContainer.Controls.Add(l);
+
+            TextBox tb = new TextBox();
+            tb.Location = new System.Drawing.Point(x + 100, y);
+            tb.Width = textwidth;
+            tb.Name = FName;
+            tb.Text = FValue.ToString();
+            tb.Multiline = true;
+            //tb.Height = 40;
+            gbContainer.Controls.Add(tb);
+        }
+        public static ComboBox CreateCombobox(GroupBox gbContainer, string labText, string FName, string items, object FValue, int x, int y, object itemstag=null, int labwidth = 90, int comboxwidth = 150)
         {
             Label l = new Label();
             l.Text = labText;
@@ -40,10 +61,11 @@ namespace QyTech.SkinForm.UICreate
             cb.Location = new System.Drawing.Point(x + 100, y);
             cb.Width = comboxwidth;
             cb.Name = FName;
+            cb.Tag = itemstag;
             int index = 0;
             if (items.Trim() != "")
             {
-                string[] sitems = items.Split(new char[] { ',' });
+                string[] sitems = items.Split(new char[] { ',' ,';'});
                 cb.Items.Clear();
                 cb.Items.Add("");
                 foreach (string s in sitems)
@@ -58,6 +80,7 @@ namespace QyTech.SkinForm.UICreate
 
             cb.SelectedIndex = index;
             gbContainer.Controls.Add(cb);
+            return cb;
         }
     }
 }

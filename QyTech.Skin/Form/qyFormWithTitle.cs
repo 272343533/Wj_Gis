@@ -23,24 +23,14 @@ namespace QyTech.SkinForm
             this.ShowInTaskbar = true;
         }
 
-        public override string Text { set { lblTitle.Text = value; } }
+        public string Title { set { lblFormTitle.Text = value; } }
 
-        private void FlatForm_MouseMove(object sender, MouseEventArgs e)
-        {
-            qyFormUtil.MouseMoveForm(this.Handle);
-        }
-
-        private void FlatForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-
-      
+ 
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
-            qyFormUtil.MouseMoveForm(this.Handle);
+            if (e.Button==MouseButtons.Left)
+                qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void btnClose_Click(object sender, EventArgs e)

@@ -34,6 +34,42 @@ namespace QyTech.ExcelOper
                 eventNumChanged(num,percent);
         }
 
+        public string ExportDataTableToExcl(System.Data.DataTable exDataTable, string exFileName, string propertiesFilds,
+        bool HaveNoColumn = false, int RowStart = 2, int ColStart = 1, string localOrWeb = "local")
+        {
+
+            int i = 1;
+            //传进来的列表都放入  错误的列不进行处理  内部实现
+            List<string> listStr = new List<string>();
+            string[] strs = propertiesFilds.Split(',');
+            foreach (string s in strs)
+            {
+                if (s != "")
+                {
+                    listStr.Add(s);
+                }
+            }
+            IQyExclSettings exportSetting;
+            if (localOrWeb.ToLower() == "local")
+                exportSetting = new QyExclSettingsLocal();
+            else
+                exportSetting = new QyExclSettingsWeb();
+
+            exportSetting.ExFileName = exFileName;
+            exportSetting.PropertiesFilds = listStr;
+            exportSetting.NullValueHandling = NullValueHandling.Include;
+            exportSetting.FormatDT = "yyyy - MM - dd HH: mm: ss";
+            exportSetting.ColStartValue = ColStart;
+            exportSetting.RowStartValue = RowStart;
+            exportSetting.HaveNumberColumn = HaveNoColumn;
+            exportSetting.ExServerPath += exDataTable.TableName + ".xls";// typeof(T).Name.ToString() + ".xls";
+
+
+            string filePath = QyExcel_.Export(exDataTable, exportSetting);
+            return filePath;
+        }
+
+
         public string ExportListToExcl<T>(List<T> exDate, string exFileName, string propertiesFilds,
           string FormatDT = "yyyy-MM-dd HH:mm:ss", bool HaveNoColumn = false, int RowStart = 2, int ColStart = 1,string localOrWeb="local")
         {

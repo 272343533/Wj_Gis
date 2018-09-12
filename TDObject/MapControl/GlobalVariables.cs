@@ -181,7 +181,7 @@ namespace TDObject.MapControl
             /// </summary>
             TotalSpatialInteract=100,
             /// <summary>
-            /// 空间查询
+            /// 空间查询（房屋，企业，城市规划）
             /// </summary>
             QueryLayerInfo=200,
             /// <summary>
@@ -193,40 +193,38 @@ namespace TDObject.MapControl
             /// 企业范围查处需要
             /// </summary>
             QueryQyCc=400,
-            
+
             /// <summary>
-            /// 企业信息图片框
+            /// 空间查询（红牌，黄牌，安全，企业照片）
             /// </summary>
-            LtdPicInfo=500
+            QueryMarkerInfo = 500,
+
+
+
+
         }
 
         /// <summary>
-        /// 选择类型
+        /// 单击地图，选择对应的图层类型
         /// </summary>
         public enum SelectFeatureValue
         {
             enull = 0,//空
             Cunjie = 1,//村
             Zhenjie,//镇
-            GLQ,//管理区
-            XZ,//土地现状
-            GH,//土地规划
-            PC,//批次
-            FW,//房屋
-            FreeRegion,//自由分区
-            Tdlyxz,//土地利用现状
-            Gyqs,//国有权属
-            Kjsq,//可建设区
-            Jbntbhq,//基本农田保护区
-            Qyfw,//企业范围
-            Gd, //供地
-            LtdPic//企业照片信息
+            FangWu,//房屋
+            QiYeFangWei,//企业范围
+            ChengShiGuiHua, //城市规划
+            HongPai,//红牌
+            HuangPai,//黄牌
+            QiYeZhaoPianXinxi,//企业照片信息
+            AnQuanJianCha//安全检查
         }
         /// <summary>
         /// 选择类
         /// </summary>
         public static class Select {
-            public delegate void ChangedEventHandler();//定义委托
+            public delegate void ChangedEventHandler(SelectFeatureValue sfv);//定义委托
             public static event ChangedEventHandler Changed;//定义事件
             private static SelectType sType = SelectType.enull;
 
@@ -249,7 +247,7 @@ namespace TDObject.MapControl
                     if (Select.sValue != value)
                     {
                         Select.sValue = value;
-                        OnChanged();
+                        OnChanged(Select.sValue);
                     }
                 }
             }
@@ -260,11 +258,11 @@ namespace TDObject.MapControl
             /// <summary>
             /// 选择图层改变
             /// </summary>
-            public static void OnChanged()
+            public static void OnChanged(SelectFeatureValue sfv)
             {
                 if (Changed != null)
                 {
-                    Changed();
+                    Changed(sfv);
                 }
             }
             /// <summary>
@@ -311,11 +309,7 @@ namespace TDObject.MapControl
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateFillSymbol("河流注记");
             }
-            else if (m_FeatureLayer.Name == LayerName2FullName["城市规划"])            {
-                ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
-                color.CreateFillSymbolByFields("城规地类名称", "城市规划");
-            }
-            else if (m_FeatureLayer.Name == LayerName2FullName["城市规划注记注记2"])            {
+             else if (m_FeatureLayer.Name == LayerName2FullName["城市规划注记注记2"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateFillSymbol("城市规划注记注记2", "城市规划");
             }
@@ -330,6 +324,11 @@ namespace TDObject.MapControl
             else if (m_FeatureLayer.Name == GlobalVariables.LayerName2FullName["企业范围"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateFillSymbol("企业范围");
+            }
+            else if (m_FeatureLayer.Name == GlobalVariables.LayerName2FullName["城市规划"])
+            {
+                ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
+                color.CreateFillSymbolByFields("城规地类名称", "城市规划");
             }
 
             //Line 填充
@@ -568,7 +567,7 @@ namespace TDObject.MapControl
                 ax1.Refresh();
                 //this.axMapControl1.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
 
-           }
+            }
             catch { }
 
         }
@@ -617,7 +616,6 @@ namespace TDObject.MapControl
             //创建标注的字体样式  
             ITextSymbol pTextSymbol = new TextSymbolClass();
             pTextSymbol.Color = pRgbColor;
-            pTextSymbol.Size = 12;
             pTextSymbol.Font.Name = font.Name;
             pTextSymbol.Size = font.Size;//字体大小
             pTextSymbol.Font.Bold = font.Bold;
@@ -638,7 +636,7 @@ namespace TDObject.MapControl
             pAnnotateLayerProperties.AnnotationMaximumScale = 1;
             //设置显示标注的最小比例  
             pAnnotateLayerProperties.AnnotationMinimumScale = 250000;
-
+            
             pAnnotateLayerPropertiesCollection.Add(pAnnotateLayerProperties);
 
 
@@ -660,7 +658,15 @@ namespace TDObject.MapControl
                 if (scale <= 13000)
                 {
                     RefreshAnnoLable(sMapCtr);//道路注记
+                    
+                    //城市规划注记
+                    ILayer paramLayer = LayerControl.getGeoLayer(GlobalVariables.axMapControl, "城市规划注记注记2");
+                    System.Drawing.Font font = new System.Drawing.Font("宋体", 12);
+                    AddlableTolayer(paramLayer as IFeatureLayer, "TextString", font);
                 }
+
+
+
                 IGeoFeatureLayer pGeoFeatureLayer = sFlyr as IGeoFeatureLayer;
                 pGeoFeatureLayer.AnnotationProperties.Clear();//必须执行 有默认标注
 
@@ -763,6 +769,96 @@ namespace TDObject.MapControl
             pColor.Green = g;
             pColor.Blue = b;
             return pColor;
+        }
+
+        public static void CreateTextElment(AxMapControl axMc,double x, double y,string txt)
+        {
+            ESRI.ArcGIS.Geometry.IPoint pPoint = new PointClass();
+
+            IMap pMap = axMc.Map;
+
+            IActiveView pActiveView = pMap as IActiveView;
+
+            IGraphicsContainer pGraphicsContainer;
+
+            IElement pElement = new MarkerElementClass();
+
+            IElement pTElement = new TextElementClass();
+
+            pGraphicsContainer = (IGraphicsContainer)pActiveView;
+            pGraphicsContainer.DeleteAllElements();
+            pPoint.PutCoords(x, y);//创建点要素
+
+            pElement.Geometry = pPoint;
+
+            //pGraphicsContainer.AddElement(pElement, 1);
+
+            IFormattedTextSymbol pTextSymbol = new TextSymbolClass();//文本符号
+
+            IBalloonCallout pBalloonCallout = CreateBalloonCallout(x, y);//利用创建气泡的方法
+
+            IRgbColor pColor = new RgbColorClass();
+
+            pColor.Red = 200;
+
+            pColor.Green = 0;
+
+            pColor.Blue = 0;
+
+            pTextSymbol.Color = pColor;
+
+            ITextBackground pTextBackground;
+
+            pTextBackground = (ITextBackground)pBalloonCallout;
+
+            pTextSymbol.Background = pTextBackground;
+
+            ((ITextElement)pTElement).Symbol = pTextSymbol;
+            //IFeatureLayer pFeatureLyr = new FeatureLayerClass();
+            //pFeatureLyr = (IFeatureLayer)pMap.get_Layer(0);//要查询的图层
+            //pFeatureLyr.DisplayField = "NAME";//要展示的字段
+            ////
+            //pFeatureLyr.ShowTips = true;
+            //axMapControl1.ShowMapTips = true;
+
+            ((ITextElement)pTElement).Text = txt;// pFeatureLyr.get_TipText(x, y, 0.0001);//文本的位置
+            pPoint.X = x + 0.00001;
+
+            pPoint.Y = y + 0.00001;
+
+            pTElement.Geometry = pPoint;
+
+            pGraphicsContainer.AddElement(pTElement, 1);//添加元素
+
+            pActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);//刷新
+
+        }
+
+        //********CreateBalloonCallout**************//创建气泡的方法
+        public static IBalloonCallout CreateBalloonCallout(double x, double y)
+        {
+            IRgbColor pRgbClr = new RgbColorClass();
+            pRgbClr.Red = 255;
+            pRgbClr.Blue = 255;
+            pRgbClr.Green = 255;
+            ISimpleFillSymbol pSmplFill = new SimpleFillSymbolClass();//填充符号
+            pSmplFill.Color = pRgbClr;
+            pSmplFill.Style = esriSimpleFillStyle.esriSFSSolid;
+            IBalloonCallout pBllnCallout = new BalloonCalloutClass();//气泡
+            pBllnCallout.Style = esriBalloonCalloutStyle.esriBCSRectangle;
+            pBllnCallout.Symbol = pSmplFill;
+            pBllnCallout.LeaderTolerance = 1;//容差
+
+            ESRI.ArcGIS.Geometry.IPoint pPoint = new ESRI.ArcGIS.Geometry.PointClass();
+
+            pPoint.X = x;
+
+            pPoint.Y = y;
+
+            pBllnCallout.AnchorPoint = pPoint;//锚点位置
+
+            return pBllnCallout;
+
         }
     }
 }

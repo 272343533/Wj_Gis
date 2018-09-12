@@ -37,6 +37,12 @@
             System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint5 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(5D, 324D);
             System.Windows.Forms.DataVisualization.Charting.DataPoint dataPoint6 = new System.Windows.Forms.DataVisualization.Charting.DataPoint(6D, 82D);
             System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("税收统计");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("土地面积统计");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("销售额统计");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("能耗统计");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("投资类型分析");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("行业企业数量");
             System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("通用设备制造业");
             System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("金属制品业");
             System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("非金属矿物制品业");
@@ -47,21 +53,17 @@
             System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("专用设备制造业");
             System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("文教、工美、体育和娱乐用品制造业");
             System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("金属制品业");
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("税收统计");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("土地面积统计");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("销售额统计");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("能耗统计");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("投资类型分析");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("行业企业数量");
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.treeView2 = new System.Windows.Forms.TreeView();
             this.radioButton3 = new System.Windows.Forms.RadioButton();
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.treeView2 = new System.Windows.Forms.TreeView();
+            this.cboYearMonth = new System.Windows.Forms.ComboBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
@@ -149,6 +151,8 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.cboYearMonth);
+            this.panel2.Controls.Add(this.label6);
             this.panel2.Controls.Add(this.treeView2);
             this.panel2.Controls.Add(this.radioButton3);
             this.panel2.Controls.Add(this.radioButton2);
@@ -160,11 +164,46 @@
             this.panel2.Size = new System.Drawing.Size(276, 595);
             this.panel2.TabIndex = 4;
             // 
+            // treeView2
+            // 
+            this.treeView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.treeView2.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.treeView2.Font = new System.Drawing.Font("楷体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.treeView2.ForeColor = System.Drawing.Color.Black;
+            this.treeView2.LineColor = System.Drawing.Color.White;
+            this.treeView2.Location = new System.Drawing.Point(6, 437);
+            this.treeView2.Name = "treeView2";
+            treeNode1.Name = "节点5";
+            treeNode1.Text = "税收统计";
+            treeNode2.Name = "节点0";
+            treeNode2.Text = "土地面积统计";
+            treeNode3.Name = "节点4";
+            treeNode3.Text = "销售额统计";
+            treeNode4.Name = "节点1";
+            treeNode4.Text = "能耗统计";
+            treeNode5.ForeColor = System.Drawing.Color.Black;
+            treeNode5.Name = "节点3";
+            treeNode5.Text = "投资类型分析";
+            treeNode6.Name = "节点0";
+            treeNode6.Text = "行业企业数量";
+            this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6});
+            this.treeView2.Size = new System.Drawing.Size(264, 127);
+            this.treeView2.TabIndex = 10;
+            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
+            // 
             // radioButton3
             // 
             this.radioButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(180, 570);
+            this.radioButton3.Location = new System.Drawing.Point(209, 571);
             this.radioButton3.Name = "radioButton3";
             this.radioButton3.Size = new System.Drawing.Size(47, 16);
             this.radioButton3.TabIndex = 9;
@@ -176,7 +215,7 @@
             // 
             this.radioButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(106, 570);
+            this.radioButton2.Location = new System.Drawing.Point(117, 570);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(59, 16);
             this.radioButton2.TabIndex = 8;
@@ -189,7 +228,7 @@
             this.radioButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(29, 571);
+            this.radioButton1.Location = new System.Drawing.Point(30, 571);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(59, 16);
             this.radioButton1.TabIndex = 7;
@@ -249,44 +288,27 @@
             treeNode14,
             treeNode15,
             treeNode16});
-            this.treeView1.Size = new System.Drawing.Size(273, 427);
+            this.treeView1.Size = new System.Drawing.Size(273, 410);
             this.treeView1.TabIndex = 4;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
-            // treeView2
+            // cboYearMonth
             // 
-            this.treeView2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.treeView2.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.treeView2.Font = new System.Drawing.Font("楷体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.treeView2.ForeColor = System.Drawing.Color.Black;
-            this.treeView2.LineColor = System.Drawing.Color.White;
-            this.treeView2.Location = new System.Drawing.Point(6, 437);
-            this.treeView2.Name = "treeView2";
-            treeNode1.Name = "节点5";
-            treeNode1.Text = "税收统计";
-            treeNode2.Name = "节点0";
-            treeNode2.Text = "土地面积统计";
-            treeNode3.Name = "节点4";
-            treeNode3.Text = "销售额统计";
-            treeNode4.Name = "节点1";
-            treeNode4.Text = "能耗统计";
-            treeNode5.ForeColor = System.Drawing.Color.Black;
-            treeNode5.Name = "节点3";
-            treeNode5.Text = "投资类型分析";
-            treeNode6.Name = "节点0";
-            treeNode6.Text = "行业企业数量";
-            this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode5,
-            treeNode6});
-            this.treeView2.Size = new System.Drawing.Size(264, 127);
-            this.treeView2.TabIndex = 10;
-            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
+            this.cboYearMonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboYearMonth.FormattingEnabled = true;
+            this.cboYearMonth.Location = new System.Drawing.Point(91, 415);
+            this.cboYearMonth.Name = "cboYearMonth";
+            this.cboYearMonth.Size = new System.Drawing.Size(152, 20);
+            this.cboYearMonth.TabIndex = 47;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(28, 418);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(29, 12);
+            this.label6.TabIndex = 46;
+            this.label6.Text = "年月";
             // 
             // frmTotalHY
             // 
@@ -319,5 +341,7 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.TreeView treeView2;
+        private System.Windows.Forms.ComboBox cboYearMonth;
+        private System.Windows.Forms.Label label6;
     }
 }

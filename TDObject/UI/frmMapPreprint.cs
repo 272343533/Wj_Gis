@@ -50,21 +50,16 @@ namespace TDObject.UI
             //_axMap.Refresh();
             try
             {
-                IObjectCopy objectCopy = new ObjectCopyClass();
-
-                object toCopyMap = _axMap.Map;
-
-                object copiedMap = objectCopy.Copy(toCopyMap);
-
-                object toOverwriteMap = axPageLayoutControl1.ActiveView.FocusMap;
-
-                objectCopy.Overwrite(copiedMap, ref toOverwriteMap);
-
-                IPageLayout pageLayout = axPageLayoutControl1.ActiveView as IPageLayout;
+                Copy();
+                //IPageLayout pageLayout = axPageLayoutControl1.ActiveView as IPageLayout;
                 // AddMapSurround(pageLayout, _axMap.ActiveView);
                 //AddNorthArrow(pageLayout, _axMap.ActiveView as IMap);
                 // AddMapSurround(axPageLayoutControl1.PageLayout, this._axMap.ActiveView);
-                AxPageLayoutControl pPageLayout = axPageLayoutControl1;
+                //AxPageLayoutControl pPageLayout = axPageLayoutControl1;
+
+                axPageLayoutControl1.ZoomToWholePage();
+                axPageLayoutControl1.ActiveView.FocusMap = _axMap.Map;
+                
             }
             catch (Exception ex)
             {
@@ -73,6 +68,29 @@ namespace TDObject.UI
             }
         }
 
+        private void Copy()
+        {
+            try
+            {
+                IActiveView activeView = (IActiveView)axPageLayoutControl1.ActiveView.FocusMap;
+                IDisplayTransformation displayTransformation = activeView.ScreenDisplay.DisplayTransformation;
+                //根据MapControl的视图范围,确定PageLayoutControl的视图范围
+                displayTransformation.VisibleBounds = _axMap.FullExtent;
+                axPageLayoutControl1.Extent = _axMap.FullExtent; 
+                axPageLayoutControl1.ActiveView.Refresh();
+
+                object toOverwriteMap = axPageLayoutControl1.ActiveView.FocusMap;
+                IObjectCopy objectCopy = new ObjectCopyClass();
+                //object toCopyMap = _axMap.Map;
+                //object copiedMap = objectCopy.Copy(toCopyMap);
+                objectCopy.Overwrite(_axMap.ActiveView, ref toOverwriteMap);
+            }
+            catch (Exception ex)
+            {
+                log.Error(this.Name + ":" + ex.Message);
+                MessageBox.Show(ex.Message);
+            }
+        }
         public void AddMapSurround(IPageLayout pageLayout, IActiveView activeView)
         {
             try
@@ -311,7 +329,7 @@ namespace TDObject.UI
 
         private void frmMapPreprint_MouseMove(object sender, MouseEventArgs e)
         {
-            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
+            //QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -364,6 +382,11 @@ namespace TDObject.UI
             export.Cleanup();
 
             return true;
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            Copy();
         }
     }
 }

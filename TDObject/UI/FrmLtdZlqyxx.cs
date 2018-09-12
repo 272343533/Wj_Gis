@@ -113,9 +113,9 @@ namespace TDObject.UI
                 //List<z租赁企业信息表> dbobjs = JsonHelper.DeserializeJsonToList<z租赁企业信息表>(ret);
 
                 //users = EntityManager<bsUser>.GetListNoPaging<bsUser>("", "bsR_Name,LoginName");
-                List<z租赁企业信息表> dbobjs = MainForm.EM.GetListNoPaging<z租赁企业信息表>("DKBH='" + DKBH + "'", "");
+                List<vwLtdJcSj> dbobjs = MainForm.EM.GetListNoPaging<vwLtdJcSj>("地块编号='" + DKBH + "'", "");
                
-                BindingList<z租赁企业信息表> bs_objs = new BindingList<z租赁企业信息表>(dbobjs);
+                BindingList<vwLtdJcSj> bs_objs = new BindingList<vwLtdJcSj>(dbobjs);
                 this.dgvT2_12.AutoGenerateColumns = false;
 
                 dgvT2_12.DataSource = bs_objs;
@@ -154,7 +154,7 @@ namespace TDObject.UI
 
         private void FrmLtdZlqyxx_MouseMove(object sender, MouseEventArgs e)
         {
-            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
+            //QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
     }

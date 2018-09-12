@@ -38,47 +38,64 @@ using TDObject;
 
 namespace TDObject.UI
 {
-    public partial class FrmOneLtdAndRentLtdInfo : QyTech.SkinForm.qyForm
+    public partial class FrmOneLtdAndRentLtdInfo : QyTech.SkinForm.qyForm//WithTitle
     {
         private string dkbh;
-
         List<LtdPhoto> photos;
         int CurrPhotoNo = 0;
     
 
-
+        /// <summary>
+        /// 用于从列表中或鼠标单击中根据地块来显示信息
+        /// </summary>
+        /// <param name="dkbm"></param>
         public FrmOneLtdAndRentLtdInfo(string dkbm)
         {
             InitializeComponent();
             dkbh = dkbm;
         }
 
+        /// <summary>
+        /// 用于在企业基础信息处调用单独显示照片
+        /// </summary>
+        /// <param name="Id"></param>
+        public FrmOneLtdAndRentLtdInfo(List<LtdPhoto> photoes)
+        {
+            InitializeComponent();
+
+            photos = photoes;
+            dkbh = "";// photos[0].SSDKBM;
+            this.Height = this.Height - 270;
+
+        }
+
         private void FrmOneLtdAndRentLtdInfo_Load(object sender, EventArgs e)
         {
             try
             {
-                dgvT2_11.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
-
-                dgvT2_12.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
-
-                //this.Size =new Size(SystemInformation.WorkingArea.Width,400);
-                List<企业范围> objs = MainForm.EM.GetListNoPaging<企业范围>("DKBH='" + dkbh + "'", "");
-
-                dgvT2_11.AutoGenerateColumns = false;
-                dgvT2_11.DataSource = objs;
-
-                List<z租赁企业信息表> zlobjs = MainForm.EM.GetListNoPaging<z租赁企业信息表>("DKBH='" + dkbh + "'", "");
-
-                dgvT2_12.AutoGenerateColumns = false;
-                dgvT2_12.DataSource = zlobjs;
-
-
-                photos = BLL.CommSetting.EM.GetListNoPaging<LtdPhoto>("SSDKBM='" + dkbh + "' and PhotoType=1", "PICTURE");
-                if (photos.Count > 0)
+                if (dkbh != "")
                 {
-                    CurrPhotoNo = 1;
+                    dgvT2_11.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle; ;
+                    dgvT2_11.Columns.Clear();
+                    dgvT2_12.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle; ;
+                    dgvT2_12.Columns.Clear();
+                    //this.Size =new Size(SystemInformation.WorkingArea.Width,400);
+                    List<QyTech.Auth.Dao.bsFunField> CurrFunFields;
+                    string sqlOrderby = "序号";
+                    string sqlwhere = " 单位 in (select 纳税人名称 from bsltdinfo where 地块编号 = '" + dkbh + "' and 租赁企业否=0)";
+                    System.Data.DataTable CurrDt = QyTech.SQLDA.SqlUtil.RefreshDbTable(dgvT2_11, MainForm.sqlConn, "t企业基础数据", sqlwhere, sqlOrderby, out CurrFunFields);
+
+
+                    sqlwhere = " 单位 in (select 纳税人名称 from bsltdinfo where 地块编号 ='" + dkbh + "' and 租赁企业否=1)";
+                    QyTech.SQLDA.SqlUtil.RefreshDbTable(dgvT2_12, MainForm.sqlConn, "t企业基础数据", sqlwhere, sqlOrderby, out CurrFunFields);
+
+                    //List<z租赁企业信息表> zlobjs = MainForm.EM.GetListNoPaging<z租赁企业信息表>("DKBH='" + dkbh + "'", "");
+
+                    //dgvT2_12.AutoGenerateColumns = false;
+                    //dgvT2_12.DataSource = zlobjs;
+                    photos = BLL.CommSetting.EM.GetListNoPaging<LtdPhoto>("SSDKBM='" + dkbh + "' and PhotoType=1", "PICTURE");
+
                 }
-                textBox1.Text = "0/" + photos.Count.ToString();
 
             }
             catch (Exception ex)
@@ -87,7 +104,23 @@ namespace TDObject.UI
                 MessageBox.Show(ex.Message);
             }
          }
+        private void FrmOneLtdAndRentLtdInfo_Shown(object sender, EventArgs e)
+        {
+            if (photos != null)
+            {
+                CurrPhotoNo = 0;
+                if (photos.Count > 0)
+                {
+                    CurrPhotoNo = 1;
+                    DispImg();
+                }
+                textBox1.Text = CurrPhotoNo.ToString() + "/" + photos.Count.ToString();
 
+            }
+            else {
+                this.label1.Text = "无照片信息";
+            }
+        }
         private void button3_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -95,7 +128,7 @@ namespace TDObject.UI
 
         private void dgvT2_12_MouseMove(object sender, MouseEventArgs e)
         {
-            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
+            //QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
 
@@ -167,10 +200,6 @@ namespace TDObject.UI
             }
         }
 
-        private void FrmOneLtdAndRentLtdInfo_Shown(object sender, EventArgs e)
-        {
-            if (photos.Count > 0)
-                DispImg();
-        }
+       
     }
 }

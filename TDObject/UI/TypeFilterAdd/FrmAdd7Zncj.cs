@@ -55,7 +55,7 @@ namespace TDObject.UI
                 obj_.序号 = Convert.ToInt32(this.序号.Text);
                 obj_.企业名称 = this.企业名称.Text;
                 obj_.车间名称 = this.车间名称.Text;
-                obj_.获评年份 = Convert.ToInt32(this.获评年份.Text);
+                obj_.获评年份 = this.获评年份.Text;
                 obj_.区镇 = this.区镇.Text;
 
                 obj_.地块编号 = this.地块编号.Text;

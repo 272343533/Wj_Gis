@@ -917,7 +917,7 @@ namespace TDObject.UI
 
         private void toolStrip1_MouseMove(object sender, MouseEventArgs e)
         {
-            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
+           // QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)

@@ -37,11 +37,19 @@ namespace QyTech.SkinForm
             frmobj.StartPosition = FormStartPosition.CenterScreen;
         }
 
+        /// <summary>
+        /// 应该可以用withTitle完全替代，至少母线来说
+        /// </summary>
+        /// <param name="frm"></param>
         public static void ShowForm(Form frm)
         {
             qyFormContainer pfrm = new qyFormContainer(frm);
             pfrm.Show();
         }
-
+        public static void ShowDialogForm(Form frm)
+        {
+            qyFormContainer pfrm = new qyFormContainer(frm);
+            pfrm.ShowDialog();
+        }
     }
 }

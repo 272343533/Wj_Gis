@@ -7,6 +7,9 @@ using Microsoft.Office.Interop.Excel;
 using QyTech.Core;
 using System.Windows.Forms;
 
+using System.Data;
+
+
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
 namespace QyTech.ExcelOper
 {
@@ -23,7 +26,82 @@ namespace QyTech.ExcelOper
         private static string DefaultTemplateExcelFile = "Report.xls";//System.Web.HttpContext.Current.Server.MapPath("~/DownLoads/Template/Report.xls")
 
         public event DelegateForExportNo ExportNoChanged;
-  
+
+
+        /// <summary>
+        /// 通过datatable导出数据
+        /// </summary>
+        /// <param name="reportDate"></param>
+        /// <param name="Settings"></param>
+        /// <returns></returns>
+        public string Export(System.Data.DataTable reportDt, IQyExclSettings Settings)
+        {
+            Microsoft.Office.Interop.Excel.Application app = CopyTemplateAndOpenWorkSheet(Settings.ExServerPath, Settings.ExFileName);
+            Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks[1];
+            _Worksheet worksheet = (Microsoft.Office.Interop.Excel._Worksheet)app.Worksheets[1];
+            try
+            {
+                //再此处进行excl的填充
+                int num = 1;
+                #region 表头的绑定  设置了模板可不用这个 统一改模板
+                //for (int i = 1; i <= Settings.PropertiesFilds.Count; i++)
+                //{
+                //    try
+                //    {
+                //        PropertyInfo p = typeof(T).GetProperty(Settings.PropertiesFilds[i - 1].ToString());
+                //        if (!Settings.EliminateFilds.Contains(p.Name))
+                //            worksheet.Cells[num, i] = typeof(T).GetProperty(Settings.PropertiesFilds[i - 1].ToString()).Name;
+                //    }catch(Exception ex){}
+                //}
+                #endregion
+                num = Settings.RowStartValue;
+                int RowNo = 0;
+                foreach (DataRow dr in reportDt.Rows)
+                {
+                    RowNo++;
+                    if (Settings.HaveNumberColumn)
+                    {
+                        worksheet.Cells[num, Settings.ColStartValue - 1] = RowNo;
+                    }
+                    for (int i = 1; i <= Settings.PropertiesFilds.Count; i++)
+                    {
+                        try
+                        {
+                            string fname = Settings.PropertiesFilds[i - 1].ToString();
+                            if (reportDt.Columns.Contains(fname))
+                            {
+                                if (!Settings.EliminateFilds.Contains(fname))
+                                {
+                                    object o = dr[fname];
+                                    worksheet.Cells[num, Settings.ColStartValue + i - 1] = o == null && Settings.NullValueHandling == NullValueHandling.Include ? "" :  o.ToString();
+                                }
+                            }
+                          
+                        }
+                        catch (Exception ex)
+                        {
+                            LogHelper.Error(ex);
+                        }
+
+                    }
+                    num++;
+                    if (ExportNoChanged != null)
+                        ExportNoChanged(RowNo, reportDt.Rows.Count);
+                }
+                workbook.Save();
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Error(ex);
+            }
+            finally
+            {
+                CloseExcel(app, workbook);
+            }
+
+            return Settings.ExTempPath + Settings.ExFileName;
+        }
+
         /// <summary>
         /// 导出Excel文件核心方法-简单填充文件
         /// </summary>

@@ -123,7 +123,7 @@ namespace TDObject.UI
 
         private void frmLtdInfoModi_MouseDown(object sender, MouseEventArgs e)
         {
-            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
+           // QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void button3_Click(object sender, EventArgs e)

@@ -53,8 +53,15 @@ namespace TDObject.UI
         {
             try
             {
-                treeView1.Nodes.Clear();
+                //获取统计时间数据
+                List<string> items = TDObject.DAOBLL.ImportTBll.GetYearMonths("t企业基础数据");
+                cboYearMonth.DataSource = items;
+                if (cboYearMonth.Items.Count > 0)
+                    cboYearMonth.SelectedIndex = 0;
 
+                cboYearMonth.Refresh();
+
+                treeView1.Nodes.Clear();
                 List<bsHYDL> hydl = MainForm.EM.GetListNoPaging<bsHYDL>("", "");
                 foreach (bsHYDL item in hydl)
                 {
@@ -103,7 +110,13 @@ namespace TDObject.UI
         {
             try
             {
-              
+                string Ym = this.cboYearMonth.Text;
+                if (Ym == "")
+                {
+                    MessageBox.Show("请选择月份！"); ;
+                    return;
+                }
+                string YearMonth = "YearMonth='" + Ym + "' and ";
                 //更改图形数据
                 chart1.Series[0].Points.Clear();
                 List<bsTotalResult> ts = new List<bsTotalResult>();
@@ -111,33 +124,33 @@ namespace TDObject.UI
                 if (CurrTotalType == "投资类型分析")
                 {
                     chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业投资类型分析' and GLQName='" + CurrHYName + "'", "");
+                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("YearMonth='" + Ym.Substring(0,4) + "' and " + "TotalType='行业投资类型分析' and GLQName like '%" + CurrHYName + "'", "");
                 }
                 else if (CurrTotalType == "行业企业数量")
                 {
                     chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业管理区企业数量' and GLQName='" + CurrHYName + "'", "");
+                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区企业数量' and GLQName like '%" + CurrHYName + "'", "");
 
                 }
                 else if (CurrTotalType == "销售额统计")
                 {
                     chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业管理区销售额统计' and GLQName='" + CurrHYName + "'", "");
+                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区销售额统计' and GLQName like '%" + CurrHYName + "'", "");
                 }
                 else if (CurrTotalType == "税收统计")
                 {
                     chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业管理区税收统计' and GLQName='" + CurrHYName + "'", "");
+                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区税收统计' and GLQName like '%" + CurrHYName + "'", "");
                 }
                 else if (CurrTotalType == "能耗统计")
                 {
                     chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业管理区能耗统计' and GLQName='" + CurrHYName + "'", "");
+                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区能耗统计' and GLQName like '%" + CurrHYName + "'", "");
                 }
                 else if (CurrTotalType == "土地面积统计")
                 {
                     chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("TotalType='行业管理区土地面积统计' and GLQName='" + CurrHYName + "'", "");
+                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区土地面积统计' and GLQName like '%" + CurrHYName + "'", "");
                 }
                 double sum = 0;
                 for (int i = 0; i < ts.Count; i++)
@@ -147,10 +160,12 @@ namespace TDObject.UI
 
                     chart1.Series[0].Points.AddXY(i + 1, item.TotalValue);
                     chart1.Series[0].Points[i].LegendText = item.TypeDesp;
-                    if (CurrTotalType == "投资类型分析" ||CurrTotalType == "管理区企业数量")
+                    if (CurrTotalType == "投资类型分析" ||CurrTotalType == "行业企业数量")
                         chart1.Series[0].Points[i].Label = item.TotalValue.ToString()+"家";
                     else if (CurrTotalType == "土地面积统计")
                         chart1.Series[0].Points[i].Label = item.TotalValue.ToString()+"亩";
+                    else if (CurrTotalType == "能耗统计")
+                        chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "千瓦时";
                     else
                         chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "万元";
                     chart1.Series[0].Points[i].LabelToolTip = item.TypeDesp;
@@ -158,10 +173,12 @@ namespace TDObject.UI
                     //chart1.Series[0].ax
 
                 }
-                if (CurrTotalType == "投资类型分析" || CurrTotalType == "管理区企业数量")
+                if (CurrTotalType == "投资类型分析" || CurrTotalType == "行业企业数量")
                     chart1.Titles[0].Text = CurrHYName + " " + CurrTotalType + "    (共" + sum.ToString() + "家)";
                 else if (CurrTotalType == "土地面积统计")
                     chart1.Titles[0].Text = CurrHYName + " " + CurrTotalType + "    (共" + sum.ToString() + "亩)";
+                else if (CurrTotalType == "能耗统计")
+                    chart1.Titles[0].Text = CurrHYName + " " + CurrTotalType + "    (共" + sum.ToString() + "千瓦时)";
                 else
                     chart1.Titles[0].Text = CurrHYName + " " + CurrTotalType + "    (共" + sum.ToString() + "万元)";
             
@@ -179,7 +196,7 @@ namespace TDObject.UI
 
         private void chart1_MouseMove(object sender, MouseEventArgs e)
         {
-            QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
+            //QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
 
         private void radioButton2_Click(object sender, EventArgs e)

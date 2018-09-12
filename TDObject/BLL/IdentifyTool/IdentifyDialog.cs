@@ -61,9 +61,9 @@ namespace TDObject.IdentifyTool
             associateMapControl = IdentifyMap;
             dgvQyxx = (DataGridView)list[0];
             lstFW = (DataGridView)list[1];
+            dgvInfo = (DataGridView)list[2];
 
-          
-  
+
             //初始化地图窗口事件
             //associateMapWindow.FormClosed += new FormClosedEventHandler(MapWindow_FormClosed);
             associateMapControl.OnMapReplaced += new IMapControlEvents2_Ax_OnMapReplacedEventHandler(OnMapReplaced);
@@ -94,7 +94,7 @@ namespace TDObject.IdentifyTool
             int n = -1;
             for (int i = 0; i < this.cboLayerFilter.Items.Count; i++)
             {
-                if (this.cboLayerFilter.GetItemText(this.cboLayerFilter.Items[i]).Contains(layerName))
+                if (this.cboLayerFilter.GetItemText(this.cboLayerFilter.Items[i])==layerName)
                     n = i;
             }
             return n;
@@ -528,9 +528,7 @@ namespace TDObject.IdentifyTool
             //清空数据列表
             lstFW.Columns.Clear();
             dgvQyxx.Columns.Clear();
-            //dgvInfo.Columns.Clear();
-            //MainForm._area.Text = "";
-            //MainForm._length.Text = "";
+            dgvInfo.Columns.Clear();
         }
         /// <summary>
         /// 初始化属性列表
@@ -591,7 +589,13 @@ namespace TDObject.IdentifyTool
                 dt = setDispData<企业范围>("企业范围", identifiedFeature.OID, dt);
 
             }
+            if (identifyFilter == "城市规划")
+            {
+                lstProperties = dgvInfo;
+                MainForm._TabControl.SelectedIndex = 2;
+                dt = setDispData<城市规划>("城市规划", identifiedFeature.OID, dt);
 
+            }
 
             lstProperties.DataSource = dt;
             lstProperties.AllowUserToAddRows = false;
@@ -664,7 +668,7 @@ namespace TDObject.IdentifyTool
         //    //可以编辑复制
         //    dt.Rows.Add(dr);
 
- 
+
         //    EntityObject tObject = DatabaseAccess.getLayerInfoFromDB<T>(OID.ToString());
 
 
@@ -697,7 +701,21 @@ namespace TDObject.IdentifyTool
         //    }
         //    return dt;
         //}
-        private static DataTable setDispData<T>(string TType,int OID,DataTable dt)
+
+
+        //test reflection
+        private static Type GetType(string typename)
+        {
+            
+            Assembly a = Assembly.LoadFrom("SunMvcExpress.Dao.dll");
+
+            Type t = a.GetType("SunMvcExpress.Dao." + typename);
+
+           
+            return t;
+        }
+      
+    private static DataTable setDispData<T>(string TType,int OID,DataTable dt)
         {
           
             //  DataTable dt = new DataTable();
@@ -707,25 +725,52 @@ namespace TDObject.IdentifyTool
             //可以编辑复制
             dt.Rows.Add(dr);
 
-            //add by szw on 2017-08-16 begin
-              
-            string detailUrl = MainForm.App_URI + "lyRemoteServ/GetGisObj?TType=" + TType + "&id=" + OID.ToString();
-
-            string ret = AsyncHttp.CommFun.GetRemoteJson(detailUrl);
-
             object obj = new object();
+            QyTech.SkinForm.UICreate.frmAdd frmobj;
 
-            if (TType == "房屋建筑")
-                obj = JsonHelper.DeserializeJsonToObject<房屋建筑>(ret);
-           
-            else if (TType == "企业范围")
-                obj = JsonHelper.DeserializeJsonToObject<企业范围>(ret);
-          
-            if (obj == null)
-                return dt;
+            if (TType == "城市规划")
+            {
+                obj=MainForm.EM.GetByPk<城市规划>("OBJECTID", OID);
+                if (obj == null)
+                    return dt;
+                frmobj = new QyTech.SkinForm.UICreate.frmAdd(TType, obj,MainForm.EM);
+                frmobj.ShowDialog();
+            }
+            else
+            {
+                string detailUrl = MainForm.App_URI + "lyRemoteServ/GetGisObj?TType=" + TType + "&id=" + OID.ToString();
+                string ret = AsyncHttp.CommFun.GetRemoteJson(detailUrl);
 
-            QyTech.SkinForm.UICreate.frmAdd frmobj = new QyTech.SkinForm.UICreate.frmAdd("企业范围", obj);
-            QyTech.SkinForm.qyFormUtil.ShowForm(frmobj);
+                if (TType == "房屋建筑")
+                {
+                    obj = JsonHelper.DeserializeJsonToObject<房屋建筑>(ret);
+                    if (obj == null)
+                        return dt;
+                    frmobj = new QyTech.SkinForm.UICreate.frmAdd(TType, obj, MainForm.EM);
+                    frmobj.ShowDialog();
+                }
+                else //if (TType == "企业范围")
+                {
+                    obj= MainForm.EM.GetByPk<企业范围>("OBJECTID", OID);
+                    if (obj != null)
+                    {
+                        List<t企业基础数据>  objs= MainForm.EM.GetListNoPaging<t企业基础数据>("单位='"+(obj as 企业范围).YDQYMC+"'", "");
+                        if (objs.Count > 0)
+                        {
+                            //obj = objs[0];
+                            TDObject.UI.frmAddLtdBase fobj = new TDObject.UI.frmAddLtdBase("t企业基础数据", objs[0], MainForm.EM);
+                            fobj.ShowDialog();
+                        }
+                        else
+                        {
+                            MessageBox.Show("企业范围数据与基础数据名称不一致，需要核对数据！");
+                        }
+                    }
+                }
+            }
+            
+
+
            
             Type type = obj.GetType();
             System.Reflection.PropertyInfo[] pi = type.GetProperties();

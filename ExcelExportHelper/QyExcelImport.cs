@@ -85,7 +85,7 @@ namespace QyTech.ExcelOper
         /// <param name="connectionString">sql连接串</param>
         /// <param name="ColRel">数据库列与excel列对应关系</param>
         /// <returns></returns>
-        public string TransferDataWithSql(string excelFile, string sheetName, string connectionString,string TName,Dictionary<string,string> FName2ExcelColName,bool delTableData=false)
+        public string TransferDataWithSql(string excelFile, string sheetName, string connectionString,string TName,Dictionary<string,string> FName2ExcelColName,bool delTableData=false,string ExcelNotNullCols="",string where="")
         {
             FillDataTable(excelFile, sheetName);
 
@@ -93,7 +93,7 @@ namespace QyTech.ExcelOper
             conn.Open();
             if (delTableData)
             {
-                SqlCommand cmd = new SqlCommand("delete  from "+TName, conn);
+                SqlCommand cmd = new SqlCommand("delete  from "+TName+where==""?"":"where "+where, conn);
                 cmd.ExecuteNonQuery();
             }
             if (dt.Rows.Count > 0)
@@ -102,7 +102,7 @@ namespace QyTech.ExcelOper
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     dr = dt.Rows[i];
-                    insertToSql(dr, TName, FName2ExcelColName);
+                    insertToSql(dr, TName, FName2ExcelColName, ExcelNotNullCols);
                     if (CopiedEvent != null)
                         CopiedEvent(i+1, dt.Rows.Count);
                 }
@@ -111,11 +111,65 @@ namespace QyTech.ExcelOper
         }
 
         /// <summary>
-        /// 数据库脚本导入excel数据
+        /// 将dt中的数据导入数据库
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="connectionString"></param>
+        /// <param name="TName"></param>
+        /// <param name="FName2ExcelColName"></param>
+        /// <param name="delTableData"></param>
+        /// <returns></returns>
+        public DataTable TransferDataWithSql(DataTable dtData, string connectionString, string TName, Dictionary<string, string> FName2ExcelColName, bool delTableData = false, string ExcelNotNullCols = "")
+        {
+            DataRow drWrong;
+            DataTable dtWrong = dtData.Clone();
+            this.dt = dtData;
+            conn = new SqlConnection(connectionString);
+            conn.Open();
+            if (delTableData)
+            {
+                SqlCommand cmd = new SqlCommand("delete  from " + TName, conn);
+                cmd.ExecuteNonQuery();
+            }
+            if (dt.Rows.Count > 0)
+            {
+                DataRow dr = null;
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    dr = dt.Rows[i];
+                    drWrong=insertToSql(dr, TName, FName2ExcelColName, ExcelNotNullCols);
+                    if (drWrong != null)
+                    {
+                        DataRow drcopy = dtWrong.NewRow();
+
+                        foreach (DataColumn dc in dtWrong.Columns)
+                        {
+                            drcopy[dc.ColumnName] = dr[dc.ColumnName];
+                        }
+                        dtWrong.Rows.Add(drcopy);
+                    }
+                    if (CopiedEvent != null)
+                        CopiedEvent(i + 1, dt.Rows.Count);
+                }
+            }
+            return dtWrong;
+        }
+        private DataRow CopyDataRow(DataRow dr)
+        {
+            DataRow drcopy = dr.Table.Clone().NewRow();
+
+            foreach (DataColumn dc in dr.Table.Columns)
+            {
+                drcopy[dc] = dr[dc];
+            }
+            return drcopy;
+        }
+        /// <summary>
+        /// 数据库脚本导入excel数据, 对已存在数据的修改怎么处理呢？让用户自己决定是否直接删除？
         /// </summary>
         /// <param name="dr">数据行</param>
         /// <param name="ColRel">列关系</param>
-        private void insertToSql(DataRow dr,string TName,Dictionary<string, string> ColRel)
+        private DataRow insertToSql(DataRow dr,string TName,Dictionary<string, string> ColRel,string ExcelNotNullCols="")
         {
             string sql = "insert into " + TName;
             //excel表中的列名和数据库中的列名一定要对应  
@@ -123,25 +177,31 @@ namespace QyTech.ExcelOper
 
             try
             { 
-            foreach (string key in ColRel.Keys)
-            {
-                fields += ","+key;
-                values += ",'" + dr[ColRel[key]].ToString()+"'";
-            }
+                foreach (string key in ColRel.Keys)
+                {
+                    if (ExcelNotNullCols.Contains("," + fields) && dr[ColRel[key]].ToString() == "")
+                        return dr;
+                    fields += ","+key;
+                    values += ",'" + dr[ColRel[key]].ToString()+"'";
+                
+                }
             
-            fields = "("+fields.Substring(1)+")";
-            values = "(" + values.Substring(1) + ")";
+                fields = "("+fields.Substring(1)+")";
+                values = "(" + values.Substring(1) + ")";
 
-            sql = sql + fields + values;
-            SqlCommand cmd = new SqlCommand(sql, conn);
-            cmd.ExecuteNonQuery();
+                sql = sql + fields +" values"+ values;
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                return null;
             }
             catch(Exception ex)
             {
                 log.Error(ex.Message);
+                return dr;
             }
         }
 
+       
 
 
         private void FillDataTable(string excelFile, string sheetName="")

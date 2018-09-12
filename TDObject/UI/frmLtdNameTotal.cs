@@ -57,7 +57,7 @@ namespace TDObject.UI
             {
                 dataGridView1.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
-                List<企业范围> objs = BLL.CommSetting.EM.GetListNoPaging<企业范围>("", "YDQYMC");
+                List<bsLtdInfo> objs = BLL.CommSetting.EM.GetListNoPaging<bsLtdInfo>("租赁企业否=0", "纳税人名称");
                 dataGridView1.AutoGenerateColumns = false;
                 dataGridView1.DataSource = objs;
 
@@ -153,12 +153,17 @@ namespace TDObject.UI
         {
             label8.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
 
+            
             try
             {
                 if (dataGridView1.CurrentCell == null)
                     return;
-            
-               dkbh = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
+                if (dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value == null)
+                {
+                    MessageBox.Show("该企业没有地块编号数据，请补充基础数据！");
+                    return;
+                }
+                dkbh = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[2].Value.ToString();
                 ltdname = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
             
                 ILayer pLayer = GlobalVariables.GetOverviewLayer(this.axMapControl1, "企业范围");
@@ -183,16 +188,26 @@ namespace TDObject.UI
 
                 //刷新数据
                 企业范围 ltdobj = MainForm.EM.GetByPk<企业范围>("DKBH", dkbh);
-
                 this.textBox1.Text = ltdobj.ZDMJ.ToString();
                 this.textBox2.Text = ltdobj.JZMJ.ToString();
                 this.textBox6.Text = ltdobj.FZMJ_.ToString();
-                this.textBox3.Text = ltdobj.CZ_;
-                this.textBox4.Text = ltdobj.SS_;
-                this.textBox5.Text = ltdobj.NH_;
 
 
-                List<z租赁企业信息表> rentltdobjs=MainForm.EM.GetListNoPaging<z租赁企业信息表>("DKBH='"+dkbh+"'","");
+                int RowIndex = dataGridView1.CurrentCell.RowIndex;
+                if (RowIndex >= 0)
+                {
+                    List<t企业基础数据> Objs = MainForm.EM.GetListNoPaging<t企业基础数据>("单位='"+ltdname+"'", "年度+'-'+月份 desc ");
+                    if (Objs.Count > 0)
+                    {
+                        this.textBox3.Text = Objs[0].销售.ToString();
+                        this.textBox4.Text = Objs[0].税收.ToString();
+                        this.textBox5.Text = Objs[0].用能.ToString();
+                    }
+                }
+
+
+
+                List<vwLtdJcSj> rentltdobjs=MainForm.EM.GetListNoPaging<vwLtdJcSj>("地块编号='"+dkbh+"'","");
                 if (rentltdobjs.Count > 0)
                     btnRent.Enabled = true;
                 else
@@ -204,6 +219,10 @@ namespace TDObject.UI
                 {
                     pictureBox1.Image = Image.FromStream(System.Net.WebRequest.Create("http://122.114.190.250:8080/Wjkfq_gis/Uploads/" + photos[0].PICTURE).GetResponse().GetResponseStream());
                 }
+                //else
+                //{
+                //    pictureBox1.Image = null;
+                //}
 
             }
             catch (Exception ex)
@@ -217,8 +236,7 @@ namespace TDObject.UI
         {
             try
             {
-                FlashObjectsClass flashObjects;
-                flashObjects = new FlashObjectsClass();
+                FlashObjectsClass flashObjects=flashObjects = new FlashObjectsClass();
                 flashObjects.MapControl = this.axMapControl1.Object as IMapControl2;
                 flashObjects.Init();
 

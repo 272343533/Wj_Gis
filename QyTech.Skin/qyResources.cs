@@ -14,20 +14,20 @@ namespace QyTech.SkinForm
     
     public class qyResources
     {
-        public static Image  GetImage(ImageSource image)
-        {
-            Assembly myAssem = Assembly.GetEntryAssembly();
-            ResourceManager rm = new ResourceManager("QyTech.SkinForm.Resources", myAssem);
-            return (Image)rm.GetObject(image.ToString());
+        //public static Image  GetImage(ImageSource image)
+        //{
+        //    Assembly myAssem = Assembly.GetEntryAssembly();
+        //    ResourceManager rm = new ResourceManager("QyTech.SkinForm.Resources", myAssem);
+        //    return (Image)rm.GetObject(image.ToString());
             
-        }
+        //}
 
-        public static string GetString(StringSource text)
-        {
-            Assembly myAssem = Assembly.GetEntryAssembly();
-            ResourceManager rm = new ResourceManager("QyTech.SkinForm.Resources", myAssem);
-            return rm.GetString(text.ToString());
-        }
+        //public static string GetString(StringSource text)
+        //{
+        //    Assembly myAssem = Assembly.GetEntryAssembly();
+        //    ResourceManager rm = new ResourceManager("QyTech.SkinForm.Resources", myAssem);
+        //    return rm.GetString(text.ToString());
+        //}
 
         public static Image add_16
         {
@@ -51,8 +51,12 @@ namespace QyTech.SkinForm
         {
             get { return Resources.search_16; }
         }
+        public static Image exit_16
+        {
+            get { return Resources.exit_16; }
+        }
 
-      
+        
 
         public static Image Alarm_16
         {
