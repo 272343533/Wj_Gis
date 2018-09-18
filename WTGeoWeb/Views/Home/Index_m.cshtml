@@ -460,7 +460,7 @@
 				    //VectorLayer.on("onLoad", LoadList);
 				    // dojo.connect(VectorLayer4, "onLoad", LoadList);
 
-                    ZhaoPianPntTemplate = new esri.infoTemplate();
+                    //ZhaoPianPntTemplate = new esri.infoTemplate();
 				}
 			);
         }
@@ -2043,9 +2043,11 @@
                 //window.BMapAndroid.SetCurrCorrType("bd09ll");
                 var data = window.BMapAndroid.GetCurrPositionInfo();
                 if (typeof (data) == "undefined") {
-                    //alert('数据无效');
+                    //alert('定位数据无效');
                     return;
                 }
+                //alert(data);
+
                 var items = data.split(/[:,]/);
                 //alert(items[0] + ":" + items[1] + "," + items[2] + ":" + items[3] + "," + items[4] + ":" + items[5] + "," + items[8] + ":" + items[9]);
 
