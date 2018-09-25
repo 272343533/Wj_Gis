@@ -49,7 +49,7 @@
             this.axPageLayoutControl1.Location = new System.Drawing.Point(3, 63);
             this.axPageLayoutControl1.Name = "axPageLayoutControl1";
             this.axPageLayoutControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axPageLayoutControl1.OcxState")));
-            this.axPageLayoutControl1.Size = new System.Drawing.Size(701, 479);
+            this.axPageLayoutControl1.Size = new System.Drawing.Size(991, 634);
             this.axPageLayoutControl1.TabIndex = 11;
             // 
             // button3
@@ -90,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(710, 545);
+            this.ClientSize = new System.Drawing.Size(1000, 700);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.axPageLayoutControl1);
             this.Controls.Add(this.button3);

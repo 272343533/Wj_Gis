@@ -380,12 +380,13 @@ namespace TDObject.UI
         private void button4_Click(object sender, EventArgs e)
         {
              SaveFileDialog sfd = new SaveFileDialog();
-             sfd.Filter = "JPEG Files|*.jpg";
+             sfd.Filter = "PNG 文件|*.png|JPEG 文件|*.jpg|BMP 文件|*.bmp|GIF 文件|*.gif";
                 if (DialogResult.OK == sfd.ShowDialog())
                 {
                     string filename = sfd.FileName;
-                    bool ret = CreateJPEGFromActiveView(axPageLayoutControl1.ActiveView, filename);
-                    if (ret)
+                //bool ret = CreateJPEGFromActiveView(axPageLayoutControl1.ActiveView, filename);
+                bool ret = CreateImgFromActiveView(axPageLayoutControl1.ActiveView, filename);
+                if (ret)
                         MessageBox.Show("保存为图片成功!");
                     else
                         MessageBox.Show("保存为图片失败!");
@@ -402,7 +403,7 @@ namespace TDObject.UI
         ///<returns>A System.Boolean indicating the success</returns>
         /// 
         ///<remarks></remarks>
-        public System.Boolean CreateJPEGFromActiveView(ESRI.ArcGIS.Carto.IActiveView activeView, System.String pathFileName)
+        public static System.Boolean CreateJPEGFromActiveView(ESRI.ArcGIS.Carto.IActiveView activeView, System.String pathFileName)
         {
             //parameter check
             if (activeView == null || !(pathFileName.EndsWith(".jpg")))
@@ -443,7 +444,57 @@ namespace TDObject.UI
 
             return true;
         }
+        public static System.Boolean CreateImgFromActiveView(ESRI.ArcGIS.Carto.IActiveView activeView, System.String pathFileName)
+        {
+            //parameter check
+            if (activeView == null || !(pathFileName.EndsWith(".jpg") || pathFileName.EndsWith(".gif") || pathFileName.EndsWith(".png") || pathFileName.EndsWith(".bmp")))
+            {
+                return false;
+            }
+            ESRI.ArcGIS.Output.IExport export;
+            if (pathFileName.EndsWith(".jpg"))
+                export = new ESRI.ArcGIS.Output.ExportJPEGClass();
+            else if (pathFileName.EndsWith(".png"))
+                export = new ESRI.ArcGIS.Output.ExportPNGClass();
+            else if (pathFileName.EndsWith(".gif"))
+                export = new ESRI.ArcGIS.Output.ExportGIFClass();
+            else
+            {
+                export = new ESRI.ArcGIS.Output.ExportBMPClass();
+            }
+            export.ExportFileName = pathFileName;
 
+            // Microsoft Windows default DPI resolution
+            export.Resolution = 192;//96 ;
+            tagRECT exportRECT = activeView.ExportFrame;
+            ESRI.ArcGIS.Geometry.IEnvelope envelope = new ESRI.ArcGIS.Geometry.EnvelopeClass();
+            //envelope = activeView.Extent.Envelope;
+            envelope.PutCoords(exportRECT.left, exportRECT.top, exportRECT.right, exportRECT.bottom);
+
+
+            tagRECT exportRect = new tagRECT();
+            exportRect.left = exportRect.top = 0;
+            exportRect.right = exportRECT.right - exportRect.left;//.Width;
+            exportRect.bottom = (int)(exportRect.right * activeView.Extent.Envelope.Height / activeView.Extent.Envelope.Width);
+            //输出范围
+            envelope.PutCoords(exportRect.left, exportRect.top, exportRect.right, exportRect.bottom);
+            export.PixelBounds = envelope;
+
+
+
+
+
+            export.PixelBounds = envelope;
+            System.Int32 hDC = export.StartExporting();
+
+            activeView.Output(hDC, (System.Int32)export.Resolution, ref exportRECT, null, null);
+
+            // Finish writing the export file and cleanup any intermediate files
+            export.FinishExporting();
+            export.Cleanup();
+
+            return true;
+        }
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Copy();
