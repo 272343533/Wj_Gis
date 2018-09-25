@@ -20,8 +20,9 @@ namespace QyTech.ExcelOper
         protected string exServerPath = "";// System.Web.HttpContext.Current.Server.MapPath("~/DownLoads/Template/");
         protected string exTempPath = "";// System.Web.HttpContext.Current.Server.MapPath("~/DownLoads/Temp/");
         protected string exFileName;
-        protected List<string> propertiesFilds = new List<string>();//要导出的字段列表  null 为全部导出
-        protected List<string> propertiesFildsName = new List<string>();
+        protected List<string> propertiesFilds = new List<string>();//要导出的字段列表  
+        protected List<string> propertiesFildsDesp = new List<string>();//字段表头中文
+        protected Dictionary<string, string> dicFields = new Dictionary<string, string>();//字段及中文对应关系
         protected string eliminateFilds = "EntityState,EntityKey"; //排除字段
 
         protected int RowStartValue_ = 2;
@@ -70,10 +71,10 @@ namespace QyTech.ExcelOper
             get { return propertiesFilds; }
             set { propertiesFilds = value; }
         }
-        public List<string> PropertiesFildsName
+        public Dictionary<string,string> DicFields
         {
-            get { return propertiesFildsName; }
-            set { propertiesFildsName = value; }
+            get { return dicFields; }
+            set { dicFields = value; }
         }
          /// <summary>
         /// 导出时排除的字段 - 优先级比PropertiesFilds 高

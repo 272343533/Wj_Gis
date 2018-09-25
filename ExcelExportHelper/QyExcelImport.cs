@@ -179,6 +179,10 @@ namespace QyTech.ExcelOper
             { 
                 foreach (string key in ColRel.Keys)
                 {
+                    //没有对应Excel列
+                    if (ColRel[key].Trim() == "")
+                        continue;
+                    //非空列
                     if (ExcelNotNullCols.Contains("," + fields) && dr[ColRel[key]].ToString() == "")
                         return dr;
                     fields += ","+key;

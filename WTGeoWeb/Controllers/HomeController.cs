@@ -12,6 +12,8 @@ using QyTech.Json;
 using System.Security.Cryptography;
 
 using WTGeoWeb.BLL;
+using QyTech.Auth.Dao;
+
 namespace WTGeoWeb.Controllers
 {
     public class HomeController : Controller
@@ -63,7 +65,7 @@ namespace WTGeoWeb.Controllers
 
         public ActionResult Index_m(string userid)
         {
-            bsUser obj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", Guid.Parse(userid));
+            bsUser obj = WTGeoWeb.BLL.CommSetting.EM_Base.GetByPk<bsUser>("bsU_Id", Guid.Parse(userid));
             if (obj != null)
             {
                 log.Info("login1:" + obj.bsR_Name);
@@ -88,7 +90,7 @@ namespace WTGeoWeb.Controllers
                 log.Info("login:"+username + "--" + password+".");
                 if ((username != null && password != null))
                 {
-                    bsUser obj = WTGeoWeb.BLL.CommSetting.EM.GetBySql<bsUser>("LoginName='" + username + "' and LoginPwd='" + MD5(password) + "'");
+                    bsUser obj = WTGeoWeb.BLL.CommSetting.EM_Base.GetBySql<bsUser>("LoginName='" + username + "' and LoginPwd='" + MD5(password) + "'");
 
                     log.Info("home-login:" + obj.bsR_Name);
                     if (obj != null)
@@ -128,7 +130,7 @@ namespace WTGeoWeb.Controllers
                 log.Error("login:" + username + "--" + password + ".");
                 if ((username != null && password != null))
                 {
-                    bsUser obj = WTGeoWeb.BLL.CommSetting.EM.GetBySql<bsUser>("LoginName='" + username + "' and Pwd='" + MD5(password) + "'");
+                    bsUser obj = WTGeoWeb.BLL.CommSetting.EM_Base.GetBySql<bsUser>("LoginName='" + username + "' and Pwd='" + MD5(password) + "'");
 
                     json = JsonHelper.SerializeObject<bsUser>(obj,null);
                     //json=JsonHelper.SerializeObject<bsUser>(obj,new List<string>(){"bsU_Id","Name","bsR_Name"});

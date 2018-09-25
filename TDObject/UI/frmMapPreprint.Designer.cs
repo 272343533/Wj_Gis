@@ -46,15 +46,15 @@
             this.axPageLayoutControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.axPageLayoutControl1.Location = new System.Drawing.Point(3, 43);
+            this.axPageLayoutControl1.Location = new System.Drawing.Point(3, 63);
             this.axPageLayoutControl1.Name = "axPageLayoutControl1";
             this.axPageLayoutControl1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axPageLayoutControl1.OcxState")));
-            this.axPageLayoutControl1.Size = new System.Drawing.Size(544, 419);
+            this.axPageLayoutControl1.Size = new System.Drawing.Size(701, 479);
             this.axPageLayoutControl1.TabIndex = 11;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(57, 10);
+            this.button3.Location = new System.Drawing.Point(59, 35);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(69, 25);
             this.button3.TabIndex = 10;
@@ -65,7 +65,7 @@
             // button4
             // 
             this.button4.Image = global::TDObject.Properties.Resources.print_16px_1175846_easyicon_net;
-            this.button4.Location = new System.Drawing.Point(278, 14);
+            this.button4.Location = new System.Drawing.Point(432, 35);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 17;
@@ -77,7 +77,7 @@
             // button1
             // 
             this.button1.Image = global::TDObject.Properties.Resources.print_16px_1175646_easyicon_net;
-            this.button1.Location = new System.Drawing.Point(145, 14);
+            this.button1.Location = new System.Drawing.Point(215, 34);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 5;
@@ -90,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(553, 474);
+            this.ClientSize = new System.Drawing.Size(710, 545);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.axPageLayoutControl1);
             this.Controls.Add(this.button3);
@@ -99,6 +99,10 @@
             this.Text = "打印预览";
             this.Load += new System.EventHandler(this.frmMapPreprint_Load);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmMapPreprint_MouseMove);
+            this.Controls.SetChildIndex(this.button1, 0);
+            this.Controls.SetChildIndex(this.button3, 0);
+            this.Controls.SetChildIndex(this.axPageLayoutControl1, 0);
+            this.Controls.SetChildIndex(this.button4, 0);
             ((System.ComponentModel.ISupportInitialize)(this.axPageLayoutControl1)).EndInit();
             this.ResumeLayout(false);
 

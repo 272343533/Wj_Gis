@@ -123,7 +123,7 @@ namespace TDObject.UI
         private void button4_Click(object sender, EventArgs e)
         {
             button4.Text = "正在导出...";
-            
+            button4.Enabled = false;
             try
             {
                 SaveFileDialog sfd = new SaveFileDialog();
@@ -139,7 +139,7 @@ namespace TDObject.UI
                     }
                     else if (tabControl1.SelectedIndex == 1)
                     {
-                        exExcelHelper.ExportListToExcl<t经发局表格>(objs2, filename, "XH,NSRSBH,NSRMC,HGDM,ZCLX,HYDL,HYDM,LJXSWHJ,SNTQ,ZJL,SS,SNTQ_1,JCKE,SNTQ_2", "yyyy-MM-dd");
+                        exExcelHelper.ExportListToExcl<t经发局表格>(objs2, filename, "XH,ND,NSRSBH,NSRMC,HGDM,ZCLX,HYDL,HYDM,LJXSWHJ,SNTQ,ZJL,SS,SNTQ_1,JCKE,SNTQ_2", "yyyy-MM-dd");
                     }
                     
                     MessageBox.Show("数据导出完成！");
@@ -151,9 +151,11 @@ namespace TDObject.UI
                 MessageBox.Show(ex.Message);
             }
             button4.Text = "导出Excel";
+            button4.Enabled = true;
+
         }
 
-      
+
         private void button5_Click(object sender, EventArgs e)
         {
             this.Close();

@@ -45,12 +45,21 @@ namespace QyTech.SkinForm.Component
 
         public qyTvOrg():base()
         {
-           
-        }
-      
 
-      
-        
+        }
+        private new void AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            TreeNode tn = e.Node;
+            foreach (TreeNode tn2 in this.Nodes[0].Nodes)
+            {
+                if (tn2.Text == tn.Text)
+                    tn2.ForeColor = Color.Red;
+                else
+                    tn2.ForeColor = Color.Black;
+
+            }
+
+        }
         private void tv_DragEnter(object sender, DragEventArgs e)
         {
             //设置拖放类别(复制，移动等)

@@ -46,7 +46,7 @@ using System.Drawing.Printing;
 using QyTech.SkinForm;
 using QyTech.SkinForm.Controls;
 using ESRI.ArcGIS.DataSourcesFile;
-
+using QyTech.Auth.Dao;
 
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
@@ -56,9 +56,9 @@ namespace TDObject
 
     public sealed partial class MainForm : Form
     {
-       
+
         log4net.ILog log = log4net.LogManager.GetLogger("MainForm");
-        public static bsUser LoginUser =null;
+        public static bsUser LoginUser = null;
         public static string LoginUserRights = "";
         public static bool LoadFinished = false;
 
@@ -72,17 +72,17 @@ namespace TDObject
         private static string localMdbName_csgh = Application.StartupPath + @"\WjMapLocal_Csgh.mdb";
         private static string localMdbName_fwjz = Application.StartupPath + @"\WjMapLocal_Fwjz.mdb";
         private static string localMdbName_wt = Application.StartupPath + @"\Wt0170825.mdb";
-        
+
         arcGisMap gismap = new arcGisMap();
 
-     
 
-        List<Dictionary<string, List<string>>> OverLayStyles ;//样式1,2,3,4
-      
+
+        List<Dictionary<string, List<string>>> OverLayStyles;//样式1,2,3,4
+
 
         ClassCotrolLayerShow cls = new ClassCotrolLayerShow();
 
-        private int loadType =5;
+        private int loadType = 5;
 
         public static string QyTechAuth_URI = "http://122.114.190.250:8080/wjkfq_gis/";
         public static string App_URI = "http://122.114.190.250:8080/wjkfq_gis/";
@@ -100,12 +100,12 @@ namespace TDObject
         private IncreaseHandle myIncrease = null;
         private static object stepForProbar = 2;
 
-         /// <summary>
+        /// <summary>
         /// 统计规则
         /// </summary>
         Dictionary<string, List<LayTotalConf>> layconf = new Dictionary<string, List<LayTotalConf>>();
 
-      
+
 
 
         private List<vwLtdJcSj> _ltdobjs;
@@ -117,23 +117,24 @@ namespace TDObject
         public static EntityManager QyTech_EM = new EntityManager(new QyTech.Auth.Dao.QyTech_AuthEntities());
         private static string strSqlConn = "server =122.114.190.250,2433; uid = sa; pwd = Qy_ltd414; database = wj_GisDb";
         public static System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(strSqlConn);
+        public static System.Data.SqlClient.SqlConnection sqlConn_Base = new System.Data.SqlClient.SqlConnection(strSqlConn.Replace("wj_GisDb", "QyTech_Auth"));
 
 
         FlashObjectsClass flashObjects = new FlashObjectsClass();
-             
-         private int SelectDgv = 11;
+
+        private int SelectDgv = 11;
 
 
-         public static List<XElement> pFeatureLayerlist = new List<XElement>();
-         public delegate void AddHandler();
+        public static List<XElement> pFeatureLayerlist = new List<XElement>();
+        public delegate void AddHandler();
 
 
-         public static bool LayerToFileStatus = false;
+        public static bool LayerToFileStatus = false;
 
-         public static string LtdNameQuery;
+        public static string LtdNameQuery;
 
 
-       
+
         Dictionary<string, ILayer> LoadedLayers = new Dictionary<string, ILayer>();//所有层枚举对象
         List<IFeature> FindGeos = new List<IFeature>();//查找到的要素
         List<IGeometry> Geos = new List<IGeometry>();//找到返回要素的集合几何对象
@@ -168,7 +169,7 @@ namespace TDObject
         /// <summary>
         /// 初始化
         /// </summary>
-        private void Init() 
+        private void Init()
         {
             try
             {
@@ -211,56 +212,58 @@ namespace TDObject
 
         public IAGSServerObjectName GetMapServer(string pHostOrUrl, string pServiceName, bool pIsLAN)
         {
-           
-                //设置连接属性
-                IPropertySet pPropertySet = new PropertySetClass();
 
-                if (pIsLAN)
-                    pPropertySet.SetProperty("machine", pHostOrUrl);//machine可以是机器名或者IP，连接方式为LAN。
-                else
-                    pPropertySet.SetProperty("url", pHostOrUrl);//如果url连接的需要设置用户名和密码，那么要设置用户名和密码属性。
+            //设置连接属性
+            IPropertySet pPropertySet = new PropertySetClass();
 
-                //如果使用url连接，那么一定要在浏览器可以访问才行。
+            if (pIsLAN)
+                pPropertySet.SetProperty("machine", pHostOrUrl);//machine可以是机器名或者IP，连接方式为LAN。
+            else
+                pPropertySet.SetProperty("url", pHostOrUrl);//如果url连接的需要设置用户名和密码，那么要设置用户名和密码属性。
+
+            //如果使用url连接，那么一定要在浏览器可以访问才行。
 
 
-                //打开连接
+            //打开连接
 
-                IAGSServerConnectionFactory pFactory = new AGSServerConnectionFactory();
+            IAGSServerConnectionFactory pFactory = new AGSServerConnectionFactory();
 
-                IAGSServerConnection pConnection = pFactory.Open(pPropertySet, 0);
+            IAGSServerConnection pConnection = pFactory.Open(pPropertySet, 0);
 
-                //Get the image server.
-                IAGSEnumServerObjectName pServerObjectNames = pConnection.ServerObjectNames;
-                pServerObjectNames.Reset();
-                IAGSServerObjectName ServerObjectName = pServerObjectNames.Next();
-                while (ServerObjectName != null)
+            //Get the image server.
+            IAGSEnumServerObjectName pServerObjectNames = pConnection.ServerObjectNames;
+            pServerObjectNames.Reset();
+            IAGSServerObjectName ServerObjectName = pServerObjectNames.Next();
+            while (ServerObjectName != null)
+            {
+                if ((ServerObjectName.Name.ToLower() == pServiceName.ToLower()) &&
+                    (ServerObjectName.Type == "MapServer"))
                 {
-                    if ((ServerObjectName.Name.ToLower() == pServiceName.ToLower()) &&
-                        (ServerObjectName.Type == "MapServer"))
-                    {
 
-                        break;
-                    }
-                    ServerObjectName = pServerObjectNames.Next();
+                    break;
                 }
+                ServerObjectName = pServerObjectNames.Next();
+            }
 
-                //返回对象
-                return ServerObjectName;
-         
+            //返回对象
+            return ServerObjectName;
+
         }
         private void LoadMap(int loadtype)
         {
             try
             {
                 List<string> layers = new List<string>();
-               
+
                 layers.Clear();
                 layers.Add("红牌警告点位置");
                 layers.Add("黄牌警告点位置");
                 layers.Add("企业照片点位置");
                 layers.Add("安全检查点位置");
+                LoadLocalMap(localMdbName_fwjz, layers);
 
-             
+
+                layers.Clear();
                 layers.Add("行政区");
                 layers.Add("管理区");
                 //layers.Add("房屋建筑");
@@ -276,13 +279,13 @@ namespace TDObject
                 LoadLocalMap(localMdbName_csgh, layers);
 
                 layers.Clear();
-                layers.Add("房屋建筑"); 
+                layers.Add("房屋建筑");
                 LoadLocalMap(localMdbName_fwjz, layers);
-                
+
 
                 GlobalVariables.addLayer = true;
 
-                for(int i = 0; i < axMapControl1.LayerCount; i++)
+                for (int i = 0; i < axMapControl1.LayerCount; i++)
                 {
                     LoadedLayers.Add(axMapControl1.get_Layer(i).Name, axMapControl1.get_Layer(i));
                 }
@@ -294,7 +297,7 @@ namespace TDObject
             }
         }
 
-        private void LoadLocalMap(string dbname,List<string> layers)
+        private void LoadLocalMap(string dbname, List<string> layers)
         {
             try
             {
@@ -308,17 +311,17 @@ namespace TDObject
                 {
                     try
                     {
-                            IFeatureClass m_FeatureClass = pFeatWorkspace.OpenFeatureClass(layername);
+                        IFeatureClass m_FeatureClass = pFeatWorkspace.OpenFeatureClass(layername);
 
-                            //判断是否已添加（或判断过下面的if且不成立）过当前图层 不知道为什么有时候会出现重复加载
-                            IFeatureLayer m_FeatureLayer = new FeatureLayerClass();
-                            m_FeatureLayer.FeatureClass = m_FeatureClass;
-                            m_FeatureLayer.Name = m_FeatureClass.AliasName;
-                            m_FeatureLayer.Selectable = false;
+                        //判断是否已添加（或判断过下面的if且不成立）过当前图层 不知道为什么有时候会出现重复加载
+                        IFeatureLayer m_FeatureLayer = new FeatureLayerClass();
+                        m_FeatureLayer.FeatureClass = m_FeatureClass;
+                        m_FeatureLayer.Name = m_FeatureClass.AliasName;
+                        m_FeatureLayer.Selectable = false;
 
-                            GlobalVariables.axMapControl.AddLayer(m_FeatureLayer, GlobalVariables.axMapControl.LayerCount);   //加载到map窗口
-                        
-                            GlobalVariables.SymbolLayer(m_FeatureLayer);
+                        GlobalVariables.axMapControl.AddLayer(m_FeatureLayer, GlobalVariables.axMapControl.LayerCount);   //加载到map窗口
+
+                        GlobalVariables.SymbolLayer(m_FeatureLayer);
                     }
                     catch (Exception ex)
                     {
@@ -352,7 +355,7 @@ namespace TDObject
             catch (Exception ex)
             {
                 log.Error(this.Name + ":" + ex.Message);
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("LoadMap_l：" + ex.Message);
             }
         }
 
@@ -369,7 +372,7 @@ namespace TDObject
             }
         }
 
-             
+
         private void LayerCallBack(IAsyncResult arResult)
         {
             try
@@ -393,7 +396,7 @@ namespace TDObject
             }
 
         }
-       //对错误进行处理
+        //对错误进行处理
         void Window_Error(object sender, HtmlElementErrorEventArgs e)
         {
             // 自己的处理代码             
@@ -406,6 +409,8 @@ namespace TDObject
         {
             try
             {
+                this.WindowState = FormWindowState.Minimized;
+
                 this.dgvCSGH.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
                 this.dgvFW.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
                 this.dgvQycc.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;
@@ -429,10 +434,10 @@ namespace TDObject
 
 
 
-                dicLayerDisp.Add("红牌警告点位置", false);
-                dicLayerDisp.Add("黄牌警告点位置", false);
-                dicLayerDisp.Add("企业照片点位置", false);
-                dicLayerDisp.Add("安全检查点位置", false);
+                //dicLayerDisp.Add("红牌警告点位置", false);
+                //dicLayerDisp.Add("黄牌警告点位置", false);
+                //dicLayerDisp.Add("企业照片点位置", false);
+                //dicLayerDisp.Add("安全检查点位置", false);
 
                 arcGisMap gismap = new arcGisMap();
                 log.Info("0:");
@@ -457,13 +462,13 @@ namespace TDObject
 
 
                 //确定各图层位置
-                 ChangeLayerPos("企业照片点位置,红牌警告点位置,黄牌警告点位置,安全检查点位置,行政区,管理区,房屋建筑,企业范围,城市规划注记注记2,城市规划,道路注记,河流注记,道路,河流");//D_Spatial.SDE.
-                //确定可见性
-                 LayerControl.SetVisibleLayer(GlobalVariables.axMapControl, "", "管理区,行政区,房屋建筑,企业范围,道路,河流,道路注记,河流注记");
+                ChangeLayerPos("企业照片点位置,红牌警告点位置,黄牌警告点位置,安全检查点位置,行政区,管理区,房屋建筑,企业范围,城市规划注记注记2,城市规划,道路注记,河流注记,道路,河流");//D_Spatial.SDE.
+                                                                                                                   //确定可见性
+                LayerControl.SetVisibleLayer(GlobalVariables.axMapControl, "", "管理区,行政区,房屋建筑,企业范围,道路,河流,道路注记,河流注记");
 
                 if (m_LoginStatus == 2)
                 {
-
+                    this.ShowInTaskbar = true;
 
                     ////////string url = MainForm.App_URI + "lyRemoteServ/GetAllOrgData?userid=" + MainForm.LoginUser.bsU_Id;
                     ////////string ret = AsyncHttp.CommFun.GetRemoteJson(url);
@@ -513,11 +518,11 @@ namespace TDObject
             catch (Exception ex)
             {
                 log.Error(this.Name + ":" + ex.Message);
-               // MessageBox.Show(ex.Message);
+                // MessageBox.Show(ex.Message);
             }
-       }
+        }
 
-       private void AddFXFBXSMenuItem()
+        private void AddFXFBXSMenuItem()
         {
             blluifilter = new TDObject.BLL.UIBLL.bllTypeFilter(this.axMapControl1);
 
@@ -532,7 +537,7 @@ namespace TDObject
                         ToolStripMenuItem subtsmi = new ToolStripMenuItem(item);
                         subtsmi.Tag = blluifilter.menus[key];
                         subtsmi.Click += new System.EventHandler(FilterHighLightDisplay);
-                        subtsmi.MouseDown+= new MouseEventHandler(FilterHighLightUnDisplay);
+                        subtsmi.MouseDown += new MouseEventHandler(FilterHighLightUnDisplay);
                         tsmi.DropDownItems.Add(subtsmi);
                     }
                 }
@@ -593,8 +598,8 @@ namespace TDObject
                 if (Geos.Count > 0)
                 {
                     Console.WriteLine(Geos.Count.ToString());
-                    if (this.flashObjects==null)
-                        this.flashObjects= new FlashObjectsClass();
+                    if (this.flashObjects == null)
+                        this.flashObjects = new FlashObjectsClass();
                     flashObjects.MapControl = axMapControl1.Object as IMapControl2;
                     flashObjects.Init();
 
@@ -614,7 +619,7 @@ namespace TDObject
                 log.Error(ex.Message);
             }
         }
-            
+
 
 
         //private void RefreshMapDisplay()
@@ -736,7 +741,7 @@ namespace TDObject
             LayerControl.ChangePos(GlobalVariables.axMapControl, name2pos);
         }
 
-       
+
         private void LoginValid()
         {
             if (LoginUser == null)
@@ -746,14 +751,14 @@ namespace TDObject
             }
         }
 
-     
+
         /// <summary>
         /// 地图加载方法--待修改
         /// </summary>
         private void RemoteSdeMap_Load()
         {
             log.Info("500:");
-          
+
             if (!GlobalVariables.addLayer)
             {
                 Conection c = new Conection();
@@ -782,7 +787,7 @@ namespace TDObject
             }
         }
 
-        private void Map_RemoteLoadLayer(string LayName,string datasetName)
+        private void Map_RemoteLoadLayer(string LayName, string datasetName)
         {
             log.Info("500:");
 
@@ -813,7 +818,7 @@ namespace TDObject
         }
 
 
-        
+
 
         private void axMapControl1_OnExtentUpdated(object sender, ESRI.ArcGIS.Controls.IMapControlEvents2_OnExtentUpdatedEvent e)
         {
@@ -950,7 +955,7 @@ namespace TDObject
 
                             this.axMapControl2.AddLayer(m_FeatureLayer, axMapControl2.LayerCount);   //加载到map窗口
 
-                            GlobalVariables.SymbolLayer(axMapControl2,m_FeatureLayer);
+                            GlobalVariables.SymbolLayer(axMapControl2, m_FeatureLayer);
                         }
                         catch (Exception ex)
                         {
@@ -1065,7 +1070,7 @@ namespace TDObject
             {
                 ITopologicalOperator pTopologicalOperator = pPoint as ITopologicalOperator;
                 IGeometry pGeometry = pTopologicalOperator.Buffer(pRadius);//建立缓冲区
-                
+
                 pSpatialFilter.Geometry = pGeometry;
                 pSpatialFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelEnvelopeIntersects;//求交
                 pFeatureCursor = pFeatureLayer.FeatureClass.Search(pSpatialFilter, false);//空间查询
@@ -1164,7 +1169,7 @@ namespace TDObject
                             if (GlobalVariables.Select.SValue == GlobalVariables.SelectFeatureValue.QiYeZhaoPianXinxi)
                             {
                                 FrmOneLtdAndRentLtdInfo obj = new FrmOneLtdAndRentLtdInfo(id.ToString());
-                                QyTech.SkinForm.qyFormUtil.ShowForm(obj);
+                                obj.ShowDialog();
                             }
                             else if (GlobalVariables.Select.SValue == GlobalVariables.SelectFeatureValue.AnQuanJianCha)
                             {
@@ -1186,7 +1191,7 @@ namespace TDObject
                             //{
                             //    //fealayer = GlobalVariables.GetOverviewLayer(this.axMapControl1, "红牌警告点位置 ") as IFeatureLayer;
                             //}
-                           
+
                         }
                     }
                     else
@@ -1194,7 +1199,7 @@ namespace TDObject
                         MessageBox.Show("没有选中对象，要使图层可见并选中对象，请重新选择！");
                         return;
                     }
-                   
+
                     return;
                     #region temp no use
                     //if (GlobalVariables.Select.SType == GlobalVariables.SelectType.SingleSelect)
@@ -1262,24 +1267,24 @@ namespace TDObject
             }
         }
 
-      
-
-      
-
-      
-       
 
 
-       
 
-    
-    
-      
 
-    
 
-  
-     
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void 图层控制ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1294,7 +1299,7 @@ namespace TDObject
             //}
         }
 
-       
+
         private bool LabelLayer(ILayer pLayer, Font pFontDisp, Color pColor, string bstrExpression, bool m_bViewLabel)
         {
             //return true;
@@ -1363,7 +1368,7 @@ namespace TDObject
         }
 
 
-       
+
 
         private void btnRefreshMap_Click(object sender, EventArgs e)
         {
@@ -1412,7 +1417,7 @@ namespace TDObject
             //toolStripButton10.Enabled = this.chkKjsq.Checked;
             //toolStripButton11.Enabled = this.chkGdsj.Checked;
             //toolStripButton12.Enabled = this.chkTdlyxz.Checked;
-          
+
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -1459,10 +1464,10 @@ namespace TDObject
             //{
             //    log.Error(ex.Message);
             //}
-         
+
         }
 
-        private void LoadImageLayer(string layName,string serviceName)
+        private void LoadImageLayer(string layName, string serviceName)
         {
             try
             {
@@ -1488,10 +1493,10 @@ namespace TDObject
                     connection = connectionFactory.Open(propertySet, 0);
                     // Get "MapService" MapServer object
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    this.button7.BackgroundImage = TDObject.Properties.Resources.weixing;
-                    MessageBox.Show("在与服务器通信中发生错误！("+ex.Message+")");
+                    //this.button7.BackgroundImage = TDObject.Properties.Resources.weixing;
+                    MessageBox.Show("在与服务器通信中发生错误！(" + ex.Message + ")");
                     return;
                 }
                 IAGSEnumServerObjectName serverObjectNames;
@@ -1508,7 +1513,7 @@ namespace TDObject
                 if (serverObjectName == null)
                 {
 
-                    this.button7.BackgroundImage = TDObject.Properties.Resources.weixing;
+                    //this.button7.BackgroundImage = TDObject.Properties.Resources.weixing;
                     MessageBox.Show("在与服务器通信中发生错误！");
                     return;
                 }
@@ -1522,14 +1527,14 @@ namespace TDObject
                 lay.Name = layName;
                 GlobalVariables.axMapControl.AddLayer(lay, GlobalVariables.axMapControl.LayerCount);
                 LayerControl.SetVisibleStatus(GlobalVariables.axMapControl, serviceName, true);
-                GlobalVariables.axMapControl.Refresh();﻿
-                }
+                GlobalVariables.axMapControl.Refresh();
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString());
             }
         }
-  
+
         /// <summary>
         /// 2017-11-01 取消取消历年批次的叠加
         /// </summary>
@@ -1544,7 +1549,7 @@ namespace TDObject
             //overlyNames.Add("影像", chkImage.Checked);
 
 
-      
+
             //int OverLayCount = 0;
             ////string LastDispLayName = GlobalVariables.LayerName2FullName["历年批次"];
             //string LastDispLayName = GlobalVariables.LayerName2FullName["城市规划"];
@@ -1626,14 +1631,14 @@ namespace TDObject
             //GlobalVariables.axMapControl.Refresh();
             ////this.axTOCControl1.SetBuddyControl(GlobalVariables.axMapControl);
 
-        
+
         }
 
         private void axMapControl1_OnMouseMove(object sender, IMapControlEvents2_OnMouseMoveEvent e)
         {
             try
             {
-                statusBarXY.Text = string.Format("{0}, {1}  {2}", e.mapX.ToString("#######.##"), e.mapY.ToString("#######.##"), axMapControl1.MapUnits.ToString().Substring(4));
+                //statusBarXY.Text = string.Format("{0}, {1}  {2}", e.mapX.ToString("#######.##"), e.mapY.ToString("#######.##"), axMapControl1.MapUnits.ToString().Substring(4));
                 if (GlobalVariables.Select.SType != GlobalVariables.SelectType.enull && GlobalVariables.Select.SOperFun == GlobalVariables.SelectFunGroup.QueryLayerInfo)
                 {
                     identifyDialog.OnMouseMove(e.mapX, e.mapY);
@@ -1676,6 +1681,7 @@ namespace TDObject
             {
                 if (MainForm.m_LoginStatus == 3)
                 { this.Close(); }
+                this.WindowState = FormWindowState.Maximized ;
 
                 foreach (string layanme in cboLayerFact.Items)
                 {
@@ -1691,22 +1697,15 @@ namespace TDObject
             catch (Exception ex) { log.Error(ex.Message); }
         }
 
-    
+
 
         private void 用户管理ToolStripMenuItem2_Click(object sender, EventArgs e)
         {
             try
             {
-                if (LoginUser.bsR_Name == "管理员")
-                {
-                    
-                    frmUserMana obj = new frmUserMana();
-                    qyFormUtil.ShowForm(obj);
-                }
-                else
-                {
-                    MessageBox.Show("您不具有修改权限");
-                }
+                FrmUserManaNew obj = new FrmUserManaNew();
+                obj.Show();
+
             }
             catch (Exception ex)
             {
@@ -1714,14 +1713,14 @@ namespace TDObject
             }
         }
 
-      
+
 
         private void 密码修改ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
                 frmChangePwd obj = new frmChangePwd();
-                qyFormUtil.ShowForm(obj);
+                obj.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -1745,21 +1744,25 @@ namespace TDObject
             {
                 if (LoginUser.bsR_Name == "管理员")
                 {
+                    excel数据导入ToolStripMenuItem.Visible = true;
                     用户管理ToolStripMenuItem2.Visible = true;
                     图形处理ToolStripMenuItem.Visible = true;
+                    分项维护ToolStripMenuItem1.Visible = true;
 
-                    if ("统计站,委领导,System".Contains(LoginUser.bsO_Name))
+
+                    if ("统计站,委领导,System,吴江经济技术开发区".Contains(LoginUser.bsO_Name))
                     {
                         基础数据导入ToolStripMenuItem.Visible = true;
-                        testToolStripMenuItem.Visible = true;
+                        testToolStripMenuItem.Visible = true;//企业统计
                     }
-                        
+
                 }
                 else
                 {
                     excel数据导入ToolStripMenuItem.Visible = false;
                     用户管理ToolStripMenuItem2.Visible = false;
                     图形处理ToolStripMenuItem.Visible = false;
+                    分项维护ToolStripMenuItem1.Visible = false;
 
                     btnSaveFW.Visible = false;
                     btnSaveQyfw.Visible = false;
@@ -1783,7 +1786,7 @@ namespace TDObject
             }
         }
 
-    
+
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -1793,19 +1796,19 @@ namespace TDObject
             }
         }
 
-    
+
         private void StartProgress()
         {
             stepForProbar = 2;
             Thread thdSub = new Thread(new ThreadStart(DispProgressBar));//ThreadFun));
             thdSub.Start();
-           // this.Enabled = false;
+            // this.Enabled = false;
         }
         public void StopProgress()
         {
             //lock (stepForProbar)
             //{
-           //     stepForProbar = -1;
+            //     stepForProbar = -1;
             //}
             if (loadingProgress != null)
                 loadingProgress.m_Terminated = true;
@@ -1815,7 +1818,7 @@ namespace TDObject
         {
             loadingProgress = new frmProgress();
             myIncrease = new IncreaseHandle(loadingProgress.Increase);
-            if ((int)stepForProbar!=-1)
+            if ((int)stepForProbar != -1)
                 loadingProgress.ShowDialog();
             loadingProgress = null;
             myIncrease = null;
@@ -1849,15 +1852,15 @@ namespace TDObject
 
             this.axToolbarControl1.CurrentTool = null;
             this.axMapControl1.MousePointer = ESRI.ArcGIS.Controls.esriControlsMousePointer.esriPointerArrow;
-       
+
         }
 
         private void axToolbarControl1_OnItemClick(object sender, IToolbarControlEvents_OnItemClickEvent e)
         {
             //如果不是放到，缩小，漫游，则清除之前的操作
-           // if (e.index > 5)
+            // if (e.index > 5)
             //{
-                GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.eNull;//清除之前的操作
+            GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.eNull;//清除之前的操作
             //}
         }
 
@@ -1879,7 +1882,7 @@ namespace TDObject
             panel1.Visible = dispflag;
         }
 
-     
+
         /// 属性查询初始化窗体创建带查询图层 -- 入口方法
         /// <summary>
         /// </summary>
@@ -1897,21 +1900,21 @@ namespace TDObject
             //新建属性查询对象
             identifyDialog = IdentifyDialog.CreateInstance(axMapControl1, list);
             identifyDialog.Owner = this;
-             identifyDialog.Show();
+            identifyDialog.Show();
             //  identifyDialog.Hide();
             identifyDialog.SetLayerFilterIndex(layerName);
-           
+
 
         }
 
         private IdentifyDialog identifyDialog { get; set; }
 
-     
-        
 
-    
 
-        private void SaveLayerData(string TType,DataGridView dgv)
+
+
+
+        private void SaveLayerData(string TType, DataGridView dgv)
         {
             Dictionary<string, string> value = new Dictionary<string, string>();
             int row = dgv.Rows.Count;//得到总行数    
@@ -1921,7 +1924,7 @@ namespace TDObject
             {
                 value.Add(dgv.Rows[i].Cells[0].Value.ToString(), dgv.Rows[i].Cells[1].Value.ToString());
             }
-            if (DatabaseAccess.updateLayerInfoToDB(TType,value) == 0)
+            if (DatabaseAccess.updateLayerInfoToDB(TType, value) == 0)
             {
                 MessageBox.Show("修改保存成功！", "信息提示");
             }
@@ -1930,19 +1933,19 @@ namespace TDObject
                 MessageBox.Show("修改保存失败！", "信息提示");
             }
         }
-            
 
-  
+
+
         private void btnSaveFW_Click(object sender, EventArgs e)
         {
-            SaveLayerData("房屋建筑",dgvFW);
+            SaveLayerData("房屋建筑", dgvFW);
         }
 
 
         //private void toolStripButton6_Click(object sender, EventArgs e)
         //{
         //    SetProperViewDisp(true);
-           
+
         //    GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.FW;
         //    GlobalVariables.Select.SType = GlobalVariables.SelectType.PolygonSelect;
         //    GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.QueryLayerInfo;
@@ -1952,71 +1955,65 @@ namespace TDObject
         //    this.axMapControl1.MousePointer = ESRI.ArcGIS.Controls.esriControlsMousePointer.esriPointerArrow;
         //}
 
-    
-        private bool RefreshCheckedStatus(string layname)
+
+        private void RefreshCheckedStatus(string layname,bool visible)
         {
-            bool visible = false;
             int layindex = -1;
-            for(int i = 0; i < treeView2.Nodes[0].Nodes.Count; i++)
+            for (int i = 0; i < treeView2.Nodes[0].Nodes.Count; i++)
             {
                 if (treeView2.Nodes[0].Nodes[i].Text == layname)
                 {
-                    visible = treeView2.Nodes[0].Nodes[i].Checked;
+                    //visible = treeView2.Nodes[0].Nodes[i].Checked;
 
-                    treeView2.Nodes[0].Nodes[i].Checked = !visible;
+                    treeView2.Nodes[0].Nodes[i].Checked = visible;
                     layindex = i;
                     break;
                 }
             }
-            return treeView2.Nodes[0].Nodes[layindex].Checked;
         }
 
-        private void LayerAttrQueryStart(string Layername)
+        private void CancelMapClickHandler()
+        {
+            GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.enull;
+            GlobalVariables.Select.SType = GlobalVariables.SelectType.enull;
+            GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.eNull;
+
+        }
+        private void LayerAttrQueryStart(string Layername,bool visible)
         {
             try
             {
                 //SetProperViewDisp(true); //吴江左侧不显示，注释掉
-
-                //获取显示状态
-                bool visible = true;
-
-
-                if (Layername == "城市规划")
-                {
-                    visible = RefreshCheckedStatus(Layername);
-                    LayerControl.SetVisibleStatus(axMapControl1, Layername, visible);
-                }
-                else
-                    LayerControl.SetVisibleStatus(axMapControl1, Layername, true);
-
-
                 GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.enull;
                 GlobalVariables.Select.SType = GlobalVariables.SelectType.enull;
                 GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.eNull;
+                //获取显示状态
 
-                if (!visible&& Layername == "城市规划")
+                if (Layername == "城市规划")
+                {
+                    RefreshCheckedStatus(Layername, visible);
+                    LayerControl.SetVisibleStatus(axMapControl1, Layername, visible);
+                }
+                else if (visible)
+                {
+                    RefreshCheckedStatus(Layername, visible);
+                    LayerControl.SetVisibleStatus(axMapControl1, Layername, true);
+                }
+
+
+
+                if (!visible)// && Layername == "城市规划")
                     return;
 
 
                 GlobalVariables.Select.SType = GlobalVariables.SelectType.PolygonSelect;
+                GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.QueryLayerInfo;
                 if (Layername == "房屋建筑")
-                { 
-                    GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.QueryLayerInfo;
                     GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.FangWu;
-
-                }
                 else if (Layername == "企业范围")
-                {
-                    GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.QueryLayerInfo;
                     GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.QiYeFangWei;
-
-                }
-                else if (Layername=="城市规划")
-                {
-                    GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.QueryLayerInfo;
+                else if (Layername == "城市规划")
                     GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.ChengShiGuiHua;
-              
-                }
 
                 ShowIdentifyDialog(Layername);
 
@@ -2029,7 +2026,7 @@ namespace TDObject
                 MessageBox.Show(ex.Message);
             }
         }
-      
+
 
         private void 综合查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -2037,7 +2034,7 @@ namespace TDObject
             qyFormUtil.ShowForm(obj);
         }
 
-       
+
         private void 按企业名称查询ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmLtdQymcQuery frmobj = new frmLtdQymcQuery();
@@ -2045,7 +2042,7 @@ namespace TDObject
 
             BottomPageVisible(1);
             string strQyfw = "纳税人名称 like '%" + LtdNameQuery + "%'" + LoginUserRights;
-            string strLtdBase = "单位 in (select 纳税人名称 from bsltdinfo where 租赁企业否=0 and " + strQyfw+")";
+            string strLtdBase = "单位 in (select 纳税人名称 from bsltdinfo where 租赁企业否=0 and " + strQyfw + ")";
 
 
             string strZlBase = "单位 in (select 纳税人名称 from bsltdinfo where 租赁企业否=1 and " + strQyfw + ")";
@@ -2053,18 +2050,18 @@ namespace TDObject
 
 
             //LtdQyxxQuery(strLtdBase, "ZLQYMC_ like '%" + LtdNameQuery + "%'" + LoginUserRights);
-           
+
         }
 
-        private void LtdQyxxQuery(string qyfilter,string zlfilter)
+        private void LtdQyxxQuery(string qyfilter, string zlfilter)
         {
             _ltdobjs = TDObject.BLL.CommSetting.EM.GetListNoPaging<vwLtdJcSj>(qyfilter, "序号");
-            TDObject.UI.UIDgvColumnsSetting.RefreshLtdImportInfo(dgvT2_11,_ltdobjs,"vwLtdJcSj",1);
-          
+            TDObject.UI.UIDgvColumnsSetting.RefreshLtdImportInfo(dgvT2_11, _ltdobjs, "vwLtdJcSj", 1);
+
             _ltdobjs1 = TDObject.BLL.CommSetting.EM.GetListNoPaging<vwLtdJcSj>(zlfilter, "序号");
-            TDObject.UI.UIDgvColumnsSetting.RefreshLtdImportInfo(dgvT2_12, _ltdobjs1,"vwLtdJcSj", 1);
+            TDObject.UI.UIDgvColumnsSetting.RefreshLtdImportInfo(dgvT2_12, _ltdobjs1, "vwLtdJcSj", 1);
         }
-        
+
         //企业信息查询
         //private void toolStripButton7_Click(object sender, EventArgs e)
         //{
@@ -2111,7 +2108,7 @@ namespace TDObject
                 this.tabPage7.Parent = null;
                 this.tabPage8.Parent = null;
                 //this.tabPage15.Parent = this.tabControl2;
-      
+
             }
         }
 
@@ -2153,7 +2150,7 @@ namespace TDObject
                 string strQyfw = "主行业 like '%" + LtdNameQuery + "%'" + MainForm.LoginUserRights;
                 //string strLtdBase = "单位 in (select ydqymc from 企业范围 where " + strQyfw + ")";
                 string strLtdBase = "单位 in (select 纳税人名称 from bsltdinfo where 租赁企业否=0) and " + strQyfw + "";
-                string strZlBase= "单位 in (select 纳税人名称 from bsltdinfo where 租赁企业否=1) and " + strQyfw + "";
+                string strZlBase = "单位 in (select 纳税人名称 from bsltdinfo where 租赁企业否=1) and " + strQyfw + "";
                 LtdQyxxQuery(strLtdBase, strZlBase);
                 //LtdQyxxQuery("所属行政村代码='" + MainForm.LoginUser.bsO_RightsCode + "' and 用地单位名称 like '%" + LtdNameQuery + "%'", "所属行政村代码='" + MainForm.LoginUser.bsO_RightsCode + "' and  租赁企业名称 like '%" + LtdNameQuery + "%'");
             }
@@ -2163,7 +2160,7 @@ namespace TDObject
             }
         }
 
-       
+
 
 
 
@@ -2173,30 +2170,30 @@ namespace TDObject
         private void ChangeToPositioin(string LayerName)
         {
             string DKBH;
-  
 
-            
+
+
 
             try
             {
                 string dkbhs = "";
                 for (int i = 0; i < dgvT2_11.Rows.Count; i++)
                 {
-                    object val=dgvT2_11.Rows[i].Cells[0].Value;
-                    if (val!= null && Convert.ToBoolean(val)==true)
+                    object val = dgvT2_11.Rows[i].Cells[0].Value;
+                    if (val != null && Convert.ToBoolean(val) == true)
                     {
                         DKBH = dgvT2_11.Rows[i].Cells[2].Value.ToString();
                         //pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", DKBH);
-                        if (DKBH!=null && DKBH.Trim() != "")
+                        if (DKBH != null && DKBH.Trim() != "")
                         {
                             if (!dkbhs.Contains(DKBH))
                                 dkbhs += "," + DKBH;
                         }
 
-                       
+
                     }
                 }
-                 FindGeos = LayerControl.getIGeoByFields(LoadedLayers["企业范围"], "DKBH", dkbhs, ",", ref newdisp, ref Geos);
+                FindGeos = LayerControl.getIGeoByFields(LoadedLayers["企业范围"], "DKBH", dkbhs, ",", ref newdisp, ref Geos);
 
                 if (Geos.Count == 0)
                     MessageBox.Show("没有找到定位企业，请与管理员联系核实数据！");
@@ -2205,7 +2202,7 @@ namespace TDObject
             }
             catch (Exception ex)
             {
-                  MessageBox.Show("系统资源可能不足，请尽量不要全部选择！");
+                MessageBox.Show("系统资源可能不足，请尽量不要全部选择！");
             }
 
             if (FindGeos.Count == 0)
@@ -2214,12 +2211,12 @@ namespace TDObject
                 LayerControl.ChangeMapExtent(this.axMapControl1, newdisp);
         }
 
-       
+
 
         public void ChangeToPositioin(string LayerName, string lstdkbms)
         {
             string DKBH;
-           
+
 
             List<IFeature> FindGeos = new List<IFeature>();
 
@@ -2281,8 +2278,8 @@ namespace TDObject
             try
             {
                 frmMapPreprint obj = new frmMapPreprint(this.axMapControl1);
-                qyFormUtil.ShowForm(obj);
-             
+                obj.ShowDialog();
+
             }
             catch (Exception ex)
             {
@@ -2344,7 +2341,7 @@ namespace TDObject
 
         }
 
-   
+
         private void btnExport1_Click(object sender, EventArgs e)
         {
             try
@@ -2364,7 +2361,7 @@ namespace TDObject
                             objs.Add(_ltdobjs[i]);
                         }
                     }
-                    if (objs.Count >0)
+                    if (objs.Count > 0)
                     {
                         if (DialogResult.OK == sfd.ShowDialog())
                         {
@@ -2373,7 +2370,11 @@ namespace TDObject
                             //string p = "Id,bsO_Id,TotalDTType,FromDt,ddd,OrgName";
                             //导出的数据项
                             //string items = "用地单位名称,所属行政村名称,土地发证面积,实际占地面积,建筑占地面积,建筑面积,批准用途,实际用途,是否为租赁企业,企业性质,注册资本,法人代表,联系电话,土地座落,通讯地址,产业类型,能耗,产值,税收,租金,行业类型,经济类型,资产类型,抵押情况,企业代码";
-                            string items = "地块编号,年度,月份,单位代码,单位,市区,区域,经营现状,是否工业,等级,住所,经营范围,注册时间,企业类型,法人代表,注册资金,主行业,行业细分,规模,规上,企业数,参保人数,就业人数,国税,地税,销售,占地,其中持证,用能,用电,排放,研发经费支出,平均职工人数,固定资产折旧,生产税净额,营业盈余,职工工资总额,税收,增加值,亩均税收";
+                            string items = "地块编号,年度,月份,单位代码,单位,市区,区域,经营现状,是否工业,等级,住所,经营范围,注册时间,企业类型,法人代表,注册资金,主行业,行业细分,规模,规上";
+                            if ("统计站,委领导,System,吴江经济技术开发区".Contains(LoginUser.bsO_Name))
+                            {
+                                items = "地块编号,年度,月份,单位代码,单位,市区,区域,经营现状,是否工业,等级,住所,经营范围,注册时间,企业类型,法人代表,注册资金,主行业,行业细分,规模,规上,企业数,参保人数,就业人数,国税,地税,销售,占地,其中持证,用能,用电,排放,研发经费支出,平均职工人数,固定资产折旧,生产税净额,营业盈余,职工工资总额,税收,增加值,亩均税收";
+                            }
                             string saveToPath = excl.ExportListToExcl<vwLtdJcSj>(objs, modelName, items, "yyyy-MM-dd", true, 2, 2, "local");
 
                             MessageBox.Show("用地企业文件导出完毕！", "提示", MessageBoxButtons.OK);
@@ -2382,8 +2383,9 @@ namespace TDObject
                     else
                     {
                         MessageBox.Show("请首选选择要导出的数据！", "提示", MessageBoxButtons.OK);
+                        return;
                     }
-                 
+
                 }
                 if (chkZlqy.Checked)
                 {
@@ -2405,14 +2407,18 @@ namespace TDObject
                             string modelName = sfd.FileName;//@"z租赁企业信息表";
                             QyTech.ExcelOper.QyExcelHelper excl = new QyTech.ExcelOper.QyExcelHelper("local");
                             //string items = "租赁企业名称,所属行政村名称,用地企业名称,企业性质,注册资本,法人代表,联系电话,土地座落,通讯地址,产业类型,能耗,产值,税收,租金,行业类型,经济类型,资产类型,抵押情况,企业代码";
-                            string items = "地块编号,年度,月份,单位代码,单位,市区,区域,经营现状,是否工业,等级,住所,经营范围,注册时间,企业类型,法人代表,注册资金,主行业,行业细分,规模,规上,企业数,参保人数,就业人数,国税,地税,销售,占地,其中持证,用能,用电,排放,研发经费支出,平均职工人数,固定资产折旧,生产税净额,营业盈余,职工工资总额,税收,增加值,亩均税收";
-                            string saveToPath = excl.ExportListToExcl<vwLtdJcSj>(objs, modelName, items,"yyyy-MM-dd",true,2,2,"local");
+                            string items = "地块编号,年度,月份,单位代码,单位,市区,区域,经营现状,是否工业,等级,住所,经营范围,注册时间,企业类型,法人代表,注册资金,主行业,行业细分,规模,规上";
+                            if ("统计站,委领导,System,吴江经济技术开发区".Contains(LoginUser.bsO_Name))
+                            {
+                                items = "地块编号,年度,月份,单位代码,单位,市区,区域,经营现状,是否工业,等级,住所,经营范围,注册时间,企业类型,法人代表,注册资金,主行业,行业细分,规模,规上,企业数,参保人数,就业人数,国税,地税,销售,占地,其中持证,用能,用电,排放,研发经费支出,平均职工人数,固定资产折旧,生产税净额,营业盈余,职工工资总额,税收,增加值,亩均税收";
+                            }
+                            string saveToPath = excl.ExportListToExcl<vwLtdJcSj>(objs, modelName, items, "yyyy-MM-dd", true, 2, 2, "local");
                             MessageBox.Show("租赁企业文件导出完毕！", "提示", MessageBoxButtons.OK);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("请首选选择要导出的数据！" ,"提示", MessageBoxButtons.OK);
+                        MessageBox.Show("请首选选择要导出的数据！", "提示", MessageBoxButtons.OK);
                     }
                 }
 
@@ -2425,7 +2431,7 @@ namespace TDObject
             {
                 btnExport1.Text = "导出表";
                 btnExport1.Enabled = true;
-     
+
             }
         }
 
@@ -2436,9 +2442,9 @@ namespace TDObject
             button1.Text = "导出";
         }
 
-      
-      
-     
+
+
+
         private void button6_Click(object sender, EventArgs e)
         {
             try
@@ -2463,7 +2469,7 @@ namespace TDObject
             }
         }
 
-           
+
         private void button12_Click(object sender, EventArgs e)
         {
             try
@@ -2476,7 +2482,7 @@ namespace TDObject
             }
         }
 
-    
+
 
 
         private void button10_Click(object sender, EventArgs e)
@@ -2597,7 +2603,7 @@ namespace TDObject
 
 
                         //处理租赁信息部分
-                        this._ltdobjs1=EM.GetListNoPaging<vwLtdJcSj>("地块编号='"+DKBH+ "' and 单位 in (select 纳税人名称 from bsltdinfo where 租赁企业否=0)", "");
+                        this._ltdobjs1 = EM.GetListNoPaging<vwLtdJcSj>("地块编号='" + DKBH + "' and 单位 in (select 纳税人名称 from bsltdinfo where 租赁企业否=1)", "");
                         TDObject.UI.UIDgvColumnsSetting.RefreshLtdImportInfo(dgvT2_12, _ltdobjs1, "vwLtdJcSj", 1);
 
                         //bool findflag = false;
@@ -2624,13 +2630,13 @@ namespace TDObject
             catch (Exception ex) { MessageBox.Show(ex.Message); }
             //this.axMapControl1.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
 
-             
-            
-         }
 
-      
 
-          
+        }
+
+
+
+
 
         private void dgvT2_11_DoubleClick(object sender, EventArgs e)
         {
@@ -2654,15 +2660,15 @@ namespace TDObject
                         int SW = Screen.PrimaryScreen.Bounds.Width;
                         int WH = this.ClientRectangle.Height;// 工作区域高度
                         int WW = this.ClientRectangle.Width;// 工作区域宽度
-                        int leftPanel = splitContainer1.SplitterDistance;
+                        int leftPanel = scFillExtent.SplitterDistance;
                         int bottompanel = panel6.Height;
-                        int x = (WW + leftPanel) / 2+50;
-                        int y = (WH - bottompanel) / 2- 50;
+                        int x = (WW + leftPanel) / 2 + 50;
+                        int y = (WH - bottompanel) / 2 - 50;
 
                         if (newpop != null)
                         {
                             newpop.Close();
-                          
+
                         }
                         newpop = new frmLtdInfoPop(DKBH, x, y);
                         //newpop.StartPosition = FormStartPosition.CenterScreen;
@@ -2727,7 +2733,7 @@ namespace TDObject
             }
         }
 
-  
+
         //单击显示
         private void dgvT2_31_Click(object sender, EventArgs e)
         {
@@ -2785,7 +2791,7 @@ namespace TDObject
             }
         }
 
-   
+
         private void dgvT2_12_Click(object sender, EventArgs e)
         {
             SelectDgv = 12;
@@ -2831,7 +2837,7 @@ namespace TDObject
 
 
 
-         
+
         }
 
         private void cboLayerName_SelectedIndexChanged(object sender, EventArgs e)
@@ -2839,10 +2845,10 @@ namespace TDObject
             cboLayerFact.SelectedIndex = cboLayerName.SelectedIndex;
         }
 
-     
 
-       
-     
+
+
+
 
         private void dgvT2_21_Click(object sender, EventArgs e)
         {
@@ -2904,7 +2910,7 @@ namespace TDObject
             }
         }
 
-        private bool RefreshExQyxx=false;
+        private bool RefreshExQyxx = false;
         private void dgvQyxx_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
             ///企业查处
@@ -2931,10 +2937,10 @@ namespace TDObject
             //    else if ((dgvQyxx.Rows.Count == 40 || dgvQyxx.Rows.Count == 2) && !RefreshExQyxx)
             //    {
             //        RefreshExQyxx = true;
-                  
+
             //        string dkbm = dgvQyxx.Rows[1].Cells[1].Value.ToString();
             //        企业范围 ltdinfo=MainForm.EM.GetByPk<企业范围>("DKBH",dkbm);
-                   
+
             //        //应该刷新数据
             //        //this.ucdgvQyxx1.RefreshData(ltdinfo);
             //        BottomPageVisible(4);
@@ -2973,9 +2979,9 @@ namespace TDObject
             }
         }
 
-       
 
-    
+
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             //if (!tmrEnabled)
@@ -2984,9 +2990,9 @@ namespace TDObject
             //{
             //    timer1.Enabled = false;
             //    MessageBox.Show(webBrowser1.Document.GetElementById("idForQueryResult").GetAttribute("value"));
-           
+
             //}
- 
+
         }
 
         private void treeView2_AfterCheck(object sender, TreeViewEventArgs e)
@@ -3001,7 +3007,7 @@ namespace TDObject
                 {
                     LayerControl.SetVisibleStatus(this.axMapControl1, GlobalVariables.LayerName2FullName["城市规划注记注记2"], tn.Checked);
                 }
-              
+
                 //if (!tn.Checked)
                 this.axMapControl1.ActiveView.Refresh();//.axMapControl.ActiveView.Refresh();
             }
@@ -3039,7 +3045,7 @@ namespace TDObject
 
         private void 数据导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           frmDataImport obj = new frmDataImport();
+            frmDataImport obj = new frmDataImport();
             qyFormUtil.ShowForm(obj);
         }
 
@@ -3055,51 +3061,12 @@ namespace TDObject
             {
                 ToolTip p = new ToolTip();
                 p.ShowAlways = true;
-                p.SetToolTip(btnLtnInfo, "企业信息查询");
+                //p.SetToolTip(btnLtnInfo, "企业信息查询");
             }
             catch (Exception ex)
             {
                 log.Error(ex.Message);
             }
-        }
-
-        private void btnLtnInfo_MouseEnter(object sender, EventArgs e)
-        {
-            try
-            {
-                ToolTip p = new ToolTip();
-                p.ShowAlways = true;
-                p.SetToolTip(btnLtnInfo, "企业信息查询1");
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// 企  按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnLtnInfo_Click(object sender, EventArgs e)
-        {
-            LayerAttrQueryStart("企业范围");
-        }
-
-        /// <summary>
-        /// 房  按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button15_Click(object sender, EventArgs e)
-        {
-            LayerAttrQueryStart("房屋建筑");
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-            LayerAttrQueryStart("城市规划");
         }
 
         private void InfoEditView()
@@ -3159,7 +3126,7 @@ namespace TDObject
             {
                 frmLtdNameTotal obj = new frmLtdNameTotal(this.axMapControl1.Extent);
                 //objfrmLtdNameTotal.axMapControl1.vi = this.axMapControl1.ActiveView;
-                qyFormUtil.ShowForm(obj);
+                obj.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -3172,7 +3139,7 @@ namespace TDObject
             try
             {
                 FrmRegionTotal obj = new FrmRegionTotal();
-                qyFormUtil.ShowForm(obj);
+                obj.ShowDialog();
             }
             catch (Exception ex)
             {
@@ -3182,7 +3149,7 @@ namespace TDObject
 
         private void 点击查询警告ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
                 GlobalVariables.Select.SType = GlobalVariables.SelectType.SingleSelect;
@@ -3237,38 +3204,7 @@ namespace TDObject
             }
         }
 
-        /// <summary>
-        /// 企业照片 按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button19_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-                DicLayerDispPnt("企业照片点位置","SSDKHM");
-
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex.Message);
-            }
-        }
-
        
-        private void button17_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DicLayerDispPnt("红牌警告点位置", "SSDKHM_");
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex.Message);
-            }
-          
-        }
 
         private string GetLtdproblem(GlobalVariables.SelectFeatureValue flag, string dkbm)
         {
@@ -3294,71 +3230,88 @@ namespace TDObject
             return ret;
         }
 
-        private void DicLayerDispPnt(string layername,string dkbhField)
+        private void DicLayerDispPnt(string layername, string dkbhField,bool visible)
         {
 
             GlobalVariables.Select.SType = GlobalVariables.SelectType.SingleSelect;
-            if (layername == "企业照片点位置") //安全检查点位置 黄牌警告点位置 红牌警告点位置
-            {
-                GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.QueryMarkerInfo;
-                GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.QiYeZhaoPianXinxi;
-            }
-            else if (layername == "安全检查点位置")
-            {
-                GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.QueryMarkerInfo;
-                GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.AnQuanJianCha;
-            }
-            else if (layername == "黄牌警告点位置")
-            {
-                MessageBox.Show("需要提供基础数据！");
-                return;
-                GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.QueryMarkerInfo;
-                GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.HuangPai;
-            }
-            else if (layername == "红牌警告点位置")
-            {
-                MessageBox.Show("需要提供基础数据！");
-                return;
-                GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.QueryMarkerInfo;
-                GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.HongPai;
-            }
-            this.axToolbarControl1.CurrentTool = null;
-            this.axMapControl1.MousePointer = ESRI.ArcGIS.Controls.esriControlsMousePointer.esriPointerArrow;
+            GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.QueryMarkerInfo;
+ 
+            //for (int i = 0; i < dicLayerDisp.Count; i++)
+            //{
+            //    string key = dicLayerDisp.Keys[i];
+            //    if (key == layername)
+            //    {
+            //        dicLayerDisp[key] = visible;
+            //        LayerControl.SetVisibleStatus(this.axMapControl1, layername, dicLayerDisp[layername]);
+            //        //企业高亮，然后单击出现图形界面
+            //        //LayerControl.SetVisibleStatus(this.axMapControl1, "企业范围", true, "DKBH in (select [SSDKBM]  FROM [wj_GisDb].[sde].[LtdPhoto])");
 
+            //    }
+            //}
             IMap pMap = axMapControl1.Map;
             IActiveView pActiveView = pMap as IActiveView;
             IGraphicsContainer pGraphicsContainer = (IGraphicsContainer)pActiveView;
             pGraphicsContainer.DeleteAllElements();
             //pActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);//刷新
             pActiveView.PartialRefresh(esriViewDrawPhase.esriViewAll, null, null);//刷新
+
+            if (!visible)
+            {
+                LayerControl.SetVisibleStatus(this.axMapControl1, layername, visible);
+                return;
+            }
+
+            //下面开始准备单击地图的操作
+           
+            if (layername == "企业照片点位置") //安全检查点位置 黄牌警告点位置 红牌警告点位置
+            {
+                GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.QiYeZhaoPianXinxi;
+            }
+            else if (layername == "安全检查点位置")
+            {
+                GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.AnQuanJianCha;
+            }
+            else if (layername == "黄牌警告点位置")
+            {
+                MessageBox.Show("需要提供基础数据！");
+                return;
+                GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.HuangPai;
+            }
+            else if (layername == "红牌警告点位置")
+            {
+                MessageBox.Show("需要提供基础数据！");
+                return;
+                GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.HongPai;
+            }
+
             //this.axMapControl1.ActiveView.PartialRefresh(ESRI.ArcGIS.Carto.esriViewDrawPhase.esriViewAll, null, null);
 
-            for (int i=0;i<dicLayerDisp.Count;i++)
-            {
-                string key=dicLayerDisp.Keys[i];
-                if (key == layername)
-                {
-                    dicLayerDisp[key] = !dicLayerDisp[key];
-                     LayerControl.SetVisibleStatus(this.axMapControl1, layername, dicLayerDisp[layername]);
-                    //企业高亮，然后单击出现图形界面
+            //////for (int i = 0; i < dicLayerDisp.Count; i++)
+            //////{
+            //////    string key = dicLayerDisp.Keys[i];
+            //////    if (key == layername)
+            //////    {
+            //////        dicLayerDisp[key] = !dicLayerDisp[key];
+            //////        LayerControl.SetVisibleStatus(this.axMapControl1, layername, dicLayerDisp[layername]);
+            //////        //企业高亮，然后单击出现图形界面
 
-                    //LayerControl.SetVisibleStatus(this.axMapControl1, "企业范围", true, "DKBH in (select [SSDKBM]  FROM [wj_GisDb].[sde].[LtdPhoto])");
+            //////        //LayerControl.SetVisibleStatus(this.axMapControl1, "企业范围", true, "DKBH in (select [SSDKBM]  FROM [wj_GisDb].[sde].[LtdPhoto])");
 
-                }
-            }
-            if (dicLayerDisp[layername] == false)
-                return;
+            //////    }
+            //////}
+            //////if (dicLayerDisp[layername] == false)
+            //////    return;
             ILayer pLayer = GlobalVariables.GetOverviewLayer(this.axMapControl1, "企业范围");
             List<IFeature> FindGeos = new List<IFeature>();
             List<IFeature> pGeo = new List<IFeature>();
             try
             {
-                List<bsLtdInfo> disLtds=new List<bsLtdInfo>();
+                List<bsLtdInfo> disLtds = new List<bsLtdInfo>();
                 if (layername == "企业照片点位置")
                 {
                     disLtds = MainForm.EM.GetListNoPaging<bsLtdInfo>("纳税人名称 in (select SSQYMC from LtdPhoto)", "");
                 }
-                else if (layername== "安全检查点位置")
+                else if (layername == "安全检查点位置")
                 {
                     disLtds = MainForm.EM.GetListNoPaging<bsLtdInfo>("纳税人名称 in (select 公司名称 from t安全事故情况)", "");
                 }
@@ -3370,56 +3323,68 @@ namespace TDObject
                 {
                     //disLtds = MainForm.EM.GetListNoPaging<bsLtdInfo>("纳税人名称 in (select 公司名称 from t安全事故情况)", "");
                 }
-                if (disLtds==null || disLtds.Count == 0)
+                if (disLtds == null || disLtds.Count == 0)
                 {
                     MessageBox.Show("没有找到相关企业！");
                     return;
                 }
 
-                ILayer apLayer = GlobalVariables.GetOverviewLayer(this.axMapControl1,layername);
+                LayerControl.SetVisibleStatus(this.axMapControl1, layername, visible);
+                ILayer apLayer = GlobalVariables.GetOverviewLayer(this.axMapControl1, layername);
+                IFeatureLayer new_FeatureLayer = apLayer as IFeatureLayer;
 
-                DeleteAllFeatures(apLayer as IFeatureLayer, null);
 
+                //DeleteAllFeatures(apLayer as IFeatureLayer, null);
+
+                string sFilter = "";
                 for (int i = 0; i < disLtds.Count; i++)
                 {
                     if (disLtds[i].地块编号 != null && disLtds[i].地块编号.Trim() != "")
                     {
-                        pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", disLtds[i].地块编号.Trim());
+                        sFilter += "," + disLtds[i].地块编号.Trim();
 
-                        
-                        if (pGeo.Count > 0)
-                        {
-                            FindGeos.Add(pGeo[0]);
+                        //自己生成并画点 begin
+                        //pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", disLtds[i].地块编号.Trim());
 
-                            double x, y;
-                            x = (pGeo[0].Extent.XMin + pGeo[0].Extent.XMax ) / 2;
-                            y = (pGeo[0].Extent.YMin + pGeo[0].Extent.YMax ) / 2;
-                            IPoint pt1 = new PointClass();
-                            pt1.PutCoords(x, y);
+                        //if (pGeo.Count > 0)
+                        //{
+                        //    FindGeos.Add(pGeo[0]);
 
-                            CreateShpFromPoint(axMapControl1,layername, pt1, dkbhField,disLtds[i].地块编号.Trim());
-                            //GlobalVariables.CreateTextElment(axMapControl1, x, y, GetLtdproblem(GlobalVariables.Select.SValue, disLtds[i].地块编号.Trim()));
-                        }
+                        //    double x, y;
+                        //    x = (pGeo[0].Extent.XMin + pGeo[0].Extent.XMax) / 2;
+                        //    y = (pGeo[0].Extent.YMin + pGeo[0].Extent.YMax) / 2;
+                        //    IPoint pt1 = new PointClass();
+                        //    pt1.PutCoords(x, y);
+
+                        //    CreateShpFromPoint(axMapControl1, layername, pt1, dkbhField, disLtds[i].地块编号.Trim());
+                        //    //GlobalVariables.CreateTextElment(axMapControl1, x, y, GetLtdproblem(GlobalVariables.Select.SValue, disLtds[i].地块编号.Trim()));
+                        //}
+                        //自己生成并画点 end
 
                     }
                 }
+                ESRI.ArcGIS.Carto.IFeatureLayerDefinition pDef = (ESRI.ArcGIS.Carto.IFeatureLayerDefinition)new_FeatureLayer;
+                pDef.DefinitionExpression = "DKBH in ('"+sFilter.Substring(1).Replace(",","','")+"')";
+                axMapControl1.ActiveView.Refresh();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show("可能数据太多，系统资源可能不足！");
+                MessageBox.Show("没有找到数据！");
             }
             //if (FindGeos.Count == 0)
             //    MessageBox.Show("没有找到对应的用地数据！");
             //else
             //    ExDisplayLtdFeature(FindGeos);
 
-            LayerControl.SetVisibleStatus(this.axMapControl1, GlobalVariables.LayerName2FullName[layername],true);
+            LayerControl.SetVisibleStatus(this.axMapControl1, GlobalVariables.LayerName2FullName[layername], true);
 
+            this.axToolbarControl1.CurrentTool = null;
+            this.axMapControl1.MousePointer = ESRI.ArcGIS.Controls.esriControlsMousePointer.esriPointerArrow;
 
 
         }
 
-        private void CreateShpFromPoint(AxMapControl axmc,string layername,IPoint point,string dkbmfield,string dkbm)
+        private void CreateShpFromPoint(AxMapControl axmc, string layername, IPoint point, string dkbmfield, string dkbm)
         {
             //string strPath = "E:\\Pointlayer2" as string;
 
@@ -3450,23 +3415,23 @@ namespace TDObject
             //string strName = dkbmfield;
             int intIndex = pFeature.Fields.FindField(dkbmfield);
 
-           
-                //添加第一条数据记录
-                //pFeature = pFLayer.FeatureClass.CreateFeature();
-                pFeature.Shape = point as IGeometry;
-                pFeature.set_Value(intIndex, dkbm);
-                pFeature.Store();
-          
-          
 
-         
+            //添加第一条数据记录
+            //pFeature = pFLayer.FeatureClass.CreateFeature();
+            pFeature.Shape = point as IGeometry;
+            pFeature.set_Value(intIndex, dkbm);
+            pFeature.Store();
+
+
+
+
 
             ////停止编辑
             //pWorkspaceEdit.StopEditOperation();
             //pWorkspaceEdit.StopEditing(true);
 
             //显示图层
-           // ax.AddLayer(pFLayer, m_mapControl.Map.LayerCount);
+            // ax.AddLayer(pFLayer, m_mapControl.Map.LayerCount);
             axmc.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
 
             //ISpatialReference pSpatialReference = axmc.ActiveView.FocusMap.SpatialReference;
@@ -3539,7 +3504,7 @@ namespace TDObject
         {
             double xs = 0, ys = 0;
             xs = 0; ys = 0;
-            for(int i=0;i< ploygon.PointCount; i++)
+            for (int i = 0; i < ploygon.PointCount; i++)
             {
                 xs += ploygon.Point[i].X;
                 ys += ploygon.Point[i].Y;
@@ -3549,32 +3514,6 @@ namespace TDObject
             y = ys / ploygon.PointCount;
 
         }
-
-        private void button18_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DicLayerDispPnt("黄牌警告点位置", "SSDKHM_");
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex.Message);
-            }
-        }
-
-        private void button20_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DicLayerDispPnt("安全检查点位置", "SSDKHM_");
-            }
-            catch (Exception ex)
-            {
-                log.Error(ex.Message);
-            }
-        }
-
-      
 
         private void button11_Click(object sender, EventArgs e)
         {
@@ -3594,9 +3533,9 @@ namespace TDObject
         {
             try
             {
-                int ltdobjid = Convert.ToInt32(dgvQyxx.Rows[0].Cells[1].Value);
-                FrmLtdZlqyxx obj = new FrmLtdZlqyxx(ltdobjid);
-                qyFormUtil.ShowForm(obj);
+                //int ltdobjid = Convert.ToInt32(dgvQyxx.Rows[0].Cells[1].Value);
+                //FrmLtdZlqyxxNew obj = new FrmLtdZlqyxxNew(ltdobjid);
+                //obj.Show();
             }
             catch (Exception ex)
             {
@@ -3674,7 +3613,7 @@ namespace TDObject
             try
             {
                 frmTotalHY obj = new frmTotalHY();
-                qyFormUtil.ShowForm(obj);
+                obj.Show();
             }
             catch (Exception ex)
             {
@@ -3704,7 +3643,7 @@ namespace TDObject
                 if (dkbm != null && dkbm != "")
                 {
                     FrmOneLtdAndRentLtdInfo obj = new FrmOneLtdAndRentLtdInfo(dkbm);
-                    qyFormUtil.ShowForm(obj);
+                    obj.ShowDialog();
                 }
             }
             catch (Exception ex)
@@ -3744,7 +3683,7 @@ namespace TDObject
                 if (dkbm != null && dkbm != "")
                 {
                     FrmOneLtdAndRentLtdInfo obj = new FrmOneLtdAndRentLtdInfo(dkbm);
-                    qyFormUtil.ShowForm(obj);
+                    obj.ShowDialog();
                 }
             }
             catch (Exception ex)
@@ -3756,7 +3695,7 @@ namespace TDObject
         private void 吴江区工业企业资源集约利用情况上报ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmUpReport1 obj = new FrmUpReport1();
-            qyFormUtil.ShowForm(obj);
+            obj.ShowDialog();
         }
 
         private void 分项数据导入ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3825,50 +3764,50 @@ namespace TDObject
 
         private void AddSelfMarker(IFeature pFeature)
         {
-        //    IElement pElement = null;
-        //    IGeometry geometry = pFeature.Shape;
-        //    switch (geometry.GeometryType)
-        //    {
-        //        case esriGeometryType.esriGeometryPolygon:
-        //            var x = (geometry.Envelope.XMin + geometry.Envelope.XMax) / 2;
-        //            var y = (geometry.Envelope.YMin + geometry.Envelope.YMax) / 2;
+            //    IElement pElement = null;
+            //    IGeometry geometry = pFeature.Shape;
+            //    switch (geometry.GeometryType)
+            //    {
+            //        case esriGeometryType.esriGeometryPolygon:
+            //            var x = (geometry.Envelope.XMin + geometry.Envelope.XMax) / 2;
+            //            var y = (geometry.Envelope.YMin + geometry.Envelope.YMax) / 2;
 
-        //            axMapControl1.AddElement(pElement, 0);
-        //            IFillShapeElement pPolygonElement = new PolygonElementClass();
-        //            pPolygonElement.Symbol = pFillSymbol;// 面符号
-        //            pElement = pPolygonElement as IElement;
-        //            pElement.Geometry = geometry;
-        //             break;
-        //        case esriGeometryType.esriGeometryPolyline:
-        //            ILineElement pLineElement = new LineElementClass();
-        //            pLineElement.Symbol = pLineSymbol;// 线符号
-        //            pElement = pLineElement as IElement;
-        //            pElement.Geometry = geometry;
-        //            break;
-        //        case esriGeometryType.esriGeometryPoint:
-        //            IMarkerElement pMarkerElement = new MarkerElementClass();
-        //            pMarkerElement.Symbol = pMarkerSymbol;// 点符号
-        //            pElement = pMarkerElement as IElement;
-        //            pElement.Geometry = pFeature.Shape;
-        //            break;
+            //            axMapControl1.AddElement(pElement, 0);
+            //            IFillShapeElement pPolygonElement = new PolygonElementClass();
+            //            pPolygonElement.Symbol = pFillSymbol;// 面符号
+            //            pElement = pPolygonElement as IElement;
+            //            pElement.Geometry = geometry;
+            //             break;
+            //        case esriGeometryType.esriGeometryPolyline:
+            //            ILineElement pLineElement = new LineElementClass();
+            //            pLineElement.Symbol = pLineSymbol;// 线符号
+            //            pElement = pLineElement as IElement;
+            //            pElement.Geometry = geometry;
+            //            break;
+            //        case esriGeometryType.esriGeometryPoint:
+            //            IMarkerElement pMarkerElement = new MarkerElementClass();
+            //            pMarkerElement.Symbol = pMarkerSymbol;// 点符号
+            //            pElement = pMarkerElement as IElement;
+            //            pElement.Geometry = pFeature.Shape;
+            //            break;
             //} 
             //axMapControl1.ActiveView.GraphicsContainer.AddElement(pElement, 0);// 添加 pElement
         }
 
         private void excel数据导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-          
+
         }
 
         private void 基础数据导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmExcelImportYM obj = new frmExcelImportYM();
-            obj.ShowDialog(); 
+            frmExcelImportYM obj = new frmExcelImportYM("月度");
+            obj.ShowDialog();
         }
 
         private void 其它数据导入ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmExcelImport obj = new frmExcelImport();
+            frmExcelImportYM obj = new frmExcelImportYM("一般");
             obj.ShowDialog();
         }
 
@@ -3878,8 +3817,58 @@ namespace TDObject
             obj.Show();
         }
 
+        private void 年度数据导入ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmExcelImportYM obj = new frmExcelImportYM("年度");
+            obj.ShowDialog();
+        }
 
+        private void tsbLtd_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ToolStripButton tsb = sender as ToolStripButton;
+                 if ("企,房,城".Contains(tsb.Text))
+                {
+                    LayerAttrQueryStart(tsb.Tag.ToString(), tsb.Checked);
+                }
+                else if ("黄,红,检,照".Contains(tsb.Text))
+                {
+
+                    DicLayerDispPnt(tsb.Tag.ToString(), "DKBH",tsb.Checked);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+            }
+
+        }
+
+        //清除其它操作
+        private void tspControl(ToolStripButton tsb)
+        {
+            tsb.Checked = !tsb.Checked;
+            //tsbLtd.Checked = tsbLtd.Checked ? false : false;
+            //tsbFang.Checked = tsbLtd.Checked ? false : false;
+            //tsbCheng.Checked = tsbLtd.Checked ? false : false;
+
+
+            //tsbRed.Checked = tsbLtd.Checked ? false : false;
+            //tsbYellow.Checked = tsbLtd.Checked ? false : false;
+            //tsbCheck.Checked = tsbLtd.Checked ? false : false;
+            //tsbPhoto.Checked = tsbLtd.Checked ? false : false;
+        }
+
+        private void tsbFang_Click(object sender, EventArgs e)
+        {
+            ToolStripButton tsb = sender as ToolStripButton;
+            tspControl(tsb);
+
+        }
     }
+
 
     public class keyvalue
     {

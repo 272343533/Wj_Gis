@@ -104,7 +104,7 @@
             this.Column22,
             this.Column24,
             this.Column56});
-            this.dgvT2_11.Location = new System.Drawing.Point(8, 8);
+            this.dgvT2_11.Location = new System.Drawing.Point(8, 31);
             this.dgvT2_11.Name = "dgvT2_11";
             this.dgvT2_11.RowTemplate.Height = 23;
             this.dgvT2_11.Size = new System.Drawing.Size(996, 90);
@@ -249,7 +249,7 @@
             this.dataGridViewTextBoxColumn128,
             this.dataGridViewTextBoxColumn132,
             this.dataGridViewTextBoxColumn133});
-            this.dgvT2_12.Location = new System.Drawing.Point(12, 104);
+            this.dgvT2_12.Location = new System.Drawing.Point(12, 127);
             this.dgvT2_12.Name = "dgvT2_12";
             this.dgvT2_12.RowTemplate.Height = 23;
             this.dgvT2_12.Size = new System.Drawing.Size(992, 164);
@@ -330,7 +330,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.30879F));
             this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(18, 290);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(18, 313);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -369,7 +369,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(68, 21);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "1";
+            this.textBox1.Text = "0/0";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // progressBar1
@@ -441,7 +441,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("宋体", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(15, 271);
+            this.label1.Location = new System.Drawing.Point(15, 294);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 16);
             this.label1.TabIndex = 17;
@@ -451,7 +451,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1008, 567);
+            this.ClientSize = new System.Drawing.Size(1008, 590);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvT2_12);
@@ -462,6 +462,10 @@
             this.Text = "企业及租赁企业信息";
             this.Load += new System.EventHandler(this.FrmOneLtdAndRentLtdInfo_Load);
             this.Shown += new System.EventHandler(this.FrmOneLtdAndRentLtdInfo_Shown);
+            this.Controls.SetChildIndex(this.dgvT2_11, 0);
+            this.Controls.SetChildIndex(this.dgvT2_12, 0);
+            this.Controls.SetChildIndex(this.label1, 0);
+            this.Controls.SetChildIndex(this.tableLayoutPanel1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.dgvT2_11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvT2_12)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);

@@ -10,8 +10,10 @@ namespace WTGeoWeb.BLL
 {
     public class CommSetting
     {
+        
         public static ObjectContext dblink = new SunMvcExpress.Dao.wj_GisDbEntities();
 
         public static EntityManager EM = new EntityManager(dblink);
+        public static EntityManager EM_Base = new EntityManager(new QyTech.Auth.Dao.QyTech_AuthEntities());
     }
 }

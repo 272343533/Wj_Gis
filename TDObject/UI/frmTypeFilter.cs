@@ -724,9 +724,9 @@ namespace TDObject.UI
                     List<t吴江区智能制造示范试点企业名单> uis = dgv5.DataSource as List<t吴江区智能制造示范试点企业名单>;
                     foreach (t吴江区智能制造示范试点企业名单 obj in uis)
                     {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
+                        if (obj.年份 != null && obj.年份 != "")
                         {
-                            dkbhs += "," + obj.地块编号;
+                            dkbhs += "," + obj.年份;
                         }
                     }
                     pGeos = LayerControl.getIGeoByFields(pLayer, "DKBH", dkbhs.Substring(1), ",", ref newdisp, ref Geos);

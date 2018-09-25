@@ -356,9 +356,8 @@
             this.cboType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboType.FormattingEnabled = true;
             this.cboType.Items.AddRange(new object[] {
-            "t市局表格",
-            "开发区表格",
-            "t经发局表格"});
+            "市局表格",
+            "经发局表格"});
             this.cboType.Location = new System.Drawing.Point(635, 18);
             this.cboType.Name = "cboType";
             this.cboType.Size = new System.Drawing.Size(98, 20);

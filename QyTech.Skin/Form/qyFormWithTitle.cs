@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using QyTech.Auth.Dao;
+
 namespace QyTech.SkinForm
 {
     public partial class qyFormWithTitle : Form
     {
         protected log4net.ILog log = log4net.LogManager.GetLogger("QyTech.SkinForm.qyFormContainer");
-
+        public bsUser CurrLogUser;
         public qyFormWithTitle()
         {
             InitializeComponent();
@@ -23,7 +25,7 @@ namespace QyTech.SkinForm
             this.ShowInTaskbar = true;
         }
 
-        public string Title { set { lblFormTitle.Text = value; } }
+        public string Title { set { lblFormTitle.Text = value;this.Text = value; } }
 
  
 

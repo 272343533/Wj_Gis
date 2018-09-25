@@ -754,17 +754,20 @@ namespace TDObject.IdentifyTool
                     obj= MainForm.EM.GetByPk<企业范围>("OBJECTID", OID);
                     if (obj != null)
                     {
-                        List<t企业基础数据>  objs= MainForm.EM.GetListNoPaging<t企业基础数据>("单位='"+(obj as 企业范围).YDQYMC+"'", "");
-                        if (objs.Count > 0)
-                        {
-                            //obj = objs[0];
-                            TDObject.UI.frmAddLtdBase fobj = new TDObject.UI.frmAddLtdBase("t企业基础数据", objs[0], MainForm.EM);
-                            fobj.ShowDialog();
-                        }
-                        else
-                        {
-                            MessageBox.Show("企业范围数据与基础数据名称不一致，需要核对数据！");
-                        }
+                        TDObject.UI.frmAddLtdVector fobj = new UI.frmAddLtdVector(obj);
+                        fobj.ShowDialog();
+
+                        //List<t企业基础数据>  objs= MainForm.EM.GetListNoPaging<t企业基础数据>("单位='"+(obj as 企业范围).YDQYMC+"'", "");
+                        //if (objs.Count > 0)
+                        //{
+                        //    //obj = objs[0];
+                        //    TDObject.UI.frmAddLtdBase fobj = new TDObject.UI.frmAddLtdBase("t企业基础数据", objs[0], MainForm.EM);
+                        //    fobj.ShowDialog();
+                        //}
+                        //else
+                        //{
+                        //    MessageBox.Show("企业范围数据与基础数据名称不一致，需要核对数据！");
+                        //}
                     }
                 }
             }

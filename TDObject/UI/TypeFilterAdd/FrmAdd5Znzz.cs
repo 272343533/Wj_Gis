@@ -33,7 +33,7 @@ namespace TDObject.UI
                 this.区镇.Text = obj_.区镇.ToString();
                 this.类型.Text = obj_.类型.ToString();
              
-               this.地块编号.Text = obj_.地块编号;
+               this.地块编号.Text = obj_.年份;
             }
             else
             {
@@ -58,7 +58,7 @@ namespace TDObject.UI
                 obj_.所属环节 = this.所属环节.Text;
                 obj_.区镇 = this.区镇.Text;
                 obj_.类型 = this.类型.Text;
-                obj_.地块编号 = this.地块编号.Text;
+                obj_.年份 = this.地块编号.Text;
 
                 if (addormodify == "add")
                     MainForm.EM.Add<t吴江区智能制造示范试点企业名单>(obj_);

@@ -10,12 +10,13 @@ using System.Windows.Forms;
 
 using QyTech.Json;
 using QyTech.Core.BLL;
-using SunMvcExpress.Dao;
+using QyTech.Auth.Dao;
+using System.Runtime.InteropServices;
 
 
 namespace TDObject.UI
 {
-    public partial class frmChangePwd : QyTech.SkinForm.qyForm
+    public partial class frmChangePwd : QyTech.SkinForm.qyFormWithTitle
     {
         public frmChangePwd()
         {
@@ -26,12 +27,12 @@ namespace TDObject.UI
         {
             try
             {
-                string DetailUrl = MainForm.App_URI + "/lyRemoteServ/GetOneUserData?id=" + MainForm.LoginUser.bsU_Id.ToString();
-                string json = AsyncHttp.CommFun.GetRemoteJson(DetailUrl);
-                bsUser userobj = JsonHelper.DeserializeFormtJsonToObject<bsUser>(json); // TDObject.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", MainForm.LoginUser.bsU_Id);
-
+                //string DetailUrl = MainForm.App_URI + "/lyRemoteServ/GetOneUserData?id=" + MainForm.LoginUser.bsU_Id.ToString();
+                //string json = AsyncHttp.CommFun.GetRemoteJson(DetailUrl);
+                //bsUser userobj = JsonHelper.DeserializeFormtJsonToObject<bsUser>(json); // TDObject.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", MainForm.LoginUser.bsU_Id);
+                //bsUser userobj=MainForm.QyTech_EM.GetByPk<bsUser>("bsU_Id", MainForm.LoginUser.bsU_Id);
                 //if (da.Md5(tbPassold.Text) != MainForm.LoginUser.Pwd)
-                if (tbPassold.Text != MainForm.LoginUser.LoginPwd)
+                if (QyTech.Security.IMD5.Encrypt(tbPassold.Text) != MainForm.LoginUser.LoginPwd)
                 {
                     MessageBox.Show("原密码不正确");
                 }
@@ -39,11 +40,15 @@ namespace TDObject.UI
                 {
                     if (tbPass.Text == tbPass2.Text)
                     {
-                        userobj.LoginPwd= tbPass.Text.Trim();
+                        bsUser userobj = MainForm.QyTech_EM.GetByPk<bsUser>("bsU_Id", MainForm.LoginUser.bsU_Id);
 
-                        string strui = JsonHelper.SerializeObject<bsUser>(userobj, null);
-                        DetailUrl = MainForm.App_URI + "lyRemoteServ/UdpUserData?userinfo=" + strui;
-                        string ret = AsyncHttp.CommFun.GetRemoteJson(DetailUrl);
+
+                        userobj.LoginPwd= QyTech.Security.IMD5.Encrypt(tbPass.Text.Trim());
+
+                        string ret= MainForm.QyTech_EM.Modify<bsUser>(userobj);
+                        //string strui = JsonHelper.SerializeObject<bsUser>(userobj, null);
+                        //DetailUrl = MainForm.App_URI + "lyRemoteServ/UdpUserData?userinfo=" + strui;
+                        //string ret = AsyncHttp.CommFun.GetRemoteJson(DetailUrl);
 
                         if (ret != "")
                             MessageBox.Show(ret);
@@ -74,5 +79,7 @@ namespace TDObject.UI
         {
            // QyTech.SkinForm.qyFormUtil.MouseMoveForm(this.Handle);
         }
+
+ 
     }
 }

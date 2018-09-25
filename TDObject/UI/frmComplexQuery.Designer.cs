@@ -29,40 +29,40 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("地块编码");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("纳税人识别号");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("经营范围");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("用地单位名称");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("土地租赁企业名称");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("安全生产等级");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("红黄牌处罚情况");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("行业大类");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("新地标企业");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("营业额");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("税收");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("智能车间");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("土地盘活计划");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("上市情况");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("技术中心获批情况");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("智能制造");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("条件", new System.Windows.Forms.TreeNode[] {
-            treeNode18,
-            treeNode19,
-            treeNode20,
-            treeNode21,
-            treeNode22,
-            treeNode23,
-            treeNode24,
-            treeNode25,
-            treeNode26,
-            treeNode27,
-            treeNode28,
-            treeNode29,
-            treeNode30,
-            treeNode31,
-            treeNode32,
-            treeNode33});
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("地块编码");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("纳税人识别号");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("经营范围");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("用地单位名称");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("土地租赁企业名称");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("安全生产等级");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("红黄牌处罚情况");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("行业大类");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("新地标企业");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("营业额");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("税收");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("智能车间");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("土地盘活计划");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("上市情况");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("技术中心获批情况");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("智能制造");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("条件", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3,
+            treeNode4,
+            treeNode5,
+            treeNode6,
+            treeNode7,
+            treeNode8,
+            treeNode9,
+            treeNode10,
+            treeNode11,
+            treeNode12,
+            treeNode13,
+            treeNode14,
+            treeNode15,
+            treeNode16});
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -161,8 +161,8 @@
             // dgvT2_11
             // 
             this.dgvT2_11.AllowUserToAddRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Azure;
-            this.dgvT2_11.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Azure;
+            this.dgvT2_11.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvT2_11.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvT2_11.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column12});
@@ -358,42 +358,42 @@
             this.treeView1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.treeView1.Location = new System.Drawing.Point(6, 30);
             this.treeView1.Name = "treeView1";
-            treeNode18.Name = "tn_txt_dkbh";
-            treeNode18.Text = "地块编码";
-            treeNode19.Name = "tn_txt_nsrsbh";
-            treeNode19.Text = "纳税人识别号";
-            treeNode20.Name = "tn_txt_jyfw";
-            treeNode20.Text = "经营范围";
-            treeNode21.Name = "tn_txt_yddwmc";
-            treeNode21.Text = "用地单位名称";
-            treeNode22.Name = "tn_txt_zdzlyy";
-            treeNode22.Text = "土地租赁企业名称";
-            treeNode23.Name = "tn_cbo_aqscdj";
-            treeNode23.Text = "安全生产等级";
-            treeNode24.Name = "tn_cbo_hhpcf";
-            treeNode24.Text = "红黄牌处罚情况";
-            treeNode25.Name = "tn_cbo_hydl";
-            treeNode25.Text = "行业大类";
-            treeNode26.Name = "tn_cbo_xdbqy";
-            treeNode26.Text = "新地标企业";
-            treeNode27.Name = "tn_cbo_yye";
-            treeNode27.Text = "营业额";
-            treeNode28.Name = "tn_cbo_ss";
-            treeNode28.Text = "税收";
-            treeNode29.Name = "tn_cbo_zncj";
-            treeNode29.Text = "智能车间";
-            treeNode30.Name = "tn_cbo_tdphjh";
-            treeNode30.Text = "土地盘活计划";
-            treeNode31.Name = "tn_cbo_ssqk";
-            treeNode31.Text = "上市情况";
-            treeNode32.Name = "tn_cbo_zxhp";
-            treeNode32.Text = "技术中心获批情况";
-            treeNode33.Name = "tn_cbo_znzz";
-            treeNode33.Text = "智能制造";
-            treeNode34.Name = "节点0";
-            treeNode34.Text = "条件";
+            treeNode1.Name = "tn_txt_dkbh";
+            treeNode1.Text = "地块编码";
+            treeNode2.Name = "tn_txt_nsrsbh";
+            treeNode2.Text = "纳税人识别号";
+            treeNode3.Name = "tn_txt_jyfw";
+            treeNode3.Text = "经营范围";
+            treeNode4.Name = "tn_txt_yddwmc";
+            treeNode4.Text = "用地单位名称";
+            treeNode5.Name = "tn_txt_zdzlyy";
+            treeNode5.Text = "土地租赁企业名称";
+            treeNode6.Name = "tn_cbo_aqscdj";
+            treeNode6.Text = "安全生产等级";
+            treeNode7.Name = "tn_cbo_hhpcf";
+            treeNode7.Text = "红黄牌处罚情况";
+            treeNode8.Name = "tn_cbo_hydl";
+            treeNode8.Text = "行业大类";
+            treeNode9.Name = "tn_cbo_xdbqy";
+            treeNode9.Text = "新地标企业";
+            treeNode10.Name = "tn_cbo_yye";
+            treeNode10.Text = "营业额";
+            treeNode11.Name = "tn_cbo_ss";
+            treeNode11.Text = "税收";
+            treeNode12.Name = "tn_cbo_zncj";
+            treeNode12.Text = "智能车间";
+            treeNode13.Name = "tn_cbo_tdphjh";
+            treeNode13.Text = "土地盘活计划";
+            treeNode14.Name = "tn_cbo_ssqk";
+            treeNode14.Text = "上市情况";
+            treeNode15.Name = "tn_cbo_zxhp";
+            treeNode15.Text = "技术中心获批情况";
+            treeNode16.Name = "tn_cbo_znzz";
+            treeNode16.Text = "智能制造";
+            treeNode17.Name = "节点0";
+            treeNode17.Text = "条件";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode34});
+            treeNode17});
             this.treeView1.Size = new System.Drawing.Size(198, 532);
             this.treeView1.TabIndex = 3;
             this.treeView1.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterCheck);

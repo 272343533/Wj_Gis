@@ -25,7 +25,7 @@ using ESRI.ArcGIS.Geometry;
 
 namespace TDObject.UI
 {
-    public partial class frmMapPreprint : QyTech.SkinForm.qyForm
+    public partial class frmMapPreprint : QyTech.SkinForm.qyFormWithTitle
     {
         public AxMapControl _axMap;
 
@@ -38,6 +38,8 @@ namespace TDObject.UI
         
         private short m_CurrentPrintPage;
 
+        private Size _size;
+
         public frmMapPreprint(AxMapControl axMap)
         {
             InitializeComponent();
@@ -47,25 +49,68 @@ namespace TDObject.UI
 
         private void frmMapPreprint_Load(object sender, EventArgs e)
         {
+
             //_axMap.Refresh();
             try
             {
                 Copy();
+                VH();
+                //axPageLayoutControl1.ActiveView.ShowRulers = true;
+                //axPageLayoutControl1.ActiveView.ShowScrollBars = true;
+                //axPageLayoutControl1.ActiveView.ShowSelection = true;
+
                 //IPageLayout pageLayout = axPageLayoutControl1.ActiveView as IPageLayout;
                 // AddMapSurround(pageLayout, _axMap.ActiveView);
-                //AddNorthArrow(pageLayout, _axMap.ActiveView as IMap);
-                // AddMapSurround(axPageLayoutControl1.PageLayout, this._axMap.ActiveView);
-                //AxPageLayoutControl pPageLayout = axPageLayoutControl1;
+                ////AddNorthArrow(pageLayout, _axMap.ActiveView as IMap);
+                //// AddMapSurround(axPageLayoutControl1.PageLayout, this._axMap.ActiveView);
+                ////AxPageLayoutControl pPageLayout = axPageLayoutControl1;
 
-                axPageLayoutControl1.ZoomToWholePage();
-                axPageLayoutControl1.ActiveView.FocusMap = _axMap.Map;
-                
+                //axPageLayoutControl1.ZoomToWholePage();
+                //axPageLayoutControl1.ActiveView.FocusMap = _axMap.Map;
+
             }
             catch (Exception ex)
             {
                 log.Error(this.Name + ":" + ex.Message);
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void VH()
+        {
+            IMap pMap = axPageLayoutControl1.ActiveView.FocusMap;
+
+            IGraphicsContainer pGraphicsContainer = (IGraphicsContainer)axPageLayoutControl1.PageLayout;
+
+            IMapFrame pMapFrame = (IMapFrame)pGraphicsContainer.FindFrame(pMap);
+
+            ISymbolBorder pSymborder = new SymbolBorderClass();
+
+            pSymborder.CornerRounding = 0;
+
+            IBorder pBorder = pSymborder;
+
+            pMapFrame.Border = pBorder;
+
+            pMapFrame.ExtentType = esriExtentTypeEnum.esriExtentBounds;
+
+            IElement pElement = (IElement)pMapFrame;
+
+            IEnvelope pEnvelop = new EnvelopeClass();
+
+            pEnvelop.PutCoords(0.5, 0.5, 29.2, 20.5);  //这里设置mapframe的大小
+
+            IGeometry pGeometry = pEnvelop;
+
+            pElement.Geometry = pGeometry;
+
+            IPage pPage = axPageLayoutControl1.Page;
+
+            pPage.Orientation = 1;
+
+            pPage.PutCustomSize(29.7, 21.0);  //这里设置page的大小
+
+            axPageLayoutControl1.ActiveView.Refresh();
         }
 
         private void Copy()
@@ -368,10 +413,25 @@ namespace TDObject.UI
             export.ExportFileName = pathFileName;
 
             // Microsoft Windows default DPI resolution
-            export.Resolution = 96;
+            export.Resolution = 192;//96 ;
             tagRECT exportRECT = activeView.ExportFrame;
             ESRI.ArcGIS.Geometry.IEnvelope envelope = new ESRI.ArcGIS.Geometry.EnvelopeClass();
+            //envelope = activeView.Extent.Envelope;
             envelope.PutCoords(exportRECT.left, exportRECT.top, exportRECT.right, exportRECT.bottom);
+
+
+            tagRECT exportRect = new tagRECT();
+            exportRect.left = exportRect.top = 0;
+            exportRect.right = exportRECT.right - exportRect.left;//.Width;
+            exportRect.bottom = (int)(exportRect.right * activeView.Extent.Envelope.Height / activeView.Extent.Envelope.Width);
+            //输出范围
+            envelope.PutCoords(exportRect.left, exportRect.top, exportRect.right, exportRect.bottom);
+            export.PixelBounds = envelope;
+
+
+
+
+
             export.PixelBounds = envelope;
             System.Int32 hDC = export.StartExporting();
 

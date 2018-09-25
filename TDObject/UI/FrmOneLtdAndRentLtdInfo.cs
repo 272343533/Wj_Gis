@@ -38,7 +38,7 @@ using TDObject;
 
 namespace TDObject.UI
 {
-    public partial class FrmOneLtdAndRentLtdInfo : QyTech.SkinForm.qyForm//WithTitle
+    public partial class FrmOneLtdAndRentLtdInfo : QyTech.SkinForm.qyFormWithTitle
     {
         private string dkbh;
         List<LtdPhoto> photos;
@@ -53,6 +53,7 @@ namespace TDObject.UI
         {
             InitializeComponent();
             dkbh = dkbm;
+            this.Title = "企业信息";
         }
 
         /// <summary>
@@ -66,7 +67,8 @@ namespace TDObject.UI
             photos = photoes;
             dkbh = "";// photos[0].SSDKBM;
             this.Height = this.Height - 270;
-
+            this.Title = "用地照片信息";
+            this.dgvT2_12.Visible = false;
         }
 
         private void FrmOneLtdAndRentLtdInfo_Load(object sender, EventArgs e)
@@ -106,20 +108,19 @@ namespace TDObject.UI
          }
         private void FrmOneLtdAndRentLtdInfo_Shown(object sender, EventArgs e)
         {
-            if (photos != null)
+            CurrPhotoNo = 0;
+            if (photos.Count > 0)
             {
-                CurrPhotoNo = 0;
-                if (photos.Count > 0)
-                {
-                    CurrPhotoNo = 1;
-                    DispImg();
-                }
-                textBox1.Text = CurrPhotoNo.ToString() + "/" + photos.Count.ToString();
-
+                CurrPhotoNo = 1;
+                DispImg();
             }
-            else {
+            else
+            {
+                pictureBox1.Image = Image.FromFile(Application.StartupPath + @"\noimage.jpg");
                 this.label1.Text = "无照片信息";
             }
+            textBox1.Text = CurrPhotoNo.ToString() + "/" + photos.Count.ToString();
+
         }
         private void button3_Click(object sender, EventArgs e)
         {
@@ -196,7 +197,8 @@ namespace TDObject.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show("没有找到图片数据！");
+                MessageBox.Show("没有找到图片，可能已被删除！");
+                pictureBox1.Image = Image.FromFile(Application.StartupPath + @"\noimage.jpg");
             }
         }
 

@@ -13,7 +13,7 @@ using SunMvcExpress.Dao;
 
 namespace TDObject.UI
 {
-    public partial class frmTotalHY : QyTech.SkinForm.qyForm
+    public partial class frmTotalHY : QyTech.SkinForm.qyFormWithTitle
     {
         public frmTotalHY()
         {
@@ -53,6 +53,7 @@ namespace TDObject.UI
         {
             try
             {
+                this.Title = "按行业统计";
                 //获取统计时间数据
                 List<string> items = TDObject.DAOBLL.ImportTBll.GetYearMonths("t企业基础数据");
                 cboYearMonth.DataSource = items;
@@ -62,10 +63,20 @@ namespace TDObject.UI
                 cboYearMonth.Refresh();
 
                 treeView1.Nodes.Clear();
-                List<bsHYDL> hydl = MainForm.EM.GetListNoPaging<bsHYDL>("", "");
+                List<bsHYDL> hydl = MainForm.EM.GetListNoPaging<bsHYDL>("HLevel=1", "");
                 foreach (bsHYDL item in hydl)
                 {
-                    treeView1.Nodes.Add(item.HYDL);
+                    TreeNode tn = new TreeNode();
+                    tn.Text = item.Name;
+                     List<bsHYDL> subhydl = MainForm.EM.GetListNoPaging<bsHYDL>("PId=" + item.Id, "HNo");
+                    foreach (bsHYDL sitem in subhydl)
+                    {
+                        TreeNode stn = new TreeNode();
+                        stn.Text = sitem.Name;
+                        tn.Nodes.Add(stn);
+                   }
+                    treeView1.Nodes.Add(tn);
+
                 }
                 treeView1.Nodes[0].ExpandAll();
 
@@ -96,6 +107,14 @@ namespace TDObject.UI
                         subtn.ForeColor = Color.Red;
                     else
                         subtn.ForeColor = Color.Black;
+                    foreach(TreeNode tn2 in subtn.Nodes)
+                    {
+                        if (tn2.Text == tn.Text)
+                            tn2.ForeColor = Color.Red;
+                        else
+                            tn2.ForeColor = Color.Black;
+
+                    }
                 }
                 RefreshChart();
             }
@@ -119,39 +138,48 @@ namespace TDObject.UI
                 string YearMonth = "YearMonth='" + Ym + "' and ";
                 //更改图形数据
                 chart1.Series[0].Points.Clear();
+                chart1.Series[0].ChartType = SeriesChartType.Column;
+
                 List<bsTotalResult> ts = new List<bsTotalResult>();
+
+                string[] spParams = new string[3];
+                spParams[0] =Ym.ToString() ;
+                spParams[2] = CurrHYName ;
 
                 if (CurrTotalType == "投资类型分析")
                 {
-                    chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>("YearMonth='" + Ym.Substring(0,4) + "' and " + "TotalType='行业投资类型分析' and GLQName like '%" + CurrHYName + "'", "");
+                    spParams[1] = "行业投资类型分析";
+                    //ts = MainForm.EM.GetListNoPaging<bsTotalResult>("YearMonth='" + Ym.Substring(0,4) + "' and " + "TotalType='行业投资类型分析' and GLQName like '%" + CurrHYName + "'", "");
                 }
                 else if (CurrTotalType == "行业企业数量")
                 {
-                    chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区企业数量' and GLQName like '%" + CurrHYName + "'", "");
+                    spParams[1] = "行业管理区企业数量";
+                    //ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区企业数量' and GLQName like '%" + CurrHYName + "'", "");
 
                 }
                 else if (CurrTotalType == "销售额统计")
                 {
-                    chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区销售额统计' and GLQName like '%" + CurrHYName + "'", "");
+                    spParams[1] = "行业管理区销售额统计";
+                    //ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区销售额统计' and GLQName like '%" + CurrHYName + "'", "");
                 }
                 else if (CurrTotalType == "税收统计")
                 {
-                    chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区税收统计' and GLQName like '%" + CurrHYName + "'", "");
+                    spParams[1] = "行业管理区税收统计";
+                    //ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区税收统计' and GLQName like '%" + CurrHYName + "'", "");
                 }
                 else if (CurrTotalType == "能耗统计")
                 {
-                    chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区能耗统计' and GLQName like '%" + CurrHYName + "'", "");
+                    spParams[1] = "行业管理区能耗统计";
+                    //ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区能耗统计' and GLQName like '%" + CurrHYName + "'", "");
                 }
                 else if (CurrTotalType == "土地面积统计")
                 {
-                    chart1.Series[0].ChartType = SeriesChartType.Column;
-                    ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区土地面积统计' and GLQName like '%" + CurrHYName + "'", "");
+                    spParams[1] = "行业管理区土地面积统计";
+                    //ts = MainForm.EM.GetListNoPaging<bsTotalResult>(YearMonth + "TotalType='行业管理区土地面积统计' and GLQName like '%" + CurrHYName + "'", "");
                 }
+
+                ts = MainForm.EM.GetAllByStorProcedure<bsTotalResult>("splyTotalWjReportOnTime", spParams);
+
                 double sum = 0;
                 for (int i = 0; i < ts.Count; i++)
                 {
@@ -160,16 +188,26 @@ namespace TDObject.UI
 
                     chart1.Series[0].Points.AddXY(i + 1, item.TotalValue);
                     chart1.Series[0].Points[i].LegendText = item.TypeDesp;
-                    if (CurrTotalType == "投资类型分析" ||CurrTotalType == "行业企业数量")
-                        chart1.Series[0].Points[i].Label = item.TotalValue.ToString()+"家";
+                    if (CurrTotalType == "投资类型分析" || CurrTotalType == "行业企业数量")
+                    {
+                        chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "家";
+                        chart1.Series[0].Points[i].AxisLabel = item.TypeDesp;
+                    }
                     else if (CurrTotalType == "土地面积统计")
-                        chart1.Series[0].Points[i].Label = item.TotalValue.ToString()+"亩";
+                    {
+                        chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "亩";
+                        chart1.Series[0].Points[i].AxisLabel = item.TypeDesp;//.Substring(0,2);
+                    }
                     else if (CurrTotalType == "能耗统计")
+                    {
                         chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "千瓦时";
+                        chart1.Series[0].Points[i].AxisLabel = item.TypeDesp;//.Substring(0, 2);
+                    }
                     else
+                    {
                         chart1.Series[0].Points[i].Label = item.TotalValue.ToString() + "万元";
-                    chart1.Series[0].Points[i].LabelToolTip = item.TypeDesp;
-                    chart1.Series[0].Points[i].AxisLabel = item.TypeDesp;
+                        chart1.Series[0].Points[i].AxisLabel = item.TypeDesp;//.Substring(0, 2);
+                    }
                     //chart1.Series[0].ax
 
                 }

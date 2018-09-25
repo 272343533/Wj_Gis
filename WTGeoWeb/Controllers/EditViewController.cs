@@ -13,6 +13,7 @@ using System.Globalization;
 using log4net;
 using log4net.Config;
 using QyTech.Json;
+using QyTech.Auth.Dao;
 
 
 [assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config", Watch = true)]
@@ -47,7 +48,7 @@ namespace WTGeoWeb.Controllers
         /// <returns></returns>
         public ActionResult FwjzWebView(string id,string bsU_Id)
         {
-            bsUser obj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", Guid.Parse(bsU_Id));
+            bsUser obj = WTGeoWeb.BLL.CommSetting.EM_Base.GetByPk<bsUser>("bsU_Id", Guid.Parse(bsU_Id));
             log.Info("login1:" + obj.bsR_Name);
             if (obj != null)
             {
@@ -215,7 +216,7 @@ namespace WTGeoWeb.Controllers
         {
             log.Error("id:" + id.ToString()+"---bsU_Id"+bsU_Id);
             ViewBag.Id = id;
-            bsUser obj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", Guid.Parse(bsU_Id));
+            bsUser obj = WTGeoWeb.BLL.CommSetting.EM_Base.GetByPk<bsUser>("bsU_Id", Guid.Parse(bsU_Id));
             log.Info("login1:" + obj.bsR_Name);
             if (obj != null)
             {

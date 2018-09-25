@@ -1015,217 +1015,217 @@ namespace TDObject.UI
         }
 
         //这个定位有bug，参考TypeFilter 中的定位
-        private void toolStripButton5_Click(object sender, EventArgs e)
-        {
-            try{
-                IEnvelope newdisp = (IEnvelope)new Envelope();
-                bool findflag = false;
-                if (CurrPageFlag == 1)
-                {
-                    List<t开发区2000万企业> uis = dgv1.DataSource as List<t开发区2000万企业>;
-                    foreach (t开发区2000万企业 obj in uis)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
-                            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
-                            if (pGeo.Count > 0)
-                            {
-                                newdisp.Union(pGeo[0].Extent);
-                                findflag = true;
-                            }
-                        }
-                    }
-                }
-                else if (CurrPageFlag == 2)
-                {
-                    List<t标准化级别> uis = dgv1.DataSource as List<t标准化级别>;
-                    foreach (t标准化级别 obj in uis)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
-                            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
-                            if (pGeo.Count > 0)
-                            {
-                                newdisp.Union(pGeo[0].Extent);
-                                findflag = true;
-                            }
-                        }
-                    }
-                }
-                else if (CurrPageFlag == 3 || CurrPageFlag == 131)
-                {
-                    List<t同里镇开发区上市企业台帐台资> uis = dgv31.DataSource as List<t同里镇开发区上市企业台帐台资>;
+        //private void toolStripButton5_Click(object sender, EventArgs e)
+        //{
+        //    try{
+        //        IEnvelope newdisp = (IEnvelope)new Envelope();
+        //        bool findflag = false;
+        //        if (CurrPageFlag == 1)
+        //        {
+        //            List<t开发区2000万企业> uis = dgv1.DataSource as List<t开发区2000万企业>;
+        //            foreach (t开发区2000万企业 obj in uis)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
+        //                    List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
+        //                    if (pGeo.Count > 0)
+        //                    {
+        //                        newdisp.Union(pGeo[0].Extent);
+        //                        findflag = true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else if (CurrPageFlag == 2)
+        //        {
+        //            List<t标准化级别> uis = dgv1.DataSource as List<t标准化级别>;
+        //            foreach (t标准化级别 obj in uis)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
+        //                    List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
+        //                    if (pGeo.Count > 0)
+        //                    {
+        //                        newdisp.Union(pGeo[0].Extent);
+        //                        findflag = true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else if (CurrPageFlag == 3 || CurrPageFlag == 131)
+        //        {
+        //            List<t同里镇开发区上市企业台帐台资> uis = dgv31.DataSource as List<t同里镇开发区上市企业台帐台资>;
 
-                    foreach (t同里镇开发区上市企业台帐台资 obj in uis)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
-                            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
-                            if (pGeo.Count > 0)
-                            {
-                                newdisp.Union(pGeo[0].Extent);
-                                findflag = true;
-                            }
-                        }
-                    }
-                }
-                else if (CurrPageFlag == 132)
-                {
-                    List<t同里镇开发区上市企业台帐三板> uis = dgv32.DataSource as List<t同里镇开发区上市企业台帐三板>;
+        //            foreach (t同里镇开发区上市企业台帐台资 obj in uis)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
+        //                    List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
+        //                    if (pGeo.Count > 0)
+        //                    {
+        //                        newdisp.Union(pGeo[0].Extent);
+        //                        findflag = true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else if (CurrPageFlag == 132)
+        //        {
+        //            List<t同里镇开发区上市企业台帐三板> uis = dgv32.DataSource as List<t同里镇开发区上市企业台帐三板>;
 
-                    foreach (t同里镇开发区上市企业台帐三板 obj in uis)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
-                            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
-                            if (pGeo.Count > 0)
-                            {
-                                newdisp.Union(pGeo[0].Extent);
-                                findflag = true;
-                            }
-                        }
-                    }
-                }
-                else if (CurrPageFlag == 133)
-                {
-                    List<t同里镇开发区上市企业台帐主版后备> uis = dgv33.DataSource as List<t同里镇开发区上市企业台帐主版后备>;
+        //            foreach (t同里镇开发区上市企业台帐三板 obj in uis)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
+        //                    List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
+        //                    if (pGeo.Count > 0)
+        //                    {
+        //                        newdisp.Union(pGeo[0].Extent);
+        //                        findflag = true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else if (CurrPageFlag == 133)
+        //        {
+        //            List<t同里镇开发区上市企业台帐主版后备> uis = dgv33.DataSource as List<t同里镇开发区上市企业台帐主版后备>;
 
-                    foreach (t同里镇开发区上市企业台帐主版后备 obj in uis)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
-                            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
-                            if (pGeo.Count > 0)
-                            {
-                                newdisp.Union(pGeo[0].Extent);
-                                findflag = true;
-                            }
-                        }
-                    }
-                }
-                else if (CurrPageFlag == 4)
-                {
-                    List<t清洁生产历年> uis = dgv4.DataSource as List<t清洁生产历年>;
+        //            foreach (t同里镇开发区上市企业台帐主版后备 obj in uis)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
+        //                    List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
+        //                    if (pGeo.Count > 0)
+        //                    {
+        //                        newdisp.Union(pGeo[0].Extent);
+        //                        findflag = true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else if (CurrPageFlag == 4)
+        //        {
+        //            List<t清洁生产历年> uis = dgv4.DataSource as List<t清洁生产历年>;
 
-                    foreach (t清洁生产历年 obj in uis)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
-                            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
-                            if (pGeo.Count > 0)
-                            {
-                                newdisp.Union(pGeo[0].Extent);
-                                findflag = true;
-                            }
-                        }
-                    }
-                }
-                else if (CurrPageFlag == 5)
-                {
-                    List<t吴江区智能制造示范试点企业名单> uis = dgv5.DataSource as List<t吴江区智能制造示范试点企业名单>;
+        //            foreach (t清洁生产历年 obj in uis)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
+        //                    List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
+        //                    if (pGeo.Count > 0)
+        //                    {
+        //                        newdisp.Union(pGeo[0].Extent);
+        //                        findflag = true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else if (CurrPageFlag == 5)
+        //        {
+        //            List<t吴江区智能制造示范试点企业名单> uis = dgv5.DataSource as List<t吴江区智能制造示范试点企业名单>;
 
-                    foreach (t吴江区智能制造示范试点企业名单 obj in uis)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
-                            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
-                            if (pGeo.Count > 0)
-                            {
-                                newdisp.Union(pGeo[0].Extent);
-                                findflag = true;
-                            }
-                        }
-                    }
-                }
-                else if (CurrPageFlag == 6)
-                {
-                    List<t新地标计划企业名单> uis = dgv6.DataSource as List<t新地标计划企业名单>;
+        //            foreach (t吴江区智能制造示范试点企业名单 obj in uis)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
+        //                    List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
+        //                    if (pGeo.Count > 0)
+        //                    {
+        //                        newdisp.Union(pGeo[0].Extent);
+        //                        findflag = true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else if (CurrPageFlag == 6)
+        //        {
+        //            List<t新地标计划企业名单> uis = dgv6.DataSource as List<t新地标计划企业名单>;
 
-                    foreach (t新地标计划企业名单 obj in uis)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
-                            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
-                            if (pGeo.Count > 0)
-                            {
-                                newdisp.Union(pGeo[0].Extent);
-                                findflag = true;
-                            }
-                        }
-                    }
-                }
-                else if (CurrPageFlag == 7)
-                {
-                    List<t智能车间> uis = dgv7.DataSource as List<t智能车间>;
-                    foreach (t智能车间 obj in uis)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
-                            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
-                            if (pGeo.Count > 0)
-                            {
-                                newdisp.Union(pGeo[0].Extent);
-                                findflag = true;
-                            }
-                        }
-                    }
-                }
-                else if (CurrPageFlag == 8)
-                {
-                    List<t闲置土地盘活计划表> uis = dgv8.DataSource as List<t闲置土地盘活计划表>;
+        //            foreach (t新地标计划企业名单 obj in uis)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
+        //                    List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
+        //                    if (pGeo.Count > 0)
+        //                    {
+        //                        newdisp.Union(pGeo[0].Extent);
+        //                        findflag = true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else if (CurrPageFlag == 7)
+        //        {
+        //            List<t智能车间> uis = dgv7.DataSource as List<t智能车间>;
+        //            foreach (t智能车间 obj in uis)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
+        //                    List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
+        //                    if (pGeo.Count > 0)
+        //                    {
+        //                        newdisp.Union(pGeo[0].Extent);
+        //                        findflag = true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else if (CurrPageFlag == 8)
+        //        {
+        //            List<t闲置土地盘活计划表> uis = dgv8.DataSource as List<t闲置土地盘活计划表>;
 
-                    foreach (t闲置土地盘活计划表 obj in uis)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
-                            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
-                            if (pGeo.Count > 0)
-                            {
-                                newdisp.Union(pGeo[0].Extent);
-                                findflag = true;
-                            }
-                        }
-                    }
-                }
-                else if (CurrPageFlag == 9)
-                {
-                    List<t企业技术中心台账> uis = dgv9.DataSource as List<t企业技术中心台账>;
+        //            foreach (t闲置土地盘活计划表 obj in uis)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
+        //                    List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
+        //                    if (pGeo.Count > 0)
+        //                    {
+        //                        newdisp.Union(pGeo[0].Extent);
+        //                        findflag = true;
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        else if (CurrPageFlag == 9)
+        //        {
+        //            List<t企业技术中心台账> uis = dgv9.DataSource as List<t企业技术中心台账>;
 
-                    foreach (t企业技术中心台账 obj in uis)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
-                            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
-                            if (pGeo.Count > 0)
-                            {
-                                newdisp.Union(pGeo[0].Extent);
-                                findflag = true;
-                            }
-                        }
-                    }
-                }
+        //            foreach (t企业技术中心台账 obj in uis)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    ILayer pLayer = GlobalVariables.GetOverviewLayer(GlobalVariables.axMapControl, "企业范围");
+        //                    List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "DKBH", obj.地块编号);
+        //                    if (pGeo.Count > 0)
+        //                    {
+        //                        newdisp.Union(pGeo[0].Extent);
+        //                        findflag = true;
+        //                    }
+        //                }
+        //            }
+        //        }
 
-                if (!findflag)
-                    MessageBox.Show("请先查询企业，目前没有企业定位！");
-                else
-                    LayerControl.ChangeMapExtent(GlobalVariables.axMapControl, newdisp);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("请核实数据!");
-            }
-        }
+        //        if (!findflag)
+        //            MessageBox.Show("请先查询企业，目前没有企业定位！");
+        //        else
+        //            LayerControl.ChangeMapExtent(GlobalVariables.axMapControl, newdisp);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("请核实数据!");
+        //    }
+        //}
      
     }
 }

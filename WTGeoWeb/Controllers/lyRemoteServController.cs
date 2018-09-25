@@ -12,6 +12,8 @@ using QyTech.Json;
 using log4net;
 using System.Security.Cryptography;
 
+using QyTech.Auth.Dao;
+
 namespace WTGeoWeb.Controllers
 {
     public class lyRemoteServController : Controller
@@ -147,31 +149,31 @@ namespace WTGeoWeb.Controllers
         /// </summary>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public string GetAllOrgData(string userid)
-        {
-            log.Info("DoComplexQuery:" + userid);
-            List<bsOrganize> list = new List<bsOrganize>();
-            if (userid == null || userid.Trim() == "")
-            {
-                list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsOrganize>("OrgType='村' or OrgType='镇'", "");
+        //public string GetAllOrgData(string userid)
+        //{
+        //    log.Info("DoComplexQuery:" + userid);
+        //    List<bsOrganize> list = new List<bsOrganize>();
+        //    if (userid == null || userid.Trim() == "")
+        //    {
+        //        list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsOrganize>("OrgType='村' or OrgType='镇'", "");
            
-            }
-            else
-            {
-                bsUser userobj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_id", Guid.Parse(userid));
-                if (userobj.bsO_RightsCode == "全部村镇")
-                {
-                    list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsOrganize>("OrgType='村' or OrgType='镇'", "");
-                }
-                else
-                {
-                    list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsOrganize>(" Name like '%镇%' or Name like '%" + userobj.bsO_RightsCode + "%' and (OrgType='村' or OrgType='镇')", "");
-                }
-            }
-            string json = JsonHelper.SerializeObjects<bsOrganize>(list, new List<string>());
+        //    }
+        //    else
+        //    {
+        //        bsUser userobj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_id", Guid.Parse(userid));
+        //        if (userobj.bsO_RightsCode == "全部村镇")
+        //        {
+        //            list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsOrganize>("OrgType='村' or OrgType='镇'", "");
+        //        }
+        //        else
+        //        {
+        //            list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsOrganize>(" Name like '%镇%' or Name like '%" + userobj.bsO_RightsCode + "%' and (OrgType='村' or OrgType='镇')", "");
+        //        }
+        //    }
+        //    string json = JsonHelper.SerializeObjects<bsOrganize>(list, new List<string>());
 
-            return json;
-        }
+        //    return json;
+        //}
 
      
 
@@ -183,11 +185,11 @@ namespace WTGeoWeb.Controllers
           
             if (bsoname == null || bsoname == "")
             {
-                list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsUser>("bso_Name!='System'", "bsR_Name,LoginName");
+                list = WTGeoWeb.BLL.CommSetting.EM_Base.GetListNoPaging<bsUser>("bso_Name!='System'", "bsR_Name,LoginName");
             }
             else
             {
-                list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<bsUser>("bsO_Name='" + bsoname + "'", "bsR_Name,LoginName");
+                list = WTGeoWeb.BLL.CommSetting.EM_Base.GetListNoPaging<bsUser>("bsO_Name='" + bsoname + "'", "bsR_Name,LoginName");
             }
             string json = JsonHelper.SerializeObjects<bsUser>(list, new List<string>());
 
@@ -197,7 +199,7 @@ namespace WTGeoWeb.Controllers
         public string GetOneUserData(string id)
         {
             log.Info("AddUserData:" + id);
-            bsUser obj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", Guid.Parse(id));
+            bsUser obj = WTGeoWeb.BLL.CommSetting.EM_Base.GetByPk<bsUser>("bsU_Id", Guid.Parse(id));
             string json = JsonHelper.SerializeObject<bsUser>(obj, null);
             return json;
         }
@@ -207,7 +209,7 @@ namespace WTGeoWeb.Controllers
             log.Info("AddUserData:" + userinfo);
             bsUser obj = JsonHelper.DeserializeFormtJsonToObject<bsUser>(userinfo);
             obj.LoginPwd = MD5(obj.LoginPwd);
-            string ret = WTGeoWeb.BLL.CommSetting.EM.Add<bsUser>(obj);
+            string ret = WTGeoWeb.BLL.CommSetting.EM_Base.Add<bsUser>(obj);
 
             if (ret == "")
                 return "";
@@ -219,7 +221,7 @@ namespace WTGeoWeb.Controllers
         public string DelUserData(string id)
         {
             log.Info("DelUserData:" + id);
-            string ret = WTGeoWeb.BLL.CommSetting.EM.DeleteById<bsUser>("bsU_Id", Guid.Parse(id));
+            string ret = WTGeoWeb.BLL.CommSetting.EM_Base.DeleteById<bsUser>("bsU_Id", Guid.Parse(id));
 
             if (ret == "")
                 return "";
@@ -236,24 +238,24 @@ namespace WTGeoWeb.Controllers
 
         }
 
-        public string UdpUserData(string userinfo)
-        {
-            log.Info("UdpUserData:" + userinfo);
-            bsUser obj = JsonHelper.DeserializeFormtJsonToObject<bsUser>(userinfo);
-            bsUser dbobj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", obj.bsU_Id);
-            dbobj.LoginName = obj.LoginName;
-            dbobj.NickName = obj.NickName;
-            dbobj.bsR_Name = obj.bsR_Name;
-            dbobj.LoginDt = obj.LoginDt;
-            dbobj.LoginPwd = obj.LoginPwd;
-            dbobj.bsO_RightsCode = obj.bsO_RightsCode;
-            string ret = WTGeoWeb.BLL.CommSetting.EM.Modify<bsUser>(dbobj);
+        //public string UdpUserData(string userinfo)
+        //{
+        //    log.Info("UdpUserData:" + userinfo);
+        //    bsUser obj = JsonHelper.DeserializeFormtJsonToObject<bsUser>(userinfo);
+        //    bsUser dbobj = WTGeoWeb.BLL.CommSetting.EM.GetByPk<bsUser>("bsU_Id", obj.bsU_Id);
+        //    dbobj.LoginName = obj.LoginName;
+        //    dbobj.NickName = obj.NickName;
+        //    dbobj.bsR_Name = obj.bsR_Name;
+        //    dbobj.LoginDt = obj.LoginDt;
+        //    dbobj.LoginPwd = obj.LoginPwd;
+        //    dbobj.bsO_RightsCode = obj.bsO_RightsCode;
+        //    string ret = WTGeoWeb.BLL.CommSetting.EM.Modify<bsUser>(dbobj);
 
-            if (ret == "")
-                return "";
-            else
-                return ret;
-        }
+        //    if (ret == "")
+        //        return "";
+        //    else
+        //        return ret;
+        //}
 
         #endregion
 

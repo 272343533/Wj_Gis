@@ -8,6 +8,8 @@ namespace QyTech.SkinForm.UICreate
 
         public static string GetObjectPropertyValue(object t, string propertyname)
         {
+            if (t == null)
+                return "";
             Type type = t.GetType();// typeof(T);
 
             PropertyInfo property = type.GetProperty(propertyname);

@@ -34,7 +34,18 @@ namespace QyTech.ExcelOper
                 eventNumChanged(num,percent);
         }
 
-        public string ExportDataTableToExcl(System.Data.DataTable exDataTable, string exFileName, string propertiesFilds,
+        /// <summary>
+        /// 通过datatable导出，需要模板
+        /// </summary>
+        /// <param name="exDataTable"></param>
+        /// <param name="exFileName"></param>
+        /// <param name="propertiesFilds"></param>
+        /// <param name="HaveNoColumn"></param>
+        /// <param name="RowStart"></param>
+        /// <param name="ColStart"></param>
+        /// <param name="localOrWeb"></param>
+        /// <returns></returns>
+        public string ExportDataTableToExclWithModel(System.Data.DataTable exDataTable, string exFileName, string propertiesFilds,
         bool HaveNoColumn = false, int RowStart = 2, int ColStart = 1, string localOrWeb = "local")
         {
 
@@ -65,11 +76,72 @@ namespace QyTech.ExcelOper
             exportSetting.ExServerPath += exDataTable.TableName + ".xls";// typeof(T).Name.ToString() + ".xls";
 
 
-            string filePath = QyExcel_.Export(exDataTable, exportSetting);
+            string filePath = QyExcel_.ExportWithTemplate(exDataTable, exportSetting);
             return filePath;
         }
 
 
+        /// <summary>
+        /// datatable导出，不需要模板
+        /// </summary>
+        /// <param name="exDataTable"></param>
+        /// <param name="exFileName"></param>
+        /// <param name="propertiesFields"></param>
+        /// <param name=""></param>
+        /// <param name="HaveNoColumn"></param>
+        /// <param name="RowStart"></param>
+        /// <param name="ColStart"></param>
+        /// <param name="localOrWeb"></param>
+        /// <returns></returns>
+        public string ExportDataTableToExcl(System.Data.DataTable exDataTable, string exFileName, Dictionary<string, string> propertiesFields,
+       bool HaveNoColumn = false, int RowStart = 2, int ColStart = 1, string localOrWeb = "local")
+        {
+
+            int i = 1;
+            //传进来的列表都放入  错误的列不进行处理  内部实现
+          
+            IQyExclSettings exportSetting;
+            if (localOrWeb.ToLower() == "local")
+                exportSetting = new QyExclSettingsLocal();
+            else
+                exportSetting = new QyExclSettingsWeb();
+
+            exportSetting.ExFileName = exFileName;
+            exportSetting.DicFields = propertiesFields;
+            exportSetting.NullValueHandling = NullValueHandling.Include;
+            exportSetting.FormatDT = "yyyy - MM - dd HH: mm: ss";
+            exportSetting.ColStartValue = ColStart;
+            exportSetting.RowStartValue = RowStart;
+            exportSetting.HaveNumberColumn = HaveNoColumn;
+            exportSetting.ExServerPath += exDataTable.TableName + ".xls";// typeof(T).Name.ToString() + ".xls";
+
+
+            //string filePath = QyExcel_.Export(exDataTable, exportSetting);
+            string filePath = QyExcel_.ExportWithoutTemplate(exDataTable, exportSetting);
+            
+            return filePath;
+        }
+        
+
+
+
+
+
+
+
+            /// <summary>
+            /// 通过List<object>导出
+            /// </summary>
+            /// <typeparam name="T"></typeparam>
+            /// <param name="exDate"></param>
+            /// <param name="exFileName"></param>
+            /// <param name="propertiesFilds"></param>
+            /// <param name="FormatDT"></param>
+            /// <param name="HaveNoColumn"></param>
+            /// <param name="RowStart"></param>
+            /// <param name="ColStart"></param>
+            /// <param name="localOrWeb"></param>
+            /// <returns></returns>
         public string ExportListToExcl<T>(List<T> exDate, string exFileName, string propertiesFilds,
           string FormatDT = "yyyy-MM-dd HH:mm:ss", bool HaveNoColumn = false, int RowStart = 2, int ColStart = 1,string localOrWeb="local")
         {

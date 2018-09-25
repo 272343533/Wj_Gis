@@ -154,166 +154,166 @@ namespace TDObject.BLL.UIBLL
 
         }
 
-        public void RefreshData(int refreshflag, string value)
-        {
-            try
-            {
-                string dkbhs = "";
+        //public void RefreshData(int refreshflag, string value)
+        //{
+        //    try
+        //    {
+        //        string dkbhs = "";
 
-                string sqlwhere = "";
-                string sqlOrderby = "";
-                ManageWhereOrderby(refreshflag, value, ref sqlwhere, ref sqlOrderby);
+        //        string sqlwhere = "";
+        //        string sqlOrderby = "";
+        //        ManageWhereOrderby(refreshflag, value, ref sqlwhere, ref sqlOrderby);
 
-                if (sqlwhere.Length > 0)
-                    sqlwhere = sqlwhere.Substring(4);
-                else if (refreshflag < 130)
-                {
-                    return;
-                }
-                if (refreshflag == 1)
-                {
-                    List<t开发区2000万企业> objs = MainForm.EM.GetListNoPaging<t开发区2000万企业>(sqlwhere, sqlOrderby);
-                    foreach (t开发区2000万企业 obj in objs)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            dkbhs += "," + obj.地块编号;
-                        }
-                    }
-                }
-                else if (refreshflag == 2)
-                {
-                    List<t标准化级别> objs = MainForm.EM.GetListNoPaging<t标准化级别>(sqlwhere, sqlOrderby);
-                    foreach (t标准化级别 obj in objs)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            dkbhs += "," + obj.地块编号;
-                        }
-                    }
+        //        if (sqlwhere.Length > 0)
+        //            sqlwhere = sqlwhere.Substring(4);
+        //        else if (refreshflag < 130)
+        //        {
+        //            return;
+        //        }
+        //        if (refreshflag == 1)
+        //        {
+        //            List<t开发区2000万企业> objs = MainForm.EM.GetListNoPaging<t开发区2000万企业>(sqlwhere, sqlOrderby);
+        //            foreach (t开发区2000万企业 obj in objs)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    dkbhs += "," + obj.地块编号;
+        //                }
+        //            }
+        //        }
+        //        else if (refreshflag == 2)
+        //        {
+        //            List<t标准化级别> objs = MainForm.EM.GetListNoPaging<t标准化级别>(sqlwhere, sqlOrderby);
+        //            foreach (t标准化级别 obj in objs)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    dkbhs += "," + obj.地块编号;
+        //                }
+        //            }
 
-                }
-                else if (refreshflag == 131 || refreshflag == 3)
-                {
-                    List<t同里镇开发区上市企业台帐台资> objs = MainForm.EM.GetListNoPaging<t同里镇开发区上市企业台帐台资>(sqlwhere, sqlOrderby);
-                    foreach (t同里镇开发区上市企业台帐台资 obj in objs)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            dkbhs += "," + obj.地块编号;
-                        }
-                    }
+        //        }
+        //        else if (refreshflag == 131 || refreshflag == 3)
+        //        {
+        //            List<t同里镇开发区上市企业台帐台资> objs = MainForm.EM.GetListNoPaging<t同里镇开发区上市企业台帐台资>(sqlwhere, sqlOrderby);
+        //            foreach (t同里镇开发区上市企业台帐台资 obj in objs)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    dkbhs += "," + obj.地块编号;
+        //                }
+        //            }
 
-                }
-                else if (refreshflag == 132)
-                {
-                    List<t同里镇开发区上市企业台帐三板> objs = MainForm.EM.GetListNoPaging<t同里镇开发区上市企业台帐三板>(sqlwhere, sqlOrderby);
-                    foreach (t同里镇开发区上市企业台帐三板 obj in objs)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            dkbhs += "," + obj.地块编号;
-                        }
-                    }
+        //        }
+        //        else if (refreshflag == 132)
+        //        {
+        //            List<t同里镇开发区上市企业台帐三板> objs = MainForm.EM.GetListNoPaging<t同里镇开发区上市企业台帐三板>(sqlwhere, sqlOrderby);
+        //            foreach (t同里镇开发区上市企业台帐三板 obj in objs)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    dkbhs += "," + obj.地块编号;
+        //                }
+        //            }
 
-                }
-                else if (refreshflag == 133)
-                {
-                    List<t同里镇开发区上市企业台帐主版后备> objs = MainForm.EM.GetListNoPaging<t同里镇开发区上市企业台帐主版后备>(sqlwhere, sqlOrderby);
-                    foreach (t同里镇开发区上市企业台帐主版后备 obj in objs)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            dkbhs += "," + obj.地块编号;
-                        }
-                    }
+        //        }
+        //        else if (refreshflag == 133)
+        //        {
+        //            List<t同里镇开发区上市企业台帐主版后备> objs = MainForm.EM.GetListNoPaging<t同里镇开发区上市企业台帐主版后备>(sqlwhere, sqlOrderby);
+        //            foreach (t同里镇开发区上市企业台帐主版后备 obj in objs)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    dkbhs += "," + obj.地块编号;
+        //                }
+        //            }
 
-                }
-                else if (refreshflag == 4)
-                {
-                    List<t清洁生产历年> objs = MainForm.EM.GetListNoPaging<t清洁生产历年>(sqlwhere, sqlOrderby);
-                    foreach (t清洁生产历年 obj in objs)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            dkbhs += "," + obj.地块编号;
-                        }
-                    }
+        //        }
+        //        else if (refreshflag == 4)
+        //        {
+        //            List<t清洁生产历年> objs = MainForm.EM.GetListNoPaging<t清洁生产历年>(sqlwhere, sqlOrderby);
+        //            foreach (t清洁生产历年 obj in objs)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    dkbhs += "," + obj.地块编号;
+        //                }
+        //            }
 
-                }
-                else if (refreshflag == 5)
-                {
-                    List<t吴江区智能制造示范试点企业名单> objs = MainForm.EM.GetListNoPaging<t吴江区智能制造示范试点企业名单>(sqlwhere, sqlOrderby);
-                    foreach (t吴江区智能制造示范试点企业名单 obj in objs)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            dkbhs += "," + obj.地块编号;
-                        }
-                    }
+        //        }
+        //        else if (refreshflag == 5)
+        //        {
+        //            List<t吴江区智能制造示范试点企业名单> objs = MainForm.EM.GetListNoPaging<t吴江区智能制造示范试点企业名单>(sqlwhere, sqlOrderby);
+        //            foreach (t吴江区智能制造示范试点企业名单 obj in objs)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    dkbhs += "," + obj.地块编号;
+        //                }
+        //            }
 
-                }
-                else if (refreshflag == 6)
-                {
-                    List<t新地标计划企业名单> objs = MainForm.EM.GetListNoPaging<t新地标计划企业名单>(sqlwhere, sqlOrderby);
-                    foreach (t新地标计划企业名单 obj in objs)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            dkbhs += "," + obj.地块编号;
-                        }
-                    }
+        //        }
+        //        else if (refreshflag == 6)
+        //        {
+        //            List<t新地标计划企业名单> objs = MainForm.EM.GetListNoPaging<t新地标计划企业名单>(sqlwhere, sqlOrderby);
+        //            foreach (t新地标计划企业名单 obj in objs)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    dkbhs += "," + obj.地块编号;
+        //                }
+        //            }
 
-                }
-                else if (refreshflag == 7)
-                {
-                    List<t智能车间> objs = MainForm.EM.GetListNoPaging<t智能车间>(sqlwhere, sqlOrderby);
-                    foreach (t智能车间 obj in objs)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            dkbhs += "," + obj.地块编号;
-                        }
-                    }
+        //        }
+        //        else if (refreshflag == 7)
+        //        {
+        //            List<t智能车间> objs = MainForm.EM.GetListNoPaging<t智能车间>(sqlwhere, sqlOrderby);
+        //            foreach (t智能车间 obj in objs)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    dkbhs += "," + obj.地块编号;
+        //                }
+        //            }
 
-                }
-                else if (refreshflag == 8)
-                {
-                    List<t闲置土地盘活计划表> objs = MainForm.EM.GetListNoPaging<t闲置土地盘活计划表>(sqlwhere, sqlOrderby);
-                    foreach (t闲置土地盘活计划表 obj in objs)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            dkbhs += "," + obj.地块编号;
-                        }
-                    }
+        //        }
+        //        else if (refreshflag == 8)
+        //        {
+        //            List<t闲置土地盘活计划表> objs = MainForm.EM.GetListNoPaging<t闲置土地盘活计划表>(sqlwhere, sqlOrderby);
+        //            foreach (t闲置土地盘活计划表 obj in objs)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    dkbhs += "," + obj.地块编号;
+        //                }
+        //            }
 
-                }
-                else if (refreshflag == 9)
-                {
-                    List<t企业技术中心台账> objs = MainForm.EM.GetListNoPaging<t企业技术中心台账>(sqlwhere, sqlOrderby);
-                    foreach (t企业技术中心台账 obj in objs)
-                    {
-                        if (obj.地块编号 != null && obj.地块编号 != "")
-                        {
-                            dkbhs += "," + obj.地块编号;
-                        }
-                    }
+        //        }
+        //        else if (refreshflag == 9)
+        //        {
+        //            List<t企业技术中心台账> objs = MainForm.EM.GetListNoPaging<t企业技术中心台账>(sqlwhere, sqlOrderby);
+        //            foreach (t企业技术中心台账 obj in objs)
+        //            {
+        //                if (obj.地块编号 != null && obj.地块编号 != "")
+        //                {
+        //                    dkbhs += "," + obj.地块编号;
+        //                }
+        //            }
 
-                }
-                pGeos = LayerControl.getIGeoByFields(pLayer, "DKBH", dkbhs.Substring(1), ",", ref newdisp, ref Geos);
+        //        }
+        //        pGeos = LayerControl.getIGeoByFields(pLayer, "DKBH", dkbhs.Substring(1), ",", ref newdisp, ref Geos);
 
 
-                if (Geos.Count > 0)
-                    LayerControl.ExDisplayLtdFeature(GlobalVariables.axMapControl, Geos);
-            }
-            catch (Exception ex)
-            {
-                //log.Error(this.Name + ":" + ex.Message);
-                //MessageBox.Show(ex.Message);
-            }
+        //        if (Geos.Count > 0)
+        //            LayerControl.ExDisplayLtdFeature(GlobalVariables.axMapControl, Geos);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        //log.Error(this.Name + ":" + ex.Message);
+        //        //MessageBox.Show(ex.Message);
+        //    }
 
-        }
+        //}
 
         public void ExDisplayOneLtdFeature(string dkbh)
         {

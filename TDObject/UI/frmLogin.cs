@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using SunMvcExpress.Dao;
+using QyTech.Auth.Dao;
 using QyTech.Core;
 using QyTech.Core.BLL;
 using System.Net.Http;
@@ -31,6 +31,8 @@ namespace TDObject
         string filename = "mydata";
         string passwordkey = "abcdefghigklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRST";
 
+        string strpwd = "";
+
         public frmLogin()
         {
             InitializeComponent();
@@ -45,11 +47,12 @@ namespace TDObject
 
         private void exButton1_Click(object sender, EventArgs e)
         {
-            string username = this.tbUserName.Text;
-            string strpwd = this.tbPassword.Text.Trim();
-            string detailUrl = MainForm.App_URI + "home/loginbyjson?username=" + username + "&password=" + strpwd;
 
-            string ret = "";// AsyncHttp.CommFun.GetRemoteJson(detailUrl);
+            string username = this.tbUserName.Text.Trim(); ;
+            //strpwd = this.tbPassword.Text.Trim(); 
+            //string detailUrl = MainForm.App_URI + "home/loginbyjson?username=" + username + "&password=" + strpwd;
+
+            //string ret = "";// AsyncHttp.CommFun.GetRemoteJson(detailUrl);
 
 
             //Uri uri = new Uri(detailUrl);
@@ -102,15 +105,16 @@ namespace TDObject
             //           });
             //   });
 
-            bsUser luser = MainForm.EM.GetByPk<bsUser>("LoginName", username);
-            try
-            {
-                luser.LoginDt = DateTime.Now;
-                MainForm.EM.Modify<bsUser>(luser);
-            }
-            catch { }
+            bsUser luser = MainForm.QyTech_EM.GetBySql<bsUser>("LoginName='"+username+ "' and LoginPwd='"+ strpwd+"'");
+          
             if (luser != null)
             {
+                try
+                {
+                    luser.LoginDt = DateTime.Now;
+                    MainForm.QyTech_EM.Modify<bsUser>(luser);
+                }
+                catch {}
                 MainForm.LoginUser = luser;
                 this.DialogResult = DialogResult.OK;
                 MainForm.m_LoginStatus = 2;
@@ -179,7 +183,9 @@ namespace TDObject
 
                     string[] strs = passwd.Split(new string[] { "@@@@" }, 2, StringSplitOptions.RemoveEmptyEntries);
                     this.tbUserName.Text = strs[0];
+
                     this.tbPassword.Text = strs[1].Trim();
+                    strpwd = this.tbPassword.Text;
                     br.Close();
                 }
                 catch { br.Close(); }
@@ -188,6 +194,12 @@ namespace TDObject
             {
                 return;
             }
+        }
+
+        private void tbPassword_TextChanged(object sender, EventArgs e)
+        {
+            strpwd = QyTech.Security.IMD5.Encrypt(this.tbPassword.Text.Trim());
+
         }
     }
 }

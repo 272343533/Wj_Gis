@@ -33,6 +33,10 @@ namespace TDObject.UI
 
         int objid=0 ;//= Convert.ToInt32(this.dgvT2_11.Rows[this.dgvT2_11.CurrentCell.RowIndex].Cells[1].Value);
 
+
+        bsUser_Ex bsuserEx=new bsUser_Ex();
+
+
         public frmComplexQuery()
         {
             InitializeComponent();
@@ -93,10 +97,9 @@ namespace TDObject.UI
 
                 //}
                 //保存查询条件
-                MainForm.LoginUser.ExComplQueryCond = Querys1;
-                bsUser dbobj = MainForm.EM.GetByPk<bsUser>("bsU_Id", MainForm.LoginUser.bsU_Id);
+                bsUser_Ex dbobj = MainForm.EM.GetByPk<bsUser_Ex>("bsU_Id", MainForm.LoginUser.bsU_Id);
                 dbobj.ExComplQueryCond = Querys1;
-                string ret = MainForm.EM.Modify<bsUser>(dbobj);
+                string ret = MainForm.EM.Modify<bsUser_Ex>(dbobj);
                 if (ret != "")
                 {
                     MessageBox.Show("保存条件失败!(" + ret + ")");
@@ -175,13 +178,13 @@ namespace TDObject.UI
                 //}
                 this.treeView1.ExpandAll();
 
-
-                string query = MainForm.LoginUser.ExComplQueryCond;
+                bsuserEx = MainForm.EM.GetByPk<bsUser_Ex>("bsU_Id", MainForm.LoginUser.bsU_Id);
+                string query = bsuserEx.ExComplQueryCond;
                 string showCell = string.Empty;
               
                 if (query != null)
                 {
-                    SetLastQuery(MainForm.LoginUser.ExComplQueryCond,treeView1.Nodes[0]);
+                    SetLastQuery(bsuserEx.ExComplQueryCond,treeView1.Nodes[0]);
                 }
                 if (showCell != null)
                 {
@@ -688,7 +691,7 @@ namespace TDObject.UI
             else
             {
                 frmAlarmQuery obj = new frmAlarmQuery(objid);
-                QyTech.SkinForm.qyFormUtil.ShowForm(obj);
+                obj.ShowDialog();
             }
         }
 

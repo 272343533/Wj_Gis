@@ -34,7 +34,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.tbPassold = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -92,22 +91,10 @@
             this.label1.TabIndex = 12;
             this.label1.Text = "原密码";
             // 
-            // button2
-            // 
-            this.button2.Image = global::TDObject.Properties.Resources.cancel_16px_34169_easyicon_net;
-            this.button2.Location = new System.Drawing.Point(134, 201);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "退出";
-            this.button2.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // button1
             // 
             this.button1.Image = global::TDObject.Properties.Resources.ok_16px_1134004_easyicon_net;
-            this.button1.Location = new System.Drawing.Point(35, 201);
+            this.button1.Location = new System.Drawing.Point(86, 208);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
@@ -127,19 +114,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbPassold);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "frmChangePwd";
             this.Text = "修改密码";
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmChangePwd_MouseMove);
-            this.Controls.SetChildIndex(this.button1, 0);
-            this.Controls.SetChildIndex(this.button2, 0);
-            this.Controls.SetChildIndex(this.label1, 0);
-            this.Controls.SetChildIndex(this.tbPassold, 0);
-            this.Controls.SetChildIndex(this.label2, 0);
-            this.Controls.SetChildIndex(this.tbPass2, 0);
-            this.Controls.SetChildIndex(this.label4, 0);
-            this.Controls.SetChildIndex(this.tbPass, 0);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,7 +131,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tbPassold;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
     }
 }

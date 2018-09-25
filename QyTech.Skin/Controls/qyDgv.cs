@@ -39,9 +39,9 @@ namespace QyTech.SkinForm.Controls
             //////ColumnHeadersDefaultCellStyle = columnHeaderStyle;
             ////////AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;//填满DataGridView
 
-            //AllowUserToAddRows = false;
+            AllowUserToAddRows = false;
             AllowUserToDeleteRows = false;
-            AllowUserToResizeColumns = false;
+            AllowUserToResizeColumns = true;
             AllowUserToResizeRows = false;
 
             BackgroundColor = Color.White;

@@ -258,6 +258,7 @@
             this.ShowInTaskbar = false;
             this.Text = "属性查询";
             this.TopMost = true;
+            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.IdentifyDialog_FormClosed);
             this.Load += new System.EventHandler(this.IdentifyDialog_Load);
             this.InfoDisplay.ResumeLayout(false);

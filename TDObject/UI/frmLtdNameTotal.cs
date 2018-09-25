@@ -28,10 +28,11 @@ using TDObject.MapControl;
 using SunMvcExpress.Dao;
 
 using TDObject.IdentifyTool;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace TDObject.UI
 {
-    public partial class frmLtdNameTotal : QyTech.SkinForm.qyForm
+    public partial class frmLtdNameTotal : QyTech.SkinForm.qyFormWithTitle
     {
         IEnvelope _ext;
 
@@ -39,28 +40,38 @@ namespace TDObject.UI
         int id;
         string dkbh;
         string ltdname;
+
+        List<t企业基础数据> Objs;//倒序，0标识最新的数据。
+        List<LtdPhoto> photos;
+        int CurrPhotoNo;
+
         public frmLtdNameTotal(IEnvelope ext)//AxMapControl axmap)
         {
             InitializeComponent();
             //_axmap = axmap;
             _ext = ext;
-         }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-         
         }
 
+
+        private void RefreshDgv(string ltname)
+        {
+            List<bsLtdInfo> objs;
+            if (ltname=="")
+                objs= BLL.CommSetting.EM.GetListNoPaging<bsLtdInfo>("租赁企业否=0", "纳税人名称");
+            else
+                objs = BLL.CommSetting.EM.GetListNoPaging<bsLtdInfo>("租赁企业否=0 and 纳税人名称 like '%"+ltname+"%'", "纳税人名称");
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.DataSource = objs;
+
+        }
         private void frmLtdNameTotal_Load(object sender, EventArgs e)
         {
             try
             {
+                this.Title = "单企业统计";
                 dataGridView1.AlternatingRowsDefaultCellStyle = QyTech.SkinForm.Controls.qyDgv.DgvDefaultAlterCellStyle;;
 
-                List<bsLtdInfo> objs = BLL.CommSetting.EM.GetListNoPaging<bsLtdInfo>("租赁企业否=0", "纳税人名称");
-                dataGridView1.AutoGenerateColumns = false;
-                dataGridView1.DataSource = objs;
-
+                RefreshDgv("");
                 //企业照片点位置,红牌警告点位置,黄牌警告点位置,安全检查点位置,行政区,管理区,房屋建筑,企业范围,道路注记,河流注记,道路,河流");//D_Spatial.SDE.
 
                 //if (this.axMapControl2.LayerCount > 1)
@@ -87,6 +98,7 @@ namespace TDObject.UI
                 LayerControl.SetVisibleStatus(this.axMapControl1, GlobalVariables.LayerName2FullName["房屋建筑"], true);
 
                 this.axMapControl1.Extent = _ext;
+
             }
             catch (Exception ex)
             {
@@ -98,19 +110,22 @@ namespace TDObject.UI
 
         private void frmLtdNameTotal_Shown(object sender, EventArgs e)
         {
-            this.checkBox1.ForeColor = Color.Blue;
-            this.checkBox2.ForeColor = Color.Yellow;
-            this.checkBox3.ForeColor = Color.Red;
+            this.chkXs.ForeColor = Color.Blue;
+            this.chkSs.ForeColor = Color.Green;
+            this.chkNh.ForeColor = Color.Red;
 
-          
+            chart1.Series[0].Points.Clear();
+            chart1.Series[1].Points.Clear();
+            chart1.Series[2].Points.Clear();
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //this.axMapControl1.Extent = _axmap.Extent;
 
-            FrmLtdZlqyxx obj = new FrmLtdZlqyxx(dkbh);
-            QyTech.SkinForm.qyFormUtil.ShowForm(obj);
+            FrmLtdZlqyxxNew obj = new FrmLtdZlqyxxNew(dkbh);
+            obj.Show();
         }
 
         private void axMapControl1_OnExtentUpdated(object sender, IMapControlEvents2_OnExtentUpdatedEvent e)
@@ -152,8 +167,6 @@ namespace TDObject.UI
         private void dataGridView1_Click(object sender, EventArgs e)
         {
             label8.Text = dataGridView1.Rows[dataGridView1.CurrentCell.RowIndex].Cells[1].Value.ToString();
-
-            
             try
             {
                 if (dataGridView1.CurrentCell == null)
@@ -196,13 +209,15 @@ namespace TDObject.UI
                 int RowIndex = dataGridView1.CurrentCell.RowIndex;
                 if (RowIndex >= 0)
                 {
-                    List<t企业基础数据> Objs = MainForm.EM.GetListNoPaging<t企业基础数据>("单位='"+ltdname+"'", "年度+'-'+月份 desc ");
+                    Objs = MainForm.EM.GetListNoPaging<t企业基础数据>("单位='"+ltdname+"'", "年度+'-'+月份 desc ");
                     if (Objs.Count > 0)
                     {
                         this.textBox3.Text = Objs[0].销售.ToString();
                         this.textBox4.Text = Objs[0].税收.ToString();
                         this.textBox5.Text = Objs[0].用能.ToString();
                     }
+                    //图形
+                    DisplayChart();
                 }
 
 
@@ -214,16 +229,28 @@ namespace TDObject.UI
                     btnRent.Enabled = false;
 
                 //照片部分
-                List<LtdPhoto> photos = MainForm.EM.GetListNoPaging<LtdPhoto>("SSQYMC='" + ltdname + "'", "OBJECTID desc");
+                photos = MainForm.EM.GetListNoPaging<LtdPhoto>("SSQYMC='" + ltdname + "'", "OBJECTID desc");
+                CurrPhotoNo = 0;
                 if (photos.Count > 0)
                 {
-                    pictureBox1.Image = Image.FromStream(System.Net.WebRequest.Create("http://122.114.190.250:8080/Wjkfq_gis/Uploads/" + photos[0].PICTURE).GetResponse().GetResponseStream());
+                    CurrPhotoNo = 1;
+                    DispImg();
                 }
+                else
+                {
+                    pictureBox1.Image = Image.FromFile(Application.StartupPath + @"\noimage.jpg");
+                }
+                textBox7.Text = CurrPhotoNo.ToString() + "/" + photos.Count.ToString();
+                //if (photos.Count > 0)
+                //{
+                //    pictureBox1.Image = Image.FromStream(System.Net.WebRequest.Create("http://122.114.190.250:8080/Wjkfq_gis/Uploads/" + photos[0].PICTURE).GetResponse().GetResponseStream());
+                //}
                 //else
                 //{
-                //    pictureBox1.Image = null;
+                //    pictureBox1.Image =Image.FromFile(Application.StartupPath+@"\noimage.jpg");
                 //}
 
+              
             }
             catch (Exception ex)
             {
@@ -232,6 +259,70 @@ namespace TDObject.UI
             }
         }
 
+       
+        private void btnFirst_Click(object sender, EventArgs e)
+        {
+            if (photos.Count > 0)
+            {
+                if (CurrPhotoNo != 1)
+                {
+                    CurrPhotoNo = 1;
+                    DispImg();
+                }
+            }
+        }
+
+        private void btnPre_Click(object sender, EventArgs e)
+        {
+            if (photos.Count > 0)
+            {
+                if (CurrPhotoNo > 1)
+                {
+                    CurrPhotoNo -= 1;
+                    DispImg();
+                }
+            }
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (photos.Count > 0)
+            {
+                if (CurrPhotoNo < photos.Count)
+                {
+                    CurrPhotoNo += 1;
+                    DispImg();
+                }
+            }
+        }
+
+        private void btnLast_Click(object sender, EventArgs e)
+        {
+            if (photos.Count > 0)
+            {
+                if (CurrPhotoNo != photos.Count)
+                {
+                    CurrPhotoNo = photos.Count;
+                    DispImg();
+                }
+            }
+        }
+        private void DispImg()
+        {
+            try
+            {
+                textBox7.Text = CurrPhotoNo.ToString() + "/" + photos.Count.ToString();
+
+                string filename = photos[CurrPhotoNo - 1].PICTURE;
+
+                pictureBox1.Image = Image.FromStream(System.Net.WebRequest.Create("http://122.114.190.250:8080/Wjkfq_gis/Uploads/" + filename).GetResponse().GetResponseStream());
+               
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("没有找到图片数据！");
+            }
+        }
         private void ExDisplayLtdFeature(List<IFeature> FindGeos)
         {
             try
@@ -274,10 +365,55 @@ namespace TDObject.UI
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+
+        private void qyBtn_Search1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("需要补充各月的相关数据");
+            RefreshDgv(this.txtLName.Text.Trim());
         }
 
+        private void chkNh_CheckedChanged(object sender, EventArgs e)
+        {
+            DisplayChart();
+        }
+
+        private void DisplayChart()
+        {
+            int monthCount = Objs.Count > 12 ? 12 : Objs.Count;
+            int FromIndex = monthCount > 12 ? Objs.Count - 12 : 0;
+            chart1.Series[0].AxisLabel = "月份";
+            //chart1.Series[0].ChartType = SeriesChartType.Column;
+            //更改图形数据
+            double sum = 0;
+            chart1.Series[0].Points.Clear();
+            chart1.Series[1].Points.Clear();
+            chart1.Series[2].Points.Clear();
+
+            for (int i = FromIndex; i < monthCount; i++)
+            {
+                if (chkXs.Checked)
+                    chart1.Series[0].Points.AddXY(Objs[i].月份, Objs[i].销售);
+                else
+                    chart1.Series[0].Points.AddXY(Objs[i].月份, 0);
+                if (chkSs.Checked)
+                    chart1.Series[1].Points.AddXY(Objs[i].月份, Objs[i].税收);
+                else
+                    chart1.Series[1].Points.AddXY(Objs[i].月份, 0);
+                if (chkNh.Checked)
+                    chart1.Series[2].Points.AddXY(Objs[i].月份, Objs[i].用能);
+                else
+                    chart1.Series[2].Points.AddXY(Objs[i].月份, 0);
+
+
+                //chart1.Series[0].Points[i].LegendText = item.TypeDesp;
+                //chart1.Series[0].Points[i].LegendText = item.TypeDesp;
+                //chart1.Series[0].Points[i].LegendText = item.TypeDesp;
+                chart1.Series[0].Points[i].LabelToolTip = Objs[i].月份;
+                chart1.Series[0].Points[i].AxisLabel = Objs[i].月份;//.Substring(0,2);
+                //chart1.Series[0].ax
+
+            }
+
+            chart1.Show();
+        }
     }
 }

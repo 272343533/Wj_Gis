@@ -138,7 +138,7 @@
       <HintPath>..\Debug\QyTech.ExcelOper.dll</HintPath>
     </Reference>
     <Reference Include="QyTech.Json">
-      <HintPath>..\..\WTGeoWeb\WebPub\QyTech.Json.dll</HintPath>
+      <HintPath>..\WebPub\QyTech.Json.dll</HintPath>
     </Reference>
     <Reference Include="QyTech.SkinForm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -208,6 +208,7 @@
     <Compile Include="DAOBLL\HttpRequery.cs" />
     <Compile Include="DAOBLL\ImportTBll.cs" />
     <Compile Include="DAOBLL\RoleRelBll.cs" />
+    <Compile Include="DAOBLL\Security.cs" />
     <Compile Include="DAOBLL\SqlUtil.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -222,17 +223,17 @@
     <Compile Include="MapControl\LayerControl.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\AddUI\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AddUI\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\AddUI\frmAddFwjz.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\AddUI\frmAddFwjz.Designer.cs">
       <DependentUpon>frmAddFwjz.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\AddUI\frmbsLtdInfoAdd.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\AddUI\frmbsLtdInfoAdd.Designer.cs">
-      <DependentUpon>frmbsLtdInfoAdd.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\AddUI\frmAddLtdBase.cs">
       <SubType>Form</SubType>
@@ -240,11 +241,17 @@
     <Compile Include="UI\AddUI\frmAddLtdBase.Designer.cs">
       <DependentUpon>frmAddLtdBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\AddUI\frmAddLtdInfo.cs">
+    <Compile Include="UI\AddUI\frmbsLtdInfoAdd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\AddUI\frmAddLtdInfo.Designer.cs">
-      <DependentUpon>frmAddLtdInfo.cs</DependentUpon>
+    <Compile Include="UI\AddUI\frmbsLtdInfoAdd.Designer.cs">
+      <DependentUpon>frmbsLtdInfoAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\AddUI\frmAddLtdVector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\AddUI\frmAddLtdVector.Designer.cs">
+      <DependentUpon>frmAddLtdVector.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\AddUI\FrmAddLtdRegular.cs">
       <SubType>Form</SubType>
@@ -257,6 +264,12 @@
     </Compile>
     <Compile Include="UI\AddUI\frmFName2ExcelCol.Designer.cs">
       <DependentUpon>frmFName2ExcelCol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\frmExcelImportYear.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\frmExcelImportYear.Designer.cs">
+      <DependentUpon>frmExcelImportYear.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\frmExcelImportYM.cs">
       <SubType>Form</SubType>
@@ -282,6 +295,18 @@
     <Compile Include="UI\frmbsLtdInfo.Designer.cs">
       <DependentUpon>frmbsLtdInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UIParent\frmList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UIParent\frmList.Designer.cs">
+      <DependentUpon>frmList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FrmLtdZlqyxxNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FrmLtdZlqyxxNew.Designer.cs">
+      <DependentUpon>FrmLtdZlqyxxNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\frmTotalFilterNew.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -305,6 +330,12 @@
     </Compile>
     <Compile Include="UI\FrmUpReport1.Designer.cs">
       <DependentUpon>FrmUpReport1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\FrmUserManaNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\FrmUserManaNew.Designer.cs">
+      <DependentUpon>FrmUserManaNew.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\TypeFilterAdd\frmAdd2000.cs">
       <SubType>Form</SubType>
@@ -493,18 +524,6 @@
     <Compile Include="UI\frmTypeFilter.Designer.cs">
       <DependentUpon>frmTypeFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\frmUserMana.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\frmUserMana.Designer.cs">
-      <DependentUpon>frmUserMana.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\frmUserMana_GlqRights.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\frmUserMana_GlqRights.Designer.cs">
-      <DependentUpon>frmUserMana_GlqRights.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\frnTmp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -542,20 +561,23 @@
     <EmbeddedResource Include="UI\AddUI\frmAddFwjz.resx">
       <DependentUpon>frmAddFwjz.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\AddUI\frmbsLtdInfoAdd.resx">
-      <DependentUpon>frmbsLtdInfoAdd.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\AddUI\frmAddLtdBase.resx">
       <DependentUpon>frmAddLtdBase.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\AddUI\frmAddLtdInfo.resx">
-      <DependentUpon>frmAddLtdInfo.cs</DependentUpon>
+    <EmbeddedResource Include="UI\AddUI\frmbsLtdInfoAdd.resx">
+      <DependentUpon>frmbsLtdInfoAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\AddUI\frmAddLtdVector.resx">
+      <DependentUpon>frmAddLtdVector.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AddUI\FrmAddLtdRegular.resx">
       <DependentUpon>FrmAddLtdRegular.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\AddUI\frmFName2ExcelCol.resx">
       <DependentUpon>frmFName2ExcelCol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\frmExcelImportYear.resx">
+      <DependentUpon>frmExcelImportYear.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmExcelImportYM.resx">
       <DependentUpon>frmExcelImportYM.cs</DependentUpon>
@@ -569,6 +591,12 @@
     <EmbeddedResource Include="UI\frmbsLtdInfo.resx">
       <DependentUpon>frmbsLtdInfo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\UIParent\frmList.resx">
+      <DependentUpon>frmList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FrmLtdZlqyxxNew.resx">
+      <DependentUpon>FrmLtdZlqyxxNew.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\frmTotalFilterNew.resx">
       <DependentUpon>frmTotalFilterNew.cs</DependentUpon>
     </EmbeddedResource>
@@ -580,6 +608,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FrmUpReport1.resx">
       <DependentUpon>FrmUpReport1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\FrmUserManaNew.resx">
+      <DependentUpon>FrmUserManaNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TypeFilterAdd\frmAdd2000.resx">
       <DependentUpon>frmAdd2000.cs</DependentUpon>
@@ -646,12 +677,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frmTypeFilter.resx">
       <DependentUpon>frmTypeFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\frmUserMana.resx">
-      <DependentUpon>frmUserMana.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\frmUserMana_GlqRights.resx">
-      <DependentUpon>frmUserMana_GlqRights.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\frnTmp.resx">
       <DependentUpon>frnTmp.cs</DependentUpon>

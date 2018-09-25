@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace TDObject.UI
 {
-    public partial class FrmUpReport1 : QyTech.SkinForm.qyForm
+    public partial class FrmUpReport1 : QyTech.SkinForm.qyFormWithTitle
     {
         public FrmUpReport1()
         {
@@ -19,6 +19,7 @@ namespace TDObject.UI
 
         private void FrmUpReport1_Load(object sender, EventArgs e)
         {
+            this.Title = "数据上报";
             webBrowser1.Navigate("file:///" + Environment.CurrentDirectory + "/Html/UpReport1Web.html");
            // webBrowser1.Navigate("http://122.114.190.250:8080/WjKfq_gis/UpReport1Web.html");
             //webBrowser1.Url =new Uri("http://122.114.190.250:8080/WjKfq_gis/UpReport1Web.html");
