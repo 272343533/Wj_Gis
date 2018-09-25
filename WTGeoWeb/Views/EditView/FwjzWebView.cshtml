@@ -108,7 +108,12 @@
     <script>
         Id = "@ViewBag.Id";
         var UsercanEdit = @ViewBag.UserCanEdit;
-        $("#btnSubmitFw").attr("disabled", !UserCanEdit);
+        if (UserCanEdit == false) {
+
+            $("#btnSubmitFw").attr("class", "weui_btn_disabled");
+        }
+
+        //$("#btnSubmitFw").attr("disabled", !UserCanEdit);
 
 
 
