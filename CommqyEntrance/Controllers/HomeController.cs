@@ -56,7 +56,8 @@ namespace CommEntrance.Controllers
                     if (obj != null)
                     {
                         lm.UserId = obj.bsU_Id.ToString();
-                        bsSoftCustInfo sciobj = QyTech.BLL.CommSetting.EM.GetByPk<bsSoftCustInfo>("bsS_Id", obj.bsO_Id);
+                        bsOrganize org = QyTech.BLL.CommSetting.EM.GetByPk<bsOrganize>("bsO_Id", obj.bsO_Id);
+                        bsSoftCustInfo sciobj = QyTech.BLL.CommSetting.EM.GetByPk<bsSoftCustInfo>("bsS_Id", org.bsS_Id);
                         if (sciobj != null)
                         {
                             lm.UserUrl = sciobj.AppHomeUrl + "?userid=" + lm.UserId;

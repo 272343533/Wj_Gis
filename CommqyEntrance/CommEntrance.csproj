@@ -46,8 +46,9 @@
       <HintPath>..\WebPub\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="QyTech.Auth.Dao">
-      <HintPath>..\WebPub\QyTech.Auth.Dao.dll</HintPath>
+    <Reference Include="QyTech.Auth.Dao, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\QySoftSet\branches\zhwsun\WebPub\QyTech.Auth.Dao.dll</HintPath>
     </Reference>
     <Reference Include="QyTech.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
