@@ -581,7 +581,7 @@ namespace TDObject
             this.叶建ToolStripMenuItem,
             this.白砚湖ToolStripMenuItem});
             this.综合查询ToolStripMenuItem.Name = "综合查询ToolStripMenuItem";
-            this.综合查询ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.综合查询ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.综合查询ToolStripMenuItem.Text = "按管理区查询";
             this.综合查询ToolStripMenuItem.Click += new System.EventHandler(this.综合查询ToolStripMenuItem_Click);
             // 
@@ -653,7 +653,7 @@ namespace TDObject
             this.印刷和记录媒介复制业ToolStripMenuItem,
             this.金属制品业ToolStripMenuItem});
             this.按行业类型查询ToolStripMenuItem.Name = "按行业类型查询ToolStripMenuItem";
-            this.按行业类型查询ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.按行业类型查询ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.按行业类型查询ToolStripMenuItem.Text = "按行业类型查询";
             // 
             // 电子资讯ToolStripMenuItem
@@ -812,21 +812,21 @@ namespace TDObject
             // 分项维护ToolStripMenuItem1
             // 
             this.分项维护ToolStripMenuItem1.Name = "分项维护ToolStripMenuItem1";
-            this.分项维护ToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.分项维护ToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
             this.分项维护ToolStripMenuItem1.Text = "分项维护";
             this.分项维护ToolStripMenuItem1.Click += new System.EventHandler(this.统计筛选ToolStripMenuItem_Click);
             // 
             // 分类筛选ToolStripMenuItem
             // 
             this.分类筛选ToolStripMenuItem.Name = "分类筛选ToolStripMenuItem";
-            this.分类筛选ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.分类筛选ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.分类筛选ToolStripMenuItem.Text = "分项筛选";
             this.分类筛选ToolStripMenuItem.Click += new System.EventHandler(this.分类筛选ToolStripMenuItem_Click);
             // 
             // 分项分布显示ToolStripMenuItem
             // 
             this.分项分布显示ToolStripMenuItem.Name = "分项分布显示ToolStripMenuItem";
-            this.分项分布显示ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.分项分布显示ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.分项分布显示ToolStripMenuItem.Text = "分项分布显示";
             // 
             // 问题企业查询及统计ToolStripMenuItem
@@ -842,14 +842,14 @@ namespace TDObject
             // 点击查询警告ToolStripMenuItem
             // 
             this.点击查询警告ToolStripMenuItem.Name = "点击查询警告ToolStripMenuItem";
-            this.点击查询警告ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.点击查询警告ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.点击查询警告ToolStripMenuItem.Text = "点击查询、警告";
             this.点击查询警告ToolStripMenuItem.Click += new System.EventHandler(this.点击查询警告ToolStripMenuItem_Click);
             // 
             // 安全综合查询ToolStripMenuItem
             // 
             this.安全综合查询ToolStripMenuItem.Name = "安全综合查询ToolStripMenuItem";
-            this.安全综合查询ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.安全综合查询ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.安全综合查询ToolStripMenuItem.Text = "安全综合查询";
             this.安全综合查询ToolStripMenuItem.Visible = false;
             this.安全综合查询ToolStripMenuItem.Click += new System.EventHandler(this.安全综合查询ToolStripMenuItem_Click);
@@ -958,14 +958,14 @@ namespace TDObject
             // 当前窗体范围打印图件ToolStripMenuItem
             // 
             this.当前窗体范围打印图件ToolStripMenuItem.Name = "当前窗体范围打印图件ToolStripMenuItem";
-            this.当前窗体范围打印图件ToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.当前窗体范围打印图件ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.当前窗体范围打印图件ToolStripMenuItem.Text = "地图输出";
             this.当前窗体范围打印图件ToolStripMenuItem.Click += new System.EventHandler(this.当前窗体范围打印图件ToolStripMenuItem_Click);
             // 
             // 专题图输出1ToolStripMenuItem
             // 
             this.专题图输出1ToolStripMenuItem.Name = "专题图输出1ToolStripMenuItem";
-            this.专题图输出1ToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.专题图输出1ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.专题图输出1ToolStripMenuItem.Text = "专题图输出1";
             this.专题图输出1ToolStripMenuItem.Visible = false;
             this.专题图输出1ToolStripMenuItem.Click += new System.EventHandler(this.专题图输出1ToolStripMenuItem_Click);

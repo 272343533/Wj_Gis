@@ -142,6 +142,26 @@ namespace TDObject
         IEnvelope newdisp = (IEnvelope)new Envelope();//查找到的要素的矩形范围
 
 
+        //专题图
+        ISimpleFillSymbol simpleFillSymbol_Out;
+        ISimpleFillSymbol simpleFillSymbol_Pre;
+        private void GetLtdRangeZhuanTiMapDispSymbol()
+        {
+            //简单填充符号
+            //获取分级颜色，实际就两种
+            IColor outLineColor = featureFieldsUtil.DefineRgbColor(0, 128, 0);
+            IColor displayColor = featureFieldsUtil.DefineRgbColor(255, 0, 0);// (255, 128, 128);
+            ILineSymbol outLineSymbol = featureFieldsUtil.DefineLineSymbol(1.5, outLineColor, esriSimpleLineStyle.esriSLSSolid);
+
+            simpleFillSymbol_Out = new SimpleFillSymbolClass();
+            simpleFillSymbol_Out.Style = esriSimpleFillStyle.esriSFSSolid;
+            simpleFillSymbol_Out = new SimpleFillSymbolClass();
+            simpleFillSymbol_Out.Color = displayColor;
+            simpleFillSymbol_Out.Outline = outLineSymbol;
+
+            simpleFillSymbol_Pre = (ISimpleFillSymbol)TDObject.BLL.ColorSymbel.ReadStyleServer(System.Windows.Forms.Application.StartupPath + @"\NewStyle\" + "默认" + ".ServerStyle", "Fill Symbols", "企业范围");
+
+        }
 
         private int GetOverlyLayers()
         {
@@ -482,6 +502,9 @@ namespace TDObject
 
                     //RefreshMapDisplay();//刷新地图和鹰眼图
 
+                    //获取企业范围高亮显示样式。
+                    GetLtdRangeZhuanTiMapDispSymbol();
+
                     RefreshRights();
                     //RefreshRightsMap();
                 }
@@ -590,6 +613,14 @@ namespace TDObject
                         dkbhs += "," + obj.DKBH;
                     }
                 }
+
+                //featureFieldsUtil.ChangeFieldValue(pLayer, dkbhs, "DKBH", "XSZD_", "1");
+                QyTech.Dao.AccessHelper.ExecuteNonQuery("update 企业范围 set XSZD_='0'");
+                QyTech.Dao.AccessHelper.ExecuteNonQuery("update 企业范围 set XSZD_='1' where Instr('"+ dkbhs + "',企业范围.dkbh)>0 ");
+
+                featureFieldsUtil.Render(pLayer, "XSZD_", simpleFillSymbol_Pre, simpleFillSymbol_Out);
+                axMapControl1.ActiveView.Refresh();
+                return;
                 IEnvelope newdisp = (IEnvelope)new Envelope();//用于定位
                 List<IGeometry> Geos = new List<IGeometry>();
                 List<IFeature> FindGeos = LayerControl.getIGeoByFields(pLayer, "DKBH", dkbhs.Substring(1), ",", ref newdisp, ref Geos);
@@ -1696,7 +1727,7 @@ namespace TDObject
             }
             catch (Exception ex) { log.Error(ex.Message); }
         }
-
+        
 
 
         private void 用户管理ToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -3092,27 +3123,49 @@ namespace TDObject
 
         private void 专题图输出1ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //首先修改要渲染地块的数据
+            ILayer player = GlobalVariables.GetOverviewLayer(axMapControl1, "企业范围");
+            IFeatureLayer featureLayer = player as IFeatureLayer;
+
+            IFeatureClass pFeatureClass = featureLayer.FeatureClass;
+            for (int i = 0; i < pFeatureClass.FeatureCount(null); i++)
+            {
+                IFeature pFeature = pFeatureClass.GetFeature(i);
+                pFeature.set_Value(pFeature.Fields.FindField("A"), "B");   //每个要素的“A”字段存储的都是“B”。
+                pFeature.Store();
+            }
             try
             {
-                System.Drawing.Printing.PrintDocument document = new System.Drawing.Printing.PrintDocument();
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.Filter = "JPEG Files|*.jpg";
+                if (DialogResult.OK == sfd.ShowDialog())
+                {
+                    string filename = sfd.FileName;
+                    bool ret = frmMapPreprint.CreateJPEGFromActiveView(axMapControl1.ActiveView, filename);
+                    if (ret)
+                        MessageBox.Show("保存为图片成功!");
+                    else
+                        MessageBox.Show("保存为图片失败!");
+                }
+                //System.Drawing.Printing.PrintDocument document = new System.Drawing.Printing.PrintDocument();
 
-                ////initialize the currently printed page number
-                //        m_CurrentPrintPage = 0;
+                //////initialize the currently printed page number
+                ////        m_CurrentPrintPage = 0;
 
-                //        //check if a document is loaded into PageLayout	control
-                //        if (axPageLayoutControl1.DocumentFilename == null) return;
-                //        //set the name of the print preview document to the name of the mxd doc
-                //        document.DocumentName = axPageLayoutControl1.DocumentFilename;
+                ////        //check if a document is loaded into PageLayout	control
+                ////        if (axPageLayoutControl1.DocumentFilename == null) return;
+                ////        //set the name of the print preview document to the name of the mxd doc
+                ////        document.DocumentName = axPageLayoutControl1.DocumentFilename;
 
-                //        //set the PrintPreviewDialog.Document property to the PrintDocument object selected by the user
+                ////        //set the PrintPreviewDialog.Document property to the PrintDocument object selected by the user
 
 
 
-                //frmMapPreprint obj = new frmMapPreprint(this.axMapControl1);
-                //obj.Show();
+                ////frmMapPreprint obj = new frmMapPreprint(this.axMapControl1);
+                ////obj.Show();
 
-                //PrintActiveViewParameterized(this.axMapControl1.ActiveView,3);
-                TDObject.BLL.Printer.MapPrint.PrintPreView(new PrintPreviewDialog(), this.axMapControl1.ActiveView);
+                ////PrintActiveViewParameterized(this.axMapControl1.ActiveView,3);
+                //TDObject.BLL.Printer.MapPrint.PrintPreView(new PrintPreviewDialog(), this.axMapControl1.ActiveView);
             }
             catch (Exception ex)
             {
