@@ -46,10 +46,10 @@ namespace TDObject.MapControl
             LayerName2FullName.Add("河流注记", "河流注记");
             LayerName2FullName.Add("企业范围", "企业范围");
              LayerName2FullName.Add("房屋建筑", "房屋建筑");
-            LayerName2FullName.Add("红牌警告点位置", "红牌警告点位置");
-            LayerName2FullName.Add("黄牌警告点位置", "黄牌警告点位置");
-            LayerName2FullName.Add("安全检查点位置", "安全检查点位置");
-            LayerName2FullName.Add("企业照片点位置", "企业照片点位置");
+            LayerName2FullName.Add("红牌警告", "红牌警告点位置");
+            LayerName2FullName.Add("黄牌警告", "黄牌警告点位置");
+            LayerName2FullName.Add("安全检查", "安全检查点位置");
+            LayerName2FullName.Add("企业照片", "企业照片点位置");
             LayerName2FullName.Add("影像", "WTMap/WTService");
             LayerName2FullName.Add("城市规划", "城市规划");
             LayerName2FullName.Add("城市规划注记注记2", "城市规划注记注记2");
@@ -339,19 +339,19 @@ namespace TDObject.MapControl
            
             //点填充
            
-            else if (m_FeatureLayer.Name == LayerName2FullName["红牌警告点位置"])            {
+            else if (m_FeatureLayer.Name == LayerName2FullName["红牌警告"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateMarkerSymbol("红牌警告点位置", "默认");
             }
-            else if (m_FeatureLayer.Name == LayerName2FullName["黄牌警告点位置"])            {
+            else if (m_FeatureLayer.Name == LayerName2FullName["黄牌警告"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateMarkerSymbol("黄牌警告点位置", "默认");
             }
-            else if (m_FeatureLayer.Name == LayerName2FullName["企业照片点位置"])            {
+            else if (m_FeatureLayer.Name == LayerName2FullName["企业照片"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateMarkerSymbol("企业照片点位置", "默认");
             }
-            else if (m_FeatureLayer.Name == LayerName2FullName["安全检查点位置"])            {
+            else if (m_FeatureLayer.Name == LayerName2FullName["安全检查"])            {
                 ColorSymbel color = new ColorSymbel(GlobalVariables.axMapControl, m_FeatureLayer.Name);
                 color.CreateMarkerSymbol("安全检查点位置", "默认");
             }

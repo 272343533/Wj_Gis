@@ -48,16 +48,16 @@ namespace TDObject.MapControl
                             LayerName = GlobalVariables.LayerName2FullName["城市规划"];
                             break;
                         case GlobalVariables.SelectFeatureValue.QiYeZhaoPianXinxi:
-                            LayerName = GlobalVariables.LayerName2FullName["企业照片点位置"];
+                            LayerName = GlobalVariables.LayerName2FullName["企业照片"];
                             break;
                         case GlobalVariables.SelectFeatureValue.AnQuanJianCha:
-                            LayerName = GlobalVariables.LayerName2FullName["安全检查点位置"];
+                            LayerName = GlobalVariables.LayerName2FullName["安全检查"];
                             break;
                         case GlobalVariables.SelectFeatureValue.HuangPai:
-                            LayerName = GlobalVariables.LayerName2FullName["黄牌警告点位置 "];
+                            LayerName = GlobalVariables.LayerName2FullName["黄牌警告 "];
                             break;
                         case GlobalVariables.SelectFeatureValue.HongPai:
-                            LayerName = GlobalVariables.LayerName2FullName["红牌警告点位置"];
+                            LayerName = GlobalVariables.LayerName2FullName["红牌警告"];
                             break;
                         default: break;
                     }
@@ -364,15 +364,10 @@ namespace TDObject.MapControl
                             if (pGeometry != null)
                                 feature.Shape = pGeometry;
                             ResFeatures.Add(feature);
-
-
-
                         }
-
                     }
                     catch (Exception Exception)
                     {
-
                         log.Error(Exception.Message);
                     }
                     feature = enumFeature.Next();
@@ -385,6 +380,138 @@ namespace TDObject.MapControl
             return ResFeatures;
            
         }
+
+        /// <summary>
+        /// 按照算子一个一个找不相交的，太慢
+        /// </summary>
+        /// <param name="featureObj"></param>
+        /// <param name="pLayer"></param>
+        /// <param name="outGeos"></param>
+        /// <param name="max_intersectarea"></param>
+        /// <returns></returns>
+        public static int GetSlyFeaturesDisJoint(IFeature featureObj, ILayer pLayer, out List<IFeature> outGeos,decimal max_intersectarea=0.5M)
+        {
+            int retV = 0;
+            outGeos = new List<IFeature>();
+
+            m_TerminatedAnalysis = false;
+            try
+            {
+                if (pLayer == null || featureObj == null)
+                    return -1;
+
+                IGeometry overGeometry = featureObj.ShapeCopy;
+
+                IFeatureLayer analysisLayer = pLayer as IFeatureLayer;
+                IFeatureClass pJCFeaCls = analysisLayer.FeatureClass;
+                IFeatureCursor pFeaCur_SpatialRel;
+
+
+                ISpatialFilter pSFilter = new SpatialFilterClass();
+                pSFilter.Geometry = overGeometry;
+                pSFilter.SpatialRel = esriSpatialRelEnum.esriSpatialRelUndefined;
+                pFeaCur_SpatialRel = pJCFeaCls.Search(pSFilter, false);
+                IFeature pFea_SpatialRel = null;
+                int count = 0;
+                while ((pFea_SpatialRel = pFeaCur_SpatialRel.NextFeature()) != null)
+                {
+                    count++;
+                    if (m_TerminatedAnalysis)
+                        return 9999;
+                    IGeometry pGeo_SpatialRel = pFea_SpatialRel.ShapeCopy;    //// 被压盖的图形
+                    //IPointCollection ipc = (pFea_SpatialRel as IPolygon) as IPointCollection;
+                    IRelationalOperator irelOperator = (pGeo_SpatialRel as IPolygon) as IRelationalOperator;
+                    bool disjointflag = irelOperator.Disjoint(overGeometry);//先找不接触的
+                    if (disjointflag)
+                    {
+                        outGeos.Add(pFea_SpatialRel);
+                    }
+                    else
+                    {
+                        //再找相交但面积小于阈值的
+                        ITopologicalOperator iTopoOperator = (ITopologicalOperator)pGeo_SpatialRel;
+                        IGeometry outGeomeity = iTopoOperator.Intersect(overGeometry, esriGeometryDimension.esriGeometry2Dimension);
+                        if (outGeomeity != null)
+                        {
+                            decimal area = Math.Round((decimal)(outGeomeity as IArea).Area, 2);
+                            if (area <= max_intersectarea)
+                            {
+                                outGeos.Add(pFea_SpatialRel);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                retV = -1;
+            }
+            return retV;
+        }
+
+        /// <summary>
+        /// 具有某种空间关系的要素
+        /// </summary>
+        /// <param name="featureObj"></param>
+        /// <param name="pLayer"></param>
+        /// <param name="SpatialRel"></param>
+        /// <param name="outGeos"></param>
+        /// <param name="max_intersectarea">如果是相交，则为相交面积的最小阈值</param>
+        /// <returns></returns>
+        public static int GetSlySpatialRelFeatures(IFeature featureObj, ILayer pLayer, esriSpatialRelEnum SpatialRel,out List<IFeature> outGeos, decimal max_intersectarea = 0.5M)
+        {
+            int retV = 0;
+            outGeos = new List<IFeature>();
+
+            m_TerminatedAnalysis = false;
+            try
+            {
+                if (pLayer == null || featureObj == null)
+                    return -1;
+ 
+                IGeometry overGeometry = featureObj.ShapeCopy;
+
+                IFeatureLayer analysisLayer = pLayer as IFeatureLayer;
+                IFeatureClass pJCFeaCls = analysisLayer.FeatureClass;
+                IFeatureCursor pFeaCur_SpatialRel;
+
+
+                ISpatialFilter pSFilter = new SpatialFilterClass();
+                pSFilter.Geometry = overGeometry;
+                pSFilter.SpatialRel = SpatialRel;// esriSpatialRelEnum.esriSpatialRelWithin;
+                pFeaCur_SpatialRel = pJCFeaCls.Search(pSFilter, false);
+                IFeature pFea_SpatialRel = null;
+                while ((pFea_SpatialRel = pFeaCur_SpatialRel.NextFeature()) != null)
+                {
+                    if (m_TerminatedAnalysis)
+                        return 9999;
+                    if (SpatialRel == esriSpatialRelEnum.esriSpatialRelIntersects)
+                    {
+                        IGeometry pGeo_SpatialRel = pFea_SpatialRel.ShapeCopy;    //// 被压盖的图形
+                        ITopologicalOperator iTopoOperator = (ITopologicalOperator)pGeo_SpatialRel;
+                        IGeometry outGeomeity = iTopoOperator.Intersect(overGeometry, esriGeometryDimension.esriGeometry2Dimension);
+                        if (outGeomeity != null)
+                        {
+                            decimal area = Math.Round((decimal)(outGeomeity as IArea).Area, 2);
+                            if (area >= max_intersectarea)
+                            {
+                                outGeos.Add(pFea_SpatialRel);
+                            }
+                        }
+                    }
+                    else
+                        outGeos.Add(pFea_SpatialRel);
+                }
+            }
+            catch (Exception ex)
+            {
+                log.Error(ex.Message);
+                retV = -1;
+            }
+            return retV;
+        }
+
         /// <summary>
         /// 求相交面积 
         /// </summary>

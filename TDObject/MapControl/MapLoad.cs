@@ -12,9 +12,10 @@ using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.ADF;
 using ESRI.ArcGIS.SystemUI;
 using ESRI.ArcGIS.Geodatabase;
-using ESRI.ArcGIS.DataSourcesGDB;
+
 using System.Windows.Forms;
 using log4net;
+using ESRI.ArcGIS.DataSourcesFile;
 
 namespace TDObject.MapControl
 {
@@ -265,7 +266,7 @@ namespace TDObject.MapControl
             IWorkspace ws = null;
             IPropertySet pPropSet = new PropertySetClass();
             //使用sde的工作空间工厂
-            IWorkspaceFactory pSdeFact = new SdeWorkspaceFactoryClass();
+            IWorkspaceFactory pSdeFact = new SDCWorkspaceFactoryClass();
             
             pPropSet.SetProperty("SERVER", Server);
             pPropSet.SetProperty("INSTANCE", Instance);//实例化端口

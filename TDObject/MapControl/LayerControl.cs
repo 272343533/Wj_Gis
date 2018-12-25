@@ -723,6 +723,50 @@ namespace TDObject.MapControl
 
             return pGeo;
         }
+        public static List<IFeature> getIGeoByFieldsByWhere(ILayer layer,string WhereClause)
+        {
+            List<IFeature> pGeo = new List<IFeature>();
+            Dictionary<int, IFeature> dicGeos = new Dictionary<int, IFeature>();
+            IEnvelope newunion = (IEnvelope)new Envelope();
+            List<IGeometry> Geos = new List<IGeometry>();
+
+            IFeatureLayer featureLayer = layer as IFeatureLayer;
+            IFeatureSelection featureSelection = featureLayer as IFeatureSelection;
+            IFeatureClass featureClass = featureLayer.FeatureClass;
+
+            IQueryFilter queryFilter = new QueryFilterClass();
+            queryFilter.WhereClause = WhereClause;// field + " in ('" + values.Replace(sepratorchar, "'" + sepratorchar + "'") + "')";
+            IFeatureCursor featureCursor = featureClass.Search(queryFilter, true);
+            bool findflag = false;
+            while (true)
+            {
+                IFeature pFeature1 = featureCursor.NextFeature();
+                if (pFeature1 != null)
+                {
+                    Geos.Add(pFeature1.Shape);
+                    if (!findflag)
+                    {
+                        newunion = pFeature1.Extent;
+                        findflag = true;
+                    }
+                    else
+                    {
+                        newunion.Union(pFeature1.Extent);
+                    }
+
+                    pGeo.Add(pFeature1);
+                    dicGeos.Add(pFeature1.OID, pFeature1);
+                }
+                else
+                    break;
+
+
+
+
+            }
+
+            return pGeo;
+        }
 
         public static List<IFeature> getIGeoByFields(ILayer layer, string field, string values, string sepratorchar, ref IEnvelope newunion, ref List<IGeometry> Geos)
         {

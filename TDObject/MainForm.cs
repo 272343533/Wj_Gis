@@ -138,9 +138,14 @@ namespace TDObject
         Dictionary<string, ILayer> LoadedLayers = new Dictionary<string, ILayer>();//所有层枚举对象
         List<IFeature> FindGeos = new List<IFeature>();//查找到的要素
         List<IGeometry> Geos = new List<IGeometry>();//找到返回要素的集合几何对象
+        List<IFeature> outM1Feas = new List<IFeature>();
+
 
         IEnvelope newdisp = (IEnvelope)new Envelope();//查找到的要素的矩形范围
 
+        //企业范围
+        ILayer pLtdLayer; //= GlobalVariables.GetOverviewLayer(this.axMapControl1, "企业范围");
+        IFeatureLayer pFeatureLayer_Ltd;
 
         //专题图
         ISimpleFillSymbol simpleFillSymbol_Out;
@@ -342,6 +347,9 @@ namespace TDObject
                         GlobalVariables.axMapControl.AddLayer(m_FeatureLayer, GlobalVariables.axMapControl.LayerCount);   //加载到map窗口
 
                         GlobalVariables.SymbolLayer(m_FeatureLayer);
+
+                        if (layername == "企业范围")
+                            pFeatureLayer_Ltd = m_FeatureLayer;
                     }
                     catch (Exception ex)
                     {
@@ -520,8 +528,8 @@ namespace TDObject
                 dataGridViewTextBoxColumn19.Visible = true;
 
 
-                treeView1.Nodes[0].Checked = true;
-                foreach (TreeNode tn in treeView1.Nodes[0].Nodes)
+                tvGlqs.Nodes[0].Checked = true;
+                foreach (TreeNode tn in tvGlqs.Nodes[0].Nodes)
                 {
                     tn.Checked = true;
                     foreach (TreeNode tn1 in tn.Nodes)
@@ -529,11 +537,12 @@ namespace TDObject
                         tn1.Checked = true;
                     }
                 }
-                treeView1.Nodes[0].ExpandAll();
-                treeView2.Nodes[0].ExpandAll();
+                tvGlqs.Nodes[0].ExpandAll();
+                tvLayers.Nodes[0].ExpandAll();
+
+                pLtdLayer = GlobalVariables.GetOverviewLayer(this.axMapControl1, "企业范围");
 
                 AddFXFBXSMenuItem();
-
 
                 //this.axTOCControl1.SetBuddyControl(GlobalVariables.axMapControl);
 
@@ -551,107 +560,89 @@ namespace TDObject
 
             foreach (string key in blluifilter.menus.Keys)
             {
-                ToolStripMenuItem tsmi = new ToolStripMenuItem(key);
-                string[] items = blluifilter.menus[key].compitems.Split(new char[] { ',' });
-                foreach (string item in items)
+                try
                 {
-                    if (item != "全部")
+                    ToolStripMenuItem tsmi = new ToolStripMenuItem(key);
+                    if (blluifilter.menus[key].compitems != null) //下拉条件的才会出现
                     {
-                        ToolStripMenuItem subtsmi = new ToolStripMenuItem(item);
-                        subtsmi.Tag = blluifilter.menus[key];
-                        subtsmi.Click += new System.EventHandler(FilterHighLightDisplay);
-                        subtsmi.MouseDown += new MouseEventHandler(FilterHighLightUnDisplay);
-                        tsmi.DropDownItems.Add(subtsmi);
+                        string[] items = blluifilter.menus[key].compitems.Split(new char[] { ',' });
+                        foreach (string item in items)
+                        {
+                            if (item != "全部")
+                            {
+                                ToolStripMenuItem subtsmi = new ToolStripMenuItem(item);
+                                subtsmi.Tag = blluifilter.menus[key];
+                                subtsmi.Click += new System.EventHandler(FilterHighLightDisplay);
+                                subtsmi.MouseDown += new MouseEventHandler(FilterHighLightUnDisplay);
+                                tsmi.DropDownItems.Add(subtsmi);
+                            }
+                        }
+                        //string[] substrs = blluifilter.menus[key].Split(new char[] { ',' });
+                        //foreach (string substrs1 in substrs)
+                        //{
+                        //    string[] subs= substrs1.Split(new char[] { '|' });
+                        //    ToolStripMenuItem subtsmi = new ToolStripMenuItem(subs[0]);
+                        //    subtsmi.Tag = key;
+                        //    subtsmi.Click += new System.EventHandler(FilterHighLightDisplay);
+                        //    tsmi.DropDownItems.Add(subtsmi);
+                        //}
+                        分项分布显示ToolStripMenuItem.DropDownItems.Add(tsmi);
                     }
                 }
-                //string[] substrs = blluifilter.menus[key].Split(new char[] { ',' });
-                //foreach (string substrs1 in substrs)
-                //{
-                //    string[] subs= substrs1.Split(new char[] { '|' });
-                //    ToolStripMenuItem subtsmi = new ToolStripMenuItem(subs[0]);
-                //    subtsmi.Tag = key;
-                //    subtsmi.Click += new System.EventHandler(FilterHighLightDisplay);
-                //    tsmi.DropDownItems.Add(subtsmi);
-                //}
-                分项分布显示ToolStripMenuItem.DropDownItems.Add(tsmi);
+                catch (Exception ex)
+                {
+                    log.Error(ex.Message);
+                }
             }
         }
 
+        /// <summary>
+        /// 现在已经不用了，元年来是flash的高亮，现在修改为专题图样式Render了
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FilterHighLightUnDisplay(object sender, MouseEventArgs e)
         {
-            flashObjects.ClearDisplay();
+           //为专题图回复内容
+            //axMapControl1.Refresh();//.PartialRefresh(esriViewDrawPhase.esriViewForeground, null, null);
+            //flashObjects.ClearDisplay();
+
+            //subtsmi.Tag = blluifilter.menus[key];
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            string clicktext = tsmi.Text;
+            bsDynCondition dc = tsmi.Tag as bsDynCondition;
+
+            string cond = TDObject.DAOBLL.RoleRelBll.Get企业范围WhereCondition(dc, tsmi.Text);
+
+
+            List<企业范围> objs = MainForm.EM.GetListNoPaging<企业范围>(cond, "");
+            string dkbhs = "";
+
+            foreach (企业范围 obj in objs)
+            {
+                if (obj.DKBH != null && obj.DKBH != "")
+                {
+                    dkbhs += "," + obj.DKBH;
+                }
+            }
+            QyTech.Dao.AccessHelper.ExecuteNonQuery("update 企业范围 set XSZD_='0'");
+            QyTech.Dao.AccessHelper.ExecuteNonQuery("update 企业范围 set XSZD_='1' where Instr('" + dkbhs + "',企业范围.dkbh)>0 ");
+
+
         }
         private void FilterHighLightDisplay(object sender, EventArgs e)
         {
             try
             {
-                //axMapControl1.Refresh();//.PartialRefresh(esriViewDrawPhase.esriViewForeground, null, null);
-                //flashObjects.ClearDisplay();
-
-                //subtsmi.Tag = blluifilter.menus[key];
-                ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-                string clicktext = tsmi.Text;
-                bsDynCondition dc = tsmi.Tag as bsDynCondition;
-                //int index = 1;
-                //string value = "";
-
-                //blluifilter.GetIndexAndCondtinoValue(ptext, clicktext, out index, out value);
-                //blluifilter.RefreshData(index, value);
-
-                string cond = TDObject.DAOBLL.RoleRelBll.Get企业范围WhereCondition(dc, tsmi.Text);
-
-                //blluifilter.RefreshData(cond);
                 ILayer pLayer = GlobalVariables.GetOverviewLayer(this.axMapControl1, "企业范围");
-
-                List<企业范围> objs = MainForm.EM.GetListNoPaging<企业范围>(cond, "");
-                string dkbhs = "";
-
-                foreach (企业范围 obj in objs)
-                {
-                    if (obj.DKBH != null && obj.DKBH != "")
-                    {
-                        dkbhs += "," + obj.DKBH;
-                    }
-                }
-
-                //featureFieldsUtil.ChangeFieldValue(pLayer, dkbhs, "DKBH", "XSZD_", "1");
-                QyTech.Dao.AccessHelper.ExecuteNonQuery("update 企业范围 set XSZD_='0'");
-                QyTech.Dao.AccessHelper.ExecuteNonQuery("update 企业范围 set XSZD_='1' where Instr('"+ dkbhs + "',企业范围.dkbh)>0 ");
-
                 featureFieldsUtil.Render(pLayer, "XSZD_", simpleFillSymbol_Pre, simpleFillSymbol_Out);
                 axMapControl1.ActiveView.Refresh();
-                return;
-                IEnvelope newdisp = (IEnvelope)new Envelope();//用于定位
-                List<IGeometry> Geos = new List<IGeometry>();
-                List<IFeature> FindGeos = LayerControl.getIGeoByFields(pLayer, "DKBH", dkbhs.Substring(1), ",", ref newdisp, ref Geos);
-
-
-                if (Geos.Count > 0)
-                {
-                    Console.WriteLine(Geos.Count.ToString());
-                    if (this.flashObjects == null)
-                        this.flashObjects = new FlashObjectsClass();
-                    flashObjects.MapControl = axMapControl1.Object as IMapControl2;
-                    flashObjects.Init();
-
-                    if (Geos.Count > 0)
-                    {
-                        foreach (IGeometry geo in Geos)
-                            flashObjects.AddGeometry(geo);
-                    }
-
-                    flashObjects.FlashObjects(0);
-                }
-                //LayerControl.ExDisplayLtdFeature(GlobalVariables.axMapControl, Geos);
-
             }
             catch (Exception ex)
             {
                 log.Error(ex.Message);
             }
         }
-
-
 
         //private void RefreshMapDisplay()
         //{
@@ -1712,7 +1703,7 @@ namespace TDObject
             {
                 if (MainForm.m_LoginStatus == 3)
                 { this.Close(); }
-                this.WindowState = FormWindowState.Maximized ;
+                this.WindowState = FormWindowState.Maximized;
 
                 foreach (string layanme in cboLayerFact.Items)
                 {
@@ -1727,7 +1718,7 @@ namespace TDObject
             }
             catch (Exception ex) { log.Error(ex.Message); }
         }
-        
+
 
 
         private void 用户管理ToolStripMenuItem2_Click(object sender, EventArgs e)
@@ -1881,7 +1872,7 @@ namespace TDObject
             //axMapControl1.CurrentTool = pCommand as ESRI.ArcGIS.SystemUI.ITool;
             //pCommand.OnClick();
 
-            this.axToolbarControl1.CurrentTool = null;
+            this.axTbCMap.CurrentTool = null;
             this.axMapControl1.MousePointer = ESRI.ArcGIS.Controls.esriControlsMousePointer.esriPointerArrow;
 
         }
@@ -1987,16 +1978,16 @@ namespace TDObject
         //}
 
 
-        private void RefreshCheckedStatus(string layname,bool visible)
+        private void RefreshCheckedStatus(string layname, bool visible)
         {
             int layindex = -1;
-            for (int i = 0; i < treeView2.Nodes[0].Nodes.Count; i++)
+            for (int i = 0; i < tvLayers.Nodes[0].Nodes.Count; i++)
             {
-                if (treeView2.Nodes[0].Nodes[i].Text == layname)
+                if (tvLayers.Nodes[0].Nodes[i].Text == layname)
                 {
                     //visible = treeView2.Nodes[0].Nodes[i].Checked;
 
-                    treeView2.Nodes[0].Nodes[i].Checked = visible;
+                    tvLayers.Nodes[0].Nodes[i].Checked = visible;
                     layindex = i;
                     break;
                 }
@@ -2010,7 +2001,7 @@ namespace TDObject
             GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.eNull;
 
         }
-        private void LayerAttrQueryStart(string Layername,bool visible)
+        private void LayerAttrQueryStart(string Layername, bool visible)
         {
             try
             {
@@ -2019,21 +2010,9 @@ namespace TDObject
                 GlobalVariables.Select.SType = GlobalVariables.SelectType.enull;
                 GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.eNull;
                 //获取显示状态
-
-                if (Layername == "城市规划")
-                {
-                    RefreshCheckedStatus(Layername, visible);
-                    LayerControl.SetVisibleStatus(axMapControl1, Layername, visible);
-                }
-                else if (visible)
-                {
-                    RefreshCheckedStatus(Layername, visible);
+                if (visible)
                     LayerControl.SetVisibleStatus(axMapControl1, Layername, true);
-                }
-
-
-
-                if (!visible)// && Layername == "城市规划")
+                else
                     return;
 
 
@@ -2048,7 +2027,7 @@ namespace TDObject
 
                 ShowIdentifyDialog(Layername);
 
-                this.axToolbarControl1.CurrentTool = null;
+                this.axTbCMap.CurrentTool = null;
                 this.axMapControl1.MousePointer = ESRI.ArcGIS.Controls.esriControlsMousePointer.esriPointerArrow;
             }
             catch (Exception ex)
@@ -3026,7 +3005,7 @@ namespace TDObject
 
         }
 
-        private void treeView2_AfterCheck(object sender, TreeViewEventArgs e)
+        private void tvLayers_AfterCheck(object sender, TreeViewEventArgs e)
         {
             try
             {
@@ -3048,7 +3027,7 @@ namespace TDObject
             }
         }
 
-        private void treeView1_AfterCheck(object sender, TreeViewEventArgs e)
+        private void tvGlqs_AfterCheck(object sender, TreeViewEventArgs e)
         {
             try
             {
@@ -3065,7 +3044,7 @@ namespace TDObject
                     }
                 }
 
-                treeView1_AfterSelect(treeView1, e);
+                tvGlqs_AfterSelect(tvGlqs, e);
             }
             catch (Exception ex)
             {
@@ -3257,7 +3236,7 @@ namespace TDObject
             }
         }
 
-       
+
 
         private string GetLtdproblem(GlobalVariables.SelectFeatureValue flag, string dkbm)
         {
@@ -3283,12 +3262,12 @@ namespace TDObject
             return ret;
         }
 
-        private void DicLayerDispPnt(string layername, string dkbhField,bool visible)
+        private void DicLayerDispPnt(string layername, string dkbhField, bool visible)
         {
 
             GlobalVariables.Select.SType = GlobalVariables.SelectType.SingleSelect;
             GlobalVariables.Select.SOperFun = GlobalVariables.SelectFunGroup.QueryMarkerInfo;
- 
+
             //for (int i = 0; i < dicLayerDisp.Count; i++)
             //{
             //    string key = dicLayerDisp.Keys[i];
@@ -3315,7 +3294,7 @@ namespace TDObject
             }
 
             //下面开始准备单击地图的操作
-           
+
             if (layername == "企业照片点位置") //安全检查点位置 黄牌警告点位置 红牌警告点位置
             {
                 GlobalVariables.Select.SValue = GlobalVariables.SelectFeatureValue.QiYeZhaoPianXinxi;
@@ -3417,7 +3396,7 @@ namespace TDObject
                     }
                 }
                 ESRI.ArcGIS.Carto.IFeatureLayerDefinition pDef = (ESRI.ArcGIS.Carto.IFeatureLayerDefinition)new_FeatureLayer;
-                pDef.DefinitionExpression = "DKBH in ('"+sFilter.Substring(1).Replace(",","','")+"')";
+                pDef.DefinitionExpression = "DKBH in ('" + sFilter.Substring(1).Replace(",", "','") + "')";
                 axMapControl1.ActiveView.Refresh();
             }
             catch (Exception ex)
@@ -3431,7 +3410,7 @@ namespace TDObject
 
             LayerControl.SetVisibleStatus(this.axMapControl1, GlobalVariables.LayerName2FullName[layername], true);
 
-            this.axToolbarControl1.CurrentTool = null;
+            this.axTbCMap.CurrentTool = null;
             this.axMapControl1.MousePointer = ESRI.ArcGIS.Controls.esriControlsMousePointer.esriPointerArrow;
 
 
@@ -3596,7 +3575,7 @@ namespace TDObject
             }
         }
 
-        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        private void tvGlqs_AfterSelect(object sender, TreeViewEventArgs e)
         {
             try
             {
@@ -3606,10 +3585,10 @@ namespace TDObject
                 string strXZqCode = "";
                 if (tnCur.Checked)
                 {
-                    strXZqCode = treeView1.Nodes[0].Tag.ToString();
+                    strXZqCode = tvGlqs.Nodes[0].Tag.ToString();
                 }
 
-                foreach (TreeNode tn in treeView1.Nodes[0].Nodes)
+                foreach (TreeNode tn in tvGlqs.Nodes[0].Nodes)
                 {
                     try
                     {
@@ -3661,6 +3640,15 @@ namespace TDObject
             }
         }
 
+
+        private void tvGlqs_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            ILayer pLayer = GlobalVariables.GetOverviewLayer(this.axMapControl1, "管理区");
+            string glqBH = e.Node.Tag.ToString();
+            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "GLQDM", glqBH);
+            LayerControl.ChangeMapExtent(this.axMapControl1, pGeo[0].Extent);
+
+        }
         private void 按行业类型统计ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -3703,11 +3691,6 @@ namespace TDObject
             {
                 log.Error(ex.Message);
             }
-        }
-
-        private void axToolbarControl1_OnMouseDown(object sender, IToolbarControlEvents_OnMouseDownEvent e)
-        {
-
         }
 
         private void 分类筛选ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3881,15 +3864,33 @@ namespace TDObject
             try
             {
                 ToolStripButton tsb = sender as ToolStripButton;
-                 if ("企,房,城".Contains(tsb.Text))
+                if (tsb.Checked)
+                    RefreshCheckedStatus(tsb.Tag.ToString(), true);
+
+                if ("企,房,城".Contains(tsb.Text))
                 {
                     LayerAttrQueryStart(tsb.Tag.ToString(), tsb.Checked);
                 }
                 else if ("黄,红,检,照".Contains(tsb.Text))
                 {
 
-                    DicLayerDispPnt(tsb.Tag.ToString(), "DKBH",tsb.Checked);
+                    DicLayerDispPnt(tsb.Tag.ToString(), "DKBH", tsb.Checked);
 
+                }
+                else if ("M1".Contains(tsb.Text))
+                {
+                    if (tsbM1.Checked)
+                    {
+                        ILayer pLayer = GlobalVariables.GetOverviewLayer(this.axMapControl1, "企业范围");
+                        featureFieldsUtil.Render(pLayer, "M1_Out", simpleFillSymbol_Pre, simpleFillSymbol_Out);
+                        axMapControl1.ActiveView.Refresh();
+                    }
+                    else
+                    {
+                        ILayer pLayer = GlobalVariables.GetOverviewLayer(this.axMapControl1, "企业范围");
+                        featureFieldsUtil.Render(pLayer, "M1_Out", simpleFillSymbol_Pre, simpleFillSymbol_Pre);
+                        axMapControl1.ActiveView.Refresh();
+                    }
                 }
             }
             catch (Exception ex)
@@ -3903,22 +3904,66 @@ namespace TDObject
         private void tspControl(ToolStripButton tsb)
         {
             tsb.Checked = !tsb.Checked;
-            //tsbLtd.Checked = tsbLtd.Checked ? false : false;
-            //tsbFang.Checked = tsbLtd.Checked ? false : false;
-            //tsbCheng.Checked = tsbLtd.Checked ? false : false;
+
+            //把其它选中的关闭选中状态，
+            string caption = tsb.Text;
+            if (tsbLtd.Checked && caption != tsbLtd.Text)
+                tsbLtd.Checked = false;
+            if (tsbFang.Checked && caption != tsbFang.Text)
+                tsbFang.Checked = false;
+            if (tsbCheng.Checked && caption != tsbCheng.Text)
+                tsbCheng.Checked = false;
 
 
-            //tsbRed.Checked = tsbLtd.Checked ? false : false;
-            //tsbYellow.Checked = tsbLtd.Checked ? false : false;
-            //tsbCheck.Checked = tsbLtd.Checked ? false : false;
-            //tsbPhoto.Checked = tsbLtd.Checked ? false : false;
+            if (tsbRed.Checked && caption != tsbRed.Text)
+                tsbRed.Checked = false;
+            if (tsbYellow.Checked && caption != tsbYellow.Text)
+                tsbYellow.Checked = false;
+            if (tsbCheck.Checked && caption != tsbCheck.Text)
+                tsbCheck.Checked = false;
+            if (tsbPhoto.Checked && caption != tsbPhoto.Text)
+                tsbPhoto.Checked = false;
+
+
         }
 
         private void tsbFang_Click(object sender, EventArgs e)
         {
-            ToolStripButton tsb = sender as ToolStripButton;
-            tspControl(tsb);
+            tspControl(sender as ToolStripButton);
+        }
 
+        private void tsbM1_MouseDown(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void tsbCancelLtdZhuantitu_Click(object sender, EventArgs e)
+        {
+            ILayer pLayer = GlobalVariables.GetOverviewLayer(this.axMapControl1, "企业范围");
+            featureFieldsUtil.Render(pLayer, "XSZD_", simpleFillSymbol_Pre, simpleFillSymbol_Pre);
+            axMapControl1.ActiveView.Refresh();
+        }
+
+        private void m1数据重置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ILayer pLayer = GlobalVariables.GetOverviewLayer(this.axMapControl1, "城市规划");
+            //List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "城规地类名称", "04M1一类工业用地");
+            List<IFeature> pGeo = LayerControl.getIGeoByFields(pLayer, "OBJECTID", 128);
+
+            if (pGeo.Count > 0)
+            {
+                pLayer = GlobalVariables.GetOverviewLayer(this.axMapControl1, "企业范围");
+                int retV = SelectControl.GetSlySpatialRelFeatures(pGeo[0], pLayer, esriSpatialRelEnum.esriSpatialRelIntersects, out outM1Feas);
+                string wheresql = "";
+                string FValue = "";
+                foreach (IFeature fea in outM1Feas)
+                {
+                    FValue = fea.get_Value(fea.Fields.FindField("DKBH")).ToString();
+                    wheresql += "," + FValue;
+                }
+
+                QyTech.Dao.AccessHelper.ExecuteNonQuery("update 企业范围 set M1_Out='0'");
+                QyTech.Dao.AccessHelper.ExecuteNonQuery("update 企业范围 set M1_Out='1' where Instr('" + wheresql + "',企业范围.dkbh)=0 ");
+            }
         }
     }
 

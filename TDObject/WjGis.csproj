@@ -168,6 +168,7 @@
     <Compile Include="ArcGis\arcGisMapLoad.cs" />
     <Compile Include="ArcGis\esriSerializer.cs" />
     <Compile Include="ArcGis\ILayerSeariize.cs" />
+    <Compile Include="ArcGis\qyArcgisPageLayout.cs" />
     <Compile Include="ArcGis\XmlSerializeHelper.cs" />
     <Compile Include="AsyncHttp\CommFun.cs" />
     <Compile Include="BLL\ClassCotrolLayerShow.cs" />
@@ -184,6 +185,7 @@
     </Compile>
     <Compile Include="BLL\DrawLayer\LayerFeatureType.cs" />
     <Compile Include="BLL\DrawLayer\LayerFilter.cs" />
+    <Compile Include="BLL\featureFieldsUtil.cs" />
     <Compile Include="BLL\FieldsRef.cs" />
     <Compile Include="BLL\FieldsTextSymbol.cs" />
     <Compile Include="BLL\IdentifyTool\FlashObjectsClass.cs" />
@@ -204,6 +206,7 @@
     <Compile Include="BLL\UIBLL\bllTypeFilter.cs" />
     <Compile Include="controls\Class1.cs" />
     <Compile Include="CreateNewDocument.cs" />
+    <Compile Include="DAOBLL\AccessHelper.cs" />
     <Compile Include="DAOBLL\DbTableConvertor.cs" />
     <Compile Include="DAOBLL\HttpRequery.cs" />
     <Compile Include="DAOBLL\ImportTBll.cs" />
@@ -806,6 +809,7 @@
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
     </COMReference>
     <COMReference Include="esriOutput">
       <Guid>{7DB92CEC-CB65-420A-8737-FCD0722FD436}</Guid>
@@ -815,15 +819,7 @@
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>False</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="esriPrintSharedOutput">
-      <Guid>{BF13098D-1A1C-4900-A8E2-E77B89627371}</Guid>
-      <VersionMajor>10</VersionMajor>
-      <VersionMinor>1</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>False</Private>
     </COMReference>
     <COMReference Include="esriServer">
       <Guid>{18F2FC71-6B30-45B9-B101-037A8B868B66}</Guid>

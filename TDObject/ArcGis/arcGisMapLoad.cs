@@ -27,7 +27,7 @@ using ESRI.ArcGIS.Controls;
 using QyTech.Core.BLL;
 using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.GISClient;
-using ESRI.ArcGIS.DataSourcesGDB;
+
 using System.Xml.Linq;
 
 
