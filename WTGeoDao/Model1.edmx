@@ -71,7 +71,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="HYDL" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="HNo" Type="varchar" MaxLength="50" />
+          <Property Name="HLevel" Type="int" />
+          <Property Name="PId" Type="int" />
+          <Property Name="IsUse" Type="bit" />
         </EntityType>
         <EntityType Name="bsLtdInfo">
           <Key>
@@ -111,54 +115,14 @@
           <Property Name="规上企业年度" Type="int" />
           <Property Name="登记日期" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="bsOrganize">
+        <EntityType Name="bsTableImportType">
           <Key>
-            <PropertyRef Name="bsO_Id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="bsO_Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="bsS_Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Code" Type="varchar" MaxLength="50" />
-          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Desp" Type="varchar" MaxLength="100" />
-          <Property Name="PId" Type="uniqueidentifier" />
-          <Property Name="OrgType" Type="varchar" MaxLength="100" />
-          <Property Name="OrgParty" Type="uniqueidentifier" />
-          <Property Name="LongLati_Gcj" Type="varchar" MaxLength="50" />
-          <Property Name="LongLati_Bd" Type="varchar" MaxLength="50" />
-          <Property Name="Operater" Type="varchar" MaxLength="20" />
-          <Property Name="CreateTime" Type="datetime" />
-          <Property Name="SaveTime" Type="datetime" />
-          <Property Name="OrganizeStatus" Type="varchar" MaxLength="20" />
-          <Property Name="Nature" Type="varchar" MaxLength="20" />
-          <Property Name="TeamAss" Type="int" />
-          <Property Name="DelStatus" Type="bit" />
-          <Property Name="bsoAttr" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="bsSoftCustInfo">
-          <Key>
-            <PropertyRef Name="bsS_Id" />
-          </Key>
-          <Property Name="bsS_Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Code" Type="varchar" MaxLength="50" />
-          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="SimpleName" Type="varchar" MaxLength="50" />
-          <Property Name="MaxUserCount" Type="int" />
-          <Property Name="Logo" Type="varchar" MaxLength="100" />
-          <Property Name="Contacter" Type="varchar" MaxLength="50" />
-          <Property Name="ContactTel" Type="varchar" MaxLength="50" />
-          <Property Name="ContactMail" Type="varchar" MaxLength="50" />
-          <Property Name="Addr" Type="varchar" MaxLength="100" />
-          <Property Name="UseDeadDate" Type="datetime" />
-          <Property Name="UseKeyAudited" Type="bit" />
-          <Property Name="MessageSendFlag" Type="bit" />
-          <Property Name="DayCalHour" Type="int" />
-          <Property Name="MonthCalDay" Type="int" />
-          <Property Name="AppName" Type="varchar" MaxLength="100" />
-          <Property Name="AppHomeUrl" Type="varchar" MaxLength="255" />
-          <Property Name="LastVersion" Type="nchar" MaxLength="10" />
-          <Property Name="UpdateUrl" Type="varchar" MaxLength="100" />
-          <Property Name="LastVersionDt" Type="datetime" />
-          <Property Name="MultiOrOneRole" Type="bit" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ImportType" Type="varchar" MaxLength="50" />
+          <Property Name="bsOName" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="bsTotalResult">
           <Key>
@@ -171,31 +135,11 @@
           <Property Name="TypeDesp" Type="varchar" MaxLength="100" />
           <Property Name="TotalValue" Type="float" />
         </EntityType>
-        <EntityType Name="bsUser">
+        <EntityType Name="bsUser_Ex">
           <Key>
             <PropertyRef Name="bsU_Id" />
           </Key>
           <Property Name="bsU_Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="bsO_Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="bsO_Name" Type="varchar" MaxLength="100" />
-          <Property Name="bsS_Code" Type="varchar" MaxLength="10" />
-          <Property Name="UserType" Type="varchar" MaxLength="50" />
-          <Property Name="bsE_bsC_Id" Type="uniqueidentifier" />
-          <Property Name="UserName" Type="varchar" MaxLength="50" />
-          <Property Name="LoginName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="LoginPwd" Type="varchar" MaxLength="50" />
-          <Property Name="NickName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ContactTel" Type="varchar" MaxLength="50" />
-          <Property Name="IsSysUser" Type="bit" />
-          <Property Name="RegDt" Type="datetime" Nullable="false" />
-          <Property Name="ValidDate" Type="date" Nullable="false" />
-          <Property Name="AccountStatus" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="LoginDt" Type="datetime" />
-          <Property Name="IsOnline" Type="bit" />
-          <Property Name="HeadPic" Type="image" />
-          <Property Name="bsR_Name" Type="varchar" MaxLength="255" />
-          <Property Name="bsO_RightsCode" Type="varchar" MaxLength="500" />
-          <Property Name="BrowserType" Type="varchar" MaxLength="50" />
           <Property Name="ExComplQueryCond" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="bsVisitLog">
@@ -310,18 +254,18 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="年份" Type="varchar" MaxLength="10" />
           <Property Name="公司名称" Type="varchar" MaxLength="100" />
           <Property Name="事故类型" Type="varchar" MaxLength="50" />
-          <Property Name="年份" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="t标准化级别">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="年份" Type="varchar" MaxLength="10" />
           <Property Name="序号" Type="int" />
           <Property Name="企业名称" Type="varchar" MaxLength="100" />
-          <Property Name="年份" Type="varchar" MaxLength="40" />
           <Property Name="是否公告" Type="varchar" MaxLength="10" />
           <Property Name="标准化级别" Type="varchar" MaxLength="10" />
           <Property Name="地块编号" Type="varchar" MaxLength="20" />
@@ -357,21 +301,22 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="年份" Type="varchar" MaxLength="10" />
           <Property Name="项目代码" Type="varchar" MaxLength="50" />
           <Property Name="公司名称" Type="varchar" MaxLength="100" />
           <Property Name="建设性质" Type="varchar" MaxLength="50" />
           <Property Name="项目类别" Type="varchar" MaxLength="50" />
           <Property Name="本年完成投资" Type="varchar" MaxLength="50" />
-          <Property Name="地块编号" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="t规上企业名单">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="年份" Type="varchar" MaxLength="10" />
+          <Property Name="序号" Type="int" />
           <Property Name="法人代码" Type="varchar" MaxLength="50" />
           <Property Name="企业名称" Type="varchar" MaxLength="100" />
-          <Property Name="序号" Type="int" />
         </EntityType>
         <EntityType Name="t经发局表格">
           <Key>
@@ -417,9 +362,17 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="企业名称" Type="varchar" MaxLength="100" />
-          <Property Name="立案查处类型" Type="varchar" MaxLength="50" />
-          <Property Name="年份" Type="varchar" MaxLength="10" />
+          <Property Name="企业名称" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="立案查处类型" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="年份" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="t能耗数据">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="企业名称" Type="varchar" MaxLength="255" />
+          <Property Name="评价值" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="t企业基础数据">
           <Key>
@@ -427,8 +380,8 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="序号" Type="int" />
-          <Property Name="年度" Type="nvarchar" MaxLength="255" />
-          <Property Name="月份" Type="nvarchar" MaxLength="255" />
+          <Property Name="年度" Type="nvarchar" MaxLength="10" />
+          <Property Name="月份" Type="nvarchar" MaxLength="10" />
           <Property Name="单位代码" Type="nvarchar" MaxLength="255" />
           <Property Name="单位" Type="nvarchar" MaxLength="255" />
           <Property Name="市区" Type="nvarchar" MaxLength="255" />
@@ -594,7 +547,7 @@
           <Property Name="所属环节" Type="nvarchar" MaxLength="20" />
           <Property Name="区镇" Type="nvarchar" MaxLength="20" />
           <Property Name="类型" Type="nvarchar" MaxLength="20" />
-          <Property Name="地块编号" Type="varchar" MaxLength="20" />
+          <Property Name="年份" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="t闲置土地盘活计划表">
           <Key>
@@ -636,17 +589,6 @@
           <Property Name="区镇" Type="nvarchar" MaxLength="20" />
           <Property Name="地块编号" Type="varchar" MaxLength="20" />
         </EntityType>
-        <!--生成过程中发现错误:
-警告 6013: 表/视图“wj_GisDb.dbo.x榜单”未定义主键，并且无法推断有效的主键。已排除了此表/视图。若要使用实体，将需要检查您的架构、添加正确的键并取消对实体的注释。
-        <EntityType Name="x榜单">
-          <Property Name="单位代码" Type="nvarchar" MaxLength="255" />
-          <Property Name="单位名称" Type="nvarchar" MaxLength="255" />
-          <Property Name="等级" Type="nvarchar" MaxLength="255" />
-          <Property Name="市区" Type="nvarchar" MaxLength="255" />
-          <Property Name="区域" Type="nvarchar" MaxLength="255" />
-          <Property Name="年度" Type="nvarchar" MaxLength="255" />
-          <Property Name="月份" Type="nvarchar" MaxLength="255" />
-        </EntityType>-->
         <EntityType Name="z企业变化信息表">
           <Key>
             <PropertyRef Name="Id" />
@@ -876,10 +818,9 @@
           <EntitySet Name="bsDynCondition" EntityType="Self.bsDynCondition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bsHYDL" EntityType="Self.bsHYDL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bsLtdInfo" EntityType="Self.bsLtdInfo" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="bsOrganize" EntityType="Self.bsOrganize" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="bsSoftCustInfo" EntityType="Self.bsSoftCustInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bsTableImportType" EntityType="Self.bsTableImportType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bsTotalResult" EntityType="Self.bsTotalResult" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="bsUser" EntityType="Self.bsUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bsUser_Ex" EntityType="Self.bsUser_Ex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bsVisitLog" EntityType="Self.bsVisitLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LtdPhoto" EntityType="Self.LtdPhoto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LtdProblem" EntityType="Self.LtdProblem" Schema="dbo" store:Type="Tables" />
@@ -894,6 +835,7 @@
           <EntitySet Name="t经发局表格" EntityType="Self.t经发局表格" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t开发区2000万企业" EntityType="Self.t开发区2000万企业" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t立案处罚情况" EntityType="Self.t立案处罚情况" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="t能耗数据" EntityType="Self.t能耗数据" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t企业基础数据" EntityType="Self.t企业基础数据" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t企业技术中心台账" EntityType="Self.t企业技术中心台账" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="t清洁生产历年" EntityType="Self.t清洁生产历年" Schema="dbo" store:Type="Tables" />
@@ -985,10 +927,10 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
         <EntityContainer Name="wj_GisDbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="bsArcLayer" EntityType="wj_GisDbModel.bsArcLayer" />
           <EntitySet Name="bsDynCondition" EntityType="wj_GisDbModel.bsDynCondition" />
-          <EntitySet Name="bsHYDL" EntityType="wj_GisDbModel.bsHYDL" />
-          <EntitySet Name="bsOrganize" EntityType="wj_GisDbModel.bsOrganize" />
-          <EntitySet Name="bsSoftCustInfo" EntityType="wj_GisDbModel.bsSoftCustInfo" />
-          <EntitySet Name="bsUser" EntityType="wj_GisDbModel.bsUser" />
+          <EntitySet Name="bsLtdInfo" EntityType="wj_GisDbModel.bsLtdInfo" />
+          <EntitySet Name="bsTableImportType" EntityType="wj_GisDbModel.bsTableImportType" />
+          <EntitySet Name="bsTotalResult" EntityType="wj_GisDbModel.bsTotalResult" />
+          <EntitySet Name="bsUser_Ex" EntityType="wj_GisDbModel.bsUser_Ex" />
           <EntitySet Name="bsVisitLog" EntityType="wj_GisDbModel.bsVisitLog" />
           <EntitySet Name="LtdPhoto" EntityType="wj_GisDbModel.LtdPhoto" />
           <EntitySet Name="LtdProblem" EntityType="wj_GisDbModel.LtdProblem" />
@@ -1023,8 +965,8 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
           <EntitySet Name="blCityPlan" EntityType="wj_GisDbModel.blCityPlan" />
           <EntitySet Name="blLayer" EntityType="wj_GisDbModel.blLayer" />
           <EntitySet Name="vwLtdJcSj" EntityType="wj_GisDbModel.vwLtdJcSj" />
-          <EntitySet Name="bsLtdInfo" EntityType="wj_GisDbModel.bsLtdInfo" />
-          <EntitySet Name="bsTotalResult" EntityType="wj_GisDbModel.bsTotalResult" />
+          <EntitySet Name="bsHYDL" EntityType="wj_GisDbModel.bsHYDL" />
+          <EntitySet Name="t能耗数据" EntityType="wj_GisDbModel.t能耗数据" />
         </EntityContainer>
         <EntityType Name="bsArcLayer">
           <Key>
@@ -1061,87 +1003,69 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
           <Property Name="PId" Type="Int32" />
           <Property Name="MulSql" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="bsHYDL">
+        <EntityType Name="bsLtdInfo">
+          <Key>
+            <PropertyRef Name="Ltd_Id" />
+          </Key>
+          <Property Name="Ltd_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="序号" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="纳税人识别号" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="纳税人名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="地块编号" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="所属管理区名称" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="所属管理区" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="租赁企业否" Type="Boolean" />
+          <Property Name="行业大类" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="经营范围" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="销售收入" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="入库税金" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="工业投资总量" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="工业投资性质" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="企业占地面积" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="亩均销售" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="亩均税收" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="智能制造示范环节" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="开发区试点企业" Type="Boolean" />
+          <Property Name="智能车间" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="新地标企业目标" Type="Int32" />
+          <Property Name="上市类型" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="清洁生产历年年度" Type="Int32" />
+          <Property Name="技术中心类型" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="技术中心市级获批年度" Type="Int32" />
+          <Property Name="技术中心省级获批年度" Type="Int32" />
+          <Property Name="技术中心国家级获批年度" Type="Int32" />
+          <Property Name="安全事故类型" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="国家安全标准化级别" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="立案处罚情况" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="高新技术企业发证日期" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="规上企业年度" Type="Int32" />
+          <Property Name="登记日期" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="bsTableImportType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="HYDL" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImportType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="bsOName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="bsOrganize">
+        <EntityType Name="bsTotalResult">
           <Key>
-            <PropertyRef Name="bsO_Id" />
+            <PropertyRef Name="Id" />
           </Key>
-          <Property Name="bsO_Id" Type="Guid" Nullable="false" />
-          <Property Name="bsS_Id" Type="Guid" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Desp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="PId" Type="Guid" />
-          <Property Name="OrgType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="OrgParty" Type="Guid" />
-          <Property Name="LongLati_Gcj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LongLati_Bd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Operater" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CreateTime" Type="DateTime" Precision="3" />
-          <Property Name="SaveTime" Type="DateTime" Precision="3" />
-          <Property Name="OrganizeStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="Nature" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="TeamAss" Type="Int32" />
-          <Property Name="DelStatus" Type="Boolean" />
-          <Property Name="bsoAttr" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YearMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TotalType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GLQName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TypeDesp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TotalValue" Type="Double" />
         </EntityType>
-        <EntityType Name="bsSoftCustInfo">
-          <Key>
-            <PropertyRef Name="bsS_Id" />
-          </Key>
-          <Property Name="bsS_Id" Type="Guid" Nullable="false" />
-          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="SimpleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="MaxUserCount" Type="Int32" />
-          <Property Name="Logo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Contacter" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ContactTel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ContactMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Addr" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="UseDeadDate" Type="DateTime" Precision="3" />
-          <Property Name="UseKeyAudited" Type="Boolean" />
-          <Property Name="MessageSendFlag" Type="Boolean" />
-          <Property Name="DayCalHour" Type="Int32" />
-          <Property Name="MonthCalDay" Type="Int32" />
-          <Property Name="AppName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="AppHomeUrl" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="LastVersion" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="UpdateUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="LastVersionDt" Type="DateTime" Precision="3" />
-          <Property Name="MultiOrOneRole" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="bsUser">
+        <EntityType Name="bsUser_Ex">
           <Key>
             <PropertyRef Name="bsU_Id" />
           </Key>
           <Property Name="bsU_Id" Type="Guid" Nullable="false" />
-          <Property Name="bsO_Id" Type="Guid" Nullable="false" />
-          <Property Name="bsO_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="bsS_Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="UserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="bsE_bsC_Id" Type="Guid" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LoginName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="LoginPwd" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NickName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ContactTel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="IsSysUser" Type="Boolean" />
-          <Property Name="RegDt" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="ValidDate" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="AccountStatus" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="LoginDt" Type="DateTime" Precision="3" />
-          <Property Name="IsOnline" Type="Boolean" />
-          <Property Name="HeadPic" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="bsR_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="bsO_RightsCode" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="BrowserType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ExComplQueryCond" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="bsVisitLog">
@@ -1256,18 +1180,18 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="年份" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="公司名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="事故类型" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="年份" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="t标准化级别">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="年份" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="序号" Type="Int32" />
           <Property Name="企业名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="年份" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
           <Property Name="是否公告" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="标准化级别" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="地块编号" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -1303,21 +1227,22 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="年份" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="项目代码" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="公司名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="建设性质" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="项目类别" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="本年完成投资" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="地块编号" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="t规上企业名单">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="年份" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="序号" Type="Int32" />
           <Property Name="法人代码" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="企业名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="序号" Type="Int32" />
         </EntityType>
         <EntityType Name="t经发局表格">
           <Key>
@@ -1363,9 +1288,9 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="企业名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="立案查处类型" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="年份" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="企业名称" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="立案查处类型" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="年份" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="t企业基础数据">
           <Key>
@@ -1373,8 +1298,8 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="序号" Type="Int32" />
-          <Property Name="年度" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="月份" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="年度" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="月份" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="单位代码" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="单位" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="市区" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -1540,7 +1465,7 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
           <Property Name="所属环节" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="区镇" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="类型" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="地块编号" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="年份" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="t闲置土地盘活计划表">
           <Key>
@@ -1820,54 +1745,24 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
           <Property Name="增加值" Type="Double" />
           <Property Name="亩均税收" Type="Double" />
         </EntityType>
-        <EntityType Name="bsLtdInfo">
-          <Key>
-            <PropertyRef Name="Ltd_Id" />
-          </Key>
-          <Property Name="Ltd_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="序号" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="纳税人识别号" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="纳税人名称" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="地块编号" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="所属管理区名称" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="所属管理区" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="租赁企业否" Type="Boolean" />
-          <Property Name="行业大类" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="经营范围" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="销售收入" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="入库税金" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="工业投资总量" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="工业投资性质" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="企业占地面积" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="亩均销售" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="亩均税收" Type="Decimal" Precision="18" Scale="2" />
-          <Property Name="智能制造示范环节" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="开发区试点企业" Type="Boolean" />
-          <Property Name="智能车间" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="新地标企业目标" Type="Int32" />
-          <Property Name="上市类型" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="清洁生产历年年度" Type="Int32" />
-          <Property Name="技术中心类型" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="技术中心市级获批年度" Type="Int32" />
-          <Property Name="技术中心省级获批年度" Type="Int32" />
-          <Property Name="技术中心国家级获批年度" Type="Int32" />
-          <Property Name="安全事故类型" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="国家安全标准化级别" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="立案处罚情况" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="高新技术企业发证日期" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="规上企业年度" Type="Int32" />
-          <Property Name="登记日期" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="bsTotalResult">
+        <EntityType Name="bsHYDL">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="YearMonth" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TotalType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="GLQName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="TypeDesp" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="TotalValue" Type="Double" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="HNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HLevel" Type="Int32" />
+          <Property Name="PId" Type="Int32" />
+          <Property Name="IsUse" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="t能耗数据">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="企业名称" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="评价值" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1912,89 +1807,71 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="bsHYDL">
-            <EntityTypeMapping TypeName="wj_GisDbModel.bsHYDL">
-              <MappingFragment StoreEntitySet="bsHYDL">
-                <ScalarProperty Name="HYDL" ColumnName="HYDL" />
+          <EntitySetMapping Name="bsLtdInfo">
+            <EntityTypeMapping TypeName="wj_GisDbModel.bsLtdInfo">
+              <MappingFragment StoreEntitySet="bsLtdInfo">
+                <ScalarProperty Name="登记日期" ColumnName="登记日期" />
+                <ScalarProperty Name="规上企业年度" ColumnName="规上企业年度" />
+                <ScalarProperty Name="高新技术企业发证日期" ColumnName="高新技术企业发证日期" />
+                <ScalarProperty Name="立案处罚情况" ColumnName="立案处罚情况" />
+                <ScalarProperty Name="国家安全标准化级别" ColumnName="国家安全标准化级别" />
+                <ScalarProperty Name="安全事故类型" ColumnName="安全事故类型" />
+                <ScalarProperty Name="技术中心国家级获批年度" ColumnName="技术中心国家级获批年度" />
+                <ScalarProperty Name="技术中心省级获批年度" ColumnName="技术中心省级获批年度" />
+                <ScalarProperty Name="技术中心市级获批年度" ColumnName="技术中心市级获批年度" />
+                <ScalarProperty Name="技术中心类型" ColumnName="技术中心类型" />
+                <ScalarProperty Name="清洁生产历年年度" ColumnName="清洁生产历年年度" />
+                <ScalarProperty Name="上市类型" ColumnName="上市类型" />
+                <ScalarProperty Name="新地标企业目标" ColumnName="新地标企业目标" />
+                <ScalarProperty Name="智能车间" ColumnName="智能车间" />
+                <ScalarProperty Name="开发区试点企业" ColumnName="开发区试点企业" />
+                <ScalarProperty Name="智能制造示范环节" ColumnName="智能制造示范环节" />
+                <ScalarProperty Name="亩均税收" ColumnName="亩均税收" />
+                <ScalarProperty Name="亩均销售" ColumnName="亩均销售" />
+                <ScalarProperty Name="企业占地面积" ColumnName="企业占地面积" />
+                <ScalarProperty Name="工业投资性质" ColumnName="工业投资性质" />
+                <ScalarProperty Name="工业投资总量" ColumnName="工业投资总量" />
+                <ScalarProperty Name="入库税金" ColumnName="入库税金" />
+                <ScalarProperty Name="销售收入" ColumnName="销售收入" />
+                <ScalarProperty Name="经营范围" ColumnName="经营范围" />
+                <ScalarProperty Name="行业大类" ColumnName="行业大类" />
+                <ScalarProperty Name="租赁企业否" ColumnName="租赁企业否" />
+                <ScalarProperty Name="所属管理区" ColumnName="所属管理区" />
+                <ScalarProperty Name="所属管理区名称" ColumnName="所属管理区名称" />
+                <ScalarProperty Name="地块编号" ColumnName="地块编号" />
+                <ScalarProperty Name="纳税人名称" ColumnName="纳税人名称" />
+                <ScalarProperty Name="纳税人识别号" ColumnName="纳税人识别号" />
+                <ScalarProperty Name="序号" ColumnName="序号" />
+                <ScalarProperty Name="Ltd_Id" ColumnName="Ltd_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bsTableImportType">
+            <EntityTypeMapping TypeName="wj_GisDbModel.bsTableImportType">
+              <MappingFragment StoreEntitySet="bsTableImportType">
+                <ScalarProperty Name="bsOName" ColumnName="bsOName" />
+                <ScalarProperty Name="ImportType" ColumnName="ImportType" />
+                <ScalarProperty Name="TName" ColumnName="TName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="bsOrganize">
-            <EntityTypeMapping TypeName="wj_GisDbModel.bsOrganize">
-              <MappingFragment StoreEntitySet="bsOrganize">
-                <ScalarProperty Name="bsoAttr" ColumnName="bsoAttr" />
-                <ScalarProperty Name="DelStatus" ColumnName="DelStatus" />
-                <ScalarProperty Name="TeamAss" ColumnName="TeamAss" />
-                <ScalarProperty Name="Nature" ColumnName="Nature" />
-                <ScalarProperty Name="OrganizeStatus" ColumnName="OrganizeStatus" />
-                <ScalarProperty Name="SaveTime" ColumnName="SaveTime" />
-                <ScalarProperty Name="CreateTime" ColumnName="CreateTime" />
-                <ScalarProperty Name="Operater" ColumnName="Operater" />
-                <ScalarProperty Name="LongLati_Bd" ColumnName="LongLati_Bd" />
-                <ScalarProperty Name="LongLati_Gcj" ColumnName="LongLati_Gcj" />
-                <ScalarProperty Name="OrgParty" ColumnName="OrgParty" />
-                <ScalarProperty Name="OrgType" ColumnName="OrgType" />
-                <ScalarProperty Name="PId" ColumnName="PId" />
-                <ScalarProperty Name="Desp" ColumnName="Desp" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="bsS_Id" ColumnName="bsS_Id" />
-                <ScalarProperty Name="bsO_Id" ColumnName="bsO_Id" />
+          <EntitySetMapping Name="bsTotalResult">
+            <EntityTypeMapping TypeName="wj_GisDbModel.bsTotalResult">
+              <MappingFragment StoreEntitySet="bsTotalResult">
+                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
+                <ScalarProperty Name="TypeDesp" ColumnName="TypeDesp" />
+                <ScalarProperty Name="GLQName" ColumnName="GLQName" />
+                <ScalarProperty Name="TotalType" ColumnName="TotalType" />
+                <ScalarProperty Name="YearMonth" ColumnName="YearMonth" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="bsSoftCustInfo">
-            <EntityTypeMapping TypeName="wj_GisDbModel.bsSoftCustInfo">
-              <MappingFragment StoreEntitySet="bsSoftCustInfo">
-                <ScalarProperty Name="MultiOrOneRole" ColumnName="MultiOrOneRole" />
-                <ScalarProperty Name="LastVersionDt" ColumnName="LastVersionDt" />
-                <ScalarProperty Name="UpdateUrl" ColumnName="UpdateUrl" />
-                <ScalarProperty Name="LastVersion" ColumnName="LastVersion" />
-                <ScalarProperty Name="AppHomeUrl" ColumnName="AppHomeUrl" />
-                <ScalarProperty Name="AppName" ColumnName="AppName" />
-                <ScalarProperty Name="MonthCalDay" ColumnName="MonthCalDay" />
-                <ScalarProperty Name="DayCalHour" ColumnName="DayCalHour" />
-                <ScalarProperty Name="MessageSendFlag" ColumnName="MessageSendFlag" />
-                <ScalarProperty Name="UseKeyAudited" ColumnName="UseKeyAudited" />
-                <ScalarProperty Name="UseDeadDate" ColumnName="UseDeadDate" />
-                <ScalarProperty Name="Addr" ColumnName="Addr" />
-                <ScalarProperty Name="ContactMail" ColumnName="ContactMail" />
-                <ScalarProperty Name="ContactTel" ColumnName="ContactTel" />
-                <ScalarProperty Name="Contacter" ColumnName="Contacter" />
-                <ScalarProperty Name="Logo" ColumnName="Logo" />
-                <ScalarProperty Name="MaxUserCount" ColumnName="MaxUserCount" />
-                <ScalarProperty Name="SimpleName" ColumnName="SimpleName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="bsS_Id" ColumnName="bsS_Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="bsUser">
-            <EntityTypeMapping TypeName="wj_GisDbModel.bsUser">
-              <MappingFragment StoreEntitySet="bsUser">
+          <EntitySetMapping Name="bsUser_Ex">
+            <EntityTypeMapping TypeName="wj_GisDbModel.bsUser_Ex">
+              <MappingFragment StoreEntitySet="bsUser_Ex">
                 <ScalarProperty Name="ExComplQueryCond" ColumnName="ExComplQueryCond" />
-                <ScalarProperty Name="BrowserType" ColumnName="BrowserType" />
-                <ScalarProperty Name="bsO_RightsCode" ColumnName="bsO_RightsCode" />
-                <ScalarProperty Name="bsR_Name" ColumnName="bsR_Name" />
-                <ScalarProperty Name="HeadPic" ColumnName="HeadPic" />
-                <ScalarProperty Name="IsOnline" ColumnName="IsOnline" />
-                <ScalarProperty Name="LoginDt" ColumnName="LoginDt" />
-                <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
-                <ScalarProperty Name="ValidDate" ColumnName="ValidDate" />
-                <ScalarProperty Name="RegDt" ColumnName="RegDt" />
-                <ScalarProperty Name="IsSysUser" ColumnName="IsSysUser" />
-                <ScalarProperty Name="ContactTel" ColumnName="ContactTel" />
-                <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="LoginPwd" ColumnName="LoginPwd" />
-                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="bsE_bsC_Id" ColumnName="bsE_bsC_Id" />
-                <ScalarProperty Name="UserType" ColumnName="UserType" />
-                <ScalarProperty Name="bsS_Code" ColumnName="bsS_Code" />
-                <ScalarProperty Name="bsO_Name" ColumnName="bsO_Name" />
-                <ScalarProperty Name="bsO_Id" ColumnName="bsO_Id" />
                 <ScalarProperty Name="bsU_Id" ColumnName="bsU_Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2114,9 +1991,9 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
           <EntitySetMapping Name="t安全事故情况">
             <EntityTypeMapping TypeName="wj_GisDbModel.t安全事故情况">
               <MappingFragment StoreEntitySet="t安全事故情况">
-                <ScalarProperty Name="年份" ColumnName="年份" />
                 <ScalarProperty Name="事故类型" ColumnName="事故类型" />
                 <ScalarProperty Name="公司名称" ColumnName="公司名称" />
+                <ScalarProperty Name="年份" ColumnName="年份" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2127,9 +2004,9 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
                 <ScalarProperty Name="地块编号" ColumnName="地块编号" />
                 <ScalarProperty Name="标准化级别" ColumnName="标准化级别" />
                 <ScalarProperty Name="是否公告" ColumnName="是否公告" />
-                <ScalarProperty Name="年份" ColumnName="年份" />
                 <ScalarProperty Name="企业名称" ColumnName="企业名称" />
                 <ScalarProperty Name="序号" ColumnName="序号" />
+                <ScalarProperty Name="年份" ColumnName="年份" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2165,12 +2042,12 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
           <EntitySetMapping Name="t工业固定资产">
             <EntityTypeMapping TypeName="wj_GisDbModel.t工业固定资产">
               <MappingFragment StoreEntitySet="t工业固定资产">
-                <ScalarProperty Name="地块编号" ColumnName="地块编号" />
                 <ScalarProperty Name="本年完成投资" ColumnName="本年完成投资" />
                 <ScalarProperty Name="项目类别" ColumnName="项目类别" />
                 <ScalarProperty Name="建设性质" ColumnName="建设性质" />
                 <ScalarProperty Name="公司名称" ColumnName="公司名称" />
                 <ScalarProperty Name="项目代码" ColumnName="项目代码" />
+                <ScalarProperty Name="年份" ColumnName="年份" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2178,9 +2055,10 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
           <EntitySetMapping Name="t规上企业名单">
             <EntityTypeMapping TypeName="wj_GisDbModel.t规上企业名单">
               <MappingFragment StoreEntitySet="t规上企业名单">
-                <ScalarProperty Name="序号" ColumnName="序号" />
                 <ScalarProperty Name="企业名称" ColumnName="企业名称" />
                 <ScalarProperty Name="法人代码" ColumnName="法人代码" />
+                <ScalarProperty Name="序号" ColumnName="序号" />
+                <ScalarProperty Name="年份" ColumnName="年份" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -2409,7 +2287,7 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
           <EntitySetMapping Name="t吴江区智能制造示范试点企业名单">
             <EntityTypeMapping TypeName="wj_GisDbModel.t吴江区智能制造示范试点企业名单">
               <MappingFragment StoreEntitySet="t吴江区智能制造示范试点企业名单">
-                <ScalarProperty Name="地块编号" ColumnName="地块编号" />
+                <ScalarProperty Name="年份" ColumnName="年份" />
                 <ScalarProperty Name="类型" ColumnName="类型" />
                 <ScalarProperty Name="区镇" ColumnName="区镇" />
                 <ScalarProperty Name="所属环节" ColumnName="所属环节" />
@@ -2709,53 +2587,23 @@ FROM [dbo].[vwLtdJcSj] AS [vwLtdJcSj]</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="bsLtdInfo">
-            <EntityTypeMapping TypeName="wj_GisDbModel.bsLtdInfo">
-              <MappingFragment StoreEntitySet="bsLtdInfo">
-                <ScalarProperty Name="登记日期" ColumnName="登记日期" />
-                <ScalarProperty Name="规上企业年度" ColumnName="规上企业年度" />
-                <ScalarProperty Name="高新技术企业发证日期" ColumnName="高新技术企业发证日期" />
-                <ScalarProperty Name="立案处罚情况" ColumnName="立案处罚情况" />
-                <ScalarProperty Name="国家安全标准化级别" ColumnName="国家安全标准化级别" />
-                <ScalarProperty Name="安全事故类型" ColumnName="安全事故类型" />
-                <ScalarProperty Name="技术中心国家级获批年度" ColumnName="技术中心国家级获批年度" />
-                <ScalarProperty Name="技术中心省级获批年度" ColumnName="技术中心省级获批年度" />
-                <ScalarProperty Name="技术中心市级获批年度" ColumnName="技术中心市级获批年度" />
-                <ScalarProperty Name="技术中心类型" ColumnName="技术中心类型" />
-                <ScalarProperty Name="清洁生产历年年度" ColumnName="清洁生产历年年度" />
-                <ScalarProperty Name="上市类型" ColumnName="上市类型" />
-                <ScalarProperty Name="新地标企业目标" ColumnName="新地标企业目标" />
-                <ScalarProperty Name="智能车间" ColumnName="智能车间" />
-                <ScalarProperty Name="开发区试点企业" ColumnName="开发区试点企业" />
-                <ScalarProperty Name="智能制造示范环节" ColumnName="智能制造示范环节" />
-                <ScalarProperty Name="亩均税收" ColumnName="亩均税收" />
-                <ScalarProperty Name="亩均销售" ColumnName="亩均销售" />
-                <ScalarProperty Name="企业占地面积" ColumnName="企业占地面积" />
-                <ScalarProperty Name="工业投资性质" ColumnName="工业投资性质" />
-                <ScalarProperty Name="工业投资总量" ColumnName="工业投资总量" />
-                <ScalarProperty Name="入库税金" ColumnName="入库税金" />
-                <ScalarProperty Name="销售收入" ColumnName="销售收入" />
-                <ScalarProperty Name="经营范围" ColumnName="经营范围" />
-                <ScalarProperty Name="行业大类" ColumnName="行业大类" />
-                <ScalarProperty Name="租赁企业否" ColumnName="租赁企业否" />
-                <ScalarProperty Name="所属管理区" ColumnName="所属管理区" />
-                <ScalarProperty Name="所属管理区名称" ColumnName="所属管理区名称" />
-                <ScalarProperty Name="地块编号" ColumnName="地块编号" />
-                <ScalarProperty Name="纳税人名称" ColumnName="纳税人名称" />
-                <ScalarProperty Name="纳税人识别号" ColumnName="纳税人识别号" />
-                <ScalarProperty Name="序号" ColumnName="序号" />
-                <ScalarProperty Name="Ltd_Id" ColumnName="Ltd_Id" />
+          <EntitySetMapping Name="bsHYDL">
+            <EntityTypeMapping TypeName="wj_GisDbModel.bsHYDL">
+              <MappingFragment StoreEntitySet="bsHYDL">
+                <ScalarProperty Name="IsUse" ColumnName="IsUse" />
+                <ScalarProperty Name="PId" ColumnName="PId" />
+                <ScalarProperty Name="HLevel" ColumnName="HLevel" />
+                <ScalarProperty Name="HNo" ColumnName="HNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="bsTotalResult">
-            <EntityTypeMapping TypeName="wj_GisDbModel.bsTotalResult">
-              <MappingFragment StoreEntitySet="bsTotalResult">
-                <ScalarProperty Name="TotalValue" ColumnName="TotalValue" />
-                <ScalarProperty Name="TypeDesp" ColumnName="TypeDesp" />
-                <ScalarProperty Name="GLQName" ColumnName="GLQName" />
-                <ScalarProperty Name="TotalType" ColumnName="TotalType" />
-                <ScalarProperty Name="YearMonth" ColumnName="YearMonth" />
+          <EntitySetMapping Name="t能耗数据">
+            <EntityTypeMapping TypeName="wj_GisDbModel.t能耗数据">
+              <MappingFragment StoreEntitySet="t能耗数据">
+                <ScalarProperty Name="评价值" ColumnName="评价值" />
+                <ScalarProperty Name="企业名称" ColumnName="企业名称" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
