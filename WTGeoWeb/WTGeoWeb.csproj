@@ -268,6 +268,7 @@
     <Content Include="themes\main_pc.css" />
     <Content Include="themes\Site.css" />
     <Content Include="themes\menu.css" />
+    <Content Include="themes\twitter-bootstrap3.3.7.min.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -304,10 +305,7 @@
     <Content Include="Views\takePhoto\DispCheckPic.cshtml" />
     <Content Include="Views\EditView\LtdRegularWebView.cshtml" />
     <Content Include="Views\EditView\LtdProblemWebView.cshtml" />
-    <Content Include="Views\Home\Index_NewForCust.cshtml" />
     <Content Include="Views\Home\Helper.cshtml" />
-    <Content Include="Views\Home\Index_m_SubLayer.cshtml" />
-    <Content Include="Views\Home\Index_m - 复制.cshtml" />
     <Content Include="Views\ProblemLtdPhoto\index.cshtml" />
   </ItemGroup>
   <ItemGroup>

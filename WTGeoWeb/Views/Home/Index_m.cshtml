@@ -91,8 +91,8 @@
         var MapServers = [];
 
         var bsU_Id = '';
-        var UserName = 'admin';
-        var UserOperRight = "管理员";
+        var UserName = 'wjadmin';
+        var UserOperRight = "管理人员";
         var bsUserRightCode = ''
         var UserCanEdit = true;
 
@@ -968,7 +968,7 @@
             var feature = queryResult.features[0];
             var geometry = feature.geometry;
             //var dkbm_ = feature.attributes[dic_Layer[CurrLayerName].QueryFName];
-            var dkbm_ = feature.attributes["DKBH"];
+            var dkbm_ = feature.attributes["地块编号"];
 
             if (CurrFunItem == 'F501') {
                 //获得feature的dkbm，然后从数据库中获取数据，json结果显示
@@ -1541,7 +1541,7 @@
 
             UserOperRight = "@ViewBag.bsR_Name";
             UserName = "@ViewBag.UserName";
-            if (UserOperRight != "管理员") {
+            if (UserOperRight != "管理人员") {
                 UserCanEdit = false;
                 alert("当前用户为浏览人员，不能修改提交数据！");//程序需要获取位置数据，数据存储权限\r\n");
                 // $('#F110"').attr("display", "none");

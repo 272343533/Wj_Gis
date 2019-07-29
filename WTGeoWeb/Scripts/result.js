@@ -25,7 +25,7 @@ var vm = new Vue({
         getDetail: function() {
         	var rCode = $("input[name='regionCodes']").val();
         	var tName = $("input[name='TotalTypeName']").val();
-        	$.post('http://122.114.190.250/Wjkfq_Gis/ShowView/GetTypeDetails', {
+        	$.post('http://122.112.245.147/Wjkfq_Gis/ShowView/GetTypeDetails', {
         	    regionCodes: rCode,
         	    typename: tName
         	},
@@ -53,7 +53,7 @@ var vm = new Vue({
 // $(".dBtn").click(function() {
 //     var rCode = $("input[name='regionCodes']").val();
 //     var tName = $("input[name='TotalTypeName']").val();
-//     $.post('http://122.114.190.250/Wjkfq_Gis/ShowView/GetTypeDetails', {
+//     $.post('http://122.112.245.147/Wjkfq_Gis/ShowView/GetTypeDetails', {
 //         regionCodes: rCode,
 //         typename: tName
 //     },

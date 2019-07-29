@@ -297,7 +297,7 @@ namespace WTGeoWeb.Controllers
             log.Info("DoAppLtdQuery:" + ltdName);
 
             List<企业范围> list = new List<企业范围>();
-            list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<企业范围>("YDQYMC like '%" + ltdName + "%'", "");
+            list = WTGeoWeb.BLL.CommSetting.EM.GetListNoPaging<企业范围>("YDQYMC like '%" + ltdName.Trim(' ') + "%'", "");
 
             //List<string> fields = new List<string>();
             //fields.Add("地块编码");

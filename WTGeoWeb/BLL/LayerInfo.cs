@@ -21,7 +21,7 @@ namespace WTGeoWeb.BLL
         public Dictionary<string,LayerInfo> GetPubLayers()
         {
 
-            string GisServerPubAddr="http://122.114.190.250:80";
+            string GisServerPubAddr="http://122.112.245.147:80";
 
             //string UrlChangePart = "TdDemo_SpatialServer";//Demo使用
             string UrlChangePart = "TD_SpatialServerTest";//望亭使用
