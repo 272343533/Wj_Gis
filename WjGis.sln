@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSkin", "TestSkin\TestSk
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WjGis", "TDObject\WjGis.csproj", "{639A8E53-DC12-46F2-8778-FCDAE8991823}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QyTech.Auth.Dao", "QyTech.Auth.Dao\QyTech.Auth.Dao.csproj", "{D2374486-4716-4BDA-9EF2-C991D0BD954B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -115,6 +117,18 @@ Global
 		{639A8E53-DC12-46F2-8778-FCDAE8991823}.Release|Mixed Platforms.Build.0 = Release|x86
 		{639A8E53-DC12-46F2-8778-FCDAE8991823}.Release|x86.ActiveCfg = Release|x86
 		{639A8E53-DC12-46F2-8778-FCDAE8991823}.Release|x86.Build.0 = Release|x86
+		{D2374486-4716-4BDA-9EF2-C991D0BD954B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2374486-4716-4BDA-9EF2-C991D0BD954B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2374486-4716-4BDA-9EF2-C991D0BD954B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D2374486-4716-4BDA-9EF2-C991D0BD954B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D2374486-4716-4BDA-9EF2-C991D0BD954B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D2374486-4716-4BDA-9EF2-C991D0BD954B}.Debug|x86.Build.0 = Debug|Any CPU
+		{D2374486-4716-4BDA-9EF2-C991D0BD954B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2374486-4716-4BDA-9EF2-C991D0BD954B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2374486-4716-4BDA-9EF2-C991D0BD954B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D2374486-4716-4BDA-9EF2-C991D0BD954B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D2374486-4716-4BDA-9EF2-C991D0BD954B}.Release|x86.ActiveCfg = Release|Any CPU
+		{D2374486-4716-4BDA-9EF2-C991D0BD954B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

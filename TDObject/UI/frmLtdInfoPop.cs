@@ -58,7 +58,7 @@ namespace TDObject.UI
                 if (ltds.Count > 0)
                 {
                     string filename = ltds[0].PICTURE;
-                    pictureBox1.Image = Image.FromStream(System.Net.WebRequest.Create("http://122.114.190.250:8080/Wjkfq_gis/Uploads/" + filename).GetResponse().GetResponseStream());
+                    pictureBox1.Image = Image.FromStream(System.Net.WebRequest.Create("http://122.112.245.147:8080/Wjkfq_gis/Uploads/" + filename).GetResponse().GetResponseStream());
                     splitContainer1.SplitterDistance = 120;
                     
                 }

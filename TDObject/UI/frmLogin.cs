@@ -22,10 +22,6 @@ namespace TDObject
     public partial class frmLogin : Form
     {
 
-        //LoginUser luser;
-
-        //public LoginUser CurrentLoginUser { get { return luser; } }
-        //private const string Uri = "http://122.114.190.250/arc_gis/countries?format=json";  
         BinaryWriter bw;
         BinaryReader br;
         string filename = "mydata";

@@ -36,7 +36,7 @@ namespace TDObject.UI
 
         OleDbConnection oledbConn = null;
         SqlConnection sqlConn = null;
-        string strSqlConn = "server =122.114.190.250,2433; uid = sa; pwd = Qy_ltd414; database = wj_GisDb";
+        string strSqlConn = "server =122.112.245.147; uid = sa; pwd = Qy_ltd414; database = wj_GisDb";
         DataSet ds = new DataSet();//新建数据集
         DataTable dtSheet;
         DataTable dtImported;

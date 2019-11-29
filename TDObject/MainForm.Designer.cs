@@ -46,90 +46,90 @@ namespace TDObject
 		private void InitializeComponent()
 		{
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("运东");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("运西");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("邱舍工业区");
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("屯村社区");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("屯村街道办", new System.Windows.Forms.TreeNode[] {
-            treeNode24,
-            treeNode25});
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("同里科技产业园");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("同里社区");
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("同里街道办", new System.Windows.Forms.TreeNode[] {
-            treeNode27,
-            treeNode28});
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("吴江经济开发区", new System.Windows.Forms.TreeNode[] {
-            treeNode22,
-            treeNode23,
-            treeNode26,
-            treeNode29});
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("企业照片");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("安全检查");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("红牌警告");
-            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("黄牌警告");
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("行政区");
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("管理区");
-            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("城市规划");
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("企业范围");
-            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("房屋建筑");
-            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("河流");
-            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("道路");
-            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("叠加图层", new System.Windows.Forms.TreeNode[] {
-            treeNode31,
-            treeNode32,
-            treeNode33,
-            treeNode34,
-            treeNode35,
-            treeNode36,
-            treeNode37,
-            treeNode38,
-            treeNode39,
-            treeNode40,
-            treeNode41});
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("运东");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("运西");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("邱舍工业区");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("屯村社区");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("屯村街道办", new System.Windows.Forms.TreeNode[] {
+            treeNode3,
+            treeNode4});
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("同里科技产业园");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("同里社区");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("同里街道办", new System.Windows.Forms.TreeNode[] {
+            treeNode6,
+            treeNode7});
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("吴江经济开发区", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode5,
+            treeNode8});
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("企业照片");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("安全检查");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("红牌警告");
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("黄牌警告");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("行政区");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("管理区");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("城市规划");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("企业范围");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("房屋建筑");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("河流");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("道路");
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("叠加图层", new System.Windows.Forms.TreeNode[] {
+            treeNode10,
+            treeNode11,
+            treeNode12,
+            treeNode13,
+            treeNode14,
+            treeNode15,
+            treeNode16,
+            treeNode17,
+            treeNode18,
+            treeNode19,
+            treeNode20});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle61 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle62 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle64 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle66 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle68 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle69 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle70 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle71 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle72 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle77 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle81 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle82 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle83 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle84 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle85 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle86 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.用户管理ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.用户管理ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -1172,43 +1172,43 @@ namespace TDObject
             this.tvGlqs.FullRowSelect = true;
             this.tvGlqs.Location = new System.Drawing.Point(3, 22);
             this.tvGlqs.Name = "tvGlqs";
-            treeNode22.Checked = true;
-            treeNode22.Name = "节点1";
-            treeNode22.Tag = "WJKFQ02";
-            treeNode22.Text = "运东";
-            treeNode23.Checked = true;
-            treeNode23.Name = "节点2";
-            treeNode23.Tag = "WJKFQ01";
-            treeNode23.Text = "运西";
-            treeNode24.Checked = true;
-            treeNode24.Name = "节点4";
-            treeNode24.Tag = "WJKFQ05";
-            treeNode24.Text = "邱舍工业区";
-            treeNode25.Checked = true;
-            treeNode25.Name = "节点5";
-            treeNode25.Tag = "WJKFQ06";
-            treeNode25.Text = "屯村社区";
-            treeNode26.Checked = true;
-            treeNode26.Name = "节点3";
-            treeNode26.Tag = "WJKFQ065";
-            treeNode26.Text = "屯村街道办";
-            treeNode27.Name = "节点1";
-            treeNode27.Tag = "WJKFQ03";
-            treeNode27.Text = "同里科技产业园";
-            treeNode28.Checked = true;
-            treeNode28.Name = "节点41";
-            treeNode28.Tag = "WJKFQ04";
-            treeNode28.Text = "同里社区";
-            treeNode29.Checked = true;
-            treeNode29.Name = "节点0";
-            treeNode29.Tag = "WJKFQ034";
-            treeNode29.Text = "同里街道办";
-            treeNode30.Checked = true;
-            treeNode30.Name = "节点0";
-            treeNode30.Tag = "WJKFQ";
-            treeNode30.Text = "吴江经济开发区";
+            treeNode1.Checked = true;
+            treeNode1.Name = "节点1";
+            treeNode1.Tag = "WJKFQ02";
+            treeNode1.Text = "运东";
+            treeNode2.Checked = true;
+            treeNode2.Name = "节点2";
+            treeNode2.Tag = "WJKFQ01";
+            treeNode2.Text = "运西";
+            treeNode3.Checked = true;
+            treeNode3.Name = "节点4";
+            treeNode3.Tag = "WJKFQ05";
+            treeNode3.Text = "邱舍工业区";
+            treeNode4.Checked = true;
+            treeNode4.Name = "节点5";
+            treeNode4.Tag = "WJKFQ06";
+            treeNode4.Text = "屯村社区";
+            treeNode5.Checked = true;
+            treeNode5.Name = "节点3";
+            treeNode5.Tag = "WJKFQ065";
+            treeNode5.Text = "屯村街道办";
+            treeNode6.Name = "节点1";
+            treeNode6.Tag = "WJKFQ03";
+            treeNode6.Text = "同里科技产业园";
+            treeNode7.Checked = true;
+            treeNode7.Name = "节点41";
+            treeNode7.Tag = "WJKFQ04";
+            treeNode7.Text = "同里社区";
+            treeNode8.Checked = true;
+            treeNode8.Name = "节点0";
+            treeNode8.Tag = "WJKFQ034";
+            treeNode8.Text = "同里街道办";
+            treeNode9.Checked = true;
+            treeNode9.Name = "节点0";
+            treeNode9.Tag = "WJKFQ";
+            treeNode9.Text = "吴江经济开发区";
             this.tvGlqs.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode30});
+            treeNode9});
             this.tvGlqs.Size = new System.Drawing.Size(260, 181);
             this.tvGlqs.TabIndex = 0;
             this.tvGlqs.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvGlqs_AfterCheck);
@@ -1240,38 +1240,38 @@ namespace TDObject
             this.tvLayers.ForeColor = System.Drawing.Color.Blue;
             this.tvLayers.Location = new System.Drawing.Point(3, 22);
             this.tvLayers.Name = "tvLayers";
-            treeNode31.Name = "节点4";
-            treeNode31.Text = "企业照片";
-            treeNode32.Name = "节点3";
-            treeNode32.Text = "安全检查";
-            treeNode33.Name = "节点1";
-            treeNode33.Text = "红牌警告";
-            treeNode34.Name = "节点2";
-            treeNode34.Text = "黄牌警告";
-            treeNode35.Checked = true;
-            treeNode35.Name = "节点0";
-            treeNode35.Text = "行政区";
-            treeNode36.Checked = true;
-            treeNode36.Name = "节点1";
-            treeNode36.Text = "管理区";
-            treeNode37.Name = "节点0";
-            treeNode37.Text = "城市规划";
-            treeNode38.Checked = true;
-            treeNode38.Name = "节点2";
-            treeNode38.Text = "企业范围";
-            treeNode39.Checked = true;
-            treeNode39.Name = "节点3";
-            treeNode39.Text = "房屋建筑";
-            treeNode40.Checked = true;
-            treeNode40.Name = "节点5";
-            treeNode40.Text = "河流";
-            treeNode41.Checked = true;
-            treeNode41.Name = "节点0";
-            treeNode41.Text = "道路";
-            treeNode42.Name = "节点1";
-            treeNode42.Text = "叠加图层";
+            treeNode10.Name = "节点4";
+            treeNode10.Text = "企业照片";
+            treeNode11.Name = "节点3";
+            treeNode11.Text = "安全检查";
+            treeNode12.Name = "节点1";
+            treeNode12.Text = "红牌警告";
+            treeNode13.Name = "节点2";
+            treeNode13.Text = "黄牌警告";
+            treeNode14.Checked = true;
+            treeNode14.Name = "节点0";
+            treeNode14.Text = "行政区";
+            treeNode15.Checked = true;
+            treeNode15.Name = "节点1";
+            treeNode15.Text = "管理区";
+            treeNode16.Name = "节点0";
+            treeNode16.Text = "城市规划";
+            treeNode17.Checked = true;
+            treeNode17.Name = "节点2";
+            treeNode17.Text = "企业范围";
+            treeNode18.Checked = true;
+            treeNode18.Name = "节点3";
+            treeNode18.Text = "房屋建筑";
+            treeNode19.Checked = true;
+            treeNode19.Name = "节点5";
+            treeNode19.Text = "河流";
+            treeNode20.Checked = true;
+            treeNode20.Name = "节点0";
+            treeNode20.Text = "道路";
+            treeNode21.Name = "节点1";
+            treeNode21.Text = "叠加图层";
             this.tvLayers.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode42});
+            treeNode21});
             this.tvLayers.Size = new System.Drawing.Size(253, 176);
             this.tvLayers.TabIndex = 1;
             this.tvLayers.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.tvLayers_AfterCheck);
@@ -1952,32 +1952,32 @@ namespace TDObject
             // Column6
             // 
             this.Column6.DataPropertyName = "查处起始日期";
-            dataGridViewCellStyle44.Format = "yyyy-MM-dd";
-            this.Column6.DefaultCellStyle = dataGridViewCellStyle44;
+            dataGridViewCellStyle1.Format = "yyyy-MM-dd";
+            this.Column6.DefaultCellStyle = dataGridViewCellStyle1;
             this.Column6.HeaderText = "查处起始日期";
             this.Column6.Name = "Column6";
             // 
             // Column7
             // 
             this.Column7.DataPropertyName = "查处截止日期";
-            dataGridViewCellStyle45.Format = "yyyy-MM-dd";
-            this.Column7.DefaultCellStyle = dataGridViewCellStyle45;
+            dataGridViewCellStyle2.Format = "yyyy-MM-dd";
+            this.Column7.DefaultCellStyle = dataGridViewCellStyle2;
             this.Column7.HeaderText = "查处截止日期";
             this.Column7.Name = "Column7";
             // 
             // Column8
             // 
             this.Column8.DataPropertyName = "批注日期";
-            dataGridViewCellStyle46.Format = "yyyy-MM-dd";
-            this.Column8.DefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle3.Format = "yyyy-MM-dd";
+            this.Column8.DefaultCellStyle = dataGridViewCellStyle3;
             this.Column8.HeaderText = "批注日期";
             this.Column8.Name = "Column8";
             // 
             // Column9
             // 
             this.Column9.DataPropertyName = "撤销日期";
-            dataGridViewCellStyle47.Format = "yyyy-MM-dd";
-            this.Column9.DefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle4.Format = "yyyy-MM-dd";
+            this.Column9.DefaultCellStyle = dataGridViewCellStyle4;
             this.Column9.HeaderText = "撤销日期";
             this.Column9.Name = "Column9";
             // 
@@ -2135,8 +2135,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn33
             // 
             this.dataGridViewTextBoxColumn33.DataPropertyName = "key";
-            dataGridViewCellStyle48.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn33.DefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle5.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn33.DefaultCellStyle = dataGridViewCellStyle5;
             this.dataGridViewTextBoxColumn33.HeaderText = "数据项";
             this.dataGridViewTextBoxColumn33.Name = "dataGridViewTextBoxColumn33";
             this.dataGridViewTextBoxColumn33.ReadOnly = true;
@@ -2144,8 +2144,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn34
             // 
             this.dataGridViewTextBoxColumn34.DataPropertyName = "value";
-            dataGridViewCellStyle49.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn34.DefaultCellStyle = dataGridViewCellStyle49;
+            dataGridViewCellStyle6.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn34.DefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridViewTextBoxColumn34.HeaderText = "数据";
             this.dataGridViewTextBoxColumn34.Name = "dataGridViewTextBoxColumn34";
             this.dataGridViewTextBoxColumn34.ReadOnly = true;
@@ -2209,8 +2209,8 @@ namespace TDObject
             // 
             this.dataGridViewTextBoxColumn31.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dataGridViewTextBoxColumn31.DataPropertyName = "字段名";
-            dataGridViewCellStyle50.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn31.DefaultCellStyle = dataGridViewCellStyle50;
+            dataGridViewCellStyle7.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn31.DefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridViewTextBoxColumn31.Frozen = true;
             this.dataGridViewTextBoxColumn31.HeaderText = "数据项";
             this.dataGridViewTextBoxColumn31.MinimumWidth = 130;
@@ -2222,8 +2222,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn32
             // 
             this.dataGridViewTextBoxColumn32.DataPropertyName = "字段值";
-            dataGridViewCellStyle51.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn32.DefaultCellStyle = dataGridViewCellStyle51;
+            dataGridViewCellStyle8.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn32.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridViewTextBoxColumn32.HeaderText = "值";
             this.dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
             this.dataGridViewTextBoxColumn32.ReadOnly = true;
@@ -2657,16 +2657,16 @@ namespace TDObject
             // dataGridViewTextBoxColumn30
             // 
             this.dataGridViewTextBoxColumn30.DataPropertyName = "序号";
-            dataGridViewCellStyle52.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn30.DefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle9.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn30.DefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridViewTextBoxColumn30.HeaderText = "查处序号";
             this.dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
             // 
             // dataGridViewTextBoxColumn35
             // 
             this.dataGridViewTextBoxColumn35.DataPropertyName = "批准用途";
-            dataGridViewCellStyle53.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn35.DefaultCellStyle = dataGridViewCellStyle53;
+            dataGridViewCellStyle10.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn35.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridViewTextBoxColumn35.HeaderText = "批准用途";
             this.dataGridViewTextBoxColumn35.Name = "dataGridViewTextBoxColumn35";
             this.dataGridViewTextBoxColumn35.ReadOnly = true;
@@ -2676,8 +2676,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn36
             // 
             this.dataGridViewTextBoxColumn36.DataPropertyName = "实际用途";
-            dataGridViewCellStyle54.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn36.DefaultCellStyle = dataGridViewCellStyle54;
+            dataGridViewCellStyle11.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn36.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridViewTextBoxColumn36.HeaderText = "实际用途";
             this.dataGridViewTextBoxColumn36.Name = "dataGridViewTextBoxColumn36";
             this.dataGridViewTextBoxColumn36.ReadOnly = true;
@@ -2686,8 +2686,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn37
             // 
             this.dataGridViewTextBoxColumn37.DataPropertyName = "企业代码";
-            dataGridViewCellStyle55.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn37.DefaultCellStyle = dataGridViewCellStyle55;
+            dataGridViewCellStyle12.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn37.DefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridViewTextBoxColumn37.HeaderText = "企业代码";
             this.dataGridViewTextBoxColumn37.Name = "dataGridViewTextBoxColumn37";
             this.dataGridViewTextBoxColumn37.ReadOnly = true;
@@ -2697,8 +2697,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn38
             // 
             this.dataGridViewTextBoxColumn38.DataPropertyName = "企业租赁受益人";
-            dataGridViewCellStyle56.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn38.DefaultCellStyle = dataGridViewCellStyle56;
+            dataGridViewCellStyle13.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn38.DefaultCellStyle = dataGridViewCellStyle13;
             this.dataGridViewTextBoxColumn38.HeaderText = "企业租赁受益人";
             this.dataGridViewTextBoxColumn38.Name = "dataGridViewTextBoxColumn38";
             this.dataGridViewTextBoxColumn38.ReadOnly = true;
@@ -2708,8 +2708,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn39
             // 
             this.dataGridViewTextBoxColumn39.DataPropertyName = "企业性质";
-            dataGridViewCellStyle57.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn39.DefaultCellStyle = dataGridViewCellStyle57;
+            dataGridViewCellStyle14.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn39.DefaultCellStyle = dataGridViewCellStyle14;
             this.dataGridViewTextBoxColumn39.HeaderText = "企业性质";
             this.dataGridViewTextBoxColumn39.Name = "dataGridViewTextBoxColumn39";
             this.dataGridViewTextBoxColumn39.ReadOnly = true;
@@ -2719,8 +2719,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn40
             // 
             this.dataGridViewTextBoxColumn40.DataPropertyName = "产业类型";
-            dataGridViewCellStyle58.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn40.DefaultCellStyle = dataGridViewCellStyle58;
+            dataGridViewCellStyle15.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn40.DefaultCellStyle = dataGridViewCellStyle15;
             this.dataGridViewTextBoxColumn40.HeaderText = "产业类型";
             this.dataGridViewTextBoxColumn40.Name = "dataGridViewTextBoxColumn40";
             this.dataGridViewTextBoxColumn40.ReadOnly = true;
@@ -2730,8 +2730,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn41
             // 
             this.dataGridViewTextBoxColumn41.DataPropertyName = "字段值";
-            dataGridViewCellStyle59.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn41.DefaultCellStyle = dataGridViewCellStyle59;
+            dataGridViewCellStyle16.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn41.DefaultCellStyle = dataGridViewCellStyle16;
             this.dataGridViewTextBoxColumn41.HeaderText = "面积";
             this.dataGridViewTextBoxColumn41.Name = "dataGridViewTextBoxColumn41";
             this.dataGridViewTextBoxColumn41.ReadOnly = true;
@@ -2742,8 +2742,8 @@ namespace TDObject
             // 
             this.dataGridViewTextBoxColumn42.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dataGridViewTextBoxColumn42.DataPropertyName = "字段名";
-            dataGridViewCellStyle60.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn42.DefaultCellStyle = dataGridViewCellStyle60;
+            dataGridViewCellStyle17.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn42.DefaultCellStyle = dataGridViewCellStyle17;
             this.dataGridViewTextBoxColumn42.Frozen = true;
             this.dataGridViewTextBoxColumn42.HeaderText = "字段名";
             this.dataGridViewTextBoxColumn42.MinimumWidth = 130;
@@ -2756,8 +2756,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn43
             // 
             this.dataGridViewTextBoxColumn43.DataPropertyName = "字段值";
-            dataGridViewCellStyle61.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn43.DefaultCellStyle = dataGridViewCellStyle61;
+            dataGridViewCellStyle18.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn43.DefaultCellStyle = dataGridViewCellStyle18;
             this.dataGridViewTextBoxColumn43.HeaderText = "字段值";
             this.dataGridViewTextBoxColumn43.Name = "dataGridViewTextBoxColumn43";
             this.dataGridViewTextBoxColumn43.ReadOnly = true;
@@ -2768,8 +2768,8 @@ namespace TDObject
             // 
             this.dataGridViewTextBoxColumn44.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dataGridViewTextBoxColumn44.DataPropertyName = "字段名";
-            dataGridViewCellStyle62.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn44.DefaultCellStyle = dataGridViewCellStyle62;
+            dataGridViewCellStyle19.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn44.DefaultCellStyle = dataGridViewCellStyle19;
             this.dataGridViewTextBoxColumn44.Frozen = true;
             this.dataGridViewTextBoxColumn44.HeaderText = "字段名";
             this.dataGridViewTextBoxColumn44.MinimumWidth = 150;
@@ -2782,8 +2782,8 @@ namespace TDObject
             // 
             this.dataGridViewTextBoxColumn45.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dataGridViewTextBoxColumn45.DataPropertyName = "字段值";
-            dataGridViewCellStyle63.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn45.DefaultCellStyle = dataGridViewCellStyle63;
+            dataGridViewCellStyle20.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn45.DefaultCellStyle = dataGridViewCellStyle20;
             this.dataGridViewTextBoxColumn45.Frozen = true;
             this.dataGridViewTextBoxColumn45.HeaderText = "字段值";
             this.dataGridViewTextBoxColumn45.MinimumWidth = 150;
@@ -2886,8 +2886,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn55
             // 
             this.dataGridViewTextBoxColumn55.DataPropertyName = "字段值";
-            dataGridViewCellStyle64.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn55.DefaultCellStyle = dataGridViewCellStyle64;
+            dataGridViewCellStyle21.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn55.DefaultCellStyle = dataGridViewCellStyle21;
             this.dataGridViewTextBoxColumn55.HeaderText = "字段值";
             this.dataGridViewTextBoxColumn55.Name = "dataGridViewTextBoxColumn55";
             this.dataGridViewTextBoxColumn55.ReadOnly = true;
@@ -2896,8 +2896,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn56
             // 
             this.dataGridViewTextBoxColumn56.DataPropertyName = "字段名";
-            dataGridViewCellStyle65.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn56.DefaultCellStyle = dataGridViewCellStyle65;
+            dataGridViewCellStyle22.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn56.DefaultCellStyle = dataGridViewCellStyle22;
             this.dataGridViewTextBoxColumn56.HeaderText = "字段名";
             this.dataGridViewTextBoxColumn56.Name = "dataGridViewTextBoxColumn56";
             this.dataGridViewTextBoxColumn56.ReadOnly = true;
@@ -2906,8 +2906,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn57
             // 
             this.dataGridViewTextBoxColumn57.DataPropertyName = "字段值";
-            dataGridViewCellStyle66.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn57.DefaultCellStyle = dataGridViewCellStyle66;
+            dataGridViewCellStyle23.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn57.DefaultCellStyle = dataGridViewCellStyle23;
             this.dataGridViewTextBoxColumn57.HeaderText = "字段值";
             this.dataGridViewTextBoxColumn57.Name = "dataGridViewTextBoxColumn57";
             this.dataGridViewTextBoxColumn57.ReadOnly = true;
@@ -2916,8 +2916,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn58
             // 
             this.dataGridViewTextBoxColumn58.DataPropertyName = "字段名";
-            dataGridViewCellStyle67.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn58.DefaultCellStyle = dataGridViewCellStyle67;
+            dataGridViewCellStyle24.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn58.DefaultCellStyle = dataGridViewCellStyle24;
             this.dataGridViewTextBoxColumn58.HeaderText = "字段名";
             this.dataGridViewTextBoxColumn58.Name = "dataGridViewTextBoxColumn58";
             this.dataGridViewTextBoxColumn58.ReadOnly = true;
@@ -2926,8 +2926,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn59
             // 
             this.dataGridViewTextBoxColumn59.DataPropertyName = "字段值";
-            dataGridViewCellStyle68.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn59.DefaultCellStyle = dataGridViewCellStyle68;
+            dataGridViewCellStyle25.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn59.DefaultCellStyle = dataGridViewCellStyle25;
             this.dataGridViewTextBoxColumn59.HeaderText = "字段值";
             this.dataGridViewTextBoxColumn59.Name = "dataGridViewTextBoxColumn59";
             this.dataGridViewTextBoxColumn59.ReadOnly = true;
@@ -2936,8 +2936,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn60
             // 
             this.dataGridViewTextBoxColumn60.DataPropertyName = "字段名";
-            dataGridViewCellStyle69.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn60.DefaultCellStyle = dataGridViewCellStyle69;
+            dataGridViewCellStyle26.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn60.DefaultCellStyle = dataGridViewCellStyle26;
             this.dataGridViewTextBoxColumn60.HeaderText = "字段名";
             this.dataGridViewTextBoxColumn60.Name = "dataGridViewTextBoxColumn60";
             this.dataGridViewTextBoxColumn60.ReadOnly = true;
@@ -2955,8 +2955,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn62
             // 
             this.dataGridViewTextBoxColumn62.DataPropertyName = "key";
-            dataGridViewCellStyle70.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn62.DefaultCellStyle = dataGridViewCellStyle70;
+            dataGridViewCellStyle27.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn62.DefaultCellStyle = dataGridViewCellStyle27;
             this.dataGridViewTextBoxColumn62.HeaderText = "数据项";
             this.dataGridViewTextBoxColumn62.Name = "dataGridViewTextBoxColumn62";
             this.dataGridViewTextBoxColumn62.ReadOnly = true;
@@ -2966,8 +2966,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn63
             // 
             this.dataGridViewTextBoxColumn63.DataPropertyName = "value";
-            dataGridViewCellStyle71.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn63.DefaultCellStyle = dataGridViewCellStyle71;
+            dataGridViewCellStyle28.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn63.DefaultCellStyle = dataGridViewCellStyle28;
             this.dataGridViewTextBoxColumn63.HeaderText = "数据";
             this.dataGridViewTextBoxColumn63.Name = "dataGridViewTextBoxColumn63";
             this.dataGridViewTextBoxColumn63.ReadOnly = true;
@@ -2977,8 +2977,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn64
             // 
             this.dataGridViewTextBoxColumn64.DataPropertyName = "字段名";
-            dataGridViewCellStyle72.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn64.DefaultCellStyle = dataGridViewCellStyle72;
+            dataGridViewCellStyle29.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn64.DefaultCellStyle = dataGridViewCellStyle29;
             this.dataGridViewTextBoxColumn64.HeaderText = "数据项";
             this.dataGridViewTextBoxColumn64.Name = "dataGridViewTextBoxColumn64";
             this.dataGridViewTextBoxColumn64.ReadOnly = true;
@@ -2987,8 +2987,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn65
             // 
             this.dataGridViewTextBoxColumn65.DataPropertyName = "字段值";
-            dataGridViewCellStyle73.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn65.DefaultCellStyle = dataGridViewCellStyle73;
+            dataGridViewCellStyle30.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn65.DefaultCellStyle = dataGridViewCellStyle30;
             this.dataGridViewTextBoxColumn65.HeaderText = "值";
             this.dataGridViewTextBoxColumn65.Name = "dataGridViewTextBoxColumn65";
             this.dataGridViewTextBoxColumn65.ReadOnly = true;
@@ -3110,8 +3110,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn79
             // 
             this.dataGridViewTextBoxColumn79.DataPropertyName = "租赁企业名称";
-            dataGridViewCellStyle74.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn79.DefaultCellStyle = dataGridViewCellStyle74;
+            dataGridViewCellStyle31.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn79.DefaultCellStyle = dataGridViewCellStyle31;
             this.dataGridViewTextBoxColumn79.FillWeight = 68.96552F;
             this.dataGridViewTextBoxColumn79.HeaderText = "租赁企业名称";
             this.dataGridViewTextBoxColumn79.Name = "dataGridViewTextBoxColumn79";
@@ -3121,8 +3121,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn80
             // 
             this.dataGridViewTextBoxColumn80.DataPropertyName = "所属行政村名称";
-            dataGridViewCellStyle75.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn80.DefaultCellStyle = dataGridViewCellStyle75;
+            dataGridViewCellStyle32.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn80.DefaultCellStyle = dataGridViewCellStyle32;
             this.dataGridViewTextBoxColumn80.FillWeight = 131.0345F;
             this.dataGridViewTextBoxColumn80.HeaderText = "所属行政村";
             this.dataGridViewTextBoxColumn80.Name = "dataGridViewTextBoxColumn80";
@@ -3131,8 +3131,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn81
             // 
             this.dataGridViewTextBoxColumn81.DataPropertyName = "企业租赁受益人";
-            dataGridViewCellStyle76.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn81.DefaultCellStyle = dataGridViewCellStyle76;
+            dataGridViewCellStyle33.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn81.DefaultCellStyle = dataGridViewCellStyle33;
             this.dataGridViewTextBoxColumn81.FillWeight = 68.96552F;
             this.dataGridViewTextBoxColumn81.HeaderText = "所属用地企业";
             this.dataGridViewTextBoxColumn81.Name = "dataGridViewTextBoxColumn81";
@@ -3142,8 +3142,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn82
             // 
             this.dataGridViewTextBoxColumn82.DataPropertyName = "批准用途";
-            dataGridViewCellStyle77.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn82.DefaultCellStyle = dataGridViewCellStyle77;
+            dataGridViewCellStyle34.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn82.DefaultCellStyle = dataGridViewCellStyle34;
             this.dataGridViewTextBoxColumn82.FillWeight = 131.0345F;
             this.dataGridViewTextBoxColumn82.HeaderText = "批准用途";
             this.dataGridViewTextBoxColumn82.Name = "dataGridViewTextBoxColumn82";
@@ -3186,8 +3186,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn87
             // 
             this.dataGridViewTextBoxColumn87.DataPropertyName = "产业类型";
-            dataGridViewCellStyle78.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn87.DefaultCellStyle = dataGridViewCellStyle78;
+            dataGridViewCellStyle35.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn87.DefaultCellStyle = dataGridViewCellStyle35;
             this.dataGridViewTextBoxColumn87.HeaderText = "产业类型";
             this.dataGridViewTextBoxColumn87.Name = "dataGridViewTextBoxColumn87";
             this.dataGridViewTextBoxColumn87.ReadOnly = true;
@@ -3196,8 +3196,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn88
             // 
             this.dataGridViewTextBoxColumn88.DataPropertyName = "OBJECTID";
-            dataGridViewCellStyle79.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn88.DefaultCellStyle = dataGridViewCellStyle79;
+            dataGridViewCellStyle36.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn88.DefaultCellStyle = dataGridViewCellStyle36;
             this.dataGridViewTextBoxColumn88.HeaderText = "objid";
             this.dataGridViewTextBoxColumn88.Name = "dataGridViewTextBoxColumn88";
             this.dataGridViewTextBoxColumn88.ReadOnly = true;
@@ -3208,8 +3208,8 @@ namespace TDObject
             // 
             this.dataGridViewTextBoxColumn89.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.dataGridViewTextBoxColumn89.DataPropertyName = "地块编码";
-            dataGridViewCellStyle80.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn89.DefaultCellStyle = dataGridViewCellStyle80;
+            dataGridViewCellStyle37.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn89.DefaultCellStyle = dataGridViewCellStyle37;
             this.dataGridViewTextBoxColumn89.Frozen = true;
             this.dataGridViewTextBoxColumn89.HeaderText = "地块编码";
             this.dataGridViewTextBoxColumn89.MinimumWidth = 150;
@@ -3222,8 +3222,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn90
             // 
             this.dataGridViewTextBoxColumn90.DataPropertyName = "企业代码";
-            dataGridViewCellStyle81.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn90.DefaultCellStyle = dataGridViewCellStyle81;
+            dataGridViewCellStyle38.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn90.DefaultCellStyle = dataGridViewCellStyle38;
             this.dataGridViewTextBoxColumn90.HeaderText = "企业代码";
             this.dataGridViewTextBoxColumn90.Name = "dataGridViewTextBoxColumn90";
             this.dataGridViewTextBoxColumn90.ReadOnly = true;
@@ -3334,8 +3334,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn104
             // 
             this.dataGridViewTextBoxColumn104.DataPropertyName = "坐落";
-            dataGridViewCellStyle82.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn104.DefaultCellStyle = dataGridViewCellStyle82;
+            dataGridViewCellStyle39.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn104.DefaultCellStyle = dataGridViewCellStyle39;
             this.dataGridViewTextBoxColumn104.HeaderText = "坐落";
             this.dataGridViewTextBoxColumn104.Name = "dataGridViewTextBoxColumn104";
             this.dataGridViewTextBoxColumn104.ReadOnly = true;
@@ -3344,8 +3344,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn105
             // 
             this.dataGridViewTextBoxColumn105.DataPropertyName = "查处起始日期";
-            dataGridViewCellStyle83.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn105.DefaultCellStyle = dataGridViewCellStyle83;
+            dataGridViewCellStyle40.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn105.DefaultCellStyle = dataGridViewCellStyle40;
             this.dataGridViewTextBoxColumn105.HeaderText = "查处起始日期";
             this.dataGridViewTextBoxColumn105.Name = "dataGridViewTextBoxColumn105";
             this.dataGridViewTextBoxColumn105.Width = 159;
@@ -3353,8 +3353,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn106
             // 
             this.dataGridViewTextBoxColumn106.DataPropertyName = "查处截止日期";
-            dataGridViewCellStyle84.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn106.DefaultCellStyle = dataGridViewCellStyle84;
+            dataGridViewCellStyle41.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn106.DefaultCellStyle = dataGridViewCellStyle41;
             this.dataGridViewTextBoxColumn106.HeaderText = "查处截止日期";
             this.dataGridViewTextBoxColumn106.Name = "dataGridViewTextBoxColumn106";
             this.dataGridViewTextBoxColumn106.ReadOnly = true;
@@ -3363,8 +3363,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn107
             // 
             this.dataGridViewTextBoxColumn107.DataPropertyName = "批注日期";
-            dataGridViewCellStyle85.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn107.DefaultCellStyle = dataGridViewCellStyle85;
+            dataGridViewCellStyle42.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn107.DefaultCellStyle = dataGridViewCellStyle42;
             this.dataGridViewTextBoxColumn107.HeaderText = "批注日期";
             this.dataGridViewTextBoxColumn107.Name = "dataGridViewTextBoxColumn107";
             this.dataGridViewTextBoxColumn107.Width = 159;
@@ -3372,8 +3372,8 @@ namespace TDObject
             // dataGridViewTextBoxColumn108
             // 
             this.dataGridViewTextBoxColumn108.DataPropertyName = "撤销日期";
-            dataGridViewCellStyle86.Format = "yyyy-MM-dd";
-            this.dataGridViewTextBoxColumn108.DefaultCellStyle = dataGridViewCellStyle86;
+            dataGridViewCellStyle43.Format = "yyyy-MM-dd";
+            this.dataGridViewTextBoxColumn108.DefaultCellStyle = dataGridViewCellStyle43;
             this.dataGridViewTextBoxColumn108.HeaderText = "撤销日期";
             this.dataGridViewTextBoxColumn108.Name = "dataGridViewTextBoxColumn108";
             this.dataGridViewTextBoxColumn108.ReadOnly = true;

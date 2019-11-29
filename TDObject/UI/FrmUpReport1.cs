@@ -21,8 +21,8 @@ namespace TDObject.UI
         {
             this.Title = "数据上报";
             webBrowser1.Navigate("file:///" + Environment.CurrentDirectory + "/Html/UpReport1Web.html");
-           // webBrowser1.Navigate("http://122.114.190.250:8080/WjKfq_gis/UpReport1Web.html");
-            //webBrowser1.Url =new Uri("http://122.114.190.250:8080/WjKfq_gis/UpReport1Web.html");
+           // webBrowser1.Navigate("http://122.112.245.147:8080/WjKfq_gis/UpReport1Web.html");
+            //webBrowser1.Url =new Uri("http://122.112.245.147:8080/WjKfq_gis/UpReport1Web.html");
             //webBrowser1.Navigate("file:///" + Environment.CurrentDirectory + "/Html/吴江区工业企业资源集约利用情况表.mht");
         }
 

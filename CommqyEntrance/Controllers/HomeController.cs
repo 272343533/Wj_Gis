@@ -39,7 +39,7 @@ namespace CommEntrance.Controllers
             log.Info("login:" + username + "--" + password + ".");
             string jsonret = "http://122.114.190.250:8080/Wjkfq_gis/Home/Helper";
             LoginMess lm = new LoginMess();
-            lm.HelpUrl = "http://122.114.190.250:8080/wjkfq_gis/Home/helper";
+            lm.HelpUrl = "http://122.112.245.147:8080/wjkfq_gis/Home/helper";
             try
             {
                  if ((username != null && password != null))
@@ -48,11 +48,6 @@ namespace CommEntrance.Controllers
                     //EntityManager EM = new EntityManager(dblink);
 
                     bsUser obj = CommSetting.EM.GetBySql<bsUser>("LoginName='" + username + "' and LoginPwd='" + MD5(password) + "'");
-                    lm.ValidUrl = "http://122.114.190.250:8080/commentrance/home/login";
-                    lm.ValidUrl += "," + "http://117.121.102.226:80/commentrance/home/login";
-                    lm.ValidUrl += "," + "http://219.243.12.234:80/commentrance/home/login";
-                    lm.ValidUrl += "," + "http://219.243.12.231:80/commentrance/home/login";
-                    lm.ValidUrl += "," + "http://60.2.27.75:8081/commentrance/home/login";
                     if (obj != null)
                     {
                         lm.UserId = obj.bsU_Id.ToString();

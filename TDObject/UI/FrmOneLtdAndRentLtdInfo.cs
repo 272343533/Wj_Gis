@@ -190,7 +190,7 @@ namespace TDObject.UI
 
                 //timer1.Interval = 200;
                 //timer1.Start();
-                pictureBox1.Image = Image.FromStream(System.Net.WebRequest.Create("http://122.114.190.250:8080/Wjkfq_gis/Uploads/" + filename).GetResponse().GetResponseStream());
+                pictureBox1.Image = Image.FromStream(System.Net.WebRequest.Create("http://122.112.245.147:8080/Wjkfq_gis/Uploads/" + filename).GetResponse().GetResponseStream());
                 //timer1.Stop();
 
                 richTextBox1.Text = "      " + photos[CurrPhotoNo - 1].SSQYMC + "\r\n\r\n    " + photos[CurrPhotoNo - 1].PicMemo;

@@ -29,6 +29,8 @@ namespace QyTech.SkinForm.UICreate
             int ColumnWidth = lblWidth + betweenWidth + EditWidhth;
 
             int LocationX, LocationY;
+            if (ffs == null)
+                return;
             if (ffs.Count > 0)
             {
 

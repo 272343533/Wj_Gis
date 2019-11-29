@@ -84,8 +84,8 @@ namespace TDObject
 
         private int loadType = 5;
 
-        public static string QyTechAuth_URI = "http://122.114.190.250:8080/wjkfq_gis/";
-        public static string App_URI = "http://122.114.190.250:8080/wjkfq_gis/";
+        public static string QyTechAuth_URI = "http://122.112.245.147:8080/wjkfq_gis/";
+        public static string App_URI = "http://122.112.245.147:8080/wjkfq_gis/";
 
         TDObject.BLL.UIBLL.bllTypeFilter blluifilter; //= new TDObject.BLL.UIBLL.bllTypeFilter();
 
@@ -115,9 +115,9 @@ namespace TDObject
 
         public static EntityManager EM = new EntityManager(new SunMvcExpress.Dao.wj_GisDbEntities());
         public static EntityManager QyTech_EM = new EntityManager(new QyTech.Auth.Dao.QyTech_AuthEntities());
-        private static string strSqlConn = "server =122.114.190.250,2433; uid = sa; pwd = Qy_ltd414; database = wj_GisDb";
+        private static string strSqlConn = "server =122.112.245.147; uid = sa; pwd = Qy_ltd414; database = wj_GisDb";
         public static System.Data.SqlClient.SqlConnection sqlConn = new System.Data.SqlClient.SqlConnection(strSqlConn);
-        public static System.Data.SqlClient.SqlConnection sqlConn_Base = new System.Data.SqlClient.SqlConnection(strSqlConn.Replace("wj_GisDb", "QyTech_Auth"));
+        public static System.Data.SqlClient.SqlConnection sqlConn_Base = new System.Data.SqlClient.SqlConnection(strSqlConn.Replace("wj_GisDb", "Wj_GisDb_QyExpress"));
 
 
         FlashObjectsClass flashObjects = new FlashObjectsClass();
@@ -361,11 +361,11 @@ namespace TDObject
                 //try
                 //{
                 //    IMapServerRESTLayer pRestLayer = new MapServerRESTLayerClass();
-                //    pRestLayer.Connect("http://122.114.190.250:6080/arcgis/rest/services/WTMap/WtPublish1/MapServer");
+                //    pRestLayer.Connect("http://122.112.245.147:8080/arcgis/rest/services/WTMap/WtPublish1/MapServer");
                 //    this.axMapControl1.AddLayer(pRestLayer as ILayer);
                 //    //return;
 
-                //    //IAGSServerObjectName pServerObjectName = GetMapServer("http://122.114.190.250:6080/arcgis/rest/services", "WTMap/WtPublish1", false);
+                //    //IAGSServerObjectName pServerObjectName = GetMapServer("http://122.112.245.147:8080/arcgis/rest/services", "WTMap/WtPublish1", false);
                 //    //IName pName = (IName)pServerObjectName;
                 //    //IAGSServerObject pServerObject = (IAGSServerObject)pName.Open();
                 //    //IMapServer pMapServer = (IMapServer)pServerObject;
